@@ -1,18 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hold_that_thought/data/thought_repository.dart';
-import 'package:hold_that_thought/models/thought.dart';
+import '../repos/thought_repo.dart';
+import '../models/thought.dart';
 
-// 1. Provider for the repository implementation
-final thoughtRepositoryProvider = Provider<ThoughtRepository>((ref) {
-  // In a real app, you might switch this out with a different implementation
-  // for testing or other backends.
-  return HiveThoughtRepository();
-});
+/// Single instance of the repository for the whole app.
+/// (In main.dart you already init it with container.read(...).init())
+final thoughtRepositoryProvider = Provider<ThoughtRepo>((ref) => ThoughtRepo());
 
-// 2. StreamProvider to watch all thoughts
+/// Live stream of thoughts (pinned first, newest first).
 final thoughtsProvider = StreamProvider<List<Thought>>((ref) {
-  final repository = ref.watch(thoughtRepositoryProvider);
-  // The stream will be listened to by the UI.
-  // It will automatically re-evaluate if the repository changes.
-  return repository.watchAll();
+  final repo = ref.watch(thoughtRepositoryProvider);
+  return repo.watchAll(); // repo emits an initial snapshot + updates
 });

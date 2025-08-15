@@ -1,43 +1,51 @@
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 
 part 'thought.g.dart';
 
 @HiveType(typeId: 0)
-class Thought extends HiveObject {
+class Thought {
   @HiveField(0)
-  late String id;
+  final String id;
 
   @HiveField(1)
-  String text;
+  final String text;
 
   @HiveField(2)
-  DateTime createdAt;
+  final DateTime createdAt;
 
   @HiveField(3)
-  DateTime? updatedAt;
+  final DateTime? updatedAt;
 
-  @HiveField(4, defaultValue: false)
-  bool pinned;
+  @HiveField(4)
+  final bool pinned;
 
-  @HiveField(5, defaultValue: false)
-  bool archived;
+  @HiveField(5)
+  final bool archived;
 
-  Thought({
+  const Thought({
+    required this.id,
     required this.text,
     required this.createdAt,
     this.updatedAt,
     this.pinned = false,
     this.archived = false,
-  }) {
-    id = const Uuid().v4();
-  }
+  });
 
-  // A factory constructor for creating a new thought with a unique ID.
-  factory Thought.create({required String text}) {
+  Thought copyWith({
+    String? id,
+    String? text,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? pinned,
+    bool? archived,
+  }) {
     return Thought(
-      text: text,
-      createdAt: DateTime.now(),
+      id: id ?? this.id,
+      text: text ?? this.text,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      pinned: pinned ?? this.pinned,
+      archived: archived ?? this.archived,
     );
   }
 }
