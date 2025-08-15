@@ -13,6 +13,17 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.3.6
   go_router: ^13.0.1
+
+  # Local persistence with Hive
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Other utilities
+  path_provider: ^2.0.11
+  intl: ^0.18.1
+  uuid: ^4.3.3
+
+  # Firebase and audio packages (retained for future use)
   record: ^5.0.7
   just_audio: ^0.9.35
   isar: ^4.0.0
@@ -31,6 +42,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.1
   build_runner: ^2.4.6
+  hive_generator: ^2.0.1
   isar_generator: ^4.0.0
 
 flutter:

@@ -33,17 +33,21 @@ This project is tightly integrated with Firebase. You must have a Firebase proje
 
 ## 3. Frontend Setup (Flutter)
 
-1.  **Configure Firebase for Flutter:**
-    - From the root of the repository, run `flutterfire configure`.
-    - Select the Firebase project you created. This will automatically generate the `lib/firebase_options.dart` file with your project's credentials.
+1.  **Install Dependencies:**
+    - `flutter pub get`
 
-2.  **Install Dependencies:**
-    - Run `flutter pub get`.
-    - This will install all necessary Dart packages and generate the `pubspec.lock` file, which should be committed to version control.
+2.  **Generate Hive Adapters:**
+    - The project uses Hive for local storage, which requires code generation. Run the following command from the root directory:
+    - `flutter pub run build_runner build --delete-conflicting-outputs`
+    - This command generates the `thought.g.dart` file necessary for Hive to serialize the `Thought` model. You will need to re-run this command any time you change a model with Hive annotations.
 
-3.  **Run the App (Web):**
-    - The web version is the quickest for most UI development.
-    - `flutter run -d chrome --web-renderer canvaskit`
+3.  **Configure Firebase (Optional for MVP):**
+    - For the offline-first MVP, Firebase is not strictly required. However, to prepare for future cloud sync features:
+    - Run `flutterfire configure` and select your Firebase project. This will generate `lib/firebase_options.dart`.
+
+4.  **Run the App:**
+    - You can run the app on a simulator, emulator, or a physical device.
+    - `flutter run`
 
 ## 4. Backend Setup (Firebase Cloud Functions)
 

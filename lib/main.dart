@@ -1,75 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hold_that_thought/app.dart';
+import 'package:hold_that_thought/models/thought.dart';
+import 'package:hold_that_thought/providers/thought_providers.dart';
 
-// Placeholder pages
-class CapturePage extends StatelessWidget {
-  const CapturePage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Hold That Thought')),
-      body: const Center(child: Text('Capture Page')),
-    );
-  }
-}
+Future<void> main() async {
+  // Ensure that Flutter bindings are initialized before any async operations
+  WidgetsFlutterBinding.ensureInitialized();
 
-class ListPage extends StatelessWidget {
-  const ListPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Thoughts')),
-      body: const Center(child: Text('List Page')),
-    );
-  }
-}
+  // Initialize Hive
+  await Hive.initFlutter();
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
-      body: const Center(child: Text('Settings Page')),
-    );
-  }
-}
+  // Register the adapter for the Thought model
+  // This line will cause an error until build_runner is run
+  Hive.registerAdapter(ThoughtAdapter());
 
-void main() {
-  runApp(const ProviderScope(child: HoldThatThoughtApp()));
-}
+  // Initialize the repository. This will open the Hive box.
+  // We do this here to ensure the box is open before the app starts.
+  final container = ProviderContainer();
+  await container.read(thoughtRepositoryProvider).init();
 
-class HoldThatThoughtApp extends ConsumerWidget {
-  const HoldThatThoughtApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final router = GoRouter(
-      initialLocation: '/',
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) => const CapturePage(),
-          routes: [
-            GoRoute(
-              path: 'list',
-              builder: (context, state) => const ListPage(),
-            ),
-            GoRoute(
-              path: 'settings',
-              builder: (context, state) => const SettingsPage(),
-            ),
-          ],
-        ),
-      ],
-    );
-
-    return MaterialApp.router(
-      title: 'Hold That Thought',
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      routerConfig: router,
-    );
-  }
+  runApp(
+    // ProviderScope stores the state of our providers.
+    // We pass the container we created so it holds the initialized repository.
+    UncontrolledProviderScope(
+      container: container,
+      child: const HoldThatThoughtApp(),
+    ),
+  );
 }

@@ -22,8 +22,8 @@ The following diagram illustrates the primary data flows for core features like 
 graph TD
     subgraph "User Device"
         A[Flutter App] -- Signs in with --> B[Firebase Auth];
-        A -- Writes/Reads Thoughts --> C[Isar Local DB];
-        A -- Syncs Thoughts --> D[Cloud Firestore];
+        A -- Writes/Reads Thoughts --> C[Hive Local DB];
+        A -- Syncs Thoughts (Future) --> D[Cloud Firestore];
         A -- Uploads Audio --> E[Firebase Storage];
         D -- Sends Transcripts --> A;
     end
