@@ -67,6 +67,14 @@ The `scripts/cleanup_ci.sh` script removes Gradle caches, Flutter build director
 and other temporary files. It is invoked in the CI workflow to free up disk
 space. See `.github/workflows/build.yml` for details.
 
+## Branching Strategy
+
+This project uses a `main` -> `dev` -> `feature/*` branching model.
+
+- **`main`**: This branch is protected and contains the latest stable, released code. All pull requests to `main` must come from the `dev` branch.
+- **`dev`**: This is the primary development and integration branch. All feature branches are merged into `dev`. The CI workflow runs against this branch to ensure it remains stable.
+- **`feature/*`**: All new features and bugfixes should be developed on a branch off of `dev`, named descriptively (e.g., `feature/user-auth`, `fix/login-bug`). Pull requests are made from these branches back into `dev`.
+
 ## Licence
 
 This project is provided for demonstration purposes under the MIT licence.
