@@ -1,0 +1,34 @@
+# Flutter & Dart
+.dart_tool/
+build/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/package_config.json
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# macOS & iOS
+flutter_export_environment.sh
+Pods/
+*.xcworkspace
+*.xcuserdatad/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/ServiceDefinitions.json
+ios/Flutter/App.framework
+
+# Android
+android/.gradle/
+android/caches/
+android/gradle-wrapper.properties
+*.keystore
+
+# Web
+web/generated/
+
+# Others
+*.lock
+.env

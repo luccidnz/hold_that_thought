@@ -1,0 +1,12 @@
+{
+  "name": "hold-that-thought-functions",
+  "description": "Cloud Functions for Hold That Thought",
+  "dependencies": {
+    "firebase-admin": "^11.0.0",
+    "firebase-functions": "^4.0.0",
+    "@google-cloud/speech": "^5.2.3"
+  },
+  "engines": {
+    "node": "20"
+  }
+}

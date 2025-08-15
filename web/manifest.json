@@ -1,0 +1,10 @@
+{
+  "name": "Hold That Thought",
+  "short_name": "Thought",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#121212",
+  "description": "Capture and organise your fleeting thoughts.",
+  "icons": []
+}
