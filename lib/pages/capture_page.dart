@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/quick_capture/quick_capture_sheet.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
+import 'package:hold_that_thought/sync/sync_badge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CapturePage extends ConsumerStatefulWidget {
@@ -77,6 +78,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
       appBar: AppBar(
         title: const Text('Hold That Thought'),
         actions: [
+          const SyncBadge(),
           IconButton(
             icon: const Icon(Icons.list),
             onPressed: () => context.go(AppRoutes.list()),

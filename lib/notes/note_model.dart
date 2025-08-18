@@ -16,4 +16,24 @@ class Note {
   final DateTime updatedAt;
   final bool isPinned;
   final List<String> tags;
+
+  Note copyWith({
+    String? id,
+    String? title,
+    String? body,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    bool? isPinned,
+    List<String>? tags,
+  }) {
+    return Note(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      body: body ?? this.body,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isPinned: isPinned ?? this.isPinned,
+      tags: tags ?? this.tags,
+    );
+  }
 }
