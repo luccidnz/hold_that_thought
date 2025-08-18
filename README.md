@@ -61,6 +61,34 @@ hold_that_thought/
 └── README.md               # This file
 ```
 
+## Routing
+
+The app uses `go_router` for navigation. The defined routes are:
+- `/` - The home/capture page.
+- `/settings` - The settings page.
+- `/note/:id` - The detail page for a note.
+- `/create` - The page for creating a new note.
+
+Web deep links are supported. For example, you can navigate directly to `/note/123` in a web build. 404 errors are handled and will display a "Not Found" page.
+
+Native deep links (e.g., `myapp://...`) are a TODO. For implementation details, see [docs/deeplinks-native.md](docs/deeplinks-native.md).
+
+## Dev Quickstart
+
+For a quick start on the web, run the following command:
+```sh
+flutter run -d chrome
+```
+The app uses path URLs (no hash).
+
+## Testing
+
+To run the tests, use the following command:
+```sh
+flutter test
+```
+The router tests are located in `test/routing/app_router_test.dart`.
+
 ## Low‑Disk CI
 
 The `scripts/cleanup_ci.sh` script removes Gradle caches, Flutter build directories

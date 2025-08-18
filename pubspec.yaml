@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.3.6
   go_router: ^13.0.1
+  url_strategy: ^0.3.0
   record: ^5.0.7
   just_audio: ^0.9.35
   isar: ^4.0.0
