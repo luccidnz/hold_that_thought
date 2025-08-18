@@ -20,8 +20,8 @@ class HoldThatThoughtApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'Hold That Thought',
-      theme: AppTheme.getTheme(themeState.accentColor, Brightness.light),
-      darkTheme: AppTheme.getTheme(themeState.accentColor, Brightness.dark),
+      theme: AppTheme.lightFor(themeState.accent),
+      darkTheme: AppTheme.darkFor(themeState.accent),
       themeMode: themeState.themeMode,
       routerConfig: router,
     );

@@ -73,6 +73,18 @@ Web deep links are supported. For example, you can navigate directly to `/note/1
 
 Native deep links (e.g., `myapp://...`) are a TODO. For implementation details, see [docs/deeplinks-native.md](docs/deeplinks-native.md). For a detailed breakdown of the tasks required, see [NATIVE_DEEPLINKS_ISSUE.md](NATIVE_DEEPLINKS_ISSUE.md).
 
+## Theme & Settings
+
+The app supports dynamic theming with light/dark/system modes and a selection of accent colors. These settings are persisted across app restarts using `shared_preferences`.
+
+The settings can be changed on the `/settings` page.
+
+*(Note: Screenshots of the settings screen in light and dark mode with different accent colors will be added later, as I cannot generate them in this environment.)*
+
+### Storage Location
+- **Web:** `shared_preferences` are stored in the browser's `localStorage`. To reset, clear the site data in your browser's developer tools.
+- **Mobile (Android/iOS):** `shared_preferences` are stored in the app's sandboxed data directory. To reset, clear the app data or uninstall and reinstall the app.
+
 ## Dev Quickstart
 
 For a quick start on the web, run the following command:

@@ -8,29 +8,29 @@ void main() {
   group('ThemeController', () {
     test('loads theme from shared preferences', () async {
       SharedPreferences.setMockInitialValues({
-        'themeMode': 'dark',
-        'accentColor': 'red',
+        'theme.mode': 'dark',
+        'theme.accent': 'red',
       });
       final controller = ThemeController();
       await Future.delayed(Duration.zero); // allow async load to complete
       expect(controller.debugState.themeMode, ThemeMode.dark);
-      expect(controller.debugState.accentColor, AccentColor.red);
+      expect(controller.debugState.accent, Accent.red);
     });
 
     test('saves theme mode to shared preferences', () async {
       SharedPreferences.setMockInitialValues({});
       final controller = ThemeController();
-      await controller.setThemeMode(ThemeMode.light);
+      await controller.setMode(ThemeMode.light);
       final prefs = await SharedPreferences.getInstance();
-      expect(prefs.getString('themeMode'), 'light');
+      expect(prefs.getString('theme.mode'), 'light');
     });
 
     test('saves accent color to shared preferences', () async {
       SharedPreferences.setMockInitialValues({});
       final controller = ThemeController();
-      await controller.setAccentColor(AccentColor.purple);
+      await controller.setAccent(Accent.purple);
       final prefs = await SharedPreferences.getInstance();
-      expect(prefs.getString('accentColor'), 'purple');
+      expect(prefs.getString('theme.accent'), 'purple');
     });
   });
 }

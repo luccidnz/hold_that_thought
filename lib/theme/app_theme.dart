@@ -1,39 +1,49 @@
 import 'package:flutter/material.dart';
 
-enum AccentColor {
+enum Accent {
   blue,
-  red,
   green,
-  orange,
+  teal,
   purple,
-  pink,
+  orange,
+  red,
 }
 
-extension AccentColorExtension on AccentColor {
+extension AccentExtension on Accent {
   Color get color {
     switch (this) {
-      case AccentColor.blue:
+      case Accent.blue:
         return Colors.blue;
-      case AccentColor.red:
-        return Colors.red;
-      case AccentColor.green:
+      case Accent.green:
         return Colors.green;
-      case AccentColor.orange:
-        return Colors.orange;
-      case AccentColor.purple:
+      case Accent.teal:
+        return Colors.teal;
+      case Accent.purple:
         return Colors.purple;
-      case AccentColor.pink:
-        return Colors.pink;
+      case Accent.orange:
+        return Colors.orange;
+      case Accent.red:
+        return Colors.red;
     }
   }
 }
 
 class AppTheme {
-  static ThemeData getTheme(AccentColor accentColor, Brightness brightness) {
+  static ThemeData lightFor(Accent accent) {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: accentColor.color,
-        brightness: brightness,
+        seedColor: accent.color,
+        brightness: Brightness.light,
+      ),
+      useMaterial3: true,
+    );
+  }
+
+  static ThemeData darkFor(Accent accent) {
+    return ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: accent.color,
+        brightness: Brightness.dark,
       ),
       useMaterial3: true,
     );

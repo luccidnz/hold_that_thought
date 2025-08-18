@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/theme/app_theme.dart';
 import 'package:hold_that_thought/theme/theme_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -43,7 +45,7 @@ class SettingsScreen extends ConsumerWidget {
             ],
             selected: {themeState.themeMode},
             onSelectionChanged: (newSelection) {
-              themeController.setThemeMode(newSelection.first);
+              themeController.setMode(newSelection.first);
             },
           ),
           const SizedBox(height: 24),
@@ -55,14 +57,14 @@ class SettingsScreen extends ConsumerWidget {
           Wrap(
             spacing: 8.0,
             runSpacing: 8.0,
-            children: AccentColor.values.map((color) {
+            children: Accent.values.map((accent) {
               return GestureDetector(
                 onTap: () {
-                  themeController.setAccentColor(color);
+                  themeController.setAccent(accent);
                 },
                 child: CircleAvatar(
-                  backgroundColor: color.color,
-                  child: themeState.accentColor == color
+                  backgroundColor: accent.color,
+                  child: themeState.accent == accent
                       ? const Icon(Icons.check, color: Colors.white)
                       : null,
                 ),

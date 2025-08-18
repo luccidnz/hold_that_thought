@@ -10,8 +10,8 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
-          theme: AppTheme.getTheme(AccentColor.blue, Brightness.light),
-          darkTheme: AppTheme.getTheme(AccentColor.blue, Brightness.dark),
+          theme: AppTheme.lightFor(Accent.blue),
+          darkTheme: AppTheme.darkFor(Accent.blue),
           home: const SettingsScreen(),
         ),
       ),
@@ -24,9 +24,20 @@ void main() {
     );
 
     // Test in dark mode
-    final themeController = ProviderContainer().read(themeProvider.notifier);
-    themeController.setThemeMode(ThemeMode.dark);
-    await tester.pumpAndSettle();
+    final container = ProviderContainer();
+    final themeController = container.read(themeProvider.notifier);
+    await themeController.setMode(ThemeMode.dark);
+    await tester.pumpWidget(
+      ProviderScope(
+        parent: container,
+        child: MaterialApp(
+          theme: AppTheme.lightFor(Accent.blue),
+          darkTheme: AppTheme.darkFor(Accent.blue),
+          themeMode: ThemeMode.dark,
+          home: const SettingsScreen(),
+        ),
+      ),
+    );
 
     await expectLater(
       find.byType(SettingsScreen),

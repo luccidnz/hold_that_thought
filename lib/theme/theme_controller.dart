@@ -6,19 +6,19 @@ import 'package:hold_that_thought/theme/app_theme.dart';
 class ThemeState {
   const ThemeState({
     this.themeMode = ThemeMode.system,
-    this.accentColor = AccentColor.blue,
+    this.accent = Accent.blue,
   });
 
   final ThemeMode themeMode;
-  final AccentColor accentColor;
+  final Accent accent;
 
   ThemeState copyWith({
     ThemeMode? themeMode,
-    AccentColor? accentColor,
+    Accent? accent,
   }) {
     return ThemeState(
       themeMode: themeMode ?? this.themeMode,
-      accentColor: accentColor ?? this.accentColor,
+      accent: accent ?? this.accent,
     );
   }
 }
@@ -28,8 +28,8 @@ class ThemeController extends StateNotifier<ThemeState> {
     _loadTheme();
   }
 
-  static const String _themeModeKey = 'themeMode';
-  static const String _accentColorKey = 'accentColor';
+  static const String _themeModeKey = 'theme.mode';
+  static const String _accentColorKey = 'theme.accent';
 
   Future<void> _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
@@ -41,24 +41,24 @@ class ThemeController extends StateNotifier<ThemeState> {
       orElse: () => ThemeMode.system,
     );
 
-    final accentColor = AccentColor.values.firstWhere(
-      (e) => e.toString() == 'AccentColor.$accentColorString',
-      orElse: () => AccentColor.blue,
+    final accentColor = Accent.values.firstWhere(
+      (e) => e.toString() == 'Accent.$accentColorString',
+      orElse: () => Accent.blue,
     );
 
-    state = ThemeState(themeMode: themeMode, accentColor: accentColor);
+    state = ThemeState(themeMode: themeMode, accent: accentColor);
   }
 
-  Future<void> setThemeMode(ThemeMode themeMode) async {
+  Future<void> setMode(ThemeMode themeMode) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_themeModeKey, themeMode.toString().split('.').last);
     state = state.copyWith(themeMode: themeMode);
   }
 
-  Future<void> setAccentColor(AccentColor accentColor) async {
+  Future<void> setAccent(Accent accent) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_accentColorKey, accentColor.toString().split('.').last);
-    state = state.copyWith(accentColor: accentColor);
+    await prefs.setString(_accentColorKey, accent.toString().split('.').last);
+    state = state.copyWith(accent: accent);
   }
 }
 
