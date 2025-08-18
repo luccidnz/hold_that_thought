@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hold_that_thought/flavor.dart';
+import 'package:hold_that_thought/flavor_banner.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 import 'package:hold_that_thought/theme/app_theme.dart';
 import 'package:hold_that_thought/theme/theme_controller.dart';
@@ -11,7 +13,9 @@ import 'package:hold_that_thought/storage/hive_boxes.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:uuid/uuid.dart';
 
-Future<void> main() async {
+final flavorProvider = Provider<Flavor>((ref) => throw UnimplementedError());
+
+Future<void> run({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
@@ -50,7 +54,14 @@ Future<void> main() async {
   }
 
   setPathUrlStrategy();
-  runApp(const ProviderScope(child: HoldThatThoughtApp()));
+  runApp(
+    ProviderScope(
+      overrides: [
+        flavorProvider.overrideWithValue(flavor),
+      ],
+      child: const HoldThatThoughtApp(),
+    ),
+  );
 }
 
 class HoldThatThoughtApp extends ConsumerWidget {
@@ -60,6 +71,7 @@ class HoldThatThoughtApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
     final themeState = ref.watch(themeProvider);
+    final flavor = ref.watch(flavorProvider);
 
     return Builder(
       builder: (context) {
@@ -68,9 +80,10 @@ class HoldThatThoughtApp extends ConsumerWidget {
           data: mediaQuery.copyWith(
             textScaleFactor: mediaQuery.textScaleFactor.clamp(0.8, 2.0),
           ),
-          child: MaterialApp.router(
-            title: 'Hold That Thought',
-            theme: AppTheme.lightFor(themeState.accent),
+          child: FlavorBanner(
+            child: MaterialApp.router(
+              title: 'Hold That Thought',
+              theme: AppTheme.lightFor(themeState.accent),
             darkTheme: AppTheme.darkFor(themeState.accent),
             themeMode: themeState.themeMode,
             routerConfig: router,

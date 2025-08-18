@@ -92,9 +92,17 @@ The settings can be changed on the `/settings` page.
 
 For a quick start on the web, run the following command:
 ```sh
-flutter run -d chrome
+flutter run -d chrome -t lib/main_dev.dart
 ```
 The app uses path URLs (no hash).
+
+### Flavors
+
+The app has three flavors: `dev`, `staging`, and `prod`. To run a specific flavor, use the `-t` flag with the `flutter run` command:
+
+- **Development:** `flutter run -d chrome -t lib/main_dev.dart`
+- **Staging:** `flutter run -d chrome -t lib/main_staging.dart`
+- **Production:** `flutter run -d chrome -t lib/main_prod.dart`
 
 ## Testing
 
