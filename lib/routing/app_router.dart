@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/pages/capture_page.dart';
 import 'package:hold_that_thought/pages/list_page.dart';
-import 'package:hold_that_thought/pages/settings_page.dart';
+import 'package:hold_that_thought/settings/settings_screen.dart';
 import 'package:hold_that_thought/notes/create_note_page.dart';
 import 'package:hold_that_thought/notes/note_data.dart';
 import 'package:hold_that_thought/notes/note_detail_page.dart';
@@ -39,7 +39,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/settings',
-        builder: (context, state) => const SettingsPage(),
+        builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: '/note/:id',
