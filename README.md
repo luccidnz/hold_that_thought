@@ -71,7 +71,7 @@ The app uses `go_router` for navigation. The defined routes are:
 
 Web deep links are supported. For example, you can navigate directly to `/note/123` in a web build. 404 errors are handled and will display a "Not Found" page.
 
-Native deep links (e.g., `myapp://...`) are a TODO. For implementation details, see [docs/deeplinks-native.md](docs/deeplinks-native.md).
+Native deep links (e.g., `myapp://...`) are a TODO. For implementation details, see [docs/deeplinks-native.md](docs/deeplinks-native.md). For a detailed breakdown of the tasks required, see [NATIVE_DEEPLINKS_ISSUE.md](NATIVE_DEEPLINKS_ISSUE.md).
 
 ## Dev Quickstart
 
