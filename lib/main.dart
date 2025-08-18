@@ -61,12 +61,22 @@ class HoldThatThoughtApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
     final themeState = ref.watch(themeProvider);
 
-    return MaterialApp.router(
-      title: 'Hold That Thought',
-      theme: AppTheme.lightFor(themeState.accent),
-      darkTheme: AppTheme.darkFor(themeState.accent),
-      themeMode: themeState.themeMode,
-      routerConfig: router,
+    return Builder(
+      builder: (context) {
+        final mediaQuery = MediaQuery.of(context);
+        return MediaQuery(
+          data: mediaQuery.copyWith(
+            textScaleFactor: mediaQuery.textScaleFactor.clamp(0.8, 2.0),
+          ),
+          child: MaterialApp.router(
+            title: 'Hold That Thought',
+            theme: AppTheme.lightFor(themeState.accent),
+            darkTheme: AppTheme.darkFor(themeState.accent),
+            themeMode: themeState.themeMode,
+            routerConfig: router,
+          ),
+        );
+      },
     );
   }
 }

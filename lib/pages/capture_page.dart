@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:developer';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -66,14 +68,6 @@ class _CapturePageState extends ConsumerState<CapturePage> {
 
   @override
   Widget build(BuildContext context) {
-    final notesRepository = ref.watch(notesRepositoryProvider);
-    final distinctTags = notesRepository.getDistinctTags();
-    final pinnedNotes = notesRepository.getPinnedNotes();
-    final unpinnedNotes = notesRepository.getUnpinnedNotes(
-      query: _searchQuery,
-      tags: _selectedTags,
-    );
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Hold That Thought'),
@@ -81,10 +75,12 @@ class _CapturePageState extends ConsumerState<CapturePage> {
           const SyncBadge(),
           IconButton(
             icon: const Icon(Icons.list),
+            tooltip: 'View all notes',
             onPressed: () => context.go(AppRoutes.list()),
           ),
           IconButton(
             icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
             onPressed: () => context.go(AppRoutes.settings()),
           ),
         ],
@@ -109,81 +105,106 @@ class _CapturePageState extends ConsumerState<CapturePage> {
               ),
             ),
           ),
-          SizedBox(
-            height: 50,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: distinctTags.map((tag) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: FilterChip(
-                    label: Text(tag),
-                    tooltip: 'Filter by $tag',
-                    selected: _selectedTags.contains(tag),
-                    onSelected: (selected) {
-                      setState(() {
-                        if (selected) {
-                          _selectedTags.add(tag);
-                        } else {
-                          _selectedTags.remove(tag);
-                        }
-                        _saveFilters();
-                      });
-                    },
-                  ),
-                );
-              }).toList(),
-            ),
+          Consumer(
+            builder: (context, ref, child) {
+              final distinctTags =
+                  ref.watch(notesRepositoryProvider).getDistinctTags();
+              return SizedBox(
+                height: 50,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: distinctTags.map((tag) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: FilterChip(
+                        label: Text(tag),
+                        tooltip: 'Filter by $tag',
+                        selected: _selectedTags.contains(tag),
+                        onSelected: (selected) {
+                          setState(() {
+                            if (selected) {
+                              _selectedTags.add(tag);
+                            } else {
+                              _selectedTags.remove(tag);
+                            }
+                            _saveFilters();
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+              );
+            },
           ),
           Expanded(
-            child: CustomScrollView(
-              slivers: [
-                if (pinnedNotes.isNotEmpty)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Pinned',
-                        style: Theme.of(context).textTheme.titleSmall,
+            child: Consumer(
+              builder: (context, ref, child) {
+                if (kDebugMode) {
+                  Timeline.startSync('Build Note Lists');
+                }
+                final notesRepository = ref.watch(notesRepositoryProvider);
+                final pinnedNotes = notesRepository.getPinnedNotes();
+                final unpinnedNotes = notesRepository.getUnpinnedNotes(
+                  query: _searchQuery,
+                  tags: _selectedTags,
+                );
+                final customScrollView = CustomScrollView(
+                  slivers: [
+                    if (pinnedNotes.isNotEmpty)
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Pinned',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      ),
+                    if (pinnedNotes.isNotEmpty)
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final note = pinnedNotes[index];
+                            return ListTile(
+                              title: Text(note.title),
+                              subtitle:
+                                  note.body != null ? Text(note.body!) : null,
+                            );
+                          },
+                          childCount: pinnedNotes.length,
+                        ),
+                      ),
+                    if (unpinnedNotes.isNotEmpty)
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'All Notes',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final note = unpinnedNotes[index];
+                          return ListTile(
+                            title: Text(note.title),
+                            subtitle:
+                                note.body != null ? Text(note.body!) : null,
+                          );
+                        },
+                        childCount: unpinnedNotes.length,
                       ),
                     ),
-                  ),
-                if (pinnedNotes.isNotEmpty)
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final note = pinnedNotes[index];
-                        return ListTile(
-                          title: Text(note.title),
-                          subtitle: note.body != null ? Text(note.body!) : null,
-                        );
-                      },
-                      childCount: pinnedNotes.length,
-                    ),
-                  ),
-                if (unpinnedNotes.isNotEmpty)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'All Notes',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                    ),
-                  ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final note = unpinnedNotes[index];
-                      return ListTile(
-                        title: Text(note.title),
-                        subtitle: note.body != null ? Text(note.body!) : null,
-                      );
-                    },
-                    childCount: unpinnedNotes.length,
-                  ),
-                ),
-              ],
+                  ],
+                );
+                if (kDebugMode) {
+                  Timeline.finishSync();
+                }
+                return customScrollView;
+              },
             ),
           ),
         ],
@@ -196,6 +217,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
             builder: (context) => const QuickCaptureSheet(),
           );
         },
+        tooltip: 'Quick Capture',
         child: const Icon(Icons.add),
       ),
     );

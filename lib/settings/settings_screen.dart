@@ -130,15 +130,18 @@ class SettingsScreen extends ConsumerWidget {
             spacing: 8.0,
             runSpacing: 8.0,
             children: Accent.values.map((accent) {
-              return GestureDetector(
-                onTap: () {
-                  themeController.setAccent(accent);
-                },
-                child: CircleAvatar(
-                  backgroundColor: accent.color,
-                  child: themeState.accent == accent
-                      ? const Icon(Icons.check, color: Colors.white)
-                      : null,
+              return Semantics(
+                label: 'Set accent color to ${accent.name}',
+                child: GestureDetector(
+                  onTap: () {
+                    themeController.setAccent(accent);
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: accent.color,
+                    child: themeState.accent == accent
+                        ? const Icon(Icons.check, color: Colors.white)
+                        : null,
+                  ),
                 ),
               );
             }).toList(),

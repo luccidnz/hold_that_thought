@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
@@ -6,7 +7,7 @@ import 'package:hold_that_thought/storage/hive_boxes.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:uuid/uuid.dart';
 
-class NotesRepository {
+class NotesRepository extends ChangeNotifier {
   NotesRepository(this._syncService, this._notesBox, this._pendingOpsBox);
 
   final SyncService _syncService;
@@ -100,6 +101,7 @@ class NotesRepository {
     );
     await _notesBox.put(note.id, note);
     await _pendingOpsBox.add(NoteChange(type: ChangeType.create, note: note, ts: now));
+    notifyListeners();
     return note;
   }
 
@@ -108,6 +110,7 @@ class NotesRepository {
     if (note != null) {
       await _pendingOpsBox.add(NoteChange(type: ChangeType.delete, note: note, ts: DateTime.now()));
       await _notesBox.delete(id);
+      notifyListeners();
     }
   }
 
@@ -115,6 +118,7 @@ class NotesRepository {
     final updatedNote = note.copyWith(updatedAt: DateTime.now());
     await _notesBox.put(note.id, updatedNote);
     await _pendingOpsBox.add(NoteChange(type: ChangeType.update, note: updatedNote, ts: updatedNote.updatedAt));
+    notifyListeners();
   }
 
   Future<void> syncOnce() async {
@@ -142,6 +146,7 @@ class NotesRepository {
       }
       _lastSynced = pullResult.serverTime;
       _syncStatusController.add(SyncStatus.ok);
+      notifyListeners();
     } catch (e) {
       _syncStatusController.add(SyncStatus.error);
     }
@@ -150,10 +155,11 @@ class NotesRepository {
   Future<void> clearAllBoxes() async {
     await _notesBox.clear();
     await _pendingOpsBox.clear();
+    notifyListeners();
   }
 }
 
-final notesRepositoryProvider = Provider<NotesRepository>((ref) {
+final notesRepositoryProvider = ChangeNotifierProvider<NotesRepository>((ref) {
   final syncService = ref.watch(syncServiceProvider);
   final notesBox = Hive.box<Note>(HiveBoxes.notes);
   final pendingOpsBox = Hive.box<NoteChange>(HiveBoxes.pendingOps);
