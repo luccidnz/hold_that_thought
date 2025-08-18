@@ -1,4 +1,7 @@
+import 'package:hive/hive.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
+
+part 'sync_service.g.dart';
 
 abstract class SyncService {
   Future<SyncResult> pushChanges(List<NoteChange> ops);
@@ -6,8 +9,17 @@ abstract class SyncService {
   ConflictStrategy get strategy; // preferNewest
 }
 
-enum ChangeType { create, update, delete }
+@HiveType(typeId: 1)
+enum ChangeType {
+  @HiveField(0)
+  create,
+  @HiveField(1)
+  update,
+  @HiveField(2)
+  delete,
+}
 
+@HiveType(typeId: 2)
 class NoteChange {
   const NoteChange({
     required this.type,
@@ -15,8 +27,13 @@ class NoteChange {
     required this.ts,
   });
 
+  @HiveField(0)
   final ChangeType type;
+
+  @HiveField(1)
   final Note note;
+
+  @HiveField(2)
   final DateTime ts;
 }
 

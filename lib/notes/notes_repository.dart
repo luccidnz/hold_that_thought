@@ -1,43 +1,18 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
+import 'package:hold_that_thought/storage/hive_boxes.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:uuid/uuid.dart';
 
 class NotesRepository {
-  NotesRepository(this._syncService);
+  NotesRepository(this._syncService, this._notesBox, this._pendingOpsBox);
 
   final SyncService _syncService;
-  final List<Note> _notes = [
-    Note(
-      id: '123',
-      title: 'Test Note 1',
-      body: 'This is a test note about Flutter.',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      isPinned: false,
-      tags: ['work', 'flutter'],
-    ),
-    Note(
-      id: '456',
-      title: 'Test Note 2',
-      body: 'This is another test note about personal stuff.',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      isPinned: true,
-      tags: ['personal'],
-    ),
-    Note(
-      id: '789',
-      title: 'Test Note 3',
-      body: 'This is a pinned test note about work.',
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-      isPinned: true,
-      tags: ['work'],
-    ),
-  ];
-  final List<NoteChange> _pendingOps = [];
+  final Box<Note> _notesBox;
+  final Box<NoteChange> _pendingOpsBox;
+
   final _syncStatusController = StreamController<SyncStatus>.broadcast();
   DateTime _lastSynced = DateTime.fromMicrosecondsSinceEpoch(0);
 
@@ -47,7 +22,7 @@ class NotesRepository {
     String? query,
     Set<String> tags = const {},
   }) {
-    var notes = _notes;
+    var notes = _notesBox.values.toList();
 
     if (query != null && query.isNotEmpty) {
       notes = notes
@@ -68,14 +43,14 @@ class NotesRepository {
   }
 
   List<Note> getPinnedNotes() {
-    return _notes.where((note) => note.isPinned).toList();
+    return _notesBox.values.where((note) => note.isPinned).toList();
   }
 
   List<Note> getUnpinnedNotes({
     String? query,
     Set<String> tags = const {},
   }) {
-    final unpinned = _notes.where((note) => !note.isPinned).toList();
+    final unpinned = _notesBox.values.where((note) => !note.isPinned).toList();
     var notes = unpinned;
 
     if (query != null && query.isNotEmpty) {
@@ -97,19 +72,19 @@ class NotesRepository {
   }
 
   Set<String> getDistinctTags() {
-    return _notes.expand((note) => note.tags).toSet();
+    return _notesBox.values.expand((note) => note.tags).toSet();
   }
 
   bool exists(String id) {
-    return _notes.any((note) => note.id == id);
+    return _notesBox.containsKey(id);
   }
 
-  Note create({
+  Future<Note> create({
     required String title,
     String? body,
     required bool isPinned,
     List<String> tags = const [],
-  }) {
+  }) async {
     if (title == 'error') {
       throw Exception('Failed to create note');
     }
@@ -123,46 +98,46 @@ class NotesRepository {
       isPinned: isPinned,
       tags: tags,
     );
-    _notes.add(note);
-    _pendingOps.add(NoteChange(type: ChangeType.create, note: note, ts: now));
+    await _notesBox.put(note.id, note);
+    await _pendingOpsBox.add(NoteChange(type: ChangeType.create, note: note, ts: now));
     return note;
   }
 
-  void delete(String id) {
-    final note = _notes.firstWhere((note) => note.id == id);
-    _pendingOps.add(NoteChange(type: ChangeType.delete, note: note, ts: DateTime.now()));
-    _notes.removeWhere((note) => note.id == id);
+  Future<void> delete(String id) async {
+    final note = _notesBox.get(id);
+    if (note != null) {
+      await _pendingOpsBox.add(NoteChange(type: ChangeType.delete, note: note, ts: DateTime.now()));
+      await _notesBox.delete(id);
+    }
   }
 
-  Note update(Note note) {
-    final index = _notes.indexWhere((n) => n.id == note.id);
-    if (index != -1) {
-      final updatedNote = note.copyWith(updatedAt: DateTime.now());
-      _notes[index] = updatedNote;
-      _pendingOps.add(NoteChange(type: ChangeType.update, note: updatedNote, ts: updatedNote.updatedAt));
-      return updatedNote;
-    }
-    throw Exception('Note not found');
+  Future<void> update(Note note) async {
+    final updatedNote = note.copyWith(updatedAt: DateTime.now());
+    await _notesBox.put(note.id, updatedNote);
+    await _pendingOpsBox.add(NoteChange(type: ChangeType.update, note: updatedNote, ts: updatedNote.updatedAt));
   }
 
   Future<void> syncOnce() async {
     _syncStatusController.add(SyncStatus.syncing);
     try {
-      final pushResult = await _syncService.pushChanges(_pendingOps);
+      final pendingOps = _pendingOpsBox.values.toList();
+      final pushResult = await _syncService.pushChanges(pendingOps);
       if (pushResult.ok) {
-        _pendingOps.removeWhere((op) => pushResult.appliedIds.contains(op.note.id));
+        for (final id in pushResult.appliedIds) {
+          final op = pendingOps.firstWhere((op) => op.note.id == id);
+          await _pendingOpsBox.delete(op.key);
+        }
       }
 
       final pullResult = await _syncService.pullChanges(_lastSynced);
       for (final remoteNote in pullResult.notes) {
-        final localNoteIndex = _notes.indexWhere((note) => note.id == remoteNote.id);
-        if (localNoteIndex != -1) {
-          final localNote = _notes[localNoteIndex];
+        final localNote = _notesBox.get(remoteNote.id);
+        if (localNote != null) {
           if (remoteNote.updatedAt.isAfter(localNote.updatedAt)) {
-            _notes[localNoteIndex] = remoteNote;
+            await _notesBox.put(remoteNote.id, remoteNote);
           }
         } else {
-          _notes.add(remoteNote);
+          await _notesBox.put(remoteNote.id, remoteNote);
         }
       }
       _lastSynced = pullResult.serverTime;
@@ -171,9 +146,16 @@ class NotesRepository {
       _syncStatusController.add(SyncStatus.error);
     }
   }
+
+  Future<void> clearAllBoxes() async {
+    await _notesBox.clear();
+    await _pendingOpsBox.clear();
+  }
 }
 
 final notesRepositoryProvider = Provider<NotesRepository>((ref) {
   final syncService = ref.watch(syncServiceProvider);
-  return NotesRepository(syncService);
+  final notesBox = Hive.box<Note>(HiveBoxes.notes);
+  final pendingOpsBox = Hive.box<NoteChange>(HiveBoxes.pendingOps);
+  return NotesRepository(syncService, notesBox, pendingOpsBox);
 });

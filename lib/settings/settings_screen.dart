@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/settings/settings_controller.dart';
+import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/sync/fake_sync_service.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:hold_that_thought/theme/app_theme.dart';
@@ -68,6 +69,13 @@ class SettingsScreen extends ConsumerWidget {
                 title: const Text('Clear Remote Store'),
                 onTap: () {
                   syncService.clearRemoteStore();
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                title: const Text('Clear Local Store'),
+                onTap: () {
+                  ref.read(notesRepositoryProvider).clearAllBoxes();
                   Navigator.of(context).pop();
                 },
               ),

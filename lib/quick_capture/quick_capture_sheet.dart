@@ -36,7 +36,7 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
     final notesRepository = ref.read(notesRepositoryProvider);
 
     try {
-      final newNote = notesRepository.create(
+      final newNote = await notesRepository.create(
         title: title,
         body: body,
         isPinned: _isPinned,

@@ -16,6 +16,7 @@ categories, background catching and more.
 * **Thought categorisation** – AI assigns categories or user‑defined labels.
 * **Free vs Pro tiers** – choose between local‑only storage and full cloud sync
   with advanced features.
+* **Local Storage (Hive)** - Notes are persisted locally using Hive, ensuring that data survives app restarts.
 * **Search & Filters** - The home screen provides a powerful search bar and tag-based filtering to quickly find notes. Pinned notes are always displayed at the top.
 * **Quick Capture** - A floating action button on the home screen opens a modal bottom sheet to quickly capture a new thought with a title, body, and pin status.
 * **Reminders & exports** – set reminders from temporal phrases and export
