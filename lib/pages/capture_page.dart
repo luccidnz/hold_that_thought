@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hold_that_thought/notes/note_data.dart';
+import 'package:hold_that_thought/quick_capture/quick_capture_sheet.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 
 class CapturePage extends StatelessWidget {
@@ -44,6 +45,16 @@ class CapturePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => const QuickCaptureSheet(),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
