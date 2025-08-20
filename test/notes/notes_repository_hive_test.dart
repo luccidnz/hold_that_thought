@@ -5,19 +5,30 @@ import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/storage/hive_boxes.dart';
 import 'package:hold_that_thought/sync/fake_sync_service.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('NotesRepository with Hive', () {
     late Box<Note> notesBox;
+    late Box<NoteChange> pendingOpsBox;
     late NotesRepository repository;
 
-    setUp(() async {
-      Hive.init(null);
-      Hive.registerAdapter(NoteAdapter());
-      Hive.registerAdapter(ChangeTypeAdapter());
-      Hive.registerAdapter(NoteChangeAdapter());
+    setUpAll(() async {
+      SharedPreferences.setMockInitialValues({});
+      try {
+        Hive.registerAdapter(NoteAdapter());
+        Hive.registerAdapter(ChangeTypeAdapter());
+        Hive.registerAdapter(NoteChangeAdapter());
+      } catch (e) {
+        // Adapters already registered, safe to ignore.
+      }
       notesBox = await Hive.openBox<Note>(HiveBoxes.notes);
-      final pendingOpsBox = await Hive.openBox<NoteChange>(HiveBoxes.pendingOps);
+      pendingOpsBox = await Hive.openBox<NoteChange>(HiveBoxes.pendingOps);
+    });
+
+    setUp(() async {
+      await notesBox.clear();
+      await pendingOpsBox.clear();
       final syncService = FakeSyncService();
       repository = NotesRepository(syncService, notesBox, pendingOpsBox);
 
@@ -31,10 +42,6 @@ void main() {
         '2',
         Note(id: '2', title: 'Personal note', body: '', createdAt: now, updatedAt: now, isPinned: true, tags: ['personal']),
       );
-    });
-
-    tearDown(() async {
-      await Hive.deleteFromDisk();
     });
 
     test('search filters notes', () {

@@ -1,5 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
+import 'package:hold_that_thought/sync/fake_sync_service.dart';
 
 part 'sync_service.g.dart';
 
@@ -79,3 +81,7 @@ class SyncError {
   const SyncError({required this.count});
   final int count;
 }
+
+final syncServiceProvider = Provider<SyncService>((ref) {
+  return FakeSyncService();
+});

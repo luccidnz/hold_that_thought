@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 
@@ -31,9 +32,14 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
   }
 
   Future<void> _save() async {
+    // Capture context-dependent objects before async gaps.
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final notesRepository = ref.read(notesRepositoryProvider);
+
     final title = _titleController.text;
     final body = _bodyController.text;
-    final notesRepository = ref.read(notesRepositoryProvider);
 
     try {
       final newNote = await notesRepository.create(
@@ -43,28 +49,29 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
       );
 
       HapticFeedback.lightImpact();
-      Navigator.of(context).pop();
+      navigator.pop();
 
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger.showSnackBar(
         SnackBar(
           content: Row(
             children: [
-              const Text('Saved'),
+              Text(l10n.noteSaved),
               const Spacer(),
               TextButton(
                 onPressed: () {
                   notesRepository.delete(newNote.id);
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  messenger.hideCurrentSnackBar();
                 },
-                child: const Text('Undo'),
+                child: Text(l10n.undo),
               ),
               const SizedBox(width: 8),
               TextButton(
                 onPressed: () {
+                  // The context here is from the SnackBar's builder, which is valid.
                   context.go(AppRoutes.note(newNote.id));
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  messenger.hideCurrentSnackBar();
                 },
-                child: const Text('View'),
+                child: Text(l10n.view),
               ),
             ],
           ),
@@ -80,6 +87,7 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return RawKeyboardListener(
       focusNode: FocusNode(),
       onKey: (event) {
@@ -109,8 +117,8 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
               controller: _titleController,
               focusNode: _titleFocusNode,
               autofocus: true,
-              decoration: const InputDecoration(
-                hintText: 'Title',
+              decoration: InputDecoration(
+                hintText: l10n.titleHint,
                 border: InputBorder.none,
               ),
               onSubmitted: (_) {
@@ -120,8 +128,8 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
             TextField(
               controller: _bodyController,
               focusNode: _bodyFocusNode,
-              decoration: const InputDecoration(
-                hintText: 'Body',
+              decoration: InputDecoration(
+                hintText: l10n.bodyHint,
                 border: InputBorder.none,
               ),
               maxLines: 5,
@@ -136,14 +144,14 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
                       _isPinned = !_isPinned;
                     });
                   },
-                  tooltip: 'Pin note',
+                  tooltip: l10n.pinButtonTooltip,
                 ),
                 const Spacer(),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Cancel'),
+                  child: Text(l10n.cancel),
                 ),
                 const SizedBox(width: 8),
                 ValueListenableBuilder<TextEditingValue>(
@@ -151,7 +159,7 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
                   builder: (context, value, child) {
                     return FilledButton(
                       onPressed: value.text.isNotEmpty ? _save : null,
-                      child: const Text('Save'),
+                      child: Text(l10n.save),
                     );
                   },
                 ),

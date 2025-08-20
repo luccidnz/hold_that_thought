@@ -124,12 +124,13 @@ class NotesRepository extends ChangeNotifier {
   Future<void> syncOnce() async {
     _syncStatusController.add(SyncStatus.syncing);
     try {
-      final pendingOps = _pendingOpsBox.values.toList();
+      final pendingOpsMap = _pendingOpsBox.toMap();
+      final pendingOps = pendingOpsMap.values.toList();
       final pushResult = await _syncService.pushChanges(pendingOps);
       if (pushResult.ok) {
         for (final id in pushResult.appliedIds) {
-          final op = pendingOps.firstWhere((op) => op.note.id == id);
-          await _pendingOpsBox.delete(op.key);
+          final entry = pendingOpsMap.entries.firstWhere((entry) => entry.value.note.id == id);
+          await _pendingOpsBox.delete(entry.key);
         }
       }
 

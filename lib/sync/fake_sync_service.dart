@@ -57,7 +57,3 @@ class FakeSyncService implements SyncService {
     _remoteStore.clear();
   }
 }
-
-final syncServiceProvider = Provider<SyncService>((ref) {
-  return FakeSyncService();
-});

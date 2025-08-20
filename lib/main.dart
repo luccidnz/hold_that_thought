@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/flavor.dart';
 import 'package:hold_that_thought/flavor_banner.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
+import 'package:hold_that_thought/settings/settings_controller.dart';
 import 'package:hold_that_thought/theme/app_theme.dart';
 import 'package:hold_that_thought/theme/theme_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hold_that_thought/storage/hive_boxes.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
 
 final flavorProvider = Provider<Flavor>((ref) => throw UnimplementedError());
 
@@ -72,6 +75,7 @@ class HoldThatThoughtApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
     final themeState = ref.watch(themeProvider);
     final flavor = ref.watch(flavorProvider);
+    final locale = ref.watch(localeProvider);
 
     return Builder(
       builder: (context) {
@@ -82,11 +86,23 @@ class HoldThatThoughtApp extends ConsumerWidget {
           ),
           child: FlavorBanner(
             child: MaterialApp.router(
-              title: 'Hold That Thought',
+              onGenerateTitle: (ctx) => AppLocalizations.of(ctx)!.appTitle,
+              locale: locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('mi'),
+              ],
               theme: AppTheme.lightFor(themeState.accent),
-            darkTheme: AppTheme.darkFor(themeState.accent),
-            themeMode: themeState.themeMode,
-            routerConfig: router,
+              darkTheme: AppTheme.darkFor(themeState.accent),
+              themeMode: themeState.themeMode,
+              routerConfig: router,
+            ),
           ),
         );
       },

@@ -74,7 +74,8 @@ void main() {
     });
 
     test('simulated failure throws an exception', () async {
-      final service = FakeSyncService(failureRate: 1.0);
+      final service = FakeSyncService();
+      service.failureRate = 1.0;
       final note = Note(
         id: '1',
         title: 't',

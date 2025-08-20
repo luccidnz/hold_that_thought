@@ -1,0 +1,23 @@
+{
+  "@@locale": "en",
+  "appTitle": "Hold That Thought",
+  "homeTitle": "Notes",
+  "settingsTitle": "Settings",
+  "themeLabel": "Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "accentLabel": "Accent",
+  "quickCapture": "Quick Capture",
+  "searchHint": "Search notes…",
+  "pinned": "Pinned",
+  "allNotes": "All Notes",
+  "save": "Save",
+  "cancel": "Cancel",
+  "undo": "Undo",
+  "view": "View",
+  "noteSaved": "Note Saved",
+  "titleHint": "Title",
+  "bodyHint": "Body",
+  "pinButtonTooltip": "Pin note"
+}

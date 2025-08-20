@@ -3,14 +3,23 @@ import 'package:hive/hive.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
 import 'package:hold_that_thought/storage/hive_boxes.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('HiveNotesTest', () {
+    setUpAll(() async {
+      SharedPreferences.setMockInitialValues({});
+      Hive.init('test/hive_testing_path');
+      try {
+        Hive.registerAdapter(NoteAdapter());
+        Hive.registerAdapter(ChangeTypeAdapter());
+        Hive.registerAdapter(NoteChangeAdapter());
+      } catch (e) {
+        // Adapters already registered
+      }
+    });
+
     setUp(() async {
-      Hive.init(null);
-      Hive.registerAdapter(NoteAdapter());
-      Hive.registerAdapter(ChangeTypeAdapter());
-      Hive.registerAdapter(NoteChangeAdapter());
       await Hive.openBox<Note>(HiveBoxes.notes);
     });
 

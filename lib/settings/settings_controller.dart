@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
@@ -45,7 +46,7 @@ class SettingsController extends StateNotifier<bool> {
   void _handleSyncStatus(SyncStatus status) {
     if (status == SyncStatus.error && state) {
       final backoffTime = min(pow(2, _retryCount) * 2, 30).toInt();
-      log('Sync failed. Retrying in $backoffTime seconds...');
+      dev.log('Sync failed. Retrying in $backoffTime seconds...');
       Future.delayed(Duration(seconds: backoffTime), () {
         if (state) {
           _notesRepository.syncOnce();
@@ -67,4 +68,34 @@ class SettingsController extends StateNotifier<bool> {
 final settingsProvider = StateNotifierProvider<SettingsController, bool>((ref) {
   final notesRepository = ref.watch(notesRepositoryProvider);
   return SettingsController(notesRepository);
+});
+
+class LocaleController extends StateNotifier<Locale?> {
+  LocaleController() : super(null) {
+    _loadLocale();
+  }
+
+  static const String _localeKey = 'locale';
+
+  Future<void> _loadLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final localeString = prefs.getString(_localeKey);
+    if (localeString != null) {
+      state = Locale(localeString);
+    }
+  }
+
+  Future<void> setLocale(Locale? locale) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (locale != null) {
+      await prefs.setString(_localeKey, locale.languageCode);
+    } else {
+      await prefs.remove(_localeKey);
+    }
+    state = locale;
+  }
+}
+
+final localeProvider = StateNotifierProvider<LocaleController, Locale?>((ref) {
+  return LocaleController();
 });

@@ -1,0 +1,23 @@
+{
+  "@@locale": "mi",
+  "appTitle": "Puritia Te Whakaaro",
+  "homeTitle": "Ngā Tuhipoka",
+  "settingsTitle": "Tautuhinga",
+  "themeLabel": "Kaupapa",
+  "themeSystem": "Pūnaha",
+  "themeLight": "Mārama",
+  "themeDark": "Pōuri",
+  "accentLabel": "Tae Tohu",
+  "quickCapture": "Hopukina Tere",
+  "searchHint": "Rapu tuhipoka…",
+  "pinned": "Kua Piri",
+  "allNotes": "Ngā Tuhipoka Katoa",
+  "save": "Tiaki",
+  "cancel": "Whakakore",
+  "undo": "Wetekia",
+  "view": "Tirohia",
+  "noteSaved": "Kua Tiakina te Tuhipoka",
+  "titleHint": "Taitara",
+  "bodyHint": "Tinana",
+  "pinButtonTooltip": "Tīpina te tuhipoka"
+}

@@ -7,6 +7,7 @@ import 'package:hold_that_thought/sync/fake_sync_service.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:hold_that_thought/theme/app_theme.dart';
 import 'package:hold_that_thought/theme/theme_controller.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class SettingsScreen extends ConsumerWidget {
     final themeController = ref.read(themeProvider.notifier);
     final autoSync = ref.watch(settingsProvider);
     final settingsController = ref.read(settingsProvider.notifier);
+    final locale = ref.watch(localeProvider);
+    final localeController = ref.read(localeProvider.notifier);
 
     void showDevTools() {
       final syncService = ref.read(syncServiceProvider) as FakeSyncService;
@@ -87,7 +90,7 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(AppLocalizations.of(context)!.settingsTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -145,6 +148,35 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               );
             }).toList(),
+          ),
+          const SizedBox(height: 24),
+          const Divider(),
+          const SizedBox(height: 24),
+          Text(
+            'Language',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 8),
+          SegmentedButton<Locale?>(
+            segments: const [
+              ButtonSegment(
+                value: null,
+                label: Text('System'),
+                icon: Icon(Icons.language),
+              ),
+              ButtonSegment(
+                value: Locale('en'),
+                label: Text('English'),
+              ),
+              ButtonSegment(
+                value: Locale('mi'),
+                label: Text('Māori'),
+              ),
+            ],
+            selected: {locale},
+            onSelectionChanged: (newSelection) {
+              localeController.setLocale(newSelection.first);
+            },
           ),
           const SizedBox(height: 24),
           const Divider(),
