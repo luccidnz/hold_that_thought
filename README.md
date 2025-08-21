@@ -88,6 +88,31 @@ The settings can be changed on the `/settings` page.
 - **Web:** `shared_preferences` are stored in the browser's `localStorage`. To reset, clear the site data in your browser's developer tools.
 - **Mobile (Android/iOS):** `shared_preferences` are stored in the app's sandboxed data directory. To reset, clear the app data or uninstall and reinstall the app.
 
+## Localization
+
+The app supports internationalization (i18n) and is localized for English (en) and Māori (mi).
+
+### Adding/Editing Strings
+
+All user-facing strings are located in the `.arb` (Application Resource Bundle) files in `lib/l10n/`.
+
+- `app_en.arb`: English strings
+- `app_mi.arb`: Māori strings
+
+To add or edit a string, modify these files. Each entry must have a unique key and be present in all `.arb` files.
+
+### Generating Localizations
+
+After editing the `.arb` files, you must run the following command to update the `AppLocalizations.dart` class that the app uses to access the strings:
+
+```sh
+flutter gen-l10n
+```
+
+### Language Selector
+
+The user can change the language from the Settings screen. The options are System, English, and Māori. The selected locale is persisted across app restarts.
+
 ## Dev Quickstart
 
 For a quick start on the web, run the following command:

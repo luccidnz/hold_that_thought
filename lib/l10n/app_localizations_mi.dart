@@ -67,4 +67,81 @@ class AppLocalizationsMi extends AppLocalizations {
 
   @override
   String get pinButtonTooltip => 'Tīpina te tuhipoka';
+
+  @override
+  String get viewAllNotesTooltip => 'Tirohia ngā tuhipoka katoa';
+
+  @override
+  String get settingsTooltip => 'Tautuhinga';
+
+  @override
+  String filterByTagTooltip(String tag) {
+    return 'Tātarihia mā te $tag';
+  }
+
+  @override
+  String get settingsThemeModeLabel => 'Aratau Kaupapa';
+
+  @override
+  String get settingsAccentLabel => 'Tae Kōkaha';
+
+  @override
+  String get settingsLanguageLabel => 'Reo';
+
+  @override
+  String get settingsSyncLabel => 'Tukutahi';
+
+  @override
+  String get settingsThemeSystem => 'Pūnaha';
+
+  @override
+  String get settingsThemeLight => 'Mārama';
+
+  @override
+  String get settingsThemeDark => 'Pōuri';
+
+  @override
+  String get settingsLanguageSystem => 'Pūnaha';
+
+  @override
+  String get settingsLanguageEnglish => 'Ingarihi';
+
+  @override
+  String get settingsLanguageMaori => 'Māori';
+
+  @override
+  String settingsSetAccent(String accentName) {
+    return 'Tautuhia te tae kōkaha ki te $accentName';
+  }
+
+  @override
+  String get settingsAutoSync => 'Tukutahi-aunoa (tumau)';
+
+  @override
+  String get noteDetailTitle => 'Taipitopito Tuhipoka';
+
+  @override
+  String noteDetailId(String id) {
+    return 'ID Tuhipoka: $id';
+  }
+
+  @override
+  String get listPageTitle => 'Ngā Whakaaro';
+
+  @override
+  String get listPageBody => 'Whārangi Rārangi';
+
+  @override
+  String listPageBodyFiltered(String tag) {
+    return 'Whārangi Rārangi (Kua tātarihia e te tūtohu: $tag)';
+  }
+
+  @override
+  String get notFoundTitle => 'Kāore i Kitea te Whārangi';
+
+  @override
+  String get notFoundBody => '404 - Kāore i Kitea te Whārangi';
+
+  @override
+  String get goHomeButton => 'Hoki ki te Kāinga';
 }

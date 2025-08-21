@@ -84,25 +84,28 @@ class HoldThatThoughtApp extends ConsumerWidget {
           data: mediaQuery.copyWith(
             textScaleFactor: mediaQuery.textScaleFactor.clamp(0.8, 2.0),
           ),
-          child: FlavorBanner(
-            child: MaterialApp.router(
-              onGenerateTitle: (ctx) => AppLocalizations.of(ctx)!.appTitle,
-              locale: locale,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en'),
-                Locale('mi'),
-              ],
-              theme: AppTheme.lightFor(themeState.accent),
-              darkTheme: AppTheme.darkFor(themeState.accent),
-              themeMode: themeState.themeMode,
-              routerConfig: router,
-            ),
+          child: MaterialApp.router(
+            onGenerateTitle: (ctx) => AppLocalizations.of(ctx)!.appTitle,
+            locale: locale,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('mi'),
+            ],
+            theme: AppTheme.lightFor(themeState.accent),
+            darkTheme: AppTheme.darkFor(themeState.accent),
+            themeMode: themeState.themeMode,
+            routerConfig: router,
+            builder: (context, child) {
+              // The child is the screen returned by the router.
+              // We wrap it in the FlavorBanner to display the flavor.
+              return FlavorBanner(child: child!);
+            },
           ),
         );
       },

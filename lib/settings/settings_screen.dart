@@ -14,6 +14,7 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final themeState = ref.watch(themeProvider);
     final themeController = ref.read(themeProvider.notifier);
     final autoSync = ref.watch(settingsProvider);
@@ -96,26 +97,26 @@ class SettingsScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16.0),
         children: [
           Text(
-            'Theme Mode',
+            l10n.settingsThemeModeLabel,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 8),
           SegmentedButton<ThemeMode>(
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: ThemeMode.system,
-                label: Text('System'),
-                icon: Icon(Icons.brightness_auto),
+                label: Text(l10n.settingsThemeSystem),
+                icon: const Icon(Icons.brightness_auto),
               ),
               ButtonSegment(
                 value: ThemeMode.light,
-                label: Text('Light'),
-                icon: Icon(Icons.wb_sunny),
+                label: Text(l10n.settingsThemeLight),
+                icon: const Icon(Icons.wb_sunny),
               ),
               ButtonSegment(
                 value: ThemeMode.dark,
-                label: Text('Dark'),
-                icon: Icon(Icons.nightlight_round),
+                label: Text(l10n.settingsThemeDark),
+                icon: const Icon(Icons.nightlight_round),
               ),
             ],
             selected: {themeState.themeMode},
@@ -125,7 +126,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Accent Color',
+            l10n.settingsAccentLabel,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 8),
@@ -134,7 +135,7 @@ class SettingsScreen extends ConsumerWidget {
             runSpacing: 8.0,
             children: Accent.values.map((accent) {
               return Semantics(
-                label: 'Set accent color to ${accent.name}',
+                label: l10n.settingsSetAccent(accent.name),
                 child: GestureDetector(
                   onTap: () {
                     themeController.setAccent(accent);
@@ -153,24 +154,24 @@ class SettingsScreen extends ConsumerWidget {
           const Divider(),
           const SizedBox(height: 24),
           Text(
-            'Language',
+            l10n.settingsLanguageLabel,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 8),
           SegmentedButton<Locale?>(
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: null,
-                label: Text('System'),
-                icon: Icon(Icons.language),
+                label: Text(l10n.settingsLanguageSystem),
+                icon: const Icon(Icons.language),
               ),
               ButtonSegment(
-                value: Locale('en'),
-                label: Text('English'),
+                value: const Locale('en'),
+                label: Text(l10n.settingsLanguageEnglish),
               ),
               ButtonSegment(
-                value: Locale('mi'),
-                label: Text('Māori'),
+                value: const Locale('mi'),
+                label: Text(l10n.settingsLanguageMaori),
               ),
             ],
             selected: {locale},
@@ -182,12 +183,12 @@ class SettingsScreen extends ConsumerWidget {
           const Divider(),
           const SizedBox(height: 24),
           Text(
-            'Sync',
+            l10n.settingsSyncLabel,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 8),
           SwitchListTile(
-            title: const Text('Auto-sync (stub)'),
+            title: Text(l10n.settingsAutoSync),
             value: autoSync,
             onChanged: (value) {
               settingsController.setAutoSync(value);

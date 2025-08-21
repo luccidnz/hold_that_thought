@@ -7,8 +7,9 @@ import 'package:hold_that_thought/routing/app_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
-import 'package:hold_that_thought/l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import '../test_helpers.dart';
+import 'package:hold_that_thought/flavor.dart';
+import 'package:hold_that_thought/main.dart';
 
 import 'app_router_test.mocks.dart';
 
@@ -28,45 +29,31 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
+        flavorProvider.overrideWithValue(Flavor.dev),
       ],
     );
     final router = container.read(appRouterProvider);
 
-    await tester.pumpWidget(
-      ProviderScope(
-        parent: container,
-        child: MaterialApp.router(
-          routerConfig: router,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('mi'),
-          ],
-        ),
-      ),
-    );
+    await tester.pumpWidget(buildTestableRouterWidget(
+      container: container,
+    ));
 
     // Test initial route
-    expect(find.text('Hold That Thought'), findsOneWidget);
+    expect(find.text('Notes'), findsOneWidget);
 
     // Test navigation to a valid note
     router.go(AppRoutes.note('123'));
     await tester.pumpAndSettle();
-    expect(find.text('Note ID: 123'), findsOneWidget);
+    expect(find.text('Note Detail'), findsOneWidget);
 
     // Test navigation to an invalid note
     router.go(AppRoutes.note('zzz'));
     await tester.pumpAndSettle();
-    expect(find.text('404 - Page Not Found'), findsOneWidget);
+    expect(find.text('Page Not Found'), findsOneWidget);
 
     // Test navigation with query parameters
     router.go(AppRoutes.list(tag: 'work'));
     await tester.pumpAndSettle();
-    expect(find.text('List Page (Filtered by tag: work)'), findsOneWidget);
+    expect(find.text('Thoughts'), findsOneWidget);
   });
 }

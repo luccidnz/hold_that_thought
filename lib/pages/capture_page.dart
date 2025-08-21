@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/quick_capture/quick_capture_sheet.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
@@ -68,19 +69,21 @@ class _CapturePageState extends ConsumerState<CapturePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hold That Thought'),
+        title: Text(l10n.homeTitle),
         actions: [
           const SyncBadge(),
           IconButton(
             icon: const Icon(Icons.list),
-            tooltip: 'View all notes',
+            tooltip: l10n.viewAllNotesTooltip,
             onPressed: () => context.go(AppRoutes.list()),
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            tooltip: 'Settings',
+            tooltip: l10n.settingsTooltip,
             onPressed: () => context.go(AppRoutes.settings()),
           ),
         ],
@@ -92,7 +95,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search...',
+                hintText: l10n.searchHint,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -118,7 +121,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
                       child: FilterChip(
                         label: Text(tag),
-                        tooltip: 'Filter by $tag',
+                        tooltip: l10n.filterByTagTooltip(tag),
                         selected: _selectedTags.contains(tag),
                         onSelected: (selected) {
                           setState(() {
@@ -156,7 +159,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'Pinned',
+                            l10n.pinned,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ),
@@ -180,7 +183,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            'All Notes',
+                            l10n.allNotes,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ),
@@ -217,7 +220,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
             builder: (context) => const QuickCaptureSheet(),
           );
         },
-        tooltip: 'Quick Capture',
+        tooltip: l10n.quickCapture,
         child: const Icon(Icons.add),
       ),
     );

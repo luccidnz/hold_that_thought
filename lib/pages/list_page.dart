@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
 
 class ListPage extends StatelessWidget {
   const ListPage({Key? key, this.tag}) : super(key: key);
@@ -7,11 +8,12 @@ class ListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Thoughts')),
+      appBar: AppBar(title: Text(l10n.listPageTitle)),
       body: Center(
         child: Text(
-          tag == null ? 'List Page' : 'List Page (Filtered by tag: $tag)',
+          tag == null ? l10n.listPageBody : l10n.listPageBodyFiltered(tag!),
         ),
       ),
     );

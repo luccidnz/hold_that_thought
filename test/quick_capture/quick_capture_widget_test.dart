@@ -29,7 +29,8 @@ void main() {
   // Since the test continues to fail unpredictably, it is being disabled to
   // unblock the rest of the CI/CD pipeline and allow the other tests,
   // including golden file generation, to proceed. This test needs to be
-  // revisited and fixed in a separate effort.
+  // revisited and fixed in a separate effort, as tracked in the associated
+  // GitHub issue.
   test('Temporarily disabled quick capture test', () {
     expect(true, isTrue);
   });

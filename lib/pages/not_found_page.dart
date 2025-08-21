@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 
 class NotFoundPage extends StatelessWidget {
@@ -7,19 +8,20 @@ class NotFoundPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Page Not Found'),
+        title: Text(l10n.notFoundTitle),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('404 - Page Not Found'),
+            Text(l10n.notFoundBody),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => context.go(AppRoutes.home()),
-              child: const Text('Go Home'),
+              child: Text(l10n.goHomeButton),
             ),
           ],
         ),

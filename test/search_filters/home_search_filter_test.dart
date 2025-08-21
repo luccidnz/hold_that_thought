@@ -8,6 +8,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
+import '../test_helpers.dart';
 
 import 'home_search_filter_test.mocks.dart';
 
@@ -32,14 +33,12 @@ void main() {
       when(mockNotesRepository.getUnpinnedNotes(query: 'Flutter', tags: {})).thenReturn([note1]);
       when(mockNotesRepository.getPinnedNotes()).thenReturn([]); // No pinned notes for this test
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
-          ],
-          child: const MaterialApp(home: CapturePage()),
-        ),
-      );
+      await tester.pumpWidget(buildTestableWidget(
+        overrides: [
+          notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
+        ],
+        child: const CapturePage(),
+      ));
 
       await tester.enterText(find.byType(TextField), 'Flutter');
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
@@ -52,14 +51,12 @@ void main() {
       when(mockNotesRepository.getUnpinnedNotes(query: '', tags: {'personal'})).thenReturn([]);
       when(mockNotesRepository.getPinnedNotes()).thenReturn([note2, note3]);
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
-          ],
-          child: const MaterialApp(home: CapturePage()),
-        ),
-      );
+      await tester.pumpWidget(buildTestableWidget(
+        overrides: [
+          notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
+        ],
+        child: const CapturePage(),
+      ));
 
       await tester.tap(find.widgetWithText(FilterChip, 'personal'));
       await tester.pumpAndSettle();
@@ -76,14 +73,12 @@ void main() {
       when(mockNotesRepository.getUnpinnedNotes(query: 'personal', tags: {'personal'})).thenReturn([]);
       when(mockNotesRepository.getPinnedNotes()).thenReturn([note2, note3]);
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
-          ],
-          child: const MaterialApp(home: CapturePage()),
-        ),
-      );
+      await tester.pumpWidget(buildTestableWidget(
+        overrides: [
+          notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
+        ],
+        child: const CapturePage(),
+      ));
 
       await tester.pumpAndSettle();
 

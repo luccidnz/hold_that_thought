@@ -19,5 +19,56 @@
   "noteSaved": "Note Saved",
   "titleHint": "Title",
   "bodyHint": "Body",
-  "pinButtonTooltip": "Pin note"
+  "pinButtonTooltip": "Pin note",
+  "viewAllNotesTooltip": "View all notes",
+  "settingsTooltip": "Settings",
+  "filterByTagTooltip": "Filter by {tag}",
+  "@filterByTagTooltip": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsThemeModeLabel": "Theme Mode",
+  "settingsAccentLabel": "Accent Color",
+  "settingsLanguageLabel": "Language",
+  "settingsSyncLabel": "Sync",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsLanguageSystem": "System",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageMaori": "Māori",
+  "settingsSetAccent": "Set accent color to {accentName}",
+  "@settingsSetAccent": {
+    "placeholders": {
+      "accentName": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAutoSync": "Auto-sync (stub)",
+  "noteDetailTitle": "Note Detail",
+  "noteDetailId": "Note ID: {id}",
+  "@noteDetailId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "listPageTitle": "Thoughts",
+  "listPageBody": "List Page",
+  "listPageBodyFiltered": "List Page (Filtered by tag: {tag})",
+  "@listPageBodyFiltered": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "notFoundTitle": "Page Not Found",
+  "notFoundBody": "404 - Page Not Found",
+  "goHomeButton": "Go Home"
 }

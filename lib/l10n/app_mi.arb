@@ -19,5 +19,56 @@
   "noteSaved": "Kua Tiakina te Tuhipoka",
   "titleHint": "Taitara",
   "bodyHint": "Tinana",
-  "pinButtonTooltip": "Tīpina te tuhipoka"
+  "pinButtonTooltip": "Tīpina te tuhipoka",
+  "viewAllNotesTooltip": "Tirohia ngā tuhipoka katoa",
+  "settingsTooltip": "Tautuhinga",
+  "filterByTagTooltip": "Tātarihia mā te {tag}",
+  "@filterByTagTooltip": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsThemeModeLabel": "Aratau Kaupapa",
+  "settingsAccentLabel": "Tae Kōkaha",
+  "settingsLanguageLabel": "Reo",
+  "settingsSyncLabel": "Tukutahi",
+  "settingsThemeSystem": "Pūnaha",
+  "settingsThemeLight": "Mārama",
+  "settingsThemeDark": "Pōuri",
+  "settingsLanguageSystem": "Pūnaha",
+  "settingsLanguageEnglish": "Ingarihi",
+  "settingsLanguageMaori": "Māori",
+  "settingsSetAccent": "Tautuhia te tae kōkaha ki te {accentName}",
+  "@settingsSetAccent": {
+    "placeholders": {
+      "accentName": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsAutoSync": "Tukutahi-aunoa (tumau)",
+  "noteDetailTitle": "Taipitopito Tuhipoka",
+  "noteDetailId": "ID Tuhipoka: {id}",
+  "@noteDetailId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "listPageTitle": "Ngā Whakaaro",
+  "listPageBody": "Whārangi Rārangi",
+  "listPageBodyFiltered": "Whārangi Rārangi (Kua tātarihia e te tūtohu: {tag})",
+  "@listPageBodyFiltered": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "notFoundTitle": "Kāore i Kitea te Whārangi",
+  "notFoundBody": "404 - Kāore i Kitea te Whārangi",
+  "goHomeButton": "Hoki ki te Kāinga"
 }

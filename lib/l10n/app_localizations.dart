@@ -217,6 +217,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pin note'**
   String get pinButtonTooltip;
+
+  /// No description provided for @viewAllNotesTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'View all notes'**
+  String get viewAllNotesTooltip;
+
+  /// No description provided for @settingsTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTooltip;
+
+  /// No description provided for @filterByTagTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by {tag}'**
+  String filterByTagTooltip(String tag);
+
+  /// No description provided for @settingsThemeModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme Mode'**
+  String get settingsThemeModeLabel;
+
+  /// No description provided for @settingsAccentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent Color'**
+  String get settingsAccentLabel;
+
+  /// No description provided for @settingsLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguageLabel;
+
+  /// No description provided for @settingsSyncLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync'**
+  String get settingsSyncLabel;
+
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsLanguageSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsLanguageSystem;
+
+  /// No description provided for @settingsLanguageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get settingsLanguageEnglish;
+
+  /// No description provided for @settingsLanguageMaori.
+  ///
+  /// In en, this message translates to:
+  /// **'Māori'**
+  String get settingsLanguageMaori;
+
+  /// No description provided for @settingsSetAccent.
+  ///
+  /// In en, this message translates to:
+  /// **'Set accent color to {accentName}'**
+  String settingsSetAccent(String accentName);
+
+  /// No description provided for @settingsAutoSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-sync (stub)'**
+  String get settingsAutoSync;
+
+  /// No description provided for @noteDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Note Detail'**
+  String get noteDetailTitle;
+
+  /// No description provided for @noteDetailId.
+  ///
+  /// In en, this message translates to:
+  /// **'Note ID: {id}'**
+  String noteDetailId(String id);
+
+  /// No description provided for @listPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get listPageTitle;
+
+  /// No description provided for @listPageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'List Page'**
+  String get listPageBody;
+
+  /// No description provided for @listPageBodyFiltered.
+  ///
+  /// In en, this message translates to:
+  /// **'List Page (Filtered by tag: {tag})'**
+  String listPageBodyFiltered(String tag);
+
+  /// No description provided for @notFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get notFoundTitle;
+
+  /// No description provided for @notFoundBody.
+  ///
+  /// In en, this message translates to:
+  /// **'404 - Page Not Found'**
+  String get notFoundBody;
+
+  /// No description provided for @goHomeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Home'**
+  String get goHomeButton;
 }
 
 class _AppLocalizationsDelegate
