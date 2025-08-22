@@ -13,11 +13,9 @@ import 'package:hold_that_thought/notes/note_detail_page.dart';
 import 'package:hold_that_thought/pages/not_found_page.dart';
 import 'package:hold_that_thought/routing/route_observer.dart';
 
-final appRouterProvider = Provider<GoRouter>((ref) {
-  final notesRepository = ref.watch(notesRepositoryProvider);
-
+GoRouter buildAppRouter(NotesRepository notesRepository, {String initialLocation = '/'}) {
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: initialLocation,
     observers: [if (kDebugMode) AppRouteObserver()],
     errorBuilder: (context, state) {
       if (kDebugMode) {
@@ -68,6 +66,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
     ],
   );
+}
+
+final appRouterProvider = Provider<GoRouter>((ref) {
+  final notesRepository = ref.watch(notesRepositoryProvider);
+  return buildAppRouter(notesRepository);
 });
 
 class AppRoutes {

@@ -76,6 +76,12 @@ Web deep links are supported. For example, you can navigate directly to `/note/1
 
 Native deep links (e.g., `myapp://...`) are a TODO. For implementation details, see [docs/deeplinks-native.md](docs/deeplinks-native.md). For a detailed breakdown of the tasks required, see [NATIVE_DEEPLINKS_ISSUE.md](NATIVE_DEEPLINKS_ISSUE.md).
 
+### Navigation Service
+
+To facilitate testing and decouple components from the `go_router` package, the app uses a `NavigationService` abstraction. This service is defined in `lib/routing/navigation_service.dart` and provides a simple `go(String location)` method.
+
+Components that need to navigate should use this service via the `navigationServiceProvider`. This allows for easy mocking in tests.
+
 ## Theme & Settings
 
 The app supports dynamic theming with light/dark/system modes and a selection of accent colors. These settings are persisted across app restarts using `shared_preferences`.

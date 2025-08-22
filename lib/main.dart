@@ -15,6 +15,7 @@ import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hold_that_thought/l10n/app_localizations.dart';
+import 'package:hold_that_thought/deeplink/deeplink_controller.dart';
 
 final flavorProvider = Provider<Flavor>((ref) => throw UnimplementedError());
 
@@ -76,6 +77,10 @@ class HoldThatThoughtApp extends ConsumerWidget {
     final themeState = ref.watch(themeProvider);
     final flavor = ref.watch(flavorProvider);
     final locale = ref.watch(localeProvider);
+
+    // Initialize the deeplink controller by watching it.
+    // The controller will handle incoming links.
+    ref.watch(deeplinkControllerProvider);
 
     return Builder(
       builder: (context) {
