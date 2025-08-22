@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/routing/deeplink_source.dart';
 import 'package:hold_that_thought/routing/navigation_service.dart';
 
+import 'dart:developer';
+
 class DeepLinkController {
   final Ref ref;
   final DeepLinkSource _source;
@@ -16,6 +18,7 @@ class DeepLinkController {
   }
 
   Future<void> _init() async {
+    log('DeepLinkController initialized');
     // Process the initial link on startup
     final initialLink = await _source.getInitialLink();
     _handleLink(initialLink);
