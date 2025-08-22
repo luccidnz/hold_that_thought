@@ -2,7 +2,7 @@
 
 This document outlines the setup for native deep links on Android and iOS.
 
-**Status:** Implemented (Code-side). Native project files need to be updated as below once available.
+**Status:** Implemented (Code-side). Native project files need to be updated manually as this environment cannot generate them.
 
 **Scheme:** `myapp://note/<id>`
 **Web URL:** `/note/<id>`
@@ -11,49 +11,15 @@ This document outlines the setup for native deep links on Android and iOS.
 
 ## Android Setup
 
-To enable deep links on Android, add the following `<intent-filter>` to `android/app/src/main/AndroidManifest.xml` inside the main `<activity>` tag.
-
-```xml
-<intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW"/>
-  <category android:name="android.intent.category.DEFAULT"/>
-  <category android:name="android.intent.category.BROWSABLE"/>
-  <!-- Custom scheme: myapp://note/<id> -->
-  <data android:scheme="myapp" android:host="note"/>
-</intent-filter>
-
-<!--
-  Optional: To accept https deep-links like https://holdthatthought.app/note/<id>,
-  uncomment and configure the following filter. This requires hosting a
-  Digital Asset Links JSON file on your domain.
--->
-<!--
-<intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW"/>
-  <category android:name="android.intent.category.DEFAULT"/>
-  <category android:name="android.intent.category.BROWSABLE"/>
-  <data android:scheme="https" android:host="holdthatthought.app" android:pathPrefix="/note"/>
-</intent-filter>
--->
-```
+1.  Generate the Android project if it doesn't exist: `flutter create .`
+2.  Open `android/app/src/main/AndroidManifest.xml`.
+3.  Inside the main `<activity>` tag (the one with `.MainActivity`), paste the contents of [`deeplinks-android.md`](deeplinks-android.md).
 
 ## iOS Setup
 
-For iOS, add the `CFBundleURLTypes` key to the `ios/Runner/Info.plist` file to register the custom URL scheme.
-
-```xml
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLName</key>
-    <string>myapp</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>myapp</string>
-    </array>
-  </dict>
-</array>
-```
+1.  Generate the iOS project if it doesn't exist: `flutter create .`
+2.  Open `ios/Runner/Info.plist`.
+3.  Paste the contents of [`deeplinks-ios.md`](deeplinks-ios.md) inside the top-level `<dict>` tag.
 
 ## macOS Setup (Optional)
 

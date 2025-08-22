@@ -1,3 +1,6 @@
+// TODO: Integrate native deep link config in AndroidManifest.xml and Info.plist
+// See docs/deeplinks-native.md for details.
+
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
