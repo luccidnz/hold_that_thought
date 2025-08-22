@@ -1,3 +1,5 @@
+[![Flutter CI](https://github.com/<org>/<repo>/actions/workflows/flutter_ci.yml/badge.svg)](https://github.com/<org>/<repo>/actions/workflows/flutter_ci.yml)
+
 # Hold That Thought
 
 Hold That Thought is a Flutter application designed to help users capture and organise

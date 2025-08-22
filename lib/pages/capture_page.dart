@@ -12,7 +12,7 @@ import 'package:hold_that_thought/sync/sync_badge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CapturePage extends ConsumerStatefulWidget {
-  const CapturePage({Key? key}) : super(key: key);
+  const CapturePage({super.key});
 
   @override
   ConsumerState<CapturePage> createState() => _CapturePageState();
@@ -69,7 +69,7 @@ class _CapturePageState extends ConsumerState<CapturePage> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(

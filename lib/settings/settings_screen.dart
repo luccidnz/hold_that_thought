@@ -10,11 +10,11 @@ import 'package:hold_that_thought/theme/theme_controller.dart';
 import 'package:hold_that_thought/l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     final themeState = ref.watch(themeProvider);
     final themeController = ref.read(themeProvider.notifier);
     final autoSync = ref.watch(settingsProvider);
@@ -91,7 +91,7 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.settingsTitle),
+        title: Text(l10n.settingsTitle),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

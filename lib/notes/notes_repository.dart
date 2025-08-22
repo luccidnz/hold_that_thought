@@ -100,7 +100,8 @@ class NotesRepository extends ChangeNotifier {
       tags: tags,
     );
     await _notesBox.put(note.id, note);
-    await _pendingOpsBox.add(NoteChange(type: ChangeType.create, note: note, ts: now));
+    await _pendingOpsBox
+        .add(NoteChange(type: ChangeType.create, note: note, ts: now));
     notifyListeners();
     return note;
   }
@@ -108,7 +109,8 @@ class NotesRepository extends ChangeNotifier {
   Future<void> delete(String id) async {
     final note = _notesBox.get(id);
     if (note != null) {
-      await _pendingOpsBox.add(NoteChange(type: ChangeType.delete, note: note, ts: DateTime.now()));
+      await _pendingOpsBox.add(
+          NoteChange(type: ChangeType.delete, note: note, ts: DateTime.now()));
       await _notesBox.delete(id);
       notifyListeners();
     }
@@ -117,7 +119,8 @@ class NotesRepository extends ChangeNotifier {
   Future<void> update(Note note) async {
     final updatedNote = note.copyWith(updatedAt: DateTime.now());
     await _notesBox.put(note.id, updatedNote);
-    await _pendingOpsBox.add(NoteChange(type: ChangeType.update, note: updatedNote, ts: updatedNote.updatedAt));
+    await _pendingOpsBox.add(NoteChange(
+        type: ChangeType.update, note: updatedNote, ts: updatedNote.updatedAt));
     notifyListeners();
   }
 
@@ -129,7 +132,8 @@ class NotesRepository extends ChangeNotifier {
       final pushResult = await _syncService.pushChanges(pendingOps);
       if (pushResult.ok) {
         for (final id in pushResult.appliedIds) {
-          final entry = pendingOpsMap.entries.firstWhere((entry) => entry.value.note.id == id);
+          final entry = pendingOpsMap.entries
+              .firstWhere((entry) => entry.value.note.id == id);
           await _pendingOpsBox.delete(entry.key);
         }
       }

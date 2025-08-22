@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/pages/capture_page.dart';
@@ -20,8 +19,11 @@ void main() {
     mockNotesRepository = MockNotesRepository();
     when(mockNotesRepository.getDistinctTags()).thenReturn({});
     when(mockNotesRepository.getPinnedNotes()).thenReturn([]);
-    when(mockNotesRepository.getUnpinnedNotes(query: anyNamed('query'), tags: anyNamed('tags'))).thenReturn([]);
-    when(mockNotesRepository.syncStatus).thenAnswer((_) => Stream.value(SyncStatus.ok));
+    when(mockNotesRepository.getUnpinnedNotes(
+            query: anyNamed('query'), tags: anyNamed('tags')))
+        .thenReturn([]);
+    when(mockNotesRepository.syncStatus)
+        .thenAnswer((_) => Stream.value(SyncStatus.ok));
   });
 
   testWidgets('Home screen golden test with different text scales',
@@ -44,7 +46,7 @@ void main() {
         notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
       ],
       child: const MediaQuery(
-        data: MediaQueryData(textScaleFactor: 2.0),
+        data: MediaQueryData(textScaler: TextScaler.linear(2.0)),
         child: CapturePage(),
       ),
     ));

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
@@ -16,22 +15,51 @@ import 'home_search_filter_test.mocks.dart';
 void main() {
   group('HomeSearchFilter', () {
     late MockNotesRepository mockNotesRepository;
-    final note1 = Note(id: '1', title: 'Test Note 1', body: 'flutter', createdAt: DateTime.now(), updatedAt: DateTime.now(), isPinned: false, tags: ['work', 'flutter']);
-    final note2 = Note(id: '2', title: 'Test Note 2', body: 'personal', createdAt: DateTime.now(), updatedAt: DateTime.now(), isPinned: true, tags: ['personal']);
-    final note3 = Note(id: '3', title: 'Test Note 3', body: 'work note', createdAt: DateTime.now(), updatedAt: DateTime.now(), isPinned: true, tags: ['work']);
+    final note1 = Note(
+        id: '1',
+        title: 'Test Note 1',
+        body: 'flutter',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        isPinned: false,
+        tags: ['work', 'flutter']);
+    final note2 = Note(
+        id: '2',
+        title: 'Test Note 2',
+        body: 'personal',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        isPinned: true,
+        tags: ['personal']);
+    final note3 = Note(
+        id: '3',
+        title: 'Test Note 3',
+        body: 'work note',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        isPinned: true,
+        tags: ['work']);
 
     setUp(() {
+      SharedPreferences.setMockInitialValues({});
       mockNotesRepository = MockNotesRepository();
-      when(mockNotesRepository.getFilteredNotes(query: anyNamed('query'), tags: anyNamed('tags'))).thenReturn([note1, note2, note3]);
+      when(mockNotesRepository.getFilteredNotes(
+              query: anyNamed('query'), tags: anyNamed('tags')))
+          .thenReturn([note1, note2, note3]);
       when(mockNotesRepository.getPinnedNotes()).thenReturn([note2, note3]);
-      when(mockNotesRepository.getUnpinnedNotes(query: anyNamed('query'), tags: anyNamed('tags'))).thenReturn([note1]);
-      when(mockNotesRepository.getDistinctTags()).thenReturn({'work', 'flutter', 'personal'});
-      when(mockNotesRepository.syncStatus).thenAnswer((_) => Stream.value(SyncStatus.ok));
+      when(mockNotesRepository.getUnpinnedNotes(query: '', tags: {}))
+          .thenReturn([note1]);
+      when(mockNotesRepository.getDistinctTags())
+          .thenReturn({'work', 'flutter', 'personal'});
+      when(mockNotesRepository.syncStatus)
+          .thenAnswer((_) => Stream.value(SyncStatus.ok));
     });
 
     testWidgets('search query filters results', (WidgetTester tester) async {
-      when(mockNotesRepository.getUnpinnedNotes(query: 'Flutter', tags: {})).thenReturn([note1]);
-      when(mockNotesRepository.getPinnedNotes()).thenReturn([]); // No pinned notes for this test
+      when(mockNotesRepository.getUnpinnedNotes(query: 'Flutter', tags: {}))
+          .thenReturn([note1]);
+      when(mockNotesRepository.getPinnedNotes())
+          .thenReturn([]); // No pinned notes for this test
 
       await tester.pumpWidget(buildTestableWidget(
         overrides: [
@@ -48,8 +76,9 @@ void main() {
     });
 
     testWidgets('selecting tags filters results', (WidgetTester tester) async {
-      when(mockNotesRepository.getUnpinnedNotes(query: '', tags: {'personal'})).thenReturn([]);
-      when(mockNotesRepository.getPinnedNotes()).thenReturn([note2, note3]);
+      when(mockNotesRepository.getUnpinnedNotes(query: '', tags: {'personal'}))
+          .thenReturn([]);
+      when(mockNotesRepository.getPinnedNotes()).thenReturn([note2]);
 
       await tester.pumpWidget(buildTestableWidget(
         overrides: [
@@ -70,7 +99,8 @@ void main() {
         'searchQuery': 'personal',
         'selectedTags': ['personal'],
       });
-      when(mockNotesRepository.getUnpinnedNotes(query: 'personal', tags: {'personal'})).thenReturn([]);
+      when(mockNotesRepository.getUnpinnedNotes(
+          query: 'personal', tags: {'personal'})).thenReturn([]);
       when(mockNotesRepository.getPinnedNotes()).thenReturn([note2, note3]);
 
       await tester.pumpWidget(buildTestableWidget(
@@ -85,5 +115,9 @@ void main() {
       expect(find.text('Test Note 2'), findsOneWidget);
       expect(find.text('Test Note 1'), findsNothing);
     });
+  });
+
+  tearDown(() {
+    SharedPreferences.setMockInitialValues({});
   });
 }

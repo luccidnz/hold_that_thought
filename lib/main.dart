@@ -30,7 +30,7 @@ Future<void> run({required Flavor flavor}) async {
 
   if (kDebugMode && notesBox.isEmpty) {
     final now = DateTime.now();
-    final uuid = Uuid();
+    const Uuid();
     notesBox.put(
       '123',
       Note(
@@ -77,13 +77,13 @@ Future<void> run({required Flavor flavor}) async {
 }
 
 class HoldThatThoughtApp extends ConsumerWidget {
-  const HoldThatThoughtApp({Key? key}) : super(key: key);
+  const HoldThatThoughtApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
     final themeState = ref.watch(themeProvider);
-    final flavor = ref.watch(flavorProvider);
+    ref.watch(flavorProvider);
     final locale = ref.watch(localeProvider);
 
     return Builder(
@@ -91,10 +91,12 @@ class HoldThatThoughtApp extends ConsumerWidget {
         final mediaQuery = MediaQuery.of(context);
         return MediaQuery(
           data: mediaQuery.copyWith(
-            textScaleFactor: mediaQuery.textScaleFactor.clamp(0.8, 2.0),
+            textScaler: TextScaler.linear(
+              mediaQuery.textScaler.scale(1.0).clamp(0.8, 2.0),
+            ),
           ),
           child: MaterialApp.router(
-            onGenerateTitle: (ctx) => AppLocalizations.of(ctx)!.appTitle,
+            onGenerateTitle: (ctx) => AppLocalizations.of(ctx).appTitle,
             locale: locale,
             localizationsDelegates: const [
               AppLocalizations.delegate,

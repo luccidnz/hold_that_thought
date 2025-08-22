@@ -2,12 +2,11 @@
 // See docs/deeplinks-native.md for details.
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/routing/deeplink_source.dart';
 import 'package:hold_that_thought/routing/navigation_service.dart';
-
-import 'dart:developer';
 
 class DeepLinkController {
   final Ref ref;

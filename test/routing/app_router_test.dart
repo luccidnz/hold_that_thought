@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 import 'package:mockito/annotations.dart';
@@ -23,8 +21,11 @@ void main() {
     when(mockNotesRepository.exists('zzz')).thenReturn(false);
     when(mockNotesRepository.getDistinctTags()).thenReturn({});
     when(mockNotesRepository.getPinnedNotes()).thenReturn([]);
-    when(mockNotesRepository.getUnpinnedNotes(query: anyNamed('query'), tags: anyNamed('tags'))).thenReturn([]);
-    when(mockNotesRepository.syncStatus).thenAnswer((_) => Stream.value(SyncStatus.ok));
+    when(mockNotesRepository.getUnpinnedNotes(
+            query: anyNamed('query'), tags: anyNamed('tags')))
+        .thenReturn([]);
+    when(mockNotesRepository.syncStatus)
+        .thenAnswer((_) => Stream.value(SyncStatus.ok));
 
     final container = ProviderContainer(
       overrides: [

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
 
 class NoteList extends StatelessWidget {
-  const NoteList({Key? key, required this.notes}) : super(key: key);
+  const NoteList({super.key, required this.notes});
 
   final List<Note> notes;
 

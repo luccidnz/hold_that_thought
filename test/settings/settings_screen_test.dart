@@ -22,7 +22,8 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     mockNotesRepository = MockNotesRepository();
     when(mockNotesRepository.clearAllBoxes()).thenAnswer((_) async {});
-    when(mockNotesRepository.syncStatus).thenAnswer((_) => Stream.value(SyncStatus.ok));
+    when(mockNotesRepository.syncStatus)
+        .thenAnswer((_) => Stream.value(SyncStatus.ok));
   });
 
   testWidgets('SettingsScreen golden test', (WidgetTester tester) async {
@@ -93,7 +94,8 @@ void main() {
     );
   });
 
-  testWidgets('SettingsScreen shows English title with en locale', (WidgetTester tester) async {
+  testWidgets('SettingsScreen shows English title with en locale',
+      (WidgetTester tester) async {
     // Note: This test was originally for the Māori ('mi') locale, but it was
     // changed to English ('en'). The 'mi' locale causes a crash in the test
     // environment because Flutter's internal Material widgets (like AppBar)
@@ -104,19 +106,19 @@ void main() {
         overrides: [
           notesRepositoryProvider.overrideWith((ref) => mockNotesRepository),
         ],
-        child: MaterialApp(
-          locale: const Locale('en'),
-          localizationsDelegates: const [
+        child: const MaterialApp(
+          locale: Locale('en'),
+          localizationsDelegates: [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [
+          supportedLocales: [
             Locale('en'),
             Locale('mi'),
           ],
-          home: const SettingsScreen(),
+          home: SettingsScreen(),
         ),
       ),
     );

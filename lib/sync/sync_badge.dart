@@ -4,7 +4,7 @@ import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 
 class SyncBadge extends ConsumerWidget {
-  const SyncBadge({Key? key}) : super(key: key);
+  const SyncBadge({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

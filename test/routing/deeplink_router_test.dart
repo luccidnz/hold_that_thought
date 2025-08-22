@@ -1,6 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/routing/test_app_harness.dart';
 
 import '../fakes/stub_notes_repository.dart';

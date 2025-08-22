@@ -4,7 +4,7 @@ import 'package:hold_that_thought/flavor.dart';
 import 'package:hold_that_thought/main.dart';
 
 class FlavorBanner extends ConsumerWidget {
-  const FlavorBanner({Key? key, required this.child}) : super(key: key);
+  const FlavorBanner({super.key, required this.child});
 
   final Widget child;
 

@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/notes/note_model.dart';
 import 'package:hold_that_thought/sync/sync_service.dart';
 
@@ -38,7 +37,8 @@ class FakeSyncService implements SyncService {
 
     for (final op in ops) {
       final remoteNote = _remoteStore[op.note.id];
-      if (remoteNote != null && remoteNote.updatedAt.isAfter(op.note.updatedAt)) {
+      if (remoteNote != null &&
+          remoteNote.updatedAt.isAfter(op.note.updatedAt)) {
         conflicts.add(NoteConflict(
           id: op.note.id,
           local: op.note,

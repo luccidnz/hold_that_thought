@@ -13,8 +13,8 @@ void main() {
       });
       final controller = ThemeController();
       await Future.delayed(Duration.zero); // allow async load to complete
-      expect(controller.debugState.themeMode, ThemeMode.dark);
-      expect(controller.debugState.accent, Accent.red);
+      expect(controller.state.themeMode, ThemeMode.dark);
+      expect(controller.state.accent, Accent.red);
     });
 
     test('saves theme mode to shared preferences', () async {

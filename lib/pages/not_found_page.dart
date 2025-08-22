@@ -4,11 +4,11 @@ import 'package:hold_that_thought/l10n/app_localizations.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 
 class NotFoundPage extends StatelessWidget {
-  const NotFoundPage({Key? key}) : super(key: key);
+  const NotFoundPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.notFoundTitle),

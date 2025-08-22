@@ -3,7 +3,8 @@ import 'package:hold_that_thought/notes/notes_repository.dart';
 class StubNotesRepository implements NotesRepository {
   final bool _existsResult;
 
-  StubNotesRepository({bool existsResult = true}) : _existsResult = existsResult;
+  StubNotesRepository({bool existsResult = true})
+      : _existsResult = existsResult;
 
   @override
   bool exists(String id) => _existsResult;

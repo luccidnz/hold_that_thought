@@ -8,7 +8,7 @@ import 'package:hold_that_thought/notes/notes_repository.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
 
 class QuickCaptureSheet extends ConsumerStatefulWidget {
-  const QuickCaptureSheet({Key? key}) : super(key: key);
+  const QuickCaptureSheet({super.key});
 
   @override
   ConsumerState<QuickCaptureSheet> createState() => _QuickCaptureSheetState();
@@ -35,7 +35,7 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
     // Capture context-dependent objects before async gaps.
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     final notesRepository = ref.read(notesRepositoryProvider);
 
     final title = _titleController.text;
@@ -87,14 +87,14 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return RawKeyboardListener(
+    final l10n = AppLocalizations.of(context);
+    return KeyboardListener(
       focusNode: FocusNode(),
-      onKey: (event) {
-        if (event.isControlPressed || event.isMetaPressed) {
-          if (event.logicalKey == LogicalKeyboardKey.enter) {
-            _save();
-          }
+      onKeyEvent: (event) {
+        if (event.logicalKey == LogicalKeyboardKey.enter &&
+            (HardwareKeyboard.instance.isControlPressed ||
+                HardwareKeyboard.instance.isMetaPressed)) {
+          _save();
         }
       },
       child: Padding(
@@ -110,7 +110,7 @@ class _QuickCaptureSheetState extends ConsumerState<QuickCaptureSheet> {
           children: [
             if (_errorText != null)
               Text(
-                _errorText!,
+                _errorText ?? '',
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             TextField(

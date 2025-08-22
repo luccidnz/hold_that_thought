@@ -56,3 +56,19 @@ await tester.pumpWidget(
 ### `quick_capture_widget_test.dart`
 
 The test file `test/quick_capture/quick_capture_widget_test.dart` is **temporarily disabled**. This test proved to be flaky in the CI environment, failing unpredictably when testing for the appearance of a `SnackBar`. The underlying application code has been fixed, but the test itself remains unstable. It has been disabled to ensure the stability of the main build and will be revisited in a future task.
+
+## Continuous Integration
+
+CI runs on GitHub Actions for every push/PR:
+- Lint: format + analyze
+- Codegen: build_runner + gen-l10n
+- Tests: unit/widget tests with randomized ordering
+- Coverage: lcov artifact uploaded to the workflow run
+- Goldens: never auto-updated on PRs. To refresh, run locally and commit,
+  or add the PR label `update-goldens` to allow CI golden run.
+
+Local equivalents:
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
+flutter gen-l10n
+flutter test --coverage --test-randomize-ordering-seed=random

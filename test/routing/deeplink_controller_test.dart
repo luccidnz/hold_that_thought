@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hold_that_thought/routing/app_router.dart';
 import 'package:hold_that_thought/routing/deeplink_controller.dart';
 import 'package:hold_that_thought/routing/deeplink_source.dart';
 import 'package:hold_that_thought/routing/navigation_service.dart';
@@ -44,7 +43,8 @@ void main() {
     });
 
     test('subsequent links are processed', () async {
-      final linkStream = Stream.fromIterable(['app://note/456', 'app://note/789']);
+      final linkStream =
+          Stream.fromIterable(const ['app://note/456', 'app://note/789']);
       mockito.when(mockSource.getInitialLink()).thenAnswer((_) async => null);
       mockito.when(mockSource.linkStream).thenAnswer((_) => linkStream);
 

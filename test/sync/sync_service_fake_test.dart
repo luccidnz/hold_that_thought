@@ -15,11 +15,13 @@ void main() {
         updatedAt: DateTime.now(),
         isPinned: false,
       );
-      final change = NoteChange(type: ChangeType.create, note: note, ts: DateTime.now());
+      final change =
+          NoteChange(type: ChangeType.create, note: note, ts: DateTime.now());
       final result = await service.pushChanges([change]);
       expect(result.ok, isTrue);
       expect(result.appliedIds, ['1']);
-      final snapshot = await service.pullChanges(DateTime.fromMicrosecondsSinceEpoch(0));
+      final snapshot =
+          await service.pullChanges(DateTime.fromMicrosecondsSinceEpoch(0));
       expect(snapshot.notes.length, 1);
       expect(snapshot.notes.first.id, '1');
     });
@@ -34,7 +36,9 @@ void main() {
         updatedAt: DateTime.now(),
         isPinned: false,
       );
-      await service.pushChanges([NoteChange(type: ChangeType.create, note: note1, ts: DateTime.now())]);
+      await service.pushChanges([
+        NoteChange(type: ChangeType.create, note: note1, ts: DateTime.now())
+      ]);
       final lastSync = DateTime.now();
       await Future.delayed(const Duration(milliseconds: 10));
       final note2 = Note(
@@ -45,7 +49,9 @@ void main() {
         updatedAt: DateTime.now(),
         isPinned: false,
       );
-      await service.pushChanges([NoteChange(type: ChangeType.create, note: note2, ts: DateTime.now())]);
+      await service.pushChanges([
+        NoteChange(type: ChangeType.create, note: note2, ts: DateTime.now())
+      ]);
       final snapshot = await service.pullChanges(lastSync);
       expect(snapshot.notes.length, 1);
       expect(snapshot.notes.first.id, '2');
@@ -62,14 +68,20 @@ void main() {
         updatedAt: now,
         isPinned: false,
       );
-      await service.pushChanges([NoteChange(type: ChangeType.create, note: oldNote, ts: now)]);
+      await service.pushChanges(
+          [NoteChange(type: ChangeType.create, note: oldNote, ts: now)]);
 
-      final newNote = oldNote.copyWith(title: 'new', updatedAt: now.add(const Duration(seconds: 1)));
-      final result = await service.pushChanges([NoteChange(type: ChangeType.update, note: newNote, ts: newNote.updatedAt)]);
+      final newNote = oldNote.copyWith(
+          title: 'new', updatedAt: now.add(const Duration(seconds: 1)));
+      final result = await service.pushChanges([
+        NoteChange(
+            type: ChangeType.update, note: newNote, ts: newNote.updatedAt)
+      ]);
       expect(result.ok, isTrue);
       expect(result.appliedIds, ['1']);
 
-      final snapshot = await service.pullChanges(DateTime.fromMicrosecondsSinceEpoch(0));
+      final snapshot =
+          await service.pullChanges(DateTime.fromMicrosecondsSinceEpoch(0));
       expect(snapshot.notes.first.title, 'new');
     });
 
@@ -84,7 +96,8 @@ void main() {
         updatedAt: DateTime.now(),
         isPinned: false,
       );
-      final change = NoteChange(type: ChangeType.create, note: note, ts: DateTime.now());
+      final change =
+          NoteChange(type: ChangeType.create, note: note, ts: DateTime.now());
       expect(service.pushChanges([change]), throwsException);
     });
   });

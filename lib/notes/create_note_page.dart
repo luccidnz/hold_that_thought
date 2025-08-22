@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hold_that_thought/notes/note_data.dart';
 
 class CreateNotePage extends StatelessWidget {
-  const CreateNotePage({Key? key, this.prefilledData}) : super(key: key);
+  const CreateNotePage({super.key, this.prefilledData});
 
   final CreateNoteData? prefilledData;
 

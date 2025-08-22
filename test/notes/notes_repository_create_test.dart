@@ -40,8 +40,10 @@ void main() {
       when(mockPendingOpsBox.add(any)).thenAnswer((_) async => 0);
 
       final repository = container.read(notesRepositoryProvider);
-      final note1 = await repository.create(title: 't1', body: 'b1', isPinned: false);
-      final note2 = await repository.create(title: 't2', body: 'b2', isPinned: false);
+      final note1 =
+          await repository.create(title: 't1', body: 'b1', isPinned: false);
+      final note2 =
+          await repository.create(title: 't2', body: 'b2', isPinned: false);
       expect(note1.id, isNot(equals(note2.id)));
     });
 
@@ -50,9 +52,11 @@ void main() {
       when(mockPendingOpsBox.add(any)).thenAnswer((_) async => 0);
 
       final repository = container.read(notesRepositoryProvider);
-      final pinnedNote = await repository.create(title: 't', body: 'b', isPinned: true);
+      final pinnedNote =
+          await repository.create(title: 't', body: 'b', isPinned: true);
       expect(pinnedNote.isPinned, isTrue);
-      final unpinnedNote = await repository.create(title: 't', body: 'b', isPinned: false);
+      final unpinnedNote =
+          await repository.create(title: 't', body: 'b', isPinned: false);
       expect(unpinnedNote.isPinned, isFalse);
     });
   });

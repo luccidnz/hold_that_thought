@@ -43,7 +43,9 @@ final deeplinkControllerProvider = Provider<DeepLinkController>((ref) {
   final router = ref.watch(appRouterProvider);
 
   void onNavigate(Uri uri) {
-    if (uri.scheme == 'myapp' && uri.host == 'note' && uri.pathSegments.isNotEmpty) {
+    if (uri.scheme == 'myapp' &&
+        uri.host == 'note' &&
+        uri.pathSegments.isNotEmpty) {
       final id = uri.pathSegments.first;
       router.go('/note/$id');
     }

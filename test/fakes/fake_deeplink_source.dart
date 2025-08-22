@@ -6,7 +6,9 @@ class FakeDeepLinkSource implements DeepLinkSource {
   Uri? _initial;
   void setInitial(Uri? uri) => _initial = uri;
   void addLink(Uri? uri) => _controller.add(uri);
-  @override Future<Uri?> getInitialLink() async => _initial;
-  @override Stream<Uri?> get linkStream => _controller.stream;
+  @override
+  Future<Uri?> getInitialLink() async => _initial;
+  @override
+  Stream<Uri?> get linkStream => _controller.stream;
   void dispose() => _controller.close();
 }

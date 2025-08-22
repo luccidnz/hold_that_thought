@@ -12,5 +12,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
   await testMain();
 
-  try { tmp.deleteSync(recursive: true); } catch (_) {}
+  try {
+    tmp.deleteSync(recursive: true);
+  } catch (_) {}
 }

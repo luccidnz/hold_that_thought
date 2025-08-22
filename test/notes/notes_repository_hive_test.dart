@@ -36,11 +36,25 @@ void main() {
       final now = DateTime.now();
       await notesBox.put(
         '1',
-        Note(id: '1', title: 'Flutter work', body: '', createdAt: now, updatedAt: now, isPinned: false, tags: ['work', 'flutter']),
+        Note(
+            id: '1',
+            title: 'Flutter work',
+            body: '',
+            createdAt: now,
+            updatedAt: now,
+            isPinned: false,
+            tags: ['work', 'flutter']),
       );
       await notesBox.put(
         '2',
-        Note(id: '2', title: 'Personal note', body: '', createdAt: now, updatedAt: now, isPinned: true, tags: ['personal']),
+        Note(
+            id: '2',
+            title: 'Personal note',
+            body: '',
+            createdAt: now,
+            updatedAt: now,
+            isPinned: true,
+            tags: ['personal']),
       );
     });
 
