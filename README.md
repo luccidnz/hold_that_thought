@@ -154,3 +154,7 @@ space. See `.github/workflows/build.yml` for details.
 ## Licence
 
 This project is provided for demonstration purposes under the MIT licence.
+
+## Coverage Badge
+
+Current overall test coverage: **57.2%** (see `docs/COVERAGE_SUMMARY.md`).

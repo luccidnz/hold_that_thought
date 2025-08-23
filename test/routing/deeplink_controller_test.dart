@@ -11,7 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'deeplink_controller_test.mocks.dart';
 
 class FakeDeepLinkSource implements DeepLinkSource {
-  Uri? _initial;
+  final Uri? _initial;
   final _streamController = StreamController<Uri?>();
 
   FakeDeepLinkSource({Uri? initial}) : _initial = initial;
@@ -49,7 +49,8 @@ void main() {
     });
 
     test('routes valid initial note link to detail', () async {
-      fakeSource = FakeDeepLinkSource(initial: Uri.parse('myapp://note/abc123'));
+      fakeSource =
+          FakeDeepLinkSource(initial: Uri.parse('myapp://note/abc123'));
       container = ProviderContainer(overrides: [
         deepLinkSourceProvider.overrideWithValue(fakeSource),
         navigationServiceProvider.overrideWithValue(mockNav),

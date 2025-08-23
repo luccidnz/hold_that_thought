@@ -72,3 +72,17 @@ flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
 flutter test --coverage --test-randomize-ordering-seed=random
+
+## Coverage Improvements – Phase 2
+
+Based on the coverage report, the following files have been targeted for improved test coverage:
+
+- **`lib/routing/uni_links_source.dart`**: This file has no test coverage and is responsible for handling incoming deep links from the platform.
+- **`lib/audio/audio_engine.dart`**: This file contains complex stateful logic for audio recording and has no dedicated unit tests.
+- **`lib/notes/create_note_page.dart`**: This is a core part of the user flow for creating new notes and currently lacks widget test coverage.
+
+### New Tests Added
+
+- **`test/routing/uni_links_source_test.dart`**: Unit tests for the `UniLinksSource` class, which is responsible for parsing deep link URIs from the platform. These tests cover valid, invalid, and null link scenarios.
+- **`test/audio/audio_engine_test.dart`**: Unit tests for the `AudioEngine`, which handles the pre-roll audio buffer and WAV file creation. These tests cover data handling, buffer wrap-around, and WAV header validation.
+- **`test/notes/create_note_page_test.dart`**: Widget tests for the `CreateNotePage`, ensuring that notes are correctly saved and that the UI responds correctly to user input (e.g., disabling the save button when the title is empty).

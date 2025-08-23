@@ -85,6 +85,9 @@ jobs:
           echo "Lowest coverage files:"
           lcov --list coverage/lcov.info | grep -v "100.0%" | sort -n -k 4
 
+      - name: Coverage gate (min 80%)
+        run: scripts/coverage_gate.sh 80
+
   # ---- 3) Goldens (read-only by default) ----
   goldens:
     runs-on: ubuntu-latest
