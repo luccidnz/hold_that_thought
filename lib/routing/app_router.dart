@@ -13,8 +13,19 @@ import 'package:hold_that_thought/notes/note_detail_page.dart';
 import 'package:hold_that_thought/pages/not_found_page.dart';
 import 'package:hold_that_thought/routing/route_observer.dart';
 
+class NoteIdGuard {
+  final NotesRepository _notesRepository;
+
+  NoteIdGuard(this._notesRepository);
+
+  Future<bool> canActivate(String id) async {
+    return _notesRepository.exists(id);
+  }
+}
+
 GoRouter buildAppRouter(NotesRepository notesRepository,
     {String initialLocation = '/'}) {
+  final noteIdGuard = NoteIdGuard(notesRepository);
   return GoRouter(
     initialLocation: initialLocation,
     observers: [if (kDebugMode) AppRouteObserver()],
@@ -42,9 +53,10 @@ GoRouter buildAppRouter(NotesRepository notesRepository,
       ),
       GoRoute(
         path: '/note/:id',
-        redirect: (context, state) {
+        redirect: (context, state) async {
           final id = state.pathParameters['id']!;
-          if (!notesRepository.exists(id)) {
+          final canActivate = await noteIdGuard.canActivate(id);
+          if (!canActivate) {
             return AppRoutes.notFound();
           }
           return null;

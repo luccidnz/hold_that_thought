@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/routing/uni_links_source.dart';
 
 abstract class DeepLinkSource {
-  Future<String?> getInitialLink();
-  Stream<String?> get linkStream;
+  Future<Uri?> getInitialUri();
+  Stream<Uri?> get uriStream;
 }
 
 final deepLinkSourceProvider = Provider<DeepLinkSource>((ref) {

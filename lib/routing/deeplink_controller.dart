@@ -12,7 +12,7 @@ class DeepLinkController {
   final Ref ref;
   final DeepLinkSource _source;
 
-  StreamSubscription<String?>? _linkSubscription;
+  StreamSubscription<Uri?>? _linkSubscription;
 
   DeepLinkController({required this.ref, required DeepLinkSource source})
       : _source = source {
@@ -22,11 +22,11 @@ class DeepLinkController {
   Future<void> _init() async {
     log('DeepLinkController initialized');
     // Process the initial link on startup
-    final initialLink = await _source.getInitialLink();
-    _handleLink(initialLink);
+    final initialUri = await _source.getInitialUri();
+    _handleLink(initialUri);
 
     // Subscribe to subsequent links
-    _linkSubscription = _source.linkStream.listen(_handleLink);
+    _linkSubscription = _source.uriStream.listen(_handleLink);
 
     // Dispose of the subscription when the controller is disposed
     ref.onDispose(() {
@@ -34,16 +34,16 @@ class DeepLinkController {
     });
   }
 
-  void _handleLink(String? link) {
-    if (link != null && link.isNotEmpty) {
-      final uri = Uri.tryParse(link);
-      if (uri != null) {
-        // The controller should not have to know the GoRouter implementation details.
-        // It just needs to know how to navigate. The app router will handle the parsing.
-        final path = '/${uri.host}${uri.path}';
-        ref.read(navigationServiceProvider).go(path);
-      }
-    }
+  void _handleLink(Uri? uri) {
+    if (uri == null) return;
+
+    // Expects myapp://note/<id>
+    if (uri.host != 'note' || uri.pathSegments.isEmpty) return;
+
+    final id = uri.pathSegments.first;
+    if (id.trim().isEmpty) return;
+
+    ref.read(navigationServiceProvider).go('/note/$id');
   }
 }
 

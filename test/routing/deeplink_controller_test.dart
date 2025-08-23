@@ -1,84 +1,97 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hold_that_thought/routing/deeplink_controller.dart';
 import 'package:hold_that_thought/routing/deeplink_source.dart';
 import 'package:hold_that_thought/routing/navigation_service.dart';
-import 'package:mockito/mockito.dart' as mockito;
+import 'package:mockito/mockito.dart' as m;
 import 'package:mockito/annotations.dart';
 
 import 'deeplink_controller_test.mocks.dart';
 
-@GenerateMocks([DeepLinkSource, NavigationService])
+class FakeDeepLinkSource implements DeepLinkSource {
+  Uri? _initial;
+  final _streamController = StreamController<Uri?>();
+
+  FakeDeepLinkSource({Uri? initial}) : _initial = initial;
+
+  @override
+  Future<Uri?> getInitialUri() async => _initial;
+
+  @override
+  Stream<Uri?> get uriStream => _streamController.stream;
+
+  void addLink(Uri uri) {
+    _streamController.add(uri);
+  }
+
+  void dispose() {
+    _streamController.close();
+  }
+}
+
+@GenerateMocks([NavigationService])
 void main() {
   group('DeepLinkController', () {
-    late MockDeepLinkSource mockSource;
-    late MockNavigationService mockRouter;
+    late FakeDeepLinkSource fakeSource;
+    late MockNavigationService mockNav;
     late ProviderContainer container;
 
     setUp(() {
-      mockSource = MockDeepLinkSource();
-      mockRouter = MockNavigationService();
-      // The controller is NOT created here. It will be created on-demand
-      // by Riverpod when the test accesses the provider.
+      fakeSource = FakeDeepLinkSource();
+      mockNav = MockNavigationService();
     });
 
-    test('initial link is processed on startup', () async {
-      const initialLink = 'app://note/123';
-      mockito
-          .when(mockSource.getInitialLink())
-          .thenAnswer((_) async => initialLink);
-      mockito.when(mockSource.linkStream).thenAnswer((_) => Stream.empty());
-
-      // Create the container, which will instantiate the controller
-      container = ProviderContainer(overrides: [
-        deepLinkSourceProvider.overrideWithValue(mockSource),
-        navigationServiceProvider.overrideWithValue(mockRouter),
-      ]);
-
-      // The controller is created asynchronously. We need to wait for it.
-      await container.read(deepLinkControllerProvider.future);
-
-      // Now we can verify that the navigation method was called.
-      mockito.verify(mockRouter.go('/note/123')).called(1);
+    tearDown(() {
+      fakeSource.dispose();
+      container.dispose();
     });
 
-    test('subsequent links are processed', () async {
-      final linkStream =
-          Stream.fromIterable(const ['app://note/456', 'app://note/789']);
-      mockito.when(mockSource.getInitialLink()).thenAnswer((_) async => null);
-      mockito.when(mockSource.linkStream).thenAnswer((_) => linkStream);
-
+    test('routes valid initial note link to detail', () async {
+      fakeSource = FakeDeepLinkSource(initial: Uri.parse('myapp://note/abc123'));
       container = ProviderContainer(overrides: [
-        deepLinkSourceProvider.overrideWithValue(mockSource),
-        navigationServiceProvider.overrideWithValue(mockRouter),
+        deepLinkSourceProvider.overrideWithValue(fakeSource),
+        navigationServiceProvider.overrideWithValue(mockNav),
       ]);
-      addTearDown(container.dispose);
 
-      // The controller is created asynchronously.
       await container.read(deepLinkControllerProvider.future);
 
-      // Wait for stream events to be processed.
-      await Future.delayed(const Duration(milliseconds: 100));
-
-      mockito.verify(mockRouter.go('/note/456')).called(1);
-      mockito.verify(mockRouter.go('/note/789')).called(1);
+      m.verify(mockNav.go('/note/abc123')).called(1);
     });
 
-    test('null and empty links are ignored', () async {
-      final linkStream = Stream.fromIterable([null, '']);
-      mockito.when(mockSource.getInitialLink()).thenAnswer((_) async => null);
-      mockito.when(mockSource.linkStream).thenAnswer((_) => linkStream);
-
+    test('routes valid subsequent note link to detail', () async {
       container = ProviderContainer(overrides: [
-        deepLinkSourceProvider.overrideWithValue(mockSource),
-        navigationServiceProvider.overrideWithValue(mockRouter),
+        deepLinkSourceProvider.overrideWithValue(fakeSource),
+        navigationServiceProvider.overrideWithValue(mockNav),
       ]);
-      addTearDown(container.dispose);
-
       await container.read(deepLinkControllerProvider.future);
-      await Future.delayed(const Duration(milliseconds: 100));
 
-      mockito.verifyNever(mockRouter.go(mockito.any));
+      fakeSource.addLink(Uri.parse('myapp://note/xyz456'));
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      m.verify(mockNav.go('/note/xyz456')).called(1);
+    });
+
+    test('ignores invalid link with whitespace', () async {
+      fakeSource = FakeDeepLinkSource(initial: Uri.parse('myapp://note/   '));
+      container = ProviderContainer(overrides: [
+        deepLinkSourceProvider.overrideWithValue(fakeSource),
+        navigationServiceProvider.overrideWithValue(mockNav),
+      ]);
+      await container.read(deepLinkControllerProvider.future);
+
+      m.verifyNever(mockNav.go(m.any));
+    });
+
+    test('handles no initial link safely', () async {
+      container = ProviderContainer(overrides: [
+        deepLinkSourceProvider.overrideWithValue(fakeSource),
+        navigationServiceProvider.overrideWithValue(mockNav),
+      ]);
+      await container.read(deepLinkControllerProvider.future);
+
+      m.verifyNever(mockNav.go(m.any));
     });
   });
 }

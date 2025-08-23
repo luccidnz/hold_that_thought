@@ -3,10 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
-
-import 'package:hold_that_thought/routing/deeplink_source.dart' as _i2;
-import 'package:hold_that_thought/routing/navigation_service.dart' as _i4;
+import 'package:hold_that_thought/routing/navigation_service.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -22,34 +19,10 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [DeepLinkSource].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockDeepLinkSource extends _i1.Mock implements _i2.DeepLinkSource {
-  MockDeepLinkSource() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i3.Stream<String?> get linkStream => (super.noSuchMethod(
-        Invocation.getter(#linkStream),
-        returnValue: _i3.Stream<String?>.empty(),
-      ) as _i3.Stream<String?>);
-
-  @override
-  _i3.Future<String?> getInitialLink() => (super.noSuchMethod(
-        Invocation.method(
-          #getInitialLink,
-          [],
-        ),
-        returnValue: _i3.Future<String?>.value(),
-      ) as _i3.Future<String?>);
-}
-
 /// A class which mocks [NavigationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationService extends _i1.Mock implements _i4.NavigationService {
+class MockNavigationService extends _i1.Mock implements _i2.NavigationService {
   MockNavigationService() {
     _i1.throwOnMissingStub(this);
   }

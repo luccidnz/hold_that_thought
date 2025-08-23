@@ -80,6 +80,11 @@ jobs:
           name: coverage-lcov
           path: coverage/lcov.info
 
+      - name: Report low coverage
+        run: |
+          echo "Lowest coverage files:"
+          lcov --list coverage/lcov.info | grep -v "100.0%" | sort -n -k 4
+
   # ---- 3) Goldens (read-only by default) ----
   goldens:
     runs-on: ubuntu-latest
