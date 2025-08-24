@@ -88,6 +88,14 @@ jobs:
       - name: Coverage gate (min 80%)
         run: scripts/coverage_gate.sh 80
 
+      - name: Lint (non-blocking)
+        run: flutter analyze || true
+
+      - name: Dependency audit (non-blocking)
+        run: |
+          chmod +x scripts/deps_audit.sh
+          scripts/deps_audit.sh
+
   # ---- 3) Goldens (read-only by default) ----
   goldens:
     runs-on: ubuntu-latest

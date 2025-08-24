@@ -35,7 +35,7 @@ void main() {
 
     test('getPreRollData returns correct data after buffer is full', () {
       final fullBuffer = Uint8List(engine.bufferSize);
-      for (int i = 0; i < engine.bufferSize; i++) {
+      for (var i = 0; i < engine.bufferSize; i++) {
         fullBuffer[i] = i % 256;
       }
       engine.addPcmData(fullBuffer);

@@ -86,3 +86,7 @@ Based on the coverage report, the following files have been targeted for improve
 - **`test/routing/uni_links_source_test.dart`**: Unit tests for the `UniLinksSource` class, which is responsible for parsing deep link URIs from the platform. These tests cover valid, invalid, and null link scenarios.
 - **`test/audio/audio_engine_test.dart`**: Unit tests for the `AudioEngine`, which handles the pre-roll audio buffer and WAV file creation. These tests cover data handling, buffer wrap-around, and WAV header validation.
 - **`test/notes/create_note_page_test.dart`**: Widget tests for the `CreateNotePage`, ensuring that notes are correctly saved and that the UI responds correctly to user input (e.g., disabling the save button when the title is empty).
+
+## Lints
+Run: `flutter analyze`
+Rules are defined in `analysis_options.yaml`. CI reports but does not fail on lints (for now).

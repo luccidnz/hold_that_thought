@@ -1,25 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hold_that_thought/flavor.dart';
 import 'package:hold_that_thought/flavor_banner.dart';
+import 'package:hold_that_thought/l10n/app_localizations.dart';
+import 'package:hold_that_thought/notes/note_model.dart';
 import 'package:hold_that_thought/routing/app_router.dart';
+import 'package:hold_that_thought/routing/deeplink_controller.dart';
 import 'package:hold_that_thought/settings/settings_controller.dart';
+import 'package:hold_that_thought/storage/hive_boxes.dart';
+import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:hold_that_thought/theme/app_theme.dart';
 import 'package:hold_that_thought/theme/theme_controller.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hold_that_thought/notes/note_model.dart';
-import 'package:flutter/foundation.dart';
-import 'package:hold_that_thought/storage/hive_boxes.dart';
-import 'package:hold_that_thought/sync/sync_service.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hold_that_thought/l10n/app_localizations.dart';
-import 'package:hold_that_thought/routing/deeplink_controller.dart';
 
 final flavorProvider = Provider<Flavor>((ref) => throw UnimplementedError());
 
-Future<void> run({required Flavor flavor}) async {
+Future<void> run({required Flavor flavor, ProviderContainer? container}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
@@ -31,21 +31,22 @@ Future<void> run({required Flavor flavor}) async {
   if (kDebugMode && notesBox.isEmpty) {
     final now = DateTime.now();
     const Uuid();
-    notesBox.put(
-      '123',
-      Note(
-        id: '123',
-        title: 'Test Note 1',
-        body: 'This is a test note about Flutter.',
-        createdAt: now,
-        updatedAt: now,
-        isPinned: false,
-        tags: ['work', 'flutter'],
-      ),
-    );
-    notesBox.put(
-      '456',
-      Note(
+    notesBox
+      ..put(
+        '123',
+        Note(
+          id: '123',
+          title: 'Test Note 1',
+          body: 'This is a test note about Flutter.',
+          createdAt: now,
+          updatedAt: now,
+          isPinned: false,
+          tags: ['work', 'flutter'],
+        ),
+      )
+      ..put(
+        '456',
+        Note(
         id: '456',
         title: 'Test Note 2',
         body: 'This is another test note about personal stuff.',
@@ -59,18 +60,19 @@ Future<void> run({required Flavor flavor}) async {
 
   setPathUrlStrategy();
 
-  final container = ProviderContainer(
-    overrides: [
-      flavorProvider.overrideWithValue(flavor),
-    ],
-  );
+  final appContainer = container ??
+      ProviderContainer(
+        overrides: [
+          flavorProvider.overrideWithValue(flavor),
+        ],
+      );
 
   // Initialize the deeplink controller
-  await container.read(deepLinkControllerProvider.future);
+  await appContainer.read(deepLinkControllerProvider.future);
 
   runApp(
     UncontrolledProviderScope(
-      container: container,
+      container: appContainer,
       child: const HoldThatThoughtApp(),
     ),
   );
