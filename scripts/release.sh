@@ -15,8 +15,11 @@ fi
 # Ensure tests pass locally (non-fatal in constrained envs)
 flutter test || echo "::warning ::flutter test failed locally; CI will validate."
 
-# Tag and push
-git tag -a "$TAG" -m "Release $TAG"
-git push origin "$TAG"
-
-echo "Pushed tag $TAG. CI will create a draft release."
+if [[ "${DRY_RUN:-0}" == "1" ]]; then
+  echo "DRY_RUN=1 -> skipping tag and push."
+else
+  # Tag and push
+  git tag -a "$TAG" -m "Release $TAG"
+  git push origin "$TAG"
+  echo "Pushed tag $TAG. CI will create a draft release."
+fi

@@ -1,14 +1,9 @@
-import 'dart:convert' show ascii;
 import 'dart:typed_data';
+import 'dart:convert' show ascii;
 
 /// A Dart‑only audio engine that maintains a circular buffer of PCM data
 /// for pre‑roll capture and writes combined WAV data. No native code.
 class AudioEngine {
-  AudioEngine() {
-    bufferSize = sampleRate * channels * bytesPerSample * preRollSeconds;
-    ringBuffer = Uint8List(bufferSize);
-  }
-
   final int sampleRate = 16000;
   final int channels = 1;
   final int bytesPerSample = 2;
@@ -18,6 +13,11 @@ class AudioEngine {
   late final Uint8List ringBuffer;
   int writeIndex = 0;
   bool bufferFilled = false;
+
+  AudioEngine() {
+    bufferSize = sampleRate * channels * bytesPerSample * preRollSeconds;
+    ringBuffer = Uint8List(bufferSize);
+  }
 
   /// Feed little‑endian PCM16 bytes into the circular buffer.
   void addPcmData(Uint8List pcmChunk) {
@@ -64,21 +64,21 @@ class AudioEngine {
     final blockAlign = ch * (bitsPerSample ~/ 8);
     final dataLength = pcm.length;
     final chunkSize = 36 + dataLength;
-    final b = BytesBuilder()
-      ..add(ascii.encode('RIFF'))
-      ..add(_le(chunkSize, 4))
-      ..add(ascii.encode('WAVE'))
-      ..add(ascii.encode('fmt '))
-      ..add(_le(16, 4))
-      ..add(_le(1, 2))
-      ..add(_le(ch, 2))
-      ..add(_le(sr, 4))
-      ..add(_le(byteRate, 4))
-      ..add(_le(blockAlign, 2))
-      ..add(_le(bitsPerSample, 2))
-      ..add(ascii.encode('data'))
-      ..add(_le(dataLength, 4))
-      ..add(pcm);
+    final b = BytesBuilder();
+    b.add(ascii.encode('RIFF'));
+    b.add(_le(chunkSize, 4));
+    b.add(ascii.encode('WAVE'));
+    b.add(ascii.encode('fmt '));
+    b.add(_le(16, 4));
+    b.add(_le(1, 2));
+    b.add(_le(ch, 2));
+    b.add(_le(sr, 4));
+    b.add(_le(byteRate, 4));
+    b.add(_le(blockAlign, 2));
+    b.add(_le(bitsPerSample, 2));
+    b.add(ascii.encode('data'));
+    b.add(_le(dataLength, 4));
+    b.add(pcm);
     return b.toBytes();
   }
 
