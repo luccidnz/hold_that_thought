@@ -67,7 +67,8 @@ class HiveThoughtRepository implements ThoughtRepository {
   Future<void> archive(String id, {bool archived = true}) async {
     final t = await getById(id);
     if (t == null) return;
-    await _box!.put(id, t.copyWith(archived: archived, updatedAt: DateTime.now()));
+    await _box!
+        .put(id, t.copyWith(archived: archived, updatedAt: DateTime.now()));
   }
 
   @override

@@ -19,6 +19,15 @@ categories, background catching and more.
 * **Reminders & exports** – set reminders from temporal phrases and export
   thoughts in plain text or markdown.
 
+## MVP Features (Phase 8)
+
+* **Offline-first thought capture**: Create, list, and view thoughts even when offline.
+* **Local Storage**: All thoughts are stored locally on your device using Hive for fast access.
+* **Deep Linking**:
+  * Open the app to a new note with `/new`.
+  * Open a specific thought with `/t/<id>`.
+* **Unit Tested**: Core logic is covered by unit tests.
+
 ## Getting Started
 
 1. **Clone the repository** and run `flutter pub get` to install dependencies.

@@ -31,9 +31,11 @@ void main() {
 
   test('watchAll returns updates', () async {
     final thoughtsStream = repo.watchAll();
-    expect(thoughtsStream, emitsInOrder([
-      emits([]),
-    ]));
+    expect(
+        thoughtsStream,
+        emitsInOrder([
+          emits([]),
+        ]));
 
     await repo.create('first');
     await Future.delayed(const Duration(milliseconds: 100));
@@ -82,7 +84,8 @@ void main() {
     final thoughts = await repo.watchAll().first;
     expect(thoughts.isEmpty, isTrue);
 
-    final thoughtsWithArchived = await repo.watchAll(includeArchived: true).first;
+    final thoughtsWithArchived =
+        await repo.watchAll(includeArchived: true).first;
     expect(thoughtsWithArchived.length, 1);
     expect(thoughtsWithArchived.first.archived, isTrue);
 
