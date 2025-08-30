@@ -1,3 +1,41 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins*
+.packages
+pubspec.lock
+build/
+coverage/
+
+# Generated files
+**/*.g.dart
+
+# Android
+android/.gradle/
+android/app/build/
+
+# iOS / macOS
+ios/Pods/
+macos/Pods/
+
+# Linux
+linux/build/
+
+# Windows
+windows/build/
+
+# VS Code / IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Env / secrets
+.env
+.env.*
+*.keystore
+key.properties
+
+# Generated assets / caches
+flutter_assets/
 # Flutter & Dart
 .dart_tool/
 build/
