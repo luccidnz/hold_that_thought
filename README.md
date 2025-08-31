@@ -36,37 +36,111 @@ categories, background catching and more.
 6. **Build an Android APK** without the Android NDK:
 
    ```sh
-   flutter build apk --release
-   ```
+   # Hold That Thought
 
-## Directory Structure
+   Hold That Thought is a compact voice-note app that records short audio thoughts, transcribes them using OpenAI's Whisper API, stores audio and transcripts locally in a Hive database, and enables both keyword and semantic searching over your notes.
 
-```
-hold_that_thought/
-├── android/                # Android project (created manually)
-├── ios/                    # iOS project (created manually)
-├── web/                    # Web assets (index.html, manifest, icons)
-├── lib/
-│   ├── main.dart           # Entry point with router and state providers
-│   └── audio/
-│       └── audio_engine.dart # Dart‑only ring buffer and WAV writer
-├── functions/              # Cloud Functions (transcription, categorisation)
-├── scripts/
-│   └── cleanup_ci.sh       # Script to clean caches for low‑disk CI
-├── .github/
-│   └── workflows/
-│       └── build.yml       # CI workflow building web and Android APK
-├── pubspec.yaml            # Dependencies and project metadata
-├── analysis_options.yaml   # Static analysis configuration
-└── README.md               # This file
-```
+   This README documents the Phase 8 features and how to get the project running locally.
 
-## Low‑Disk CI
+   ## What it does
 
-The `scripts/cleanup_ci.sh` script removes Gradle caches, Flutter build directories
-and other temporary files. It is invoked in the CI workflow to free up disk
-space. See `.github/workflows/build.yml` for details.
+   - Capture audio voice-notes and save the recorded `.m4a` files in the app documents directory.
+   - Automatic transcription using OpenAI's Whisper API.
+   - Generate text embeddings (OpenAI `text-embedding-3-small`) for semantic search in a non-blocking/background manner.
+   - Store audio metadata, transcripts, embeddings, tags, and app state in a local Hive database.
+   - Provide keyword and semantic search modes with highlighted results and multiple sort options.
 
-## Licence
+   ## Key Features (Phase 8)
 
-This project is provided for demonstration purposes under the MIT licence.
+   - Recording audio and storing `.m4a` files in the platform documents directory.
+   - Automatic transcription via OpenAI Whisper (uses the OpenAI API key; see Configuration).
+   - Non-blocking background embedding generation for semantic search using `text-embedding-3-small`.
+   - Keyword and semantic search modes with in-result highlighting.
+   - Multiple result sorting options: Newest, Oldest, Longest, and Best match (semantic relevance).
+   - Tagging thoughts and filtering by tag(s).
+   - Inline editing of titles and transcripts.
+   - Multi-select operations: delete, copy transcript, copy file path, open file location, export transcript to `.txt`.
+   - Settings / Diagnostics page with:
+      - Masked OpenAI API key display
+      - Ping OpenAI connectivity check
+      - Re-transcribe All (re-send audio files to Whisper)
+      - Backfill Embeddings (recompute embeddings for existing transcripts)
+
+   ## Getting started
+
+   1. Clone the repository:
+
+       git clone https://github.com/luccidnz/hold_that_thought.git
+
+   2. Open the project in VS Code with the repository root.
+
+   3. Install dependencies:
+
+       flutter pub get
+
+   4. Ensure you have Flutter set up on your machine. (On Windows, install Flutter SDK and the Windows desktop prerequisites.)
+
+   5. Run the app:
+
+       flutter run -d windows
+
+       or, if you have an Android emulator or device available:
+
+       flutter run -d android
+
+       Note: this repository does not automatically start an emulator; you must launch an emulator or connect a device before running on Android.
+
+   ## Configuration
+
+   - OpenAI API key
+
+      The app reads the OpenAI key from the `OPENAI_API_KEY` environment variable at runtime. On Windows PowerShell you can set it for the current session like:
+
+      $env:OPENAI_API_KEY = "sk-..."
+
+      For CI or permanent environment configuration, add the variable to your system/user environment variables or pass it into the app environment when running.
+
+   - Git LFS
+
+      `.m4a` audio files are tracked with Git LFS in this project to avoid committing large audio blobs into the repository.
+
+   - Android permissions
+
+      For Android builds, ensure the following permissions are present in `android/app/src/main/AndroidManifest.xml` (or equivalent) so recording and network access work properly:
+
+      - INTERNET
+      - RECORD_AUDIO
+
+      Example (Android manifest entries):
+
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+   ## Usage notes & costs
+
+   - Whisper usage: the app currently uses OpenAI Whisper (via the OpenAI API) for transcription. Whisper billing is per audio minute; as of this README a typical reference cost is around $0.006 per minute — please check OpenAI's pricing page for current rates.
+   - Transcripts, embeddings, and metadata are stored locally in a Hive database. Audio files remain on-device (under the app documents directory) until you delete them via the app.
+
+   ## Roadmap / TODO
+
+   - Sharing notes (export/share to other apps or services).
+   - Backup and restore (cloud or file-based export/import of Hive data and audio files).
+   - Desktop-specific integrations (native notifications, system-tray quick capture).
+   - Improved UX for long-form audio and batch processing of embeddings/transcripts.
+
+   ## Where to look in the code
+
+   - Main entry: `lib/main.dart`
+   - App wiring & providers: `lib/state/providers.dart`
+   - Audio engine: `lib/audio/audio_engine.dart`
+   - Transcription service: `lib/services/transcription_service.dart`
+   - Embedding & semantic search: `lib/services/embedding_service.dart` and `lib/utils/cosine.dart`
+   - Hive bootstrap and models: `lib/services/hive_boot.dart` and `lib/models/thought.dart`
+
+   ## Contributing
+
+   Contributions and bug reports are welcome. Please open issues or PRs on the GitHub repository.
+
+   ---
+
+   If you want any edits to this README (formatting, additional troubleshooting steps, or screenshots), tell me what you'd like and I will update it.
