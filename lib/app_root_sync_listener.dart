@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hold_that_thought/app.dart';
 import 'package:hold_that_thought/state/sync_events.dart';
 import 'package:hold_that_thought/state/sync_providers.dart';

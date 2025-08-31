@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:archive/archive_io.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/state/repository_providers.dart';
 import 'package:hold_that_thought/state/sync_providers.dart';
-import '../services/transcription_service.dart';
-import '../services/embedding_service.dart';
-import '../state/providers.dart';
-import '../models/thought.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
@@ -82,13 +79,13 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           children: [
             ElevatedButton(
               onPressed: user == null
-                  ? () => ref.read(syncServiceProvider).provider.ensureSignedIn()
+                  ? () => ref.read(syncProvider).ensureSignedIn()
                   : null,
               child: const Text('Sign In Anonymously'),
             ),
             ElevatedButton(
               onPressed: user != null
-                  ? () => ref.read(syncServiceProvider).provider.signOut()
+                  ? () => ref.read(syncProvider).signOut()
                   : null,
               child: const Text('Sign Out'),
             ),
@@ -109,7 +106,6 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     );
   }
 
-  @override
   Widget _buildDataManagementSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +139,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         if (await audioFile.exists()) {
           final audioBytes = await audioFile.readAsBytes();
           final safeTitle = thought.title?.replaceAll(RegExp(r'[^\w\s-]'), '_') ?? thought.id;
-          final dirName = '${thought.createdAt.toIso8601String().split('T').first}_${safeTitle}';
+          final dirName = '${thought.createdAt.toIso8601String().split('T').first}_$safeTitle';
 
           archive.addFile(ArchiveFile('$dirName/audio.m4a', audioBytes.length, audioBytes));
 
@@ -169,14 +165,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       final zipEncoder = ZipEncoder();
       final zipData = zipEncoder.encode(archive);
 
-      if (zipData == null) {
-        throw Exception('Failed to create ZIP file.');
-      }
-
       await FileSaver.instance.saveFile(
         name: 'hold_that_thought_export_${DateTime.now().toIso8601String()}',
         bytes: Uint8List.fromList(zipData),
-        ext: 'zip',
         mimeType: MimeType.zip,
       );
 

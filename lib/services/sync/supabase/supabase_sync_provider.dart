@@ -102,4 +102,9 @@ class SupabaseSyncProvider implements SyncProvider {
     if (_client == null) throw Exception('Supabase client not initialized');
     await _client!.auth.signOut();
   }
+  
+  // Helper method to access the client
+  SupabaseClient? getClient() {
+    return _client;
+  }
 }

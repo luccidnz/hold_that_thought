@@ -1,6 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hold_that_thought/services/repository/thought_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hold_that_thought/services/sync/supabase/supabase_sync_provider.dart';
 import 'package:hold_that_thought/services/sync/sync_provider.dart';
@@ -30,11 +29,11 @@ final syncProvider = Provider<SyncProvider>((ref) {
 });
 
 final syncServiceProvider = Provider<SyncService>((ref) {
-  final syncProvider = ref.watch(syncProvider);
+  final provider = ref.watch(syncProvider);
   final thoughtRepository = ref.watch(thoughtRepositoryProvider);
 
   final service = SyncService(
-    provider: syncProvider,
+    provider: provider,
     repository: thoughtRepository,
     ref: ref,
   );
@@ -60,9 +59,9 @@ final supabaseUserProvider = StateProvider<User?>((ref) {
 
 // Provider to expose Supabase auth state changes
 final authStateChangesProvider = StreamProvider<AuthState>((ref) {
-  final syncProvider = ref.watch(syncProvider);
-   if (syncProvider is SupabaseSyncProvider) {
-    final client = syncProvider.client;
+  final provider = ref.watch(syncProvider);
+  if (provider is SupabaseSyncProvider) {
+    final client = provider.getClient();
     if (client != null) {
       return client.auth.onAuthStateChange;
     }

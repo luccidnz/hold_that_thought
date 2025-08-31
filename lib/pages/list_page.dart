@@ -7,7 +7,6 @@ import 'package:hold_that_thought/state/repository_providers.dart';
 import 'package:hold_that_thought/state/sync_providers.dart';
 import 'package:share_plus/share_plus.dart';
 import '../models/thought.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '../state/providers.dart';
 import '../services/embedding_service.dart';
 import '../services/open_file_helper.dart';
@@ -192,7 +191,7 @@ class _ListPageState extends ConsumerState<ListPage> {
   Future<void> _shareTranscript(Thought t) async {
     final transcript = t.transcript ?? '';
     if (transcript.isNotEmpty) {
-      await Share.share(transcript, subject: 'Thought Transcript: ${t.title ?? ''}');
+      await Share.share(transcript);
     } else {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No transcript to share')));
@@ -201,7 +200,7 @@ class _ListPageState extends ConsumerState<ListPage> {
 
   Future<void> _shareAudio(Thought t) async {
     final file = XFile(t.path);
-    await Share.shareXFiles([file], subject: 'Thought Audio: ${t.title ?? ''}');
+    await Share.shareXFiles([file]);
   }
 
   @override

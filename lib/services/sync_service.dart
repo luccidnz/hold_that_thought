@@ -14,7 +14,7 @@ class SyncService {
   final Ref _ref;
   String? _userId;
 
-  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
   List<Thought> _queue = [];
   bool _isProcessing = false;
 
@@ -32,7 +32,7 @@ class SyncService {
 
   void start() {
     _connectivitySubscription =
-        Connectivity().onConnectivityChanged.listen((_) => processQueue());
+        Connectivity().onConnectivityChanged.listen((result) => processQueue());
     // Initial check
     processQueue();
   }
@@ -45,8 +45,8 @@ class SyncService {
     if (_isProcessing) return;
     _isProcessing = true;
 
-    final connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
+    final connectivityResults = await Connectivity().checkConnectivity();
+    if (connectivityResults.contains(ConnectivityResult.none) || connectivityResults.isEmpty) {
       _isProcessing = false;
       return;
     }
@@ -82,12 +82,12 @@ class SyncService {
   }
 
   String _getAudioStoragePath(String thoughtId) {
-    if (_userId == null) throw Exception("User not signed in for sync.");
+    if (_userId == null) throw Exception('User not signed in for sync.');
     return '$_userId/$thoughtId/audio.m4a';
   }
 
   String _getTranscriptStoragePath(String thoughtId) {
-    if (_userId == null) throw Exception("User not signed in for sync.");
+    if (_userId == null) throw Exception('User not signed in for sync.');
     return '$_userId/$thoughtId/transcript.txt';
   }
 

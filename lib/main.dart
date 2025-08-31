@@ -7,7 +7,7 @@ import 'state/providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: '.env');
   final box = await openThoughtsBoxRobust();
   runApp(
     ProviderScope(

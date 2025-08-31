@@ -9,7 +9,6 @@ import 'package:hold_that_thought/state/sync_providers.dart';
 import '../models/thought.dart';
 import '../services/transcription_service.dart';
 import '../services/embedding_service.dart';
-import '../state/providers.dart';
 
 class CapturePage extends ConsumerStatefulWidget {
   const CapturePage({super.key});
