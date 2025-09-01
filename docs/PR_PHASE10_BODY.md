@@ -18,7 +18,7 @@ Phase 10 delivers multi-device **Auth** (Supabase), **RAG** (Related Thoughts, S
 _Attach: Related Panel, Daily Digest card, "Encrypted" badge, Android recording notification._
 
 **CI artifacts**
-- Latest workflow run & artifacts: https://github.com/luccidnz/hold_that_thought/actions?query=branch%3Afeature%2Fphase9-sync-share-polish-1+is%3Asuccess
+- Latest workflow run & artifacts: https://github.com/luccidnz/hold_that_thought/actions?query=branch%3Afeature%2Fphase10-auth-rag-android-e2ee+is%3Asuccess
 
 **Acceptance checklist**
 - [ ] Flags OFF → legacy capture/list/share OK
