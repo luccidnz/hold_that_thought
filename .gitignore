@@ -70,4 +70,6 @@ web/generated/
 
 # Others
 *.lock
-.env
+.env.env
+.env.*
+
