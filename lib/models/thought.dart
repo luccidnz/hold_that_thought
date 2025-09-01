@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'encryption_metadata.dart';
 
 class Thought {
   final String id;
@@ -12,6 +13,8 @@ class Thought {
   final String? remoteId;
   final String? sha256;
   final DateTime? uploadedAt;
+  final String? encryptionMetadata; // JSON string of ThoughtEncryptionMetadata
+  final bool isEncrypted; // Flag to indicate if content is encrypted
 
   const Thought({
     required this.id,
@@ -25,6 +28,8 @@ class Thought {
     this.remoteId,
     this.sha256,
     this.uploadedAt,
+    this.encryptionMetadata,
+    this.isEncrypted = false,
   });
 
   Thought copyWith({
@@ -39,6 +44,8 @@ class Thought {
     String? remoteId,
     String? sha256,
     DateTime? uploadedAt,
+    String? encryptionMetadata,
+    bool? isEncrypted,
   }) =>
       Thought(
         id: id ?? this.id,
@@ -52,6 +59,8 @@ class Thought {
         remoteId: remoteId ?? this.remoteId,
         sha256: sha256 ?? this.sha256,
         uploadedAt: uploadedAt ?? this.uploadedAt,
+        encryptionMetadata: encryptionMetadata ?? this.encryptionMetadata,
+        isEncrypted: isEncrypted ?? this.isEncrypted,
       );
 }
 
@@ -128,6 +137,19 @@ class ThoughtAdapter extends TypeAdapter<Thought> {
         uploadedAt = DateTime.fromMillisecondsSinceEpoch(r.readInt());
       }
     }
+    
+    String? encryptionMetadata;
+    if (r.availableBytes > 0) {
+      final hasEncryptionMetadata = r.readBool();
+      if (hasEncryptionMetadata && r.availableBytes > 0) {
+        encryptionMetadata = r.readString();
+      }
+    }
+    
+    bool isEncrypted = false;
+    if (r.availableBytes > 0) {
+      isEncrypted = r.readBool();
+    }
 
     return Thought(
       id: id,
@@ -141,6 +163,8 @@ class ThoughtAdapter extends TypeAdapter<Thought> {
       remoteId: remoteId,
       sha256: sha256,
       uploadedAt: uploadedAt,
+      encryptionMetadata: encryptionMetadata,
+      isEncrypted: isEncrypted,
     );
   }
 
@@ -187,5 +211,12 @@ class ThoughtAdapter extends TypeAdapter<Thought> {
     if (obj.uploadedAt != null) {
       w.writeInt(obj.uploadedAt!.millisecondsSinceEpoch);
     }
+    
+    // Write encryption metadata
+    w.writeBool(obj.encryptionMetadata != null);
+    if (obj.encryptionMetadata != null) w.writeString(obj.encryptionMetadata!);
+    
+    // Write isEncrypted flag
+    w.writeBool(obj.isEncrypted);
   }
 }

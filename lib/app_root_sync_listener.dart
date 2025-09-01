@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/app.dart';
 import 'package:hold_that_thought/state/sync_events.dart';
 import 'package:hold_that_thought/state/sync_providers.dart';
+import 'package:hold_that_thought/state/temp_file_providers.dart';
 
 class RootSyncListener extends ConsumerWidget {
   final Widget child;
@@ -10,6 +11,9 @@ class RootSyncListener extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Initialize temporary file cleanup service
+    ref.watch(tempFileCleanupServiceProvider);
+    
     // Listen to single-shot events
     ref.listen<SyncEvent?>(syncEventBusProvider, (prev, event) {
       if (event == null) return;

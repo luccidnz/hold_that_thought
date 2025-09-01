@@ -3,8 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
+import 'package:hold_that_thought/state/encrypted_repo_providers.dart';
+import 'package:hold_that_thought/state/encrypted_sync_providers.dart';
 import 'package:hold_that_thought/state/repository_providers.dart';
 import 'package:hold_that_thought/state/sync_providers.dart';
+import 'package:hold_that_thought/widgets/daily_digest_card.dart';
+import 'package:hold_that_thought/widgets/encryption_badge.dart';
+import 'package:hold_that_thought/widgets/thought_detail_bottom_sheet.dart';
 import 'package:share_plus/share_plus.dart';
 import '../models/thought.dart';
 import '../state/providers.dart';
@@ -50,9 +55,15 @@ class _ListPageState extends ConsumerState<ListPage> {
     final repo = ref.read(thoughtRepositoryProvider);
     await repo.deleteLocal(t.id);
     if (ref.read(syncEnabledProvider)) {
-      await ref.read(syncServiceProvider).deleteThoughtFromCloud(t);
+      // Use encrypted sync service if it's encrypted
+      if (t.isEncrypted) {
+        await ref.read(encryptedSyncServiceProvider).deleteThoughtFromCloud(t);
+      } else {
+        await ref.read(syncServiceProvider).deleteThoughtFromCloud(t);
+      }
     }
     ref.invalidate(thoughtsListProvider);
+    ref.invalidate(encryptedThoughtsListProvider);
     ref.invalidate(syncStatsProvider);
 
     try { final f = File(t.path); if (await f.exists()) await f.delete(); } catch (_) {}
@@ -205,7 +216,7 @@ class _ListPageState extends ConsumerState<ListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final thoughtsAsync = ref.watch(thoughtsListProvider);
+    final thoughtsAsync = ref.watch(encryptedThoughtsListProvider);
     final currentQuery = ref.watch(searchQueryProvider);
     final tagFilters = ref.watch(tagFilterProvider);
     if (_searchCtl.text != currentQuery) _searchCtl.text = currentQuery;
@@ -347,10 +358,26 @@ class _ListPageState extends ConsumerState<ListPage> {
           }
 
           return ListView.separated(
-            itemCount: filtered.length,
-            separatorBuilder: (_, __) => const Divider(height: 1),
+            itemCount: filtered.length + 1, // +1 for the daily digest card
+            separatorBuilder: (_, index) {
+              // No separator after the digest card
+              if (index == 0) return const SizedBox.shrink();
+              return const Divider(height: 1);
+            },
             itemBuilder: (context, i) {
-              final t = filtered[i];
+              // Show the daily digest card at the top
+              if (i == 0) {
+                return DailyDigestCard(
+                  date: DateTime.now(),
+                  onRefresh: () {
+                    // Refresh the list
+                    ref.invalidate(thoughtsListProvider);
+                  },
+                );
+              }
+              
+              // Adjust index for the actual thoughts
+              final t = filtered[i - 1];
               final fileName = t.path.split(Platform.pathSeparator).last;
               final when = '${t.createdAt.toLocal()}'.split('.').first;
               final dur = t.durationMs != null ? ' • ${(t.durationMs! / 1000).toStringAsFixed(1)}s' : '';
@@ -390,10 +417,20 @@ class _ListPageState extends ConsumerState<ListPage> {
                                 _selected.add(t.id);
                               });
                             },
-                            child: RichText(
-                                text: highlightSpan(context, t.title?.isNotEmpty == true ? t.title! : fileName, ref.watch(searchQueryProvider)),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis))),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                    text: highlightSpan(context, t.title?.isNotEmpty == true ? t.title! : fileName, ref.watch(searchQueryProvider)),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis),
+                                if (t.isEncrypted)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4.0),
+                                    child: EncryptionBadge(thought: t),
+                                  ),
+                              ],
+                            ))),
                     IconButton(
                         icon: const Icon(Icons.edit, size: 18),
                         onPressed: () async {
@@ -406,8 +443,16 @@ class _ListPageState extends ConsumerState<ListPage> {
                                   ]));
                           if (res != null) {
                             final updated = t.copyWith(title: res.isEmpty ? null : res);
-                            await ref.read(thoughtRepositoryProvider).upsertLocal(updated);
+                            
+                            // Use the encrypted repository for updating thoughts
+                            if (t.isEncrypted) {
+                              await ref.read(encryptedThoughtRepositoryProvider).upsertLocal(updated);
+                            } else {
+                              await ref.read(thoughtRepositoryProvider).upsertLocal(updated);
+                            }
+                            
                             ref.invalidate(thoughtsListProvider);
+                            ref.invalidate(encryptedThoughtsListProvider);
                           }
                         })
                   ],
@@ -430,8 +475,16 @@ class _ListPageState extends ConsumerState<ListPage> {
                                   ]));
                           if (res != null) {
                             final updated = t.copyWith(transcript: res, embedding: null);
-                            await ref.read(thoughtRepositoryProvider).upsertLocal(updated);
+                            
+                            // Use the encrypted repository for updating thoughts
+                            if (t.isEncrypted) {
+                              await ref.read(encryptedThoughtRepositoryProvider).upsertLocal(updated);
+                            } else {
+                              await ref.read(thoughtRepositoryProvider).upsertLocal(updated);
+                            }
+                            
                             ref.invalidate(thoughtsListProvider);
+                            ref.invalidate(encryptedThoughtsListProvider);
                           }
                         },
                         child: RichText(
@@ -484,7 +537,17 @@ class _ListPageState extends ConsumerState<ListPage> {
                     });
                     return;
                   }
-                  _play(t.path);
+                  
+                  // Set the selected thought ID
+                  ref.read(selectedThoughtIdProvider.notifier).state = t.id;
+                  
+                  // Show the thought detail bottom sheet
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => ThoughtDetailBottomSheet(thought: t),
+                  );
                 },
               );
             },

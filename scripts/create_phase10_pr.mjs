@@ -1,11 +1,18 @@
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
 import fs from "node:fs";
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 function sh(cmd){ return execSync(cmd,{stdio:["ignore","pipe","pipe"]}).toString().trim(); }
 
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
-if(!token){ throw new Error("Set GITHUB_TOKEN or GH_TOKEN with repo scope."); }
+if(!token || token === 'your_github_token_here'){ 
+  console.error("Please set GITHUB_TOKEN in your .env file with a valid token.");
+  process.exit(1);
+}
 
 const remote = sh('git config --get remote.origin.url');
 const m = remote.match(/github\.com[:/](.+?)\.git$/);

@@ -1,0 +1,246 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  analyze_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Pub get
+        run: flutter pub get
+      - name: Analyze
+        run: flutter analyze
+      - name: Test with coverage
+        run: flutter test --coverage
+      - name: Enforce coverage thresholds
+        run: |
+          sudo apt-get update && sudo apt-get install -y lcov
+          TOTAL=$(lcov --summary coverage/lcov.info | awk '/lines/ {print $2}' | tr -d '%')
+          THRESH=70
+          echo "Total coverage: $TOTAL%"
+          awk 'BEGIN{ if('"$TOTAL"' < '"$THRESH"') exit 1 }'
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: coverage/lcov.info
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Enable Windows
+        run: flutter config --enable-windows-desktop
+      - name: Pub get
+        run: flutter pub get
+      - name: Build Windows Release
+        run: flutter build windows --release
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-release
+          path: build/windows/x64/runner/Release/
+
+  build_android_debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Java setup
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Android SDK setup
+        uses: android-actions/setup-android@v3
+      - name: Pub get
+        run: flutter pub get
+      - name: Build Android debug
+        run: flutter build apk --debug
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+      
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+      
+      - name: Analyze project source
+        run: flutter analyze
+      
+      - name: Run tests
+        run: flutter test --coverage
+      
+      - name: Check Vector index tests
+        run: flutter test test/vector_index_test.dart
+      
+      - name: Check Crypto service tests
+        run: flutter test test/crypto_service_test.dart
+
+  build_windows:
+    name: Build Windows App
+    needs: lint_and_test
+    runs-on: windows-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+      
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Build Windows
+        run: flutter build windows --release
+      
+      - name: Create .env file
+        run: |
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > build/windows/runner/Release/.env
+          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> build/windows/runner/Release/.env
+          echo "FEATURE_AUTH_ENABLED=false" >> build/windows/runner/Release/.env
+          echo "FEATURE_RAG_ENABLED=false" >> build/windows/runner/Release/.env
+          echo "FEATURE_E2EE_ENABLED=false" >> build/windows/runner/Release/.env
+          echo "FEATURE_TELEMETRY_ENABLED=false" >> build/windows/runner/Release/.env
+      
+      - name: Create zip archive
+        run: |
+          cd build/windows/runner/Release
+          7z a -tzip ../../../windows-release.zip *
+      
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-app
+          path: build/windows-release.zip
+          retention-days: 7
+
+  build_android:
+    name: Build Android App
+    needs: lint_and_test
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+      
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Create .env file
+        run: |
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > android/app/src/main/assets/.env
+          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> android/app/src/main/assets/.env
+          echo "FEATURE_AUTH_ENABLED=false" >> android/app/src/main/assets/.env
+          echo "FEATURE_RAG_ENABLED=false" >> android/app/src/main/assets/.env
+          echo "FEATURE_E2EE_ENABLED=false" >> android/app/src/main/assets/.env
+          echo "FEATURE_TELEMETRY_ENABLED=false" >> android/app/src/main/assets/.env
+      
+      - name: Build Android Debug APK
+        run: flutter build apk --debug
+      
+      - name: Upload Android Debug APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 7
+      
+      # Uncomment to build Android release APK (requires keystore setup)
+      # - name: Decode Android keystore
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   run: |
+      #     echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/keystore.jks
+      #     echo "storeFile=keystore.jks" > android/key.properties
+      #     echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+      #     echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
+      #     echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+      
+      # - name: Build Android Release APK
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   run: flutter build apk --release
+      
+      # - name: Upload Android Release APK
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: android-release-apk
+      #     path: build/app/outputs/flutter-apk/app-release.apk
+      #     retention-days: 7
+
+  # Uncomment to add deployment steps for tagged releases
+  # deploy:
+  #   name: Deploy Release
+  #   if: startsWith(github.ref, 'refs/tags/')
+  #   needs: [build_windows, build_android]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download all artifacts
+  #       uses: actions/download-artifact@v3
+  #       
+  #     - name: Create GitHub Release
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         files: |
+  #           android-release-apk/app-release.apk
+  #           windows-app/windows-release.zip
+  #         draft: true
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
