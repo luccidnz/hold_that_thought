@@ -18,7 +18,10 @@ class SupabaseSyncProvider implements SyncProvider {
   Future<void> _initialize() async {
     if (_client != null) return;
     if (_url == null || _anonKey == null) {
-      throw Exception('Supabase URL and anon key must be configured.');
+      throw Exception('Supabase URL and anon key must be configured in Settings or .env file.');
+    }
+    if (_url!.contains('example.supabase.co')) {
+      throw Exception('Please replace example.supabase.co with your actual Supabase project URL.');
     }
     await Supabase.initialize(url: _url!, anonKey: _anonKey!);
     _client = Supabase.instance.client;

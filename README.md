@@ -45,8 +45,10 @@ Git LFS configured for audio (.m4a/.wav).
 
 Add `SUPABASE_URL` and `SUPABASE_ANON_KEY` in:
 
-- `.env` (git-ignored), or
+- `.env` (git-ignored, copy from `.env.example`), or
 - App Settings (masked inputs).
+
+When using your own Supabase project, replace `<your-project-ref>.supabase.co` with your actual project reference.
 
 ### Using Cloud Backup
 
