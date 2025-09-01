@@ -1,5 +1,12 @@
 **Summary**
-Phase 10 delivers multi-device **Auth** (Supabase), **RAG** (Related Thoughts, Summaries, Daily Digest), **Android Foreground Recording**, and **E2EE** for transcripts + audio, plus tests, CI, and docs.
+Phase 10 delivers multi-device **Auth**, **RAG**, **Android Foreground Recording**, and **E2EE**, with tests, CI, and docs.
+
+**Security Note**
+- `.env` was removed from history and CI now blocks it.
+- The previously shared token must be **revoked/rotated** in GitHub Settings (done outside this PR).
+
+**CI artifacts**
+- Latest workflow run & artifacts: https://github.com/luccidnz/hold_that_thought/actions?query=branch%3Afeature%2Fphase10-auth-rag-android-e2ee+is%3Asuccess
 
 **What's in**
 - Auth: email/password sign-in, user-namespaced storage/metadata, anon→account migration.
