@@ -1,5 +1,6 @@
 import { execSync } from "node:child_process";
 import { Octokit } from "octokit";
+import { existsSync } from "node:fs";
 
 function sh(c){ try { return execSync(c,{stdio:["ignore","pipe","pipe"]}).toString().trim(); } catch { return ""; } }
 
@@ -96,7 +97,7 @@ git clean -fdx
     "docs/screenshots/daily_digest.png",
     "docs/screenshots/encrypted_badge.png",
     "docs/screenshots/android_recording_notification.png"
-  ].filter(p => require("fs").existsSync(p));
+  ].filter(p => existsSync(p));
   if (shots.length) {
     await octo.rest.issues.createComment({ owner, repo, issue_number: pr.number, body: `**Screenshots**\n${shots.map(s=>`- ${s}`).join("\n")}` }).catch(()=>{});
   } else {
