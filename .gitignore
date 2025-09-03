@@ -73,3 +73,6 @@ web/generated/
 .env.env
 .env.*
 
+
+jules_env.*
+*.env.enc
