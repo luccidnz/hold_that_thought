@@ -1,0 +1,52 @@
+name: Android QA Smoke
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'android/**'
+      - '.github/workflows/android-qa-smoke.yml'
+
+jobs:
+  emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Build app and tests
+        run: |
+          flutter build apk --debug
+          cd android
+          ./gradlew assembleAndroidTest assembleDebug
+
+      - name: Run instrumentation on emulator (API 34)
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          script: |
+            adb logcat -c
+            cd android
+            ./gradlew connectedAndroidTest --stacktrace
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-instrumentation-reports
+          path: android/**/connected/**/index.html
