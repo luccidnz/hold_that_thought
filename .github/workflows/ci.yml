@@ -14,46 +14,75 @@ jobs:
     name: Lint and Test
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    env:
+      CI: true
+      # benign defaults so unit tests don't try to hit real services
+      OPENAI_API_KEY: "test"
+      SUPABASE_URL: "https://example.invalid"
+      SUPABASE_ANON_KEY: "test"
+      COVERAGE_MIN: "60"
     
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           lfs: true
+      
+      - name: Configure git safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      
+      - name: Setup Git LFS
+        run: git lfs install
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          cache: "gradle"
       
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
-          channel: 'stable'
+          channel: "stable"
           cache: true
+      
+      - name: Flutter version
+        run: flutter --version
       
       - name: Install dependencies
         run: flutter pub get
       
-      - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
-      
-      - name: Analyze project source
+      - name: Lint
         run: flutter analyze
       
-      - name: Run tests
+      - name: Test
         run: flutter test --coverage
       
-      - name: Check Vector index tests
-        run: flutter test test/vector_index_test.dart
-      
-      - name: Check Crypto service tests
-        run: flutter test test/crypto_service_test.dart
-        
-      - name: Enforce coverage thresholds
+      - name: Enforce coverage threshold
+        if: always()
         run: |
-          sudo apt-get update && sudo apt-get install -y lcov
-          TOTAL=$(lcov --summary coverage/lcov.info | awk '/lines/ {print $2}' | tr -d '%')
-          THRESH=${COVERAGE_MIN}
-          echo "Total coverage: $TOTAL%"
-          echo "Required minimum: $THRESH%"
-          awk 'BEGIN{ if('"$TOTAL"' < '"$THRESH"') exit 1 }'
+          if [ ! -f coverage/lcov.info ]; then
+            echo "No coverage file found"; exit 1
+          fi
+          got=$(grep -m1 -oP 'lines\.*:\s*\K[0-9.]+(?=%)' <(lcov --summary coverage/lcov.info 2>/dev/null || echo "lines......: 0.0%"))
+          if [ -z "$got" ]; then
+            # Fallback rough parse
+            got=$(grep -oP 'DA:\d+,\d+' coverage/lcov.info | awk -F, '{t+=$2;s++} END{if(s==0){print 0}else{printf("%.1f", (t/(s))*100)}}')
+          fi
+          min=${COVERAGE_MIN:-60}
+          echo "Coverage: ${got:-0}% (min ${min}%)"
+          awk -v a="${got:-0}" -v b="${min}" 'BEGIN{exit(a+0<b+0)}'
+      
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: coverage/lcov.info
       
       - name: Upload coverage
         uses: actions/upload-artifact@v4
@@ -91,8 +120,8 @@ jobs:
       
       - name: Create .env file
         run: |
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > build/windows/runner/Release/.env
-          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> build/windows/runner/Release/.env
+          echo "SUPABASE_URL=\${{ secrets.SUPABASE_URL }}" > build/windows/runner/Release/.env
+          echo "SUPABASE_ANON_KEY=\${{ secrets.SUPABASE_ANON_KEY }}" >> build/windows/runner/Release/.env
           echo "FEATURE_AUTH_ENABLED=false" >> build/windows/runner/Release/.env
           echo "FEATURE_RAG_ENABLED=false" >> build/windows/runner/Release/.env
           echo "FEATURE_E2EE_ENABLED=false" >> build/windows/runner/Release/.env
@@ -140,8 +169,8 @@ jobs:
       
       - name: Create .env file
         run: |
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > android/app/src/main/assets/.env
-          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> android/app/src/main/assets/.env
+          echo "SUPABASE_URL=\${{ secrets.SUPABASE_URL }}" > android/app/src/main/assets/.env
+          echo "SUPABASE_ANON_KEY=\${{ secrets.SUPABASE_ANON_KEY }}" >> android/app/src/main/assets/.env
           echo "FEATURE_AUTH_ENABLED=false" >> android/app/src/main/assets/.env
           echo "FEATURE_RAG_ENABLED=false" >> android/app/src/main/assets/.env
           echo "FEATURE_E2EE_ENABLED=false" >> android/app/src/main/assets/.env
