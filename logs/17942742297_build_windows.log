@@ -1,0 +1,727 @@
+﻿build_windows	Set up job	∩╗┐2025-09-23T10:11:13.5350425Z Current runner version: '2.328.0'
+build_windows	Set up job	2025-09-23T10:11:13.5406232Z ##[group]Runner Image Provisioner
+build_windows	Set up job	2025-09-23T10:11:13.5407469Z Hosted Compute Agent
+build_windows	Set up job	2025-09-23T10:11:13.5408274Z Version: 20250829.383
+build_windows	Set up job	2025-09-23T10:11:13.5409232Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+build_windows	Set up job	2025-09-23T10:11:13.5410374Z Build Date: 2025-08-29T13:48:48Z
+build_windows	Set up job	2025-09-23T10:11:13.5411301Z ##[endgroup]
+build_windows	Set up job	2025-09-23T10:11:13.5412064Z ##[group]Operating System
+build_windows	Set up job	2025-09-23T10:11:13.5412976Z Microsoft Windows Server 2022
+build_windows	Set up job	2025-09-23T10:11:13.5413819Z 10.0.20348
+build_windows	Set up job	2025-09-23T10:11:13.5414562Z Datacenter
+build_windows	Set up job	2025-09-23T10:11:13.5415195Z ##[endgroup]
+build_windows	Set up job	2025-09-23T10:11:13.5415877Z ##[group]Runner Image
+build_windows	Set up job	2025-09-23T10:11:13.5416682Z Image: windows-2022
+build_windows	Set up job	2025-09-23T10:11:13.5417353Z Version: 20250907.29.1
+build_windows	Set up job	2025-09-23T10:11:13.5418968Z Included Software: https://github.com/actions/runner-images/blob/win22/20250907.29/images/windows/Windows2022-Readme.md
+build_windows	Set up job	2025-09-23T10:11:13.5421423Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20250907.29
+build_windows	Set up job	2025-09-23T10:11:13.5423919Z ##[endgroup]
+build_windows	Set up job	2025-09-23T10:11:13.5425724Z ##[group]GITHUB_TOKEN Permissions
+build_windows	Set up job	2025-09-23T10:11:13.5428072Z Contents: read
+build_windows	Set up job	2025-09-23T10:11:13.5428889Z Metadata: read
+build_windows	Set up job	2025-09-23T10:11:13.5429608Z PullRequests: write
+build_windows	Set up job	2025-09-23T10:11:13.5430341Z ##[endgroup]
+build_windows	Set up job	2025-09-23T10:11:13.5433037Z Secret source: Actions
+build_windows	Set up job	2025-09-23T10:11:13.5434137Z Prepare workflow directory
+build_windows	Set up job	2025-09-23T10:11:13.5791539Z Prepare all required actions
+build_windows	Set up job	2025-09-23T10:11:13.5830647Z Getting action download info
+build_windows	Set up job	2025-09-23T10:11:13.9687823Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+build_windows	Set up job	2025-09-23T10:11:14.1082088Z Download action repository 'microsoft/setup-msbuild@v1.3' (SHA:ede762b26a2de8d110bb5a3db4d7e0e080c0e917)
+build_windows	Set up job	2025-09-23T10:11:14.4632221Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build_windows	Set up job	2025-09-23T10:11:14.7766559Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build_windows	Set up job	2025-09-23T10:11:15.1112344Z Getting action download info
+build_windows	Set up job	2025-09-23T10:11:15.2350059Z Download action repository 'actions/cache@v4' (SHA:0400d5f644dc74513175e3cd8d07132dd4860809)
+build_windows	Set up job	2025-09-23T10:11:15.4163827Z Complete job name: build_windows
+build_windows	Run actions/checkout@v4	∩╗┐2025-09-23T10:11:15.6142519Z ##[group]Run actions/checkout@v4
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6144009Z with:
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6144795Z   lfs: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6145722Z   repository: luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6147233Z   token: ***
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6148055Z   ssh-strict: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6148926Z   ssh-user: git
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6149792Z   persist-credentials: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6150776Z   clean: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6151649Z   sparse-checkout-cone-mode: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6152694Z   fetch-depth: 1
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6153528Z   fetch-tags: false
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6154293Z   show-progress: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6155009Z   submodules: false
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6155739Z   set-safe-directory: true
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.6156701Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.8130831Z Syncing repository: luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.8133716Z ##[group]Getting Git version info
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.8134963Z Working directory is 'D:\a\hold_that_thought\hold_that_thought'
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:15.9399894Z [command]"C:\Program Files\Git\bin\git.exe" version
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:16.4299422Z git version 2.51.0.windows.1
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:16.5233183Z [command]"C:\Program Files\Git\bin\git.exe" lfs version
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7025449Z git-lfs/3.7.0 (GitHub; windows amd64; go 1.24.4; git 92dddf56)
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7079809Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7103450Z Temporarily overriding HOME='D:\a\_temp\e8d474b0-2e49-44fb-8863-5756e09ad6aa' before making global git config changes
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7104270Z Adding repository directory to the temporary git global config as a safe directory
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7114946Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\hold_that_thought\hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7650721Z Deleting the contents of 'D:\a\hold_that_thought\hold_that_thought'
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7658966Z ##[group]Initializing the repository
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.7668787Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\hold_that_thought\hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.8811081Z Initialized empty Git repository in D:/a/hold_that_thought/hold_that_thought/.git/
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.8857794Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9386186Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9386702Z ##[group]Disabling automatic garbage collection
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9396405Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9619324Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9619736Z ##[group]Setting up auth
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9632231Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:18.9874355Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:20.5156834Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:20.5412303Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:20.9667482Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:20.9912798Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:20.9921526Z [command]"C:\Program Files\Git\bin\git.exe" lfs install --local
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:21.4840561Z Updated Git hooks.
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:21.4840937Z Git LFS initialized.
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:21.4892117Z ##[group]Fetching the repository
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:21.4910071Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2b8e37b8731e09622028c328642cf6712389db95:refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6427204Z From https://github.com/luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6427983Z  * [new ref]         2b8e37b8731e09622028c328642cf6712389db95 -> pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6754958Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6755488Z ##[group]Determining the checkout info
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6759849Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6760367Z ##[group]Fetching LFS objects
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.6774935Z [command]"C:\Program Files\Git\bin\git.exe" lfs fetch origin refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:22.8905549Z Fetching reference refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.1055369Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.1065725Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.1564888Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.1820717Z ##[group]Checking out the ref
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.1830623Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2886673Z Note: switching to 'refs/remotes/pull/3/merge'.
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2886974Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2887229Z You are in 'detached HEAD' state. You can look around, make experimental
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2887715Z changes and commit them, and you can discard any commits you make in this
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2888168Z state without impacting any branches by switching back to a branch.
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2888450Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2888639Z If you want to create a new branch to retain commits you create, you may
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2889061Z do so (now or later) by using -c with the switch command. Example:
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2890280Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2890398Z   git switch -c <new-branch-name>
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2890658Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2890793Z Or undo this operation with:
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2891002Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2891072Z   git switch -
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2891183Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2891380Z Turn off this advice by setting config variable advice.detachedHead to false
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2891644Z 
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.2891974Z HEAD is now at 2b8e37b Merge 6ee9acdee28668867e5e84472569ea1094500438 into f3fe53808c906bfcbbd83ef1b4c29c7225f35450
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.5324817Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.5693140Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+build_windows	Run actions/checkout@v4	2025-09-23T10:11:23.5920622Z 2b8e37b8731e09622028c328642cf6712389db95
+build_windows	Git LFS	∩╗┐2025-09-23T10:11:23.6273134Z ##[group]Run git lfs install
+build_windows	Git LFS	2025-09-23T10:11:23.6273543Z [36;1mgit lfs install[0m
+build_windows	Git LFS	2025-09-23T10:11:23.6273776Z [36;1mgit lfs fetch --all || true[0m
+build_windows	Git LFS	2025-09-23T10:11:23.6274004Z [36;1mgit lfs checkout[0m
+build_windows	Git LFS	2025-09-23T10:11:23.6350719Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Git LFS	2025-09-23T10:11:23.6351219Z ##[endgroup]
+build_windows	Git LFS	2025-09-23T10:11:24.1890210Z Updated Git hooks.
+build_windows	Git LFS	2025-09-23T10:11:24.1890655Z Git LFS initialized.
+build_windows	Git LFS	2025-09-23T10:11:24.4166521Z Fetching all references...
+build_windows	Git LFS	2025-09-23T10:11:24.4166986Z 1 object found, done.
+build_windows	Set up Visual Studio	∩╗┐2025-09-23T10:11:24.7133011Z ##[group]Run microsoft/setup-msbuild@v1.3
+build_windows	Set up Visual Studio	2025-09-23T10:11:24.7133366Z with:
+build_windows	Set up Visual Studio	2025-09-23T10:11:24.7133547Z   msbuild-architecture: x86
+build_windows	Set up Visual Studio	2025-09-23T10:11:24.7133761Z ##[endgroup]
+build_windows	Set up Visual Studio	2025-09-23T10:11:24.8569449Z [command]C:\ProgramData\Chocolatey\bin\vswhere.exe -products * -requires Microsoft.Component.MSBuild -property installationPath -latest
+build_windows	Set up Visual Studio	2025-09-23T10:11:25.5451372Z C:\Program Files\Microsoft Visual Studio\2022\Enterprise
+build_windows	Run subosito/flutter-action@v2	∩╗┐2025-09-23T10:11:25.5771025Z ##[group]Run subosito/flutter-action@v2
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5771358Z with:
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5771511Z   channel: stable
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5771707Z   flutter-version: 3.19.6
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5771887Z   cache: true
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5772043Z   architecture: X64
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5772221Z   pub-cache-path: default
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5772423Z   dry-run: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5772649Z   git-source: https://github.com/flutter/flutter.git
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5772920Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5939390Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.5939724Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.6298646Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.6299065Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7064754Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7065103Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7065348Z [36;1m  -n '3.19.6' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7065571Z [36;1m  -f '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7065751Z [36;1m  -a 'X64' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7065912Z [36;1m  -k '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7066086Z [36;1m  -c '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7066241Z [36;1m  -l '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7066403Z [36;1m  -d 'default' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7066673Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7066956Z [36;1m  stable[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7078957Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:25.7079313Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4933861Z ##[group]Run actions/cache@v4
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4934080Z with:
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4934296Z   path: C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4934716Z   key: flutter-windows-stable-3.19.6-x64-54e66469a933b60ddf175f858f82eaeb97e48c8d
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4935090Z   enableCrossOsArchive: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4935301Z   fail-on-cache-miss: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4935509Z   lookup-only: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4935678Z   save-always: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.4935848Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:28.9797282Z Cache not found for input keys: flutter-windows-stable-3.19.6-x64-54e66469a933b60ddf175f858f82eaeb97e48c8d
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1616733Z ##[group]Run actions/cache@v4
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1616958Z with:
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1617150Z   path: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1617577Z   key: flutter-pub-windows-stable-3.19.6-x64-54e66469a933b60ddf175f858f82eaeb97e48c8d-
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1617976Z   enableCrossOsArchive: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1618191Z   fail-on-cache-miss: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1618387Z   lookup-only: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1618549Z   save-always: false
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.1618722Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6197721Z Cache not found for input keys: flutter-pub-windows-stable-3.19.6-x64-54e66469a933b60ddf175f858f82eaeb97e48c8d-
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6416823Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6417145Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6417376Z [36;1m  -n '3.19.6' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6417574Z [36;1m  -a 'x64' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6417823Z [36;1m  -c 'C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6418172Z [36;1m  -d 'C:\Users\runneradmin\AppData\Local\Pub\Cache' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6418424Z [36;1m  stable[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6431490Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:29.6432311Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:31.8386462Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:31.8386951Z                                  Dload  Upload   Total   Spent    Left  Speed
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:31.8387147Z 
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:32.7220062Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:33.7218729Z  16  955M   16  152M    0     0   173M      0  0:00:05 --:--:--  0:00:05  173M
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:34.7212143Z  37  955M   37  359M    0     0   190M      0  0:00:05  0:00:01  0:00:04  190M
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:35.7206757Z  58  955M   58  559M    0     0   193M      0  0:00:04  0:00:02  0:00:02  194M
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:36.6376959Z  79  955M   79  762M    0     0   196M      0  0:00:04  0:00:03  0:00:01  196M
+build_windows	Run subosito/flutter-action@v2	2025-09-23T10:11:36.6384741Z 100  955M  100  955M    0     0   198M      0  0:00:04  0:00:04 --:--:--  199M
+build_windows	Enable Windows desktop	∩╗┐2025-09-23T10:12:47.4247021Z ##[group]Run flutter config --enable-windows-desktop
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.4247572Z [36;1mflutter config --enable-windows-desktop[0m
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.4261083Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.4261445Z env:
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.4261691Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.4262053Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.4262318Z ##[endgroup]
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9749618Z 
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9774310Z   ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9775313Z   Γòæ                 Welcome to Flutter! - https://flutter.dev                  Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9775970Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9776667Z   Γòæ The Flutter tool uses Google Analytics to anonymously report feature usage Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9777603Z   Γòæ statistics and basic crash reports. This data is used to help improve      Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9778776Z   Γòæ Flutter tools over time.                                                   Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9779316Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9780275Z   Γòæ Flutter tool analytics are not sent on the very first run. To disable      Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9781176Z   Γòæ reporting, type 'flutter config --no-analytics'. To display the current    Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9782075Z   Γòæ setting, type 'flutter config'. If you opt out of analytics, an opt-out    Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9783279Z   Γòæ event will be sent, and then no further information will be sent by the    Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9784059Z   Γòæ Flutter tool.                                                              Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9784659Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9785393Z   Γòæ By downloading the Flutter SDK, you agree to the Google Terms of Service.  Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9786350Z   Γòæ The Google Privacy Policy describes how data is handled in this service.   Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9787121Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9787902Z   Γòæ Moreover, Flutter includes the Dart SDK, which may send usage metrics and  Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9788802Z   Γòæ crash reports to Google.                                                   Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9789488Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9790210Z   Γòæ Read about data we send with crash reports:                                Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9791194Z   Γòæ https://flutter.dev/docs/reference/crash-reporting                         Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9791972Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9792652Z   Γòæ See Google's privacy policy:                                               Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9793548Z   Γòæ https://policies.google.com/privacy                                        Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9794261Z   Γòæ                                                                            Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9794957Z   Γòæ To disable animations in this tool, use                                    Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9795763Z   Γòæ 'flutter config --no-cli-animations'.                                      Γòæ
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9796564Z   ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+build_windows	Enable Windows desktop	2025-09-23T10:12:47.9796904Z 
+build_windows	Enable Windows desktop	2025-09-23T10:12:48.0211934Z Setting "enable-windows-desktop" value to "true".
+build_windows	Enable Windows desktop	2025-09-23T10:12:48.0213647Z 
+build_windows	Enable Windows desktop	2025-09-23T10:12:48.0214158Z You may need to restart any open editors for them to read new settings.
+build_windows	Check Windows dependencies	∩╗┐2025-09-23T10:12:48.0549681Z ##[group]Run echo "Checking Visual Studio installation..."
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0550212Z [36;1mecho "Checking Visual Studio installation..."[0m
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0550826Z [36;1mvswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath || true[0m
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0551524Z [36;1mecho "Checking for Windows 10 SDK..."[0m
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0552063Z [36;1mreg query "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" /v InstallationFolder || true[0m
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0565755Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0566099Z env:
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0566351Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0566734Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0567002Z ##[endgroup]
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.0842747Z Checking Visual Studio installation...
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.1446549Z Checking for Windows 10 SDK...
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.1625474Z ERROR: Invalid syntax.
+build_windows	Check Windows dependencies	2025-09-23T10:12:48.1625808Z Type "REG QUERY /?" for usage.
+build_windows	Flutter pub get (retry)	∩╗┐2025-09-23T10:12:48.1819270Z ##[group]Run for i in {1..4}; do flutter pub get && break || sleep 10; done
+build_windows	Flutter pub get (retry)	2025-09-23T10:12:48.1819944Z [36;1mfor i in {1..4}; do flutter pub get && break || sleep 10; done[0m
+build_windows	Flutter pub get (retry)	2025-09-23T10:12:48.1833541Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Flutter pub get (retry)	2025-09-23T10:12:48.1833909Z env:
+build_windows	Flutter pub get (retry)	2025-09-23T10:12:48.1834173Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Flutter pub get (retry)	2025-09-23T10:12:48.1834559Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Flutter pub get (retry)	2025-09-23T10:12:48.1834820Z ##[endgroup]
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:04.7031657Z Resolving dependencies...
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:07.1383881Z The current Dart SDK version is 3.3.4.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:07.1385349Z 
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:07.1385809Z Because hold_that_thought depends on flutter_lints >=5.0.0 which requires SDK version >=3.5.0 <4.0.0, version solving failed.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:17.7878957Z Resolving dependencies...
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:20.1045573Z The current Dart SDK version is 3.3.4.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:20.1046093Z 
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:20.1046951Z Because hold_that_thought depends on flutter_lints >=5.0.0 which requires SDK version >=3.5.0 <4.0.0, version solving failed.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:30.7278309Z Resolving dependencies...
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:33.0676242Z The current Dart SDK version is 3.3.4.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:33.0676728Z 
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:33.0677183Z Because hold_that_thought depends on flutter_lints >=5.0.0 which requires SDK version >=3.5.0 <4.0.0, version solving failed.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:43.6690932Z Resolving dependencies...
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:45.8975847Z The current Dart SDK version is 3.3.4.
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:45.8976220Z 
+build_windows	Flutter pub get (retry)	2025-09-23T10:13:45.8976620Z Because hold_that_thought depends on flutter_lints >=5.0.0 which requires SDK version >=3.5.0 <4.0.0, version solving failed.
+build_windows	Doctor	∩╗┐2025-09-23T10:13:56.0098548Z ##[group]Run flutter doctor -v
+build_windows	Doctor	2025-09-23T10:13:56.0099091Z [36;1mflutter doctor -v[0m
+build_windows	Doctor	2025-09-23T10:13:56.0116828Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Doctor	2025-09-23T10:13:56.0117247Z env:
+build_windows	Doctor	2025-09-23T10:13:56.0117572Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Doctor	2025-09-23T10:13:56.0117971Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Doctor	2025-09-23T10:13:56.0118291Z ##[endgroup]
+build_windows	Doctor	2025-09-23T10:13:59.4211788Z [ΓêÜ] Flutter (Channel stable, 3.19.6, on Microsoft Windows [Version 10.0.20348.4052], locale en-US)
+build_windows	Doctor	2025-09-23T10:13:59.4216297Z     ΓÇó Flutter version 3.19.6 on channel stable at C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Doctor	2025-09-23T10:13:59.4217974Z     ΓÇó Upstream repository https://github.com/flutter/flutter.git
+build_windows	Doctor	2025-09-23T10:13:59.4219468Z     ΓÇó Framework revision 54e66469a9 (1 year, 5 months ago), 2024-04-17 13:08:03 -0700
+build_windows	Doctor	2025-09-23T10:13:59.4220601Z     ΓÇó Engine revision c4cd48e186
+build_windows	Doctor	2025-09-23T10:13:59.4221808Z     ΓÇó Dart version 3.3.4
+build_windows	Doctor	2025-09-23T10:13:59.4223114Z     ΓÇó DevTools version 2.31.1
+build_windows	Doctor	2025-09-23T10:13:59.4223912Z 
+build_windows	Doctor	2025-09-23T10:13:59.4227154Z [ΓêÜ] Windows Version (Installed version of Windows is version 10 or higher)
+build_windows	Doctor	2025-09-23T10:13:59.4228438Z 
+build_windows	Doctor	2025-09-23T10:14:17.0233566Z [!] Android toolchain - develop for Android devices (Android SDK version 36.0.0)
+build_windows	Doctor	2025-09-23T10:14:17.0234540Z     ΓÇó Android SDK at C:\Android\android-sdk
+build_windows	Doctor	2025-09-23T10:14:17.0236985Z     ΓÇó Platform android-36-ext19, build-tools 36.0.0
+build_windows	Doctor	2025-09-23T10:14:17.0239108Z     ΓÇó ANDROID_HOME = C:\Android\android-sdk
+build_windows	Doctor	2025-09-23T10:14:17.0240952Z     ΓÇó ANDROID_SDK_ROOT = C:\Android\android-sdk
+build_windows	Doctor	2025-09-23T10:14:17.0243715Z     ΓÇó Java binary at: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\8.0.462-8\x64\bin\java
+build_windows	Doctor	2025-09-23T10:14:17.0244538Z     X Could not determine java version
+build_windows	Doctor	2025-09-23T10:14:17.0247130Z     ! Some Android licenses not accepted. To resolve this, run: flutter doctor --android-licenses
+build_windows	Doctor	2025-09-23T10:14:17.0247906Z 
+build_windows	Doctor	2025-09-23T10:14:17.0250266Z [ΓêÜ] Chrome - develop for the web
+build_windows	Doctor	2025-09-23T10:14:17.0255224Z     ΓÇó Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+build_windows	Doctor	2025-09-23T10:14:17.0255699Z 
+build_windows	Doctor	2025-09-23T10:14:17.0258003Z [ΓêÜ] Visual Studio - develop Windows apps (Visual Studio Enterprise 2022 17.14.13 (August 2025))
+build_windows	Doctor	2025-09-23T10:14:17.0259942Z     ΓÇó Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Enterprise
+build_windows	Doctor	2025-09-23T10:14:17.0261388Z     ΓÇó Visual Studio Enterprise 2022 version 17.14.36414.22
+build_windows	Doctor	2025-09-23T10:14:17.0262506Z     ΓÇó Windows 10 SDK version 10.0.26100.0
+build_windows	Doctor	2025-09-23T10:14:17.0263263Z 
+build_windows	Doctor	2025-09-23T10:14:17.0265294Z [!] Android Studio (not installed)
+build_windows	Doctor	2025-09-23T10:14:17.0267993Z     ΓÇó Android Studio not found; download from https://developer.android.com/studio/index.html
+build_windows	Doctor	2025-09-23T10:14:17.0268683Z       (or visit https://flutter.dev/docs/get-started/install/windows#android-setup for detailed instructions).
+build_windows	Doctor	2025-09-23T10:14:17.0269408Z 
+build_windows	Doctor	2025-09-23T10:14:17.0271690Z [ΓêÜ] Connected device (2 available)
+build_windows	Doctor	2025-09-23T10:14:17.0273241Z     ΓÇó Windows (desktop) ΓÇó windows ΓÇó windows-x64    ΓÇó Microsoft Windows [Version 10.0.20348.4052]
+build_windows	Doctor	2025-09-23T10:14:17.0273888Z     ΓÇó Chrome (web)      ΓÇó chrome  ΓÇó web-javascript ΓÇó unknown
+build_windows	Doctor	2025-09-23T10:14:17.0274850Z 
+build_windows	Doctor	2025-09-23T10:14:17.0276544Z [ΓêÜ] Network resources
+build_windows	Doctor	2025-09-23T10:14:17.0277713Z     ΓÇó All expected network resources are available.
+build_windows	Doctor	2025-09-23T10:14:17.0277996Z 
+build_windows	Doctor	2025-09-23T10:14:17.0279461Z ! Doctor found issues in 2 categories.
+build_windows	Build Windows Release	∩╗┐2025-09-23T10:14:17.0805128Z ##[group]Run flutter build windows --release --verbose
+build_windows	Build Windows Release	2025-09-23T10:14:17.0805616Z [36;1mflutter build windows --release --verbose[0m
+build_windows	Build Windows Release	2025-09-23T10:14:17.0819431Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Build Windows Release	2025-09-23T10:14:17.0819806Z env:
+build_windows	Build Windows Release	2025-09-23T10:14:17.0820091Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64
+build_windows	Build Windows Release	2025-09-23T10:14:17.0820493Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Build Windows Release	2025-09-23T10:14:17.0820819Z ##[endgroup]
+build_windows	Build Windows Release	2025-09-23T10:14:17.3900337Z [  +49 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3902108Z [   +4 ms] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3903567Z [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3905003Z [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3906470Z [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3930561Z [   +2 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3932372Z [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3934646Z [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3936805Z [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3940109Z [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3942677Z [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.3948435Z [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4372834Z [  +42 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4374142Z [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4375904Z [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4377740Z [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4379675Z [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4381613Z [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4383532Z [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4385605Z [        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4407837Z [   +2 ms] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4409427Z [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4410610Z [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4411668Z [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4413046Z [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4414131Z [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4415228Z [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4416295Z [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4417760Z [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4418295Z [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4421443Z [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4421958Z [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4422612Z [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+build_windows	Build Windows Release	2025-09-23T10:14:17.4908812Z [  +48 ms] executing: [D:\a\hold_that_thought\hold_that_thought/] C:\hostedtoolcache\windows\flutter\stable-3.19.6-x64\bin\cache\dart-sdk\bin\dart pub --suppress-analytics --verbose --directory . get --example
+build_windows	Build Windows Release	2025-09-23T10:14:17.5940006Z FINE: Pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.6541531Z MSG : Resolving dependencies...
+build_windows	Build Windows Release	2025-09-23T10:14:17.6766427Z SLVR: fact: hold_that_thought is 0.10.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.6811662Z SLVR: derived: hold_that_thought
+build_windows	Build Windows Release	2025-09-23T10:14:17.7052197Z SLVR: fact: hold_that_thought depends on flutter from sdk
+build_windows	Build Windows Release	2025-09-23T10:14:17.7057190Z SLVR: fact: hold_that_thought depends on flutter_riverpod ^2.3.6
+build_windows	Build Windows Release	2025-09-23T10:14:17.7058967Z SLVR: fact: hold_that_thought depends on go_router ^16.2.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7060354Z SLVR: fact: hold_that_thought depends on record ^6.1.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7072229Z SLVR: fact: hold_that_thought depends on path_provider ^2.1.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7074028Z SLVR: fact: hold_that_thought depends on flutter_local_notifications ^19.4.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7075685Z SLVR: fact: hold_that_thought depends on hive ^2.2.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7077074Z SLVR: fact: hold_that_thought depends on hive_flutter ^1.1.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7078756Z SLVR: fact: hold_that_thought depends on http ^1.2.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7080412Z SLVR: fact: hold_that_thought depends on open_filex ^4.4.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7082057Z SLVR: fact: hold_that_thought depends on supabase_flutter ^2.10.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7083675Z SLVR: fact: hold_that_thought depends on connectivity_plus ^6.1.5
+build_windows	Build Windows Release	2025-09-23T10:14:17.7091508Z SLVR: fact: hold_that_thought depends on crypto ^3.0.6
+build_windows	Build Windows Release	2025-09-23T10:14:17.7093609Z SLVR: fact: hold_that_thought depends on uuid ^4.5.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7095067Z SLVR: fact: hold_that_thought depends on share_plus ^11.1.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7096907Z SLVR: fact: hold_that_thought depends on archive ^4.0.7
+build_windows	Build Windows Release	2025-09-23T10:14:17.7098498Z SLVR: fact: hold_that_thought depends on file_selector ^1.0.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7099835Z SLVR: fact: hold_that_thought depends on file_saver ^0.3.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7102384Z SLVR: fact: hold_that_thought depends on flutter_dotenv ^6.0.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7104422Z SLVR: fact: hold_that_thought depends on flutter_secure_storage ^9.2.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.7106293Z SLVR: fact: hold_that_thought depends on cryptography ^2.7.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7108375Z SLVR: fact: hold_that_thought depends on argon2 ^1.0.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7110350Z SLVR: fact: hold_that_thought depends on path ^1.8.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7111860Z SLVR: fact: hold_that_thought depends on sentry_flutter ^8.11.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7114440Z SLVR: fact: hold_that_thought depends on flutter_background_service ^5.0.5
+build_windows	Build Windows Release	2025-09-23T10:14:17.7116306Z SLVR: fact: hold_that_thought depends on permission_handler ^11.3.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7117889Z SLVR: fact: hold_that_thought depends on intl ^0.20.2
+build_windows	Build Windows Release	2025-09-23T10:14:17.7119455Z SLVR: fact: hold_that_thought depends on flutter_test from sdk
+build_windows	Build Windows Release	2025-09-23T10:14:17.7121355Z SLVR: fact: hold_that_thought depends on flutter_lints ^6.0.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7122486Z SLVR: fact: hold_that_thought depends on build_runner ^2.4.13
+build_windows	Build Windows Release	2025-09-23T10:14:17.7131602Z SLVR:   selecting hold_that_thought
+build_windows	Build Windows Release	2025-09-23T10:14:17.7134042Z SLVR:   derived: build_runner ^2.4.13
+build_windows	Build Windows Release	2025-09-23T10:14:17.7135741Z SLVR:   derived: flutter_lints ^6.0.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7137841Z SLVR:   derived: flutter_test from sdk
+build_windows	Build Windows Release	2025-09-23T10:14:17.7139093Z SLVR:   derived: intl ^0.20.2
+build_windows	Build Windows Release	2025-09-23T10:14:17.7141275Z SLVR:   derived: permission_handler ^11.3.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7142056Z SLVR:   derived: flutter_background_service ^5.0.5
+build_windows	Build Windows Release	2025-09-23T10:14:17.7144006Z SLVR:   derived: sentry_flutter ^8.11.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7147040Z SLVR:   derived: path ^1.8.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7148353Z SLVR:   derived: argon2 ^1.0.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7149224Z SLVR:   derived: cryptography ^2.7.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7151832Z SLVR:   derived: flutter_secure_storage ^9.2.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.7153615Z SLVR:   derived: flutter_dotenv ^6.0.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7155689Z SLVR:   derived: file_saver ^0.3.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7157013Z SLVR:   derived: file_selector ^1.0.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7159318Z SLVR:   derived: archive ^4.0.7
+build_windows	Build Windows Release	2025-09-23T10:14:17.7160125Z SLVR:   derived: share_plus ^11.1.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7161888Z SLVR:   derived: uuid ^4.5.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7163641Z SLVR:   derived: crypto ^3.0.6
+build_windows	Build Windows Release	2025-09-23T10:14:17.7165631Z SLVR:   derived: connectivity_plus ^6.1.5
+build_windows	Build Windows Release	2025-09-23T10:14:17.7166329Z SLVR:   derived: supabase_flutter ^2.10.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7168345Z SLVR:   derived: open_filex ^4.4.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7169928Z SLVR:   derived: http ^1.2.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7171454Z SLVR:   derived: hive_flutter ^1.1.0
+build_windows	Build Windows Release	2025-09-23T10:14:17.7172969Z SLVR:   derived: hive ^2.2.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7174599Z SLVR:   derived: flutter_local_notifications ^19.4.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7176530Z SLVR:   derived: path_provider ^2.1.3
+build_windows	Build Windows Release	2025-09-23T10:14:17.7177563Z SLVR:   derived: record ^6.1.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7179546Z SLVR:   derived: go_router ^16.2.1
+build_windows	Build Windows Release	2025-09-23T10:14:17.7181605Z SLVR:   derived: flutter_riverpod ^2.3.6
+build_windows	Build Windows Release	2025-09-23T10:14:17.7183593Z SLVR:   derived: flutter from sdk
+build_windows	Build Windows Release	2025-09-23T10:14:17.8311720Z IO  : Get versions from https://pub.dev/api/packages/flutter_riverpod.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8364696Z IO  : Get versions from https://pub.dev/api/packages/go_router.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8375706Z IO  : Get versions from https://pub.dev/api/packages/record.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8384173Z IO  : Get versions from https://pub.dev/api/packages/path_provider.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8394330Z IO  : Get versions from https://pub.dev/api/packages/flutter_local_notifications.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8400877Z IO  : Get versions from https://pub.dev/api/packages/hive.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8409383Z IO  : Get versions from https://pub.dev/api/packages/hive_flutter.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8417115Z IO  : Get versions from https://pub.dev/api/packages/http.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8422653Z IO  : Get versions from https://pub.dev/api/packages/open_filex.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8435034Z IO  : Get versions from https://pub.dev/api/packages/supabase_flutter.
+build_windows	Build Windows Release	2025-09-23T10:14:17.8476089Z IO  : HTTP GET https://pub.dev/api/packages/flutter_riverpod
+build_windows	Build Windows Release	2025-09-23T10:14:17.8476669Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8477690Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8622351Z IO  : HTTP GET https://pub.dev/api/packages/go_router
+build_windows	Build Windows Release	2025-09-23T10:14:17.8623061Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8624059Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8629963Z IO  : HTTP GET https://pub.dev/api/packages/record
+build_windows	Build Windows Release	2025-09-23T10:14:17.8630601Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8630897Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8635395Z IO  : HTTP GET https://pub.dev/api/packages/path_provider
+build_windows	Build Windows Release	2025-09-23T10:14:17.8636771Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8637436Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8644408Z IO  : HTTP GET https://pub.dev/api/packages/flutter_local_notifications
+build_windows	Build Windows Release	2025-09-23T10:14:17.8645119Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8645572Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8646780Z IO  : HTTP GET https://pub.dev/api/packages/hive
+build_windows	Build Windows Release	2025-09-23T10:14:17.8647435Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8647929Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8652078Z IO  : HTTP GET https://pub.dev/api/packages/hive_flutter
+build_windows	Build Windows Release	2025-09-23T10:14:17.8652770Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8653260Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8657257Z IO  : HTTP GET https://pub.dev/api/packages/http
+build_windows	Build Windows Release	2025-09-23T10:14:17.8658171Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8658688Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8662358Z IO  : HTTP GET https://pub.dev/api/packages/open_filex
+build_windows	Build Windows Release	2025-09-23T10:14:17.8662993Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8663539Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:17.8667476Z IO  : HTTP GET https://pub.dev/api/packages/supabase_flutter
+build_windows	Build Windows Release	2025-09-23T10:14:17.8668189Z     | Accept: application/vnd.pub.v2+json
+build_windows	Build Windows Release	2025-09-23T10:14:17.8668677Z     | user-agent: Dart pub 3.3.4
+build_windows	Build Windows Release	2025-09-23T10:14:18.0613871Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/go_router
+build_windows	Build Windows Release	2025-09-23T10:14:18.0614531Z     | took 0:00:00.198709
+build_windows	Build Windows Release	2025-09-23T10:14:18.0614777Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0615079Z     | last-modified: Sat, 20 Sep 2025 03:58:05 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0615390Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0615796Z     | date: Tue, 23 Sep 2025 10:10:49 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0616156Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0616531Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0616820Z     | x-goog-stored-content-length: 16907
+build_windows	Build Windows Release	2025-09-23T10:14:18.0617077Z     | age: 209
+build_windows	Build Windows Release	2025-09-23T10:14:18.0618017Z     | x-guploader-uploadid: AAwnv3JK4d9WGIdF86h6pZRT0aultU68EdfbMhNt2NknvOw1BYKDZ2VoRKI8mLt26CxxzPdsEXJiXiUSwEntHw
+build_windows	Build Windows Release	2025-09-23T10:14:18.0618990Z     | x-goog-hash: crc32c=5lJ+GQ==,md5=aw1n/AafzIigZmzS6o0Ggw==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0619406Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0619843Z     | x-goog-generation: 1758340685061389
+build_windows	Build Windows Release	2025-09-23T10:14:18.0620407Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0620845Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0621258Z     | x-goog-meta-validated: 2025-09-20T03:58:04.977273
+build_windows	Build Windows Release	2025-09-23T10:14:18.0622391Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0622743Z     | content-length: 16907
+build_windows	Build Windows Release	2025-09-23T10:14:18.0623133Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0624595Z     | etag: "6b0d67fc069fcc88a0666cd2ea8d0683"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0624866Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0625070Z     | x-goog-metageneration: 1
+build_windows	Build Windows Release	2025-09-23T10:14:18.0625336Z     | expires: Tue, 23 Sep 2025 10:12:49 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0727448Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_riverpod
+build_windows	Build Windows Release	2025-09-23T10:14:18.0728092Z     | took 0:00:00.226113
+build_windows	Build Windows Release	2025-09-23T10:14:18.0728521Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0729001Z     | last-modified: Wed, 10 Sep 2025 15:56:32 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0729474Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0729786Z     | date: Tue, 23 Sep 2025 10:14:05 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0730074Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0730432Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0730858Z     | x-goog-stored-content-length: 9539
+build_windows	Build Windows Release	2025-09-23T10:14:18.0731259Z     | age: 13
+build_windows	Build Windows Release	2025-09-23T10:14:18.0731855Z     | x-guploader-uploadid: AAwnv3JjbZzeBONQjlkOm2X-J3apOxSSRFRLS0HhkM9sNc4OuCbwebuVTjQRz2_LGZQLJKHkmereFq0
+build_windows	Build Windows Release	2025-09-23T10:14:18.0732867Z     | x-goog-hash: crc32c=atengQ==,md5=mHkxJFPvgN5TWv61jpzzKg==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0733303Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0734024Z     | x-goog-generation: 1757519792306598
+build_windows	Build Windows Release	2025-09-23T10:14:18.0734451Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0734830Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0735292Z     | x-goog-meta-validated: 2025-09-10T15:56:32.220699
+build_windows	Build Windows Release	2025-09-23T10:14:18.0735772Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0736069Z     | content-length: 9539
+build_windows	Build Windows Release	2025-09-23T10:14:18.0736343Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0736934Z     | etag: "9879312453ef80de535afeb58e9cf32a"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0737518Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0737884Z     | x-goog-metageneration: 1
+build_windows	Build Windows Release	2025-09-23T10:14:18.0738536Z     | expires: Tue, 23 Sep 2025 10:16:05 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0756038Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider
+build_windows	Build Windows Release	2025-09-23T10:14:18.0756694Z     | took 0:00:00.211950
+build_windows	Build Windows Release	2025-09-23T10:14:18.0757593Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0758075Z     | last-modified: Thu, 14 Nov 2024 14:32:03 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0758530Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0759518Z     | date: Tue, 23 Sep 2025 10:11:18 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0759909Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0760249Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0761158Z     | x-goog-stored-content-length: 6646
+build_windows	Build Windows Release	2025-09-23T10:14:18.0761550Z     | age: 180
+build_windows	Build Windows Release	2025-09-23T10:14:18.0762826Z     | x-guploader-uploadid: AAwnv3JKbebT8t8XnteyCPujGuS08MqnEpm0OYXNWmU1Rsaylo4RaENmM0MR6hMS7PnWzUgc021rKV0
+build_windows	Build Windows Release	2025-09-23T10:14:18.0763815Z     | x-goog-hash: crc32c=S7JP9Q==,md5=MqgJ/cydImaFcq1mT/c3vw==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0764346Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0764803Z     | x-goog-generation: 1731594723426763
+build_windows	Build Windows Release	2025-09-23T10:14:18.0765585Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0765970Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0766456Z     | x-goog-meta-validated: 2025-05-31T22:25:56.398368
+build_windows	Build Windows Release	2025-09-23T10:14:18.0766888Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0767735Z     | content-length: 6646
+build_windows	Build Windows Release	2025-09-23T10:14:18.0768100Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0768531Z     | etag: "32a809fdcc9d22668572ad664ff737bf"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0769306Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0769615Z     | x-goog-metageneration: 63
+build_windows	Build Windows Release	2025-09-23T10:14:18.0769971Z     | expires: Tue, 23 Sep 2025 10:13:18 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0835870Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/hive_flutter
+build_windows	Build Windows Release	2025-09-23T10:14:18.0836486Z     | took 0:00:00.218243
+build_windows	Build Windows Release	2025-09-23T10:14:18.0836831Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0837843Z     | last-modified: Thu, 14 Nov 2024 14:22:12 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0838325Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0838755Z     | date: Tue, 23 Sep 2025 10:13:05 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0839720Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0840085Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0840484Z     | x-goog-stored-content-length: 1664
+build_windows	Build Windows Release	2025-09-23T10:14:18.0841275Z     | age: 73
+build_windows	Build Windows Release	2025-09-23T10:14:18.0842076Z     | x-guploader-uploadid: AAwnv3Ix3NxkhFoNx2aLg2IJhEto2RulQ9Cqn5AkKePN2e7bgdapBz1pgpwfc9MBuiXfb7p2_8yKpOs
+build_windows	Build Windows Release	2025-09-23T10:14:18.0843467Z     | x-goog-hash: crc32c=7ksXAg==,md5=MgUCwk4jh6IhLc4Iq0YoXw==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0844024Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0844484Z     | x-goog-generation: 1731594131996136
+build_windows	Build Windows Release	2025-09-23T10:14:18.0844880Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0845264Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0846309Z     | x-goog-meta-validated: 2025-06-23T10:08:15.185265
+build_windows	Build Windows Release	2025-09-23T10:14:18.0846767Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0847092Z     | content-length: 1664
+build_windows	Build Windows Release	2025-09-23T10:14:18.0848012Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0848434Z     | etag: "320502c24e2387a2212dce08ab46285f"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0849436Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0849730Z     | x-goog-metageneration: 70
+build_windows	Build Windows Release	2025-09-23T10:14:18.0850067Z     | expires: Tue, 23 Sep 2025 10:15:05 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0861783Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/open_filex
+build_windows	Build Windows Release	2025-09-23T10:14:18.0862364Z     | took 0:00:00.219810
+build_windows	Build Windows Release	2025-09-23T10:14:18.0862699Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0863147Z     | last-modified: Thu, 06 Mar 2025 09:55:07 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0863750Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0864223Z     | date: Tue, 23 Sep 2025 10:13:36 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0864703Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0866133Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0866508Z     | x-goog-stored-content-length: 2080
+build_windows	Build Windows Release	2025-09-23T10:14:18.0867195Z     | age: 42
+build_windows	Build Windows Release	2025-09-23T10:14:18.0868412Z     | x-guploader-uploadid: AAwnv3JkMpGPRy4kAKGAbDzP4fkrKLWQdEAgwUU0FN-nqji1nP02hHHfjendZFQ-EHz5Rxebxpt74IE
+build_windows	Build Windows Release	2025-09-23T10:14:18.0869624Z     | x-goog-hash: crc32c=tOLQPA==,md5=qgEw/liKkopKmp4U3sFuQg==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0870175Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0870616Z     | x-goog-generation: 1741254906952988
+build_windows	Build Windows Release	2025-09-23T10:14:18.0871006Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0871428Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0871934Z     | x-goog-meta-validated: 2025-09-15T14:58:01.751592
+build_windows	Build Windows Release	2025-09-23T10:14:18.0872943Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0873293Z     | content-length: 2080
+build_windows	Build Windows Release	2025-09-23T10:14:18.0873649Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0874085Z     | etag: "aa0130fe588a928a4a9a9e14dec16e42"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0874486Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0874798Z     | x-goog-metageneration: 62
+build_windows	Build Windows Release	2025-09-23T10:14:18.0875165Z     | expires: Tue, 23 Sep 2025 10:15:36 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0885841Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_local_notifications
+build_windows	Build Windows Release	2025-09-23T10:14:18.0886538Z     | took 0:00:00.224244
+build_windows	Build Windows Release	2025-09-23T10:14:18.0887301Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0887863Z     | last-modified: Sat, 13 Sep 2025 05:52:06 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0888307Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0889203Z     | date: Tue, 23 Sep 2025 10:12:25 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0889574Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0889911Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0890514Z     | x-goog-stored-content-length: 22628
+build_windows	Build Windows Release	2025-09-23T10:14:18.0890998Z     | age: 113
+build_windows	Build Windows Release	2025-09-23T10:14:18.0892121Z     | x-guploader-uploadid: AAwnv3IRJoyEWj9Pj-8m3YDXMbRiRaZ8UYFyfshqUYlpi1SsH7ggbyNi9Y_nQI7TvmOMUgUenN7xDYI
+build_windows	Build Windows Release	2025-09-23T10:14:18.0893088Z     | x-goog-hash: crc32c=3P1Mgg==,md5=pQlX4g1O/jR/4LbClVoWcQ==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0893640Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0894074Z     | x-goog-generation: 1757742726098305
+build_windows	Build Windows Release	2025-09-23T10:14:18.0894867Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0895250Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0895741Z     | x-goog-meta-validated: 2025-09-13T05:52:06.015246
+build_windows	Build Windows Release	2025-09-23T10:14:18.0896223Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0897073Z     | content-length: 22628
+build_windows	Build Windows Release	2025-09-23T10:14:18.0897444Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0897870Z     | etag: "a50957e20d4efe347fe0b6c2955a1671"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0898614Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0898924Z     | x-goog-metageneration: 1
+build_windows	Build Windows Release	2025-09-23T10:14:18.0899303Z     | expires: Tue, 23 Sep 2025 10:14:25 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0924143Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/hive
+build_windows	Build Windows Release	2025-09-23T10:14:18.0925072Z     | took 0:00:00.227530
+build_windows	Build Windows Release	2025-09-23T10:14:18.0925691Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0926765Z     | last-modified: Thu, 14 Nov 2024 14:22:11 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0927270Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0927948Z     | date: Tue, 23 Sep 2025 10:12:13 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0928719Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0929383Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0929767Z     | x-goog-stored-content-length: 4998
+build_windows	Build Windows Release	2025-09-23T10:14:18.0930128Z     | age: 125
+build_windows	Build Windows Release	2025-09-23T10:14:18.0930842Z     | x-guploader-uploadid: AAwnv3JAXdCGJgG6Y-SfUeeg9m5ltOq9xliyHfXSNQ5fzOtBzgtBFgl_wdsrDXQJx1yY2d-TRuUrI94
+build_windows	Build Windows Release	2025-09-23T10:14:18.0931848Z     | x-goog-hash: crc32c=a4Xofg==,md5=nEcDBP/7Jc18uNdFJHaEBA==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0932719Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0934164Z     | x-goog-generation: 1731594131482106
+build_windows	Build Windows Release	2025-09-23T10:14:18.0934927Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0936139Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0936759Z     | x-goog-meta-validated: 2025-07-02T14:05:22.666823
+build_windows	Build Windows Release	2025-09-23T10:14:18.0937862Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0938711Z     | content-length: 4998
+build_windows	Build Windows Release	2025-09-23T10:14:18.0939260Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0940338Z     | etag: "9c470304fffb25cd7cb8d74524768404"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0940832Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0943123Z     | x-goog-metageneration: 73
+build_windows	Build Windows Release	2025-09-23T10:14:18.0943626Z     | expires: Tue, 23 Sep 2025 10:14:13 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0952645Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/supabase_flutter
+build_windows	Build Windows Release	2025-09-23T10:14:18.0953183Z     | took 0:00:00.228484
+build_windows	Build Windows Release	2025-09-23T10:14:18.0953534Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0953921Z     | last-modified: Mon, 15 Sep 2025 19:44:15 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0954360Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0954719Z     | date: Tue, 23 Sep 2025 10:11:28 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0954947Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0955146Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0955436Z     | x-goog-stored-content-length: 10442
+build_windows	Build Windows Release	2025-09-23T10:14:18.0956484Z     | age: 170
+build_windows	Build Windows Release	2025-09-23T10:14:18.0957384Z     | x-guploader-uploadid: AAwnv3LPaSguZlhEluhZxFkeCdYp9JZRobZM7s5u6JW_Tmh5ZZuSO7pB_YxeYs52Z7LWLrBE-xu3LEPNh5xcSA
+build_windows	Build Windows Release	2025-09-23T10:14:18.0957969Z     | x-goog-hash: crc32c=SIz6aA==,md5=zpU+N+o2NzIN2UvjSR/LqA==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0958288Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0958561Z     | x-goog-generation: 1757965455158658
+build_windows	Build Windows Release	2025-09-23T10:14:18.0959028Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0959420Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0960394Z     | x-goog-meta-validated: 2025-09-15T19:44:15.059536
+build_windows	Build Windows Release	2025-09-23T10:14:18.0961140Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0961495Z     | content-length: 10442
+build_windows	Build Windows Release	2025-09-23T10:14:18.0962373Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0962896Z     | etag: "ce953e37ea3637320dd94be3491fcba8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0963309Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0964066Z     | x-goog-metageneration: 1
+build_windows	Build Windows Release	2025-09-23T10:14:18.0964486Z     | expires: Tue, 23 Sep 2025 10:13:28 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0974252Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/http
+build_windows	Build Windows Release	2025-09-23T10:14:18.0974798Z     | took 0:00:00.231655
+build_windows	Build Windows Release	2025-09-23T10:14:18.0975163Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0975882Z     | last-modified: Thu, 07 Aug 2025 22:35:25 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0976437Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0976890Z     | date: Tue, 23 Sep 2025 10:11:51 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0977293Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0977658Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0978053Z     | x-goog-stored-content-length: 10193
+build_windows	Build Windows Release	2025-09-23T10:14:18.0979031Z     | age: 147
+build_windows	Build Windows Release	2025-09-23T10:14:18.0980557Z     | x-guploader-uploadid: AAwnv3LsdxOwwocRRkFLkFqW-kJKLbUenF-C3NblBF-_jHlvTmmF5okm-YzWH7CppQwfaH6n3UNh-bw
+build_windows	Build Windows Release	2025-09-23T10:14:18.0981919Z     | x-goog-hash: crc32c=C0GmjQ==,md5=RDamIphrf1PRKKN7Jpn0mw==
+build_windows	Build Windows Release	2025-09-23T10:14:18.0982800Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0983288Z     | x-goog-generation: 1754606125457693
+build_windows	Build Windows Release	2025-09-23T10:14:18.0983709Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.0984127Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.0984649Z     | x-goog-meta-validated: 2025-08-07T22:35:25.384720
+build_windows	Build Windows Release	2025-09-23T10:14:18.0985077Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.0985387Z     | content-length: 10193
+build_windows	Build Windows Release	2025-09-23T10:14:18.0985754Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0986199Z     | etag: "4436a622986b7f53d128a37b2699f49b"
+build_windows	Build Windows Release	2025-09-23T10:14:18.0986584Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.0987132Z     | x-goog-metageneration: 1
+build_windows	Build Windows Release	2025-09-23T10:14:18.0987498Z     | expires: Tue, 23 Sep 2025 10:13:51 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0994978Z IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/record
+build_windows	Build Windows Release	2025-09-23T10:14:18.0995470Z     | took 0:00:00.236523
+build_windows	Build Windows Release	2025-09-23T10:14:18.0995851Z     | x-goog-storage-class: STANDARD
+build_windows	Build Windows Release	2025-09-23T10:14:18.0996136Z     | last-modified: Thu, 21 Aug 2025 16:15:35 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0996396Z     | cache-control: public, max-age=120
+build_windows	Build Windows Release	2025-09-23T10:14:18.0996723Z     | date: Tue, 23 Sep 2025 10:12:44 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.0997094Z     | vary: Accept-Encoding
+build_windows	Build Windows Release	2025-09-23T10:14:18.0998218Z     | content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.0998659Z     | x-goog-stored-content-length: 4917
+build_windows	Build Windows Release	2025-09-23T10:14:18.0999443Z     | age: 94
+build_windows	Build Windows Release	2025-09-23T10:14:18.1000195Z     | x-guploader-uploadid: AAwnv3JS05W1LW5FM7eNdSx_y3mdyvWr0oFU7fBaI7i4lUCM4LoK0enlDOuzf22vb_b0Hw_eK25mjYE
+build_windows	Build Windows Release	2025-09-23T10:14:18.1001163Z     | x-goog-hash: crc32c=r0SGoQ==,md5=PDx5xUNEzfXSUK3V+KTtmw==
+build_windows	Build Windows Release	2025-09-23T10:14:18.1001782Z     | content-type: application/json; charset="utf-8"
+build_windows	Build Windows Release	2025-09-23T10:14:18.1002282Z     | x-goog-generation: 1755792935495693
+build_windows	Build Windows Release	2025-09-23T10:14:18.1002695Z     | server: UploadServer
+build_windows	Build Windows Release	2025-09-23T10:14:18.1003089Z     | alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+build_windows	Build Windows Release	2025-09-23T10:14:18.1003599Z     | x-goog-meta-validated: 2025-08-21T16:15:35.388610
+build_windows	Build Windows Release	2025-09-23T10:14:18.1004056Z     | accept-ranges: bytes
+build_windows	Build Windows Release	2025-09-23T10:14:18.1004408Z     | content-length: 4917
+build_windows	Build Windows Release	2025-09-23T10:14:18.1004767Z     | x-goog-stored-content-encoding: gzip
+build_windows	Build Windows Release	2025-09-23T10:14:18.1005186Z     | etag: "3c3c79c54344cdf5d250add5f8a4ed9b"
+build_windows	Build Windows Release	2025-09-23T10:14:18.1005571Z     | via: 1.1 google
+build_windows	Build Windows Release	2025-09-23T10:14:18.1005889Z     | x-goog-metageneration: 1
+build_windows	Build Windows Release	2025-09-23T10:14:18.1006261Z     | expires: Tue, 23 Sep 2025 10:14:44 GMT
+build_windows	Build Windows Release	2025-09-23T10:14:18.1154511Z IO  : Writing 10233 characters to text file C:\Users\runneradmin\AppData\Local\Pub\Cache\hosted\pub.dev\.cache\hive_flutter-versions.json.
+build_windows	Build Windows Release	2025-09-23T10:14:18.1156138Z FINE: Contents:
+build_windows	Build Windows Release	2025-09-23T10:14:18.1200721Z     | {"name":"hive_flutter","latest":{"version":"1.1.0","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"1.1.0","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.12.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":"^2.0.4","path_provider":"^2.0.2","path":"^1.8.0"},"dev_dependencies":{"test":"^1.15.7","lints":"^1.0.1","mockito":"^5.0.10","build_runner":"^2.0.4"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-1.1.0.tar.gz","archive_sha256":"dca1da446b1d808a51689fb5d0c6c9510c0a2ba01e22805d492c73b68e33eecc","published":"2021-06-20T09:50:25.080732Z"},"versions":[{"version":"0.1.0","pubspec":{"version":"0.1.0","name":"hive_flutter","dependencies":{"flutter":{"sdk":"flutter"},"hive":">=0.4.0 <1.0.0"},"author":"Simon Leier <simonleier@gmail.com>","description":"Extension for Hive. Utils for using Hive with Flutter.","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.2.2 <3.0.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"}}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.1.0.tar.gz","archive_sha256":"5dd5d4646b826f9614ad2fad50fa96d688cb71e8bffe7479eb618c1ad8c9ae4b","published":"2019-08-19T20:34:54.505654Z"},{"version":"0.1.0+1","pubspec":{"version":"0.1.0+1","name":"hive_flutter","dependencies":{"flutter":{"sdk":"flutter"},"hive":">=0.4.0 <1.0.0"},"author":"Simon Leier <simonleier@gmail.com>","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.2.2 <3.0.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"}}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.1.0%2B1.tar.gz","archive_sha256":"345044e7f5c96932bd82132eb3ef77751b2399592a92cd70c6e0db1120f5b2b2","published":"2019-08-19T20:58:03.919805Z"},{"version":"0.2.0","pubspec":{"version":"0.2.0","name":"hive_flutter","dependencies":{"flutter":{"sdk":"flutter"},"hive":">=0.4.0 <1.0.0"},"author":"Simon Leier <simonleier@gmail.com>","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.2.2 <3.0.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"}}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.2.0.tar.gz","archive_sha256":"fd0362b68997d051a993cd06970ce5722c114e70f84e86c522c6225a2ed64353","published":"2019-08-20T22:56:01.103475Z"},{"version":"0.2.1","pubspec":{"version":"0.2.1","name":"hive_flutter","dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0"},"author":"Simon Leier <simonleier@gmail.com>","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.2.2 <3.0.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"}}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.2.1.tar.gz","archive_sha256":"5eccbad981679c26ca94be578b6a97d2afd1402002321f287176aec45c8e87a4","published":"2019-09-11T18:50:24.906611Z"},{"version":"0.3.0-dev","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"0.3.0-dev","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.6.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0","path_provider":">=1.0.0 <2.0.0","path":">=1.6.0 <1.7.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.3.0-dev.tar.gz","archive_sha256":"ae66cfdab8beb815394f439bd44b4734d2287d678629dba28aaa1a7a2bfb29d6","published":"2019-12-31T18:18:38.938661Z"},{"version":"0.3.0-dev2","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"0.3.0-dev2","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.6.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0","path_provider":">=1.0.0 <2.0.0","path":">=1.6.0 <1.7.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.3.0-dev2.tar.gz","archive_sha256":"277375fa80ed152117e350a1e998e26b85832b529b5db5d612b35039f790e969","published":"2020-01-01T19:48:43.427499Z"},{"version":"0.3.0","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"0.3.0","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.6.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0","path_provider":">=1.0.0 <2.0.0","path":">=1.6.0 <1.7.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.3.0.tar.gz","archive_sha256":"5a16a91ac3f1ed9c4591cb0af74d5388b5574c4827b8201924709491f1c94e2d","published":"2020-01-01T23:41:53.025569Z"},{"version":"0.3.0+1","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"0.3.0+1","homepage":"https://github.com/leisim/hive","environment":{"sdk":">=2.6.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0","path_provider":">=1.0.0 <2.0.0","path":">=1.6.0 <1.7.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.3.0%2B1.tar.gz","archive_sha256":"2438c6ae0a54188db4a0c6bfb574d5824e0c120f5bc7496e710e47cbec98e3b8","published":"2020-01-01T23:56:18.095404Z"},{"version":"0.3.0+2","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"0.3.0+2","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.6.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0","path_provider":">=1.0.0 <2.0.0","path":">=1.6.0 <1.7.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.3.0%2B2.tar.gz","archive_sha256":"0181ebc39a3caf0bce1c16cc24eeaaadc3a88a08fe39dd5cb23d5a96bf51c036","published":"2020-02-22T16:18:41.721794Z"},{"version":"0.3.1","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"0.3.1","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.6.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":">=1.0.0 <2.0.0","path_provider":">=1.0.0 <2.0.0","path":">=1.6.0 <2.0.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0","mockito":"^4.1.1"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-0.3.1.tar.gz","archive_sha256":"f7bc1b2eff1700f9d9b75da9ee13168e8ed921221e36b9efee6f77c46760e255","published":"2020-07-24T20:09:08.424293Z"},{"version":"1.0.0-nullsafety.0","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"1.0.0-nullsafety.0","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.12.0-0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":"^1.6.0-nullsafety.0","path_provider":"^2.0.0-nullsafety.1","path":"^1.8.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":">=1.8.0 <2.0.0","mockito":"^5.0.0-nullsafety.5","build_runner":"^1.10.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-1.0.0-nullsafety.0.tar.gz","archive_sha256":"44bc6e8749879eab5a227592d1b6adc9efb839a0acdcb256a180eb9b163614e5","published":"2021-02-18T20:13:54.935477Z"},{"version":"1.0.0","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"1.0.0","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.12.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":"^2.0.0","path_provider":"^2.0.0","path":"^1.8.0"},"dev_dependencies":{"flutter_test":{"sdk":"flutter"},"pedantic":"^1.8.0","mockito":"^5.0.0-nullsafety.5","build_runner":"^1.10.0"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-1.0.0.tar.gz","archive_sha256":"702233efe5eb7cc89bf1f291838bf2140e33eea00f2e79d9b559d9bfc9af6001","published":"2021-03-05T14:03:15.768560Z"},{"version":"1.1.0","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"1.1.0","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.12.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"hive":"^2.0.4","path_provider":"^2.0.2","path":"^1.8.0"},"dev_dependencies":{"test":"^1.15.7","lints":"^1.0.1","mockito":"^5.0.10","build_runner":"^2.0.4"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-1.1.0.tar.gz","archive_sha256":"dca1da446b1d808a51689fb5d0c6c9510c0a2ba01e22805d492c73b68e33eecc","published":"2021-06-20T09:50:25.080732Z"},{"version":"2.0.0-dev","pubspec":{"name":"hive_flutter","description":"Extension for Hive. Makes it easier to use Hive in Flutter apps.","version":"2.0.0-dev","homepage":"https://github.com/hivedb/hive/tree/master/hive_flutter","documentation":"https://docs.hivedb.dev/","environment":{"sdk":">=2.12.0 <3.0.0"},"dependencies":{"flutter":{"sdk":"flutter"},"cryptography":"^2.0.5","hive":"^3.0.0-dev","path_provider":"^2.0.10","path":"^1.8.1"},"dev_dependencies":{"test":"^1.21.1","lints":">=1.0.0","mockito":"^5.2.0","build_runner":"^2.1.11"}},"archive_url":"https://pub.dev/api/archives/hive_flutter-2.0.0-dev.tar.gz","archive_sha256":"a9f07cabf8fa205cde01cc782f56804987bbd164dc02b07fd9b30ed0426267da","published":"2022-10-15T13:55:27.524956Z"}],"_fetchedAt":"2025-09-23T10:14:18.097998"}
+build_windows	Build Windows Release	2025-09-23T10:14:18.1258016Z IO  : Writing 79017 characters to text file C:\Users\runneradmin\AppData\Local\Pub\Cache\hosted\pub.dev\.cache\path_provider-versions.json.
+build_windows	Build Windows Release	2025-09-23T10:14:18.1261311Z FINE: Contents:
+build_windows	Post Run subosito/flutter-action@v2	∩╗┐2025-09-23T10:14:28.0374939Z Post job cleanup.
+build_windows	Post Run actions/checkout@v4	∩╗┐2025-09-23T10:14:28.0504594Z Post job cleanup.
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.2798813Z [command]"C:\Program Files\Git\bin\git.exe" version
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3030385Z git version 2.51.0.windows.1
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3089039Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\3685b7da-63e2-4bbd-88a6-d2dd88e1fdf6\.gitconfig'
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3110950Z Temporarily overriding HOME='D:\a\_temp\3685b7da-63e2-4bbd-88a6-d2dd88e1fdf6' before making global git config changes
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3112316Z Adding repository directory to the temporary git global config as a safe directory
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3122335Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\hold_that_thought\hold_that_thought
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3368542Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.3597210Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.7877622Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.8073591Z http.https://github.com/.extraheader
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.8111362Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+build_windows	Post Run actions/checkout@v4	2025-09-23T10:14:28.8340342Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build_windows	Complete job	∩╗┐2025-09-23T10:14:29.2869072Z Cleaning up orphan processes
+build_windows	Complete job	2025-09-23T10:14:29.2998780Z Terminate orphan process: pid (1356) (adb)

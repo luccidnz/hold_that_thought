@@ -137,7 +137,7 @@ final apiServiceProvider = Provider<ApiService>((ref) {
 /// Provider for VectorIndex
 final vectorIndexProvider = Provider<VectorIndex>((ref) {
   final hiveBoxes = ref.watch(hiveBoxesProvider);
-  return VectorIndex(_cacheBox: hiveBoxes.vectorIndexCacheBox);
+  return VectorIndex(cacheBox: hiveBoxes.vectorIndexCacheBox);
 });
 
 /// Provider for RAGService
