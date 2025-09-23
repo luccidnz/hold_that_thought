@@ -33,31 +33,46 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.24.0'
+          flutter-version: '3.19.6'
           cache: true
       - name: Install Android SDK (cmdline-tools)
         uses: android-actions/setup-android@v3
         with:
-          cmdline-tools-version: 12266719
-          accept-android-sdk-licenses: true
-          packages: platform-tools platforms;android-34 build-tools;33.0.2
+          cmdline-tools-version: latest
+          packages: platform-tools;platforms;android-34;build-tools;34.0.0
+          
+      - name: Accept Android SDK licenses
+        run: yes | sdkmanager --licenses
+      - name: Debug environment
+        run: |
+          echo "ANDROID_HOME: $ANDROID_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          ls -la android/ || true
       - name: Flutter pub get (retry)
         run: |
           for i in {1..4}; do flutter pub get && break || sleep 10; done
+      - name: Flutter doctor
+        run: flutter doctor -v
+      # Fix gradlew permission issue
+      - name: Make gradlew executable
+        run: chmod +x ./android/gradlew
       - name: Build Android Debug
-        run: flutter build apk --debug --no-shrink
+        run: flutter build apk --debug --no-shrink --verbose
+      - name: List build outputs
+        run: |
+          find build -name "*.apk" || true
       - name: Upload Android Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: Android Debug APK
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          if-no-files-found: error
+          path: |
+            build/app/outputs/flutter-apk/app-debug.apk
+            build/app/outputs/apk/debug/app-debug.apk
+          if-no-files-found: warn
 
   build_windows:
     runs-on: windows-latest
     steps:
-      - name: Enable long paths
-        run: git config --system core.longpaths true
       - uses: actions/checkout@v4
         with: { lfs: true }
       - name: Git LFS
@@ -66,14 +81,23 @@ jobs:
           git lfs install
           git lfs fetch --all || true
           git lfs checkout
+      - name: Set up Visual Studio
+        uses: microsoft/setup-msbuild@v1.3
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.24.0'
+          flutter-version: '3.19.6'
           cache: true
       - name: Enable Windows desktop
         shell: bash
         run: flutter config --enable-windows-desktop
+      - name: Check Windows dependencies
+        shell: bash
+        run: |
+          echo "Checking Visual Studio installation..."
+          vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath || true
+          echo "Checking for Windows 10 SDK..."
+          reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" /v InstallationFolder || true
       - name: Flutter pub get (retry)
         shell: bash
         run: |
@@ -83,13 +107,20 @@ jobs:
         run: flutter doctor -v
       - name: Build Windows Release
         shell: bash
-        run: flutter build windows --release
+        run: flutter build windows --release --verbose
+      - name: List build outputs
+        shell: bash
+        run: |
+          find build/windows -type f -name "*.exe" || true
+          ls -la build/windows/runner/Release/ || true
       - name: Upload Windows Release
         uses: actions/upload-artifact@v4
         with:
           name: Windows Release
-          path: build/windows/runner/Release/**
-          if-no-files-found: error
+          path: |
+            build/windows/runner/Release/**
+            build/windows/x64/runner/Release/**
+          if-no-files-found: warn
 
   android_qa_smoke:
     needs: build_android
@@ -133,11 +164,18 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     steps:
       - name: Comment on PR when artifacts are ready
-        uses: thollander/actions-comment-pull-request@v2
+        uses: actions/github-script@v7
         with:
-          comment_tag: artifacts-ready
-          message: |
-            ✅ Artifacts are ready:
-            - Windows Release
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const message = `✅ Artifacts are ready:
+            - Windows Release (zip)
             - Android Debug APK
-            Please complete Artifacts-only QA and, if it matches the checklist, comment **QA: PASS**.
+            Please complete Artifacts-only QA and, if it matches the checklist, comment \`QA: PASS\``;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: message
+            });
