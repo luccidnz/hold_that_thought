@@ -43,7 +43,7 @@ jobs:
           packages: |
             platform-tools
             platforms;android-34
-            build-tools;34.0.0
+            build-tools;33.0.2
       - name: Flutter pub get (retry)
         run: |
           for i in {1..4}; do flutter pub get && break || sleep 10; done
