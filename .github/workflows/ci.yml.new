@@ -33,42 +33,30 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.19.6'
           cache: true
       - name: Install Android SDK (cmdline-tools)
         uses: android-actions/setup-android@v3
         with:
-          cmdline-tools-version: latest
-          packages: platform-tools;platforms;android-34;build-tools;34.0.0
-          
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
-      - name: Debug environment
-        run: |
-          echo "ANDROID_HOME: $ANDROID_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          ls -la android/ || true
+          cmdline-tools-version: 10406996
+          accept-android-sdk-licenses: true
+          packages: |
+            platform-tools
+            platforms;android-34
+            build-tools;34.0.0
       - name: Flutter pub get (retry)
         run: |
           for i in {1..4}; do flutter pub get && break || sleep 10; done
-      - name: Flutter doctor
-        run: flutter doctor -v
       # Fix gradlew permission issue
       - name: Make gradlew executable
         run: chmod +x ./android/gradlew
       - name: Build Android Debug
-        run: flutter build apk --debug --no-shrink --verbose
-      - name: List build outputs
-        run: |
-          find build -name "*.apk" || true
+        run: flutter build apk --debug --no-shrink
       - name: Upload Android Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: Android Debug APK
-          path: |
-            build/app/outputs/flutter-apk/app-debug.apk
-            build/app/outputs/apk/debug/app-debug.apk
-          if-no-files-found: warn
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
 
   build_windows:
     runs-on: windows-latest
@@ -81,12 +69,9 @@ jobs:
           git lfs install
           git lfs fetch --all || true
           git lfs checkout
-      - name: Set up Visual Studio
-        uses: microsoft/setup-msbuild@v1.3
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.19.6'
           cache: true
       - name: Enable Windows desktop
         shell: bash
@@ -107,38 +92,24 @@ jobs:
         run: flutter doctor -v
       - name: Build Windows Release
         shell: bash
-        run: flutter build windows --release --verbose
-      - name: List build outputs
-        shell: bash
-        run: |
-          find build/windows -type f -name "*.exe" || true
-          ls -la build/windows/runner/Release/ || true
+        run: flutter build windows --release
       - name: Upload Windows Release
         uses: actions/upload-artifact@v4
         with:
           name: Windows Release
-          path: |
-            build/windows/runner/Release/**
-            build/windows/x64/runner/Release/**
-          if-no-files-found: warn
+          path: build/windows/runner/Release/**
+          if-no-files-found: error
 
   # Optional: keep the emulator smoke test; depends only on Android build.
   android_qa_smoke:
     needs: build_android
     runs-on: ubuntu-latest
-    # Add continue-on-error to prevent blocking the workflow if emulator tests fail
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      # Install the specific system image ahead of time
-      - name: Install system image
-        run: |
-          yes | sdkmanager "system-images;android-30;google_apis;x86_64"
-          sdkmanager --list | grep system-images
       # Fix gradlew permission issue
       - name: Make gradlew executable
         run: chmod +x ./android/gradlew
@@ -147,8 +118,8 @@ jobs:
         with:
           api-level: 30
           arch: x86_64
-          target: google_apis
-          script: echo "Running simplified test for now" # Simplify the test command for now
+          target: default
+          script: ./android/gradlew connectedAndroidTest
 
   notify:
     needs: [build_android, build_windows]
@@ -156,18 +127,12 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     steps:
       - name: Comment on PR when artifacts are ready
-        uses: actions/github-script@v7
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const message = `✅ Artifacts are ready:
+          pr-number: ${{ github.event.pull_request.number }}
+          comment-tag: artifacts-ready
+          message: |
+            ✅ Artifacts are ready:
             - Windows Release (zip)
             - Android Debug APK
-            Please complete Artifacts-only QA and, if it matches the checklist, comment \`QA: PASS\``;
-            
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: message
-            });
+            Please complete Artifacts-only QA and, if it matches the checklist, comment `QA: PASS`

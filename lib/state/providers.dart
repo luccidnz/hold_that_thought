@@ -1,4 +1,5 @@
-iimport 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/thought.dart';
@@ -8,16 +9,6 @@ import '../services/crypto_service.dart';
 import '../services/feature_flags.dart';
 import '../services/rag_service.dart';
 import '../services/vector_index.dart';
-import '../state/repository_providers.dart';
-import 'auth_state.dart' as app_auth;ckage:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:hive/hive.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import '../models/thought.dart';
-import '../services/auth_service.dart';
-import '../services/crypto_service.dart';
-import '../services/feature_flags.dart';
-import '../services/rag_service.dart';
 import 'auth_state.dart' as app_auth;
 
 final thoughtsBoxProvider = Provider<Box<Thought>>((_) => throw UnimplementedError('Hive not ready'));
@@ -69,21 +60,20 @@ final cryptoServiceProvider = Provider<CryptoService>((ref) {
 
 // Phase 10: RAG Service provider
 final ragServiceProvider = Provider<RagService>((ref) {
-  // Note: RagService has 6 required parameters, but we're simplifying for this example
-  // In a real implementation, you'd provide all the dependencies
-  final thoughtRepo = ref.watch(thoughtRepositoryProvider);
-  final authState = ref.watch(authStateProvider);
-  final apiService = ApiService();
   final vectorIndex = VectorIndex();
   final featureFlags = ref.watch(featureFlagsProvider);
+  final apiService = ApiService(const FlutterSecureStorage());
+  // Using null for Hive boxes initially - they'd be properly initialized elsewhere
+  final Box? summariesBox = null;
+  final Box? digestsBox = null;
   
   return RagService(
-    thoughtRepo, 
-    apiService, 
-    vectorIndex, 
-    ref, 
-    featureFlags, 
-    authState,
+    vectorIndex,
+    featureFlags,
+    ref,
+    apiService,
+    summariesBox,
+    digestsBox,
   );
 });
 

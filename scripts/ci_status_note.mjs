@@ -51,7 +51,7 @@ async function main() {
     const { owner, repo } = await getCurrentRepo();
     
     // Status comment message
-    const comment = "Pushed CI workflow hardening for lint/test; re-running checks now. Jules: please re-run Artifacts-only QA once both 'CI' and 'Android QA Smoke' are green.";
+    const comment = "Pushed CI fix: switched setup-android to use valid inputs and stabilized the Windows Flutter build. CI will produce artifacts (Windows Release & Android Debug APK). When both jobs are green and artifacts are present, please run Artifacts-only QA and, if it matches the checklist, comment 'QA: PASS'.";
     
     // Post the comment to PR #3
     await postPRComment(owner, repo, 3, comment);

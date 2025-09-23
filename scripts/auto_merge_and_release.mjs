@@ -3,6 +3,7 @@ import { Octokit } from "octokit";
 
 function sh(cmd){ try { return execSync(cmd,{stdio:["ignore","pipe","pipe"]}).toString().trim(); } catch { return ""; } }
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+console.log(`Token present: ${!!token} (length: ${token?.length || 0})`);
 if(!token){ 
   console.log("⚠️ Set a session token (PowerShell):  $env:GITHUB_TOKEN = 'YOUR_FINE_GRAINED_TOKEN'"); 
   process.exit(0);
