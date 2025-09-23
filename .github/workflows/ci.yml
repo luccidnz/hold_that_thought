@@ -35,6 +35,7 @@ jobs:
           channel: 'beta'
           flutter-version: '3.24.0-0.1.pre'
           cache: true
+          cache-key: 'flutter-beta'
       - name: Install Android SDK (cmdline-tools)
         uses: android-actions/setup-android@v3
         with:
@@ -92,6 +93,7 @@ jobs:
           channel: 'beta'
           flutter-version: '3.24.0-0.1.pre'
           cache: true
+          cache-key: 'flutter-beta'
       - name: Enable Windows desktop
         shell: bash
         run: flutter config --enable-windows-desktop
