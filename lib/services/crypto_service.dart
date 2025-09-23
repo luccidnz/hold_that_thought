@@ -1,3 +1,4 @@
+import 'package:hold_that_thought/qa_smoke_shims.dart'; // QA SMOKE: remove after v0.10.0
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -6,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart' as standard_crypto;
 import 'package:hold_that_thought/models/thought.dart';
-import 'package:hold_that_thought/services/feature_flags.dart';
+import 'package:hold_that_thought/services/feature_flags.dart' hide featureFlagsProvider;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -260,7 +261,7 @@ class CryptoService {
       final salt = base64Decode(storedSalt);
       
       // Generate a random Data Encryption Key (DEK)
-      final dek = _aesGcm.newSecretKey();
+      final dek = await _aesGcm.newSecretKey();
       
       // Generate a nonce for this encryption
       final nonce = _aesGcm.newNonce();
@@ -366,7 +367,7 @@ class CryptoService {
       final salt = base64Decode(storedSalt);
       
       // Generate a random Data Encryption Key (DEK)
-      final dek = _aesGcm.newSecretKey();
+      final dek = await _aesGcm.newSecretKey();
       
       // Generate a nonce for this encryption
       final nonce = _aesGcm.newNonce();
@@ -414,7 +415,7 @@ class CryptoService {
         nonce: nonce,
       );
       
-      await sink.add(encrypted.cipherText);
+      sink.add(encrypted.cipherText);
       await sink.close();
       
       return encryptedPath;

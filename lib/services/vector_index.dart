@@ -1,3 +1,4 @@
+import 'package:hold_that_thought/qa_smoke_shims.dart'; // QA SMOKE: remove after v0.10.0
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +31,7 @@ class VectorIndex {
   // Hive box for persisting the index
   final Box? _cacheBox;
   
-  VectorIndex({this._cacheBox});
+  VectorIndex({Box? cacheBox}) : _cacheBox = cacheBox;
   
   /// Initialize the vector index from thoughts
   Future<void> initialize(List<Thought> thoughts) async {
@@ -322,6 +323,6 @@ final vectorIndexProvider = Provider<VectorIndex>((ref) {
   final hiveBoxes = ref.watch(hiveBoxesProvider);
   final vectorIndexBox = hiveBoxes.vectorIndexCacheBox;
   
-  final vectorIndex = VectorIndex(_cacheBox: vectorIndexBox);
+  final vectorIndex = VectorIndex(cacheBox: vectorIndexBox);
   return vectorIndex;
 });

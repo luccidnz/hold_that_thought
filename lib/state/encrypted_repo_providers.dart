@@ -1,3 +1,4 @@
+import 'package:hold_that_thought/qa_smoke_shims.dart'; // QA SMOKE: remove after v0.10.0
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/models/thought.dart';
 import 'package:hold_that_thought/services/crypto_service.dart' hide cryptoServiceProvider;

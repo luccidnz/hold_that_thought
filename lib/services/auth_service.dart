@@ -1,7 +1,8 @@
+import 'package:hold_that_thought/qa_smoke_shims.dart'; // QA SMOKE: remove after v0.10.0
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:hold_that_thought/services/feature_flags.dart';
+import 'package:hold_that_thought/services/feature_flags.dart' hide featureFlagsProvider;
 
 /// Service to manage user authentication
 class AuthService {

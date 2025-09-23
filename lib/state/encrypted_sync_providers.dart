@@ -1,3 +1,4 @@
+import 'package:hold_that_thought/qa_smoke_shims.dart'; // QA SMOKE: remove after v0.10.0
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hold_that_thought/services/encrypted_sync_service.dart';
 import 'package:hold_that_thought/state/encrypted_repo_providers.dart';
