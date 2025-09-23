@@ -1,3 +1,5 @@
+val kotlin_version = "1.9.24"
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
