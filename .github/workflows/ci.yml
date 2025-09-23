@@ -118,8 +118,8 @@ jobs:
         with:
           api-level: 30
           arch: x86_64
-          target: default
-          script: ./android/gradlew connectedAndroidTest
+          target: google_apis
+          script: cd android && ./gradlew connectedAndroidTest
 
   notify:
     needs: [build_android, build_windows]
