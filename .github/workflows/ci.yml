@@ -32,7 +32,7 @@ jobs:
           cache: gradle
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          channel: 'beta'
           flutter-version: '3.24.0-0.1.pre'
           cache: true
       - name: Install Android SDK (cmdline-tools)
@@ -89,7 +89,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.3
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          channel: 'beta'
           flutter-version: '3.24.0-0.1.pre'
           cache: true
       - name: Enable Windows desktop
