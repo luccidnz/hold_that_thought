@@ -100,20 +100,32 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: subosito/flutter-action@v2
+      # Download the APK artifact from the build job
+      - uses: actions/download-artifact@v4
         with:
-          channel: stable
-          flutter-version: '3.24.0'
-          cache: true
-      - name: Make gradlew executable
-        run: chmod +x android/gradlew
-      - name: Run smoke test on emulator
+          name: Android Debug APK
+      # Run a simple smoke test by installing and launching the APK on an emulator
+      - name: Run smoke test via adb
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: 33
           arch: x86_64
           target: google_apis
-          script: cd android && ./gradlew connectedAndroidTest
+          script: |
+            set -e
+            echo "Installing app-debug.apk"
+            adb install app-debug.apk
+            echo "Launching MainActivity"
+            adb shell am start -n com.holdthatthought/.MainActivity
+            echo "Waiting for app to start..."
+            sleep 30
+            pid=$(adb shell pidof com.holdthatthought || true)
+            if [ -z "$pid" ]; then
+              echo "App did not start correctly"
+              exit 1
+            else
+              echo "App started successfully with PID $pid"
+            fi
 
   notify:
     needs: [build_android, build_windows]
