@@ -46,6 +46,9 @@ jobs:
       - name: Flutter pub get (retry)
         run: |
           for i in {1..4}; do flutter pub get && break || sleep 10; done
+      # Fix gradlew permission issue
+      - name: Make gradlew executable
+        run: chmod +x ./android/gradlew
       - name: Build Android Debug
         run: flutter build apk --debug --no-shrink
       - name: Upload Android Debug APK
@@ -73,6 +76,13 @@ jobs:
       - name: Enable Windows desktop
         shell: bash
         run: flutter config --enable-windows-desktop
+      - name: Check Windows dependencies
+        shell: bash
+        run: |
+          echo "Checking Visual Studio installation..."
+          vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath || true
+          echo "Checking for Windows 10 SDK..."
+          reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" /v InstallationFolder || true
       - name: Flutter pub get (retry)
         shell: bash
         run: |
@@ -100,13 +110,16 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      # Fix gradlew permission issue
+      - name: Make gradlew executable
+        run: chmod +x ./android/gradlew
       - name: Run smoke test on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           arch: x86_64
           target: default
-          script: ./gradlew connectedAndroidTest
+          script: ./android/gradlew connectedAndroidTest
 
   notify:
     needs: [build_android, build_windows]
@@ -116,13 +129,10 @@ jobs:
       - name: Comment on PR when artifacts are ready
         uses: thollander/actions-comment-pull-request@v2
         with:
-          issue_number: ${{ github.event.pull_request.number }}
-          comment_tag: artifacts-ready
+          pr-number: ${{ github.event.pull_request.number }}
+          comment-tag: artifacts-ready
           message: |
             ✅ Artifacts are ready:
             - Windows Release (zip)
             - Android Debug APK
             Please complete Artifacts-only QA and, if it matches the checklist, comment `QA: PASS`
-              issue_number: context.payload.pull_request.number,
-              body: msg
-            });
