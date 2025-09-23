@@ -5,6 +5,9 @@ allprojects {
     }
 }
 
+// Expose kotlin_version for Groovy module build.gradle
+extra["kotlin_version"] = "1.9.24"
+
 val newBuildDir: Directory =
     rootProject.layout.buildDirectory
         .dir("../../build")
