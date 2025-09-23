@@ -57,12 +57,9 @@ jobs:
           for i in {1..4}; do flutter pub get && break || sleep 10; done
       - name: Flutter doctor
         run: flutter doctor -v
-      - name: Debug gradlew path
-        run: |
-          pwd
-          ls -la
-          ls -la android
-      # Fix gradlew permission issue
+      - name: Generate gradlew
+        working-directory: ./android
+        run: gradle wrapper
       - name: Make gradlew executable
         working-directory: ./android
         run: chmod +x ./gradlew
