@@ -46,7 +46,7 @@ jobs:
             build-tools;34.0.0
           
       - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
       - name: Debug environment
         run: |
           echo "ANDROID_HOME: $ANDROID_HOME"
@@ -54,19 +54,15 @@ jobs:
           ls -la android/ || true
       - name: Flutter pub get (retry)
         run: |
-          for i in {1..4}; do
-            flutter pub get && break || sleep 10
-          done
-
-      - name: Generate gradlew
-        run: flutter build apk --debug
-        
+          for i in {1..4}; do flutter pub get && break || sleep 10; done
+      - name: Flutter doctor
+        run: flutter doctor -v
+      # Fix gradlew permission issue
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
         working-directory: ./android
-
-      - name: Build Android (Debug)
-        run: flutter build apk --debug
+        run: chmod +x ./gradlew
+      - name: Build Android Debug
+        run: flutter build apk --debug --no-shrink --verbose
       - name: List build outputs
         run: |
           find build -name "*.apk" || true
