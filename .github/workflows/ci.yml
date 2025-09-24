@@ -32,9 +32,13 @@ jobs:
           cache: gradle
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.4'
           channel: stable
+          flutter-version: '3.35.4'
           cache: true
+      - name: Show Flutter/Dart versions
+        run: |
+          flutter --version
+          dart --version
       - name: Create CI .env file
         run: |
           cat > .env << EOF
@@ -105,8 +109,8 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.4'
           channel: stable
+          flutter-version: '3.35.4'
           cache: true
 
       - name: Show Flutter/Dart versions
@@ -161,8 +165,8 @@ jobs:
           java-version: '17'
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.4'
           channel: stable
+          flutter-version: '3.35.4'
           cache: true
       - name: Create CI .env file
         run: |
