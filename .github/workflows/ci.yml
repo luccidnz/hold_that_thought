@@ -159,6 +159,22 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.35.4'
+          cache: true
+      - name: Create CI .env file
+        run: |
+          cat > .env << EOF
+          ENV=ci
+          API_BASE_URL=https://example.invalid
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          SENTRY_DSN=
+          EOF
+      - name: Flutter pub get
+        run: flutter pub get
       # Download the APK artifact from the build job
       - uses: actions/download-artifact@v4
         with:
