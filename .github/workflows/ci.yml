@@ -75,55 +75,49 @@ jobs:
   build_windows:
     runs-on: windows-latest
     steps:
+      - name: Enable long paths
+        run: git config --system core.longpaths true
+
       - uses: actions/checkout@v4
         with: { lfs: true }
+
       - name: Git LFS
         shell: bash
         run: |
           git lfs install
           git lfs fetch --all || true
           git lfs checkout
-      - name: Set up Visual Studio
-        uses: microsoft/setup-msbuild@v1.3
+
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'beta'
-          flutter-version: '3.24.0-0.1.pre'
+          channel: stable
+          # Keep using your pinned flutter if already set at top; otherwise uncomment below:
+          # flutter-version: '3.24.0'
           cache: true
-          cache-key: 'flutter-beta'
+
       - name: Enable Windows desktop
         shell: bash
         run: flutter config --enable-windows-desktop
-      - name: Check Windows dependencies
-        shell: bash
-        run: |
-          echo "Checking Visual Studio installation..."
-          vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath || true
-          echo "Checking for Windows 10 SDK..."
-          reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" /v InstallationFolder || true
+
       - name: Flutter pub get (retry)
         shell: bash
         run: |
           for i in {1..4}; do flutter pub get && break || sleep 10; done
+
       - name: Doctor
         shell: bash
         run: flutter doctor -v
+
       - name: Build Windows Release
         shell: bash
-        run: flutter build windows --release --verbose
-      - name: List build outputs
-        shell: bash
-        run: |
-          find build/windows -type f -name "*.exe" || true
-          ls -la build/windows/runner/Release/ || true
+        run: flutter build windows --release
+
       - name: Upload Windows Release
         uses: actions/upload-artifact@v4
         with:
           name: Windows Release
-          path: |
-            build/windows/runner/Release/**
-            build/windows/x64/runner/Release/**
-          if-no-files-found: warn
+          path: build/windows/runner/Release/**
+          if-no-files-found: error
 
   android_qa_smoke:
     needs: build_android

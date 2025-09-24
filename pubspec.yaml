@@ -1,14 +1,11 @@
 name: hold_that_thought
 description: >
-  Hold That Thought is a cross-platform Flutter application for capturing and organising
-  fleeting thoughts with voice or text, including a 10-second pre-roll buffer for speech
-  before recording starts. It supports cloud sync, transcription, categorisation,
-  reminders and export features via Free and Pro tiers.
+  Hold That Thought is a cross-platform Flutter application for capturing and organising fleeting thoughts with voice or
+  text, including a 10-second pre-roll buffer for speech before recording starts. It supports cloud sync, transcription,
+  categorisation, reminders and export features via Free and Pro tiers.
 version: 0.10.0
-
 environment:
-  sdk: '>=3.5.0-0 <4.0.0'
-
+  sdk: '>=3.5.0 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter
@@ -28,25 +25,21 @@ dependencies:
   share_plus: ^11.1.0
   archive: ^4.0.7
   file_selector: ^1.0.3
-  file_saver: ^0.3.1
+  file_saver: 0.2.9
   flutter_dotenv: ^6.0.0
   flutter_secure_storage: ^9.2.4
   cryptography: ^2.7.0
   argon2: ^1.0.1
   path: ^1.8.3
   sentry_flutter: ^8.11.0
-  # For Android foreground service
   flutter_background_service: ^5.0.5
   permission_handler: ^11.3.0
   intl: ^0.20.2
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
   build_runner: ^2.4.13
-
 flutter:
   uses-material-design: true
   assets:
