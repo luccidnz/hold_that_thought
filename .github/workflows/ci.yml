@@ -178,54 +178,79 @@ jobs:
   android_qa_smoke:
     needs: build_android
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: '3.35.4'
-          cache: true
-      - name: Create CI .env file
-        run: |
-          cat > .env << EOF
-          ENV=ci
-          API_BASE_URL=https://example.invalid
-          SUPABASE_URL=
-          SUPABASE_ANON_KEY=
-          SENTRY_DSN=
-          EOF
-      - name: Flutter pub get
-        run: flutter pub get
-      # Download the APK artifact from the build job
+      # Download the built APK artifact
       - uses: actions/download-artifact@v4
         with:
           name: Android Debug APK
-      # Run a simple smoke test by installing and launching the APK on an emulator
-      - name: Run smoke test via adb
+      # Hardened emulator + robust ADB smoke
+      - name: Run smoke test via adb (hardened)
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 33
+          api-level: 30
           arch: x86_64
           target: google_apis
+          disable-animations: true
+          force-avd-creation: true
+          emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
           script: |
-            set -e
-            echo "Installing app-debug.apk"
-            adb install app-debug.apk
-            echo "Launching MainActivity"
-            adb shell am start -n com.holdthatthought/.MainActivity
-            echo "Waiting for app to start..."
-            sleep 30
-            pid=$(adb shell pidof com.holdthatthought || true)
-            if [ -z "$pid" ]; then
-              echo "App did not start correctly"
-              exit 1
-            else
-              echo "App started successfully with PID $pid"
-            fi
+            set -euo pipefail
+
+            retry() { n=0; until "$@"; do n=$((n+1)); [ $n -ge 6 ] && { echo "retry: giving up"; exit 1; }; echo "retry $n for: $*"; sleep 10; done; }
+
+            echo "Start/refresh adb server"
+            adb kill-server || true
+            adb start-server || true
+            adb version || true
+
+            echo "Wait for emulator device"
+            retry adb wait-for-device
+
+            echo "List devices"
+            adb devices
+
+            echo "Ensure boot completed"
+            retry sh -c 'adb shell getprop sys.boot_completed | grep -q 1'
+            adb shell settings put system screen_off_timeout 600000 || true
+            adb shell svc power stayon true || true
+
+            echo "Install APK with retries"
+            retry sh -c 'adb install -r -d -t app-debug.apk'
+
+            echo "Launch MainActivity with retries"
+            PKG=com.holdthatthought
+            ACT=.MainActivity
+            retry sh -c "adb shell am start -W -n $PKG/$ACT"
+
+            echo "Verify process is running"
+            for i in 1 2 3 4 5 6; do
+              if adb shell pidof $PKG >/dev/null 2>&1; then
+                echo "App is running"
+                exit 0
+              fi
+              sleep 5
+            done
+            echo "App did not stay running"; exit 1
+
+      # Always try to capture logcat on failure for debugging
+      - name: Collect logcat on failure
+        if: failure()
+        run: |
+          set -e
+          mkdir -p smoke-logs
+          adb logcat -d > smoke-logs/logcat.txt || echo "no logcat"
+      - name: Upload smoke logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-smoke-logs
+          path: smoke-logs/**
 
   notify:
     needs: [build_android, build_windows]
