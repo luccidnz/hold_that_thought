@@ -32,13 +32,9 @@ jobs:
           cache: gradle
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
           flutter-version: '3.35.4'
+          channel: stable
           cache: true
-      - name: Show Flutter/Dart versions
-        run: |
-          flutter --version
-          dart --version
       - name: Create CI .env file
         run: |
           cat > .env << EOF
@@ -67,6 +63,10 @@ jobs:
           for i in {1..4}; do flutter pub get && break || sleep 10; done
       - name: Flutter doctor
         run: flutter doctor -v
+      - name: Verify Flutter/Dart versions
+        run: |
+          flutter --version
+          dart --version
       - name: Clean Gradle cache
         run: |
           cd android
@@ -105,8 +105,8 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
           flutter-version: '3.35.4'
+          channel: stable
           cache: true
 
       - name: Show Flutter/Dart versions
@@ -161,8 +161,8 @@ jobs:
           java-version: '17'
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
           flutter-version: '3.35.4'
+          channel: stable
           cache: true
       - name: Create CI .env file
         run: |
