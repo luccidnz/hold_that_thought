@@ -39,6 +39,15 @@ jobs:
         run: |
           flutter --version
           dart --version
+      - name: Create CI .env file
+        run: |
+          cat > .env << EOF
+          ENV=ci
+          API_BASE_URL=https://example.invalid
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          SENTRY_DSN=
+          EOF
       - name: Install Android SDK (cmdline-tools)
         uses: android-actions/setup-android@v3
         with:
@@ -105,6 +114,17 @@ jobs:
         run: |
           flutter --version
           dart --version
+
+      - name: Create CI .env file
+        shell: bash
+        run: |
+          cat > .env << EOF
+          ENV=ci
+          API_BASE_URL=https://example.invalid
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          SENTRY_DSN=
+          EOF
 
       - name: Enable Windows desktop
         shell: bash
