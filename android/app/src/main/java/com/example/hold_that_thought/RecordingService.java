@@ -13,7 +13,6 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import com.example.hold_that_thought.R;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.dart.DartExecutor;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -124,9 +123,9 @@ public class RecordingService extends Service implements MethodChannel.MethodCal
         return new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 .setContentTitle("Recording in progress")
                 .setContentText("Duration: " + durationText)
-                .setSmallIcon(R.drawable.ic_recording)
+                .setSmallIcon(android.R.drawable.ic_btn_speak_now)
                 .setContentIntent(pendingIntent)
-                .addAction(R.drawable.ic_stop, "Stop", stopPendingIntent)
+                .addAction(android.R.drawable.ic_media_pause, "Stop", stopPendingIntent)
                 .setOngoing(true)
                 .build();
     }
