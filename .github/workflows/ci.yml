@@ -58,6 +58,12 @@ jobs:
           for i in {1..4}; do flutter pub get && break || sleep 10; done
       - name: Flutter doctor
         run: flutter doctor -v
+      - name: Clean Gradle cache
+        run: |
+          cd android
+          ./gradlew clean || true
+          cd ..
+          flutter clean
       - name: Build Android Debug
         run: flutter build apk --debug --no-shrink --verbose
       - name: List build outputs
