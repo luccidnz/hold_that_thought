@@ -36,8 +36,6 @@ jobs:
           flutter-version: '3.24.0-0.1.pre'
           cache: true
           cache-key: 'flutter-beta'
-      - name: Accept Android SDK licenses
-        run: yes | flutter doctor --android-licenses
       - name: Install Android SDK (cmdline-tools)
         uses: android-actions/setup-android@v3
         with:
