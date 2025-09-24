@@ -1,4 +1,4 @@
-name: CI
+﻿name: CI
 
 on:
   pull_request:
@@ -55,9 +55,6 @@ jobs:
           for i in {1..4}; do flutter pub get && break || sleep 10; done
       - name: Flutter doctor
         run: flutter doctor -v
-      - name: Make gradlew executable
-        working-directory: ./android
-        run: chmod +x ./gradlew
       - name: Build Android Debug
         run: flutter build apk --debug --no-shrink --verbose
       - name: List build outputs
@@ -165,7 +162,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const message = `✅ Artifacts are ready:
+            const message = `âœ… Artifacts are ready:
             - Windows Release (zip)
             - Android Debug APK
             Please complete Artifacts-only QA and, if it matches the checklist, comment \`QA: PASS\``;
@@ -176,3 +173,4 @@ jobs:
               issue_number: context.issue.number,
               body: message
             });
+

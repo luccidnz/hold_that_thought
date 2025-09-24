@@ -76,3 +76,6 @@ web/generated/
 
 jules_env.*
 *.env.enc
+
+# allow CI stub
+!.env
