@@ -1,0 +1,806 @@
+﻿build	Set up job	∩╗┐2025-09-24T21:39:25.6674984Z Current runner version: '2.328.0'
+build	Set up job	2025-09-24T21:39:25.6703041Z ##[group]Runner Image Provisioner
+build	Set up job	2025-09-24T21:39:25.6703833Z Hosted Compute Agent
+build	Set up job	2025-09-24T21:39:25.6704408Z Version: 20250829.383
+build	Set up job	2025-09-24T21:39:25.6704958Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+build	Set up job	2025-09-24T21:39:25.6705611Z Build Date: 2025-08-29T13:48:48Z
+build	Set up job	2025-09-24T21:39:25.6706148Z ##[endgroup]
+build	Set up job	2025-09-24T21:39:25.6706701Z ##[group]Operating System
+build	Set up job	2025-09-24T21:39:25.6707238Z Ubuntu
+build	Set up job	2025-09-24T21:39:25.6707664Z 24.04.3
+build	Set up job	2025-09-24T21:39:25.6708105Z LTS
+build	Set up job	2025-09-24T21:39:25.6708493Z ##[endgroup]
+build	Set up job	2025-09-24T21:39:25.6708965Z ##[group]Runner Image
+build	Set up job	2025-09-24T21:39:25.6709486Z Image: ubuntu-24.04
+build	Set up job	2025-09-24T21:39:25.6709972Z Version: 20250907.24.1
+build	Set up job	2025-09-24T21:39:25.6710882Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250907.24/images/ubuntu/Ubuntu2404-Readme.md
+build	Set up job	2025-09-24T21:39:25.6712301Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250907.24
+build	Set up job	2025-09-24T21:39:25.6713420Z ##[endgroup]
+build	Set up job	2025-09-24T21:39:25.6714450Z ##[group]GITHUB_TOKEN Permissions
+build	Set up job	2025-09-24T21:39:25.6716289Z Contents: read
+build	Set up job	2025-09-24T21:39:25.6716840Z Metadata: read
+build	Set up job	2025-09-24T21:39:25.6717327Z Packages: read
+build	Set up job	2025-09-24T21:39:25.6717776Z ##[endgroup]
+build	Set up job	2025-09-24T21:39:25.6719894Z Secret source: Actions
+build	Set up job	2025-09-24T21:39:25.6720543Z Prepare workflow directory
+build	Set up job	2025-09-24T21:39:25.7032527Z Prepare all required actions
+build	Set up job	2025-09-24T21:39:25.7072043Z Getting action download info
+build	Set up job	2025-09-24T21:39:26.1260226Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+build	Set up job	2025-09-24T21:39:26.3646218Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build	Set up job	2025-09-24T21:39:26.9599385Z Getting action download info
+build	Set up job	2025-09-24T21:39:27.1270540Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+build	Set up job	2025-09-24T21:39:27.8598340Z Complete job name: build
+build	Checkout	∩╗┐2025-09-24T21:39:27.9568700Z ##[group]Run actions/checkout@v3
+build	Checkout	2025-09-24T21:39:27.9570017Z with:
+build	Checkout	2025-09-24T21:39:27.9570783Z   repository: luccidnz/hold_that_thought
+build	Checkout	2025-09-24T21:39:27.9572216Z   token: ***
+build	Checkout	2025-09-24T21:39:27.9572946Z   ssh-strict: true
+build	Checkout	2025-09-24T21:39:27.9573768Z   persist-credentials: true
+build	Checkout	2025-09-24T21:39:27.9574620Z   clean: true
+build	Checkout	2025-09-24T21:39:27.9575405Z   sparse-checkout-cone-mode: true
+build	Checkout	2025-09-24T21:39:27.9576308Z   fetch-depth: 1
+build	Checkout	2025-09-24T21:39:27.9577043Z   fetch-tags: false
+build	Checkout	2025-09-24T21:39:27.9577780Z   lfs: false
+build	Checkout	2025-09-24T21:39:27.9578492Z   submodules: false
+build	Checkout	2025-09-24T21:39:27.9579267Z   set-safe-directory: true
+build	Checkout	2025-09-24T21:39:27.9580297Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:28.0494344Z Syncing repository: luccidnz/hold_that_thought
+build	Checkout	2025-09-24T21:39:28.0497113Z ##[group]Getting Git version info
+build	Checkout	2025-09-24T21:39:28.0498658Z Working directory is '/home/runner/work/hold_that_thought/hold_that_thought'
+build	Checkout	2025-09-24T21:39:28.0500696Z [command]/usr/bin/git version
+build	Checkout	2025-09-24T21:39:28.0524403Z git version 2.51.0
+build	Checkout	2025-09-24T21:39:28.0548990Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:28.0563722Z Temporarily overriding HOME='/home/runner/work/_temp/990821d4-a74f-4418-9c81-a6eb9921f823' before making global git config changes
+build	Checkout	2025-09-24T21:39:28.0566169Z Adding repository directory to the temporary git global config as a safe directory
+build	Checkout	2025-09-24T21:39:28.0568641Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hold_that_thought/hold_that_thought
+build	Checkout	2025-09-24T21:39:28.0603329Z Deleting the contents of '/home/runner/work/hold_that_thought/hold_that_thought'
+build	Checkout	2025-09-24T21:39:28.0608413Z ##[group]Initializing the repository
+build	Checkout	2025-09-24T21:39:28.0610025Z [command]/usr/bin/git init /home/runner/work/hold_that_thought/hold_that_thought
+build	Checkout	2025-09-24T21:39:28.0694105Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	Checkout	2025-09-24T21:39:28.0696010Z hint: is subject to change. To configure the initial branch name to use in all
+build	Checkout	2025-09-24T21:39:28.0698041Z hint: of your new repositories, which will suppress this warning, call:
+build	Checkout	2025-09-24T21:39:28.0699762Z hint:
+build	Checkout	2025-09-24T21:39:28.0700681Z hint: 	git config --global init.defaultBranch <name>
+build	Checkout	2025-09-24T21:39:28.0701735Z hint:
+build	Checkout	2025-09-24T21:39:28.0703043Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	Checkout	2025-09-24T21:39:28.0704654Z hint: 'development'. The just-created branch can be renamed via this command:
+build	Checkout	2025-09-24T21:39:28.0705973Z hint:
+build	Checkout	2025-09-24T21:39:28.0706812Z hint: 	git branch -m <name>
+build	Checkout	2025-09-24T21:39:28.0707647Z hint:
+build	Checkout	2025-09-24T21:39:28.0708732Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	Checkout	2025-09-24T21:39:28.0710690Z Initialized empty Git repository in /home/runner/work/hold_that_thought/hold_that_thought/.git/
+build	Checkout	2025-09-24T21:39:28.0713979Z [command]/usr/bin/git remote add origin https://github.com/luccidnz/hold_that_thought
+build	Checkout	2025-09-24T21:39:28.0743340Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:28.0744684Z ##[group]Disabling automatic garbage collection
+build	Checkout	2025-09-24T21:39:28.0746266Z [command]/usr/bin/git config --local gc.auto 0
+build	Checkout	2025-09-24T21:39:28.0775511Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:28.0776786Z ##[group]Setting up auth
+build	Checkout	2025-09-24T21:39:28.0780076Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Checkout	2025-09-24T21:39:28.0805763Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Checkout	2025-09-24T21:39:28.1079113Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Checkout	2025-09-24T21:39:28.1102450Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Checkout	2025-09-24T21:39:28.1277968Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	Checkout	2025-09-24T21:39:28.1306787Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:28.1308789Z ##[group]Fetching the repository
+build	Checkout	2025-09-24T21:39:28.1315530Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +1b1a2767665a50a1cc0a1e0213850c4e09a32922:refs/remotes/pull/3/merge
+build	Checkout	2025-09-24T21:39:28.5266617Z remote: Enumerating objects: 279, done.        
+build	Checkout	2025-09-24T21:39:28.5268845Z remote: Counting objects:   0% (1/279)        
+build	Checkout	2025-09-24T21:39:28.5270131Z remote: Counting objects:   1% (3/279)        
+build	Checkout	2025-09-24T21:39:28.5271396Z remote: Counting objects:   2% (6/279)        
+build	Checkout	2025-09-24T21:39:28.5272885Z remote: Counting objects:   3% (9/279)        
+build	Checkout	2025-09-24T21:39:28.5274151Z remote: Counting objects:   4% (12/279)        
+build	Checkout	2025-09-24T21:39:28.5275404Z remote: Counting objects:   5% (14/279)        
+build	Checkout	2025-09-24T21:39:28.5276577Z remote: Counting objects:   6% (17/279)        
+build	Checkout	2025-09-24T21:39:28.5277610Z remote: Counting objects:   7% (20/279)        
+build	Checkout	2025-09-24T21:39:28.5278651Z remote: Counting objects:   8% (23/279)        
+build	Checkout	2025-09-24T21:39:28.5279837Z remote: Counting objects:   9% (26/279)        
+build	Checkout	2025-09-24T21:39:28.5280864Z remote: Counting objects:  10% (28/279)        
+build	Checkout	2025-09-24T21:39:28.5282084Z remote: Counting objects:  11% (31/279)        
+build	Checkout	2025-09-24T21:39:28.5283111Z remote: Counting objects:  12% (34/279)        
+build	Checkout	2025-09-24T21:39:28.5284294Z remote: Counting objects:  13% (37/279)        
+build	Checkout	2025-09-24T21:39:28.5285400Z remote: Counting objects:  14% (40/279)        
+build	Checkout	2025-09-24T21:39:28.5286460Z remote: Counting objects:  15% (42/279)        
+build	Checkout	2025-09-24T21:39:28.5287490Z remote: Counting objects:  16% (45/279)        
+build	Checkout	2025-09-24T21:39:28.5288517Z remote: Counting objects:  17% (48/279)        
+build	Checkout	2025-09-24T21:39:28.5289562Z remote: Counting objects:  18% (51/279)        
+build	Checkout	2025-09-24T21:39:28.5290585Z remote: Counting objects:  19% (54/279)        
+build	Checkout	2025-09-24T21:39:28.5291623Z remote: Counting objects:  20% (56/279)        
+build	Checkout	2025-09-24T21:39:28.5292749Z remote: Counting objects:  21% (59/279)        
+build	Checkout	2025-09-24T21:39:28.5294166Z remote: Counting objects:  22% (62/279)        
+build	Checkout	2025-09-24T21:39:28.5295175Z remote: Counting objects:  23% (65/279)        
+build	Checkout	2025-09-24T21:39:28.5296202Z remote: Counting objects:  24% (67/279)        
+build	Checkout	2025-09-24T21:39:28.5297224Z remote: Counting objects:  25% (70/279)        
+build	Checkout	2025-09-24T21:39:28.5298257Z remote: Counting objects:  26% (73/279)        
+build	Checkout	2025-09-24T21:39:28.5299319Z remote: Counting objects:  27% (76/279)        
+build	Checkout	2025-09-24T21:39:28.5300490Z remote: Counting objects:  28% (79/279)        
+build	Checkout	2025-09-24T21:39:28.5301662Z remote: Counting objects:  29% (81/279)        
+build	Checkout	2025-09-24T21:39:28.5302853Z remote: Counting objects:  30% (84/279)        
+build	Checkout	2025-09-24T21:39:28.5303862Z remote: Counting objects:  31% (87/279)        
+build	Checkout	2025-09-24T21:39:28.5304868Z remote: Counting objects:  32% (90/279)        
+build	Checkout	2025-09-24T21:39:28.5306144Z remote: Counting objects:  33% (93/279)        
+build	Checkout	2025-09-24T21:39:28.5307159Z remote: Counting objects:  34% (95/279)        
+build	Checkout	2025-09-24T21:39:28.5308194Z remote: Counting objects:  35% (98/279)        
+build	Checkout	2025-09-24T21:39:28.5309246Z remote: Counting objects:  36% (101/279)        
+build	Checkout	2025-09-24T21:39:28.5310287Z remote: Counting objects:  37% (104/279)        
+build	Checkout	2025-09-24T21:39:28.5311304Z remote: Counting objects:  38% (107/279)        
+build	Checkout	2025-09-24T21:39:28.5312449Z remote: Counting objects:  39% (109/279)        
+build	Checkout	2025-09-24T21:39:28.5313474Z remote: Counting objects:  40% (112/279)        
+build	Checkout	2025-09-24T21:39:28.5314515Z remote: Counting objects:  41% (115/279)        
+build	Checkout	2025-09-24T21:39:28.5315529Z remote: Counting objects:  42% (118/279)        
+build	Checkout	2025-09-24T21:39:28.5316564Z remote: Counting objects:  43% (120/279)        
+build	Checkout	2025-09-24T21:39:28.5317593Z remote: Counting objects:  44% (123/279)        
+build	Checkout	2025-09-24T21:39:28.5319004Z remote: Counting objects:  45% (126/279)        
+build	Checkout	2025-09-24T21:39:28.5320140Z remote: Counting objects:  46% (129/279)        
+build	Checkout	2025-09-24T21:39:28.5321632Z remote: Counting objects:  47% (132/279)        
+build	Checkout	2025-09-24T21:39:28.5322894Z remote: Counting objects:  48% (134/279)        
+build	Checkout	2025-09-24T21:39:28.5324682Z remote: Counting objects:  49% (137/279)        
+build	Checkout	2025-09-24T21:39:28.5325719Z remote: Counting objects:  50% (140/279)        
+build	Checkout	2025-09-24T21:39:28.5326746Z remote: Counting objects:  51% (143/279)        
+build	Checkout	2025-09-24T21:39:28.5327787Z remote: Counting objects:  52% (146/279)        
+build	Checkout	2025-09-24T21:39:28.5328820Z remote: Counting objects:  53% (148/279)        
+build	Checkout	2025-09-24T21:39:28.5329849Z remote: Counting objects:  54% (151/279)        
+build	Checkout	2025-09-24T21:39:28.5330894Z remote: Counting objects:  55% (154/279)        
+build	Checkout	2025-09-24T21:39:28.5332052Z remote: Counting objects:  56% (157/279)        
+build	Checkout	2025-09-24T21:39:28.5333096Z remote: Counting objects:  57% (160/279)        
+build	Checkout	2025-09-24T21:39:28.5334115Z remote: Counting objects:  58% (162/279)        
+build	Checkout	2025-09-24T21:39:28.5335160Z remote: Counting objects:  59% (165/279)        
+build	Checkout	2025-09-24T21:39:28.5336181Z remote: Counting objects:  60% (168/279)        
+build	Checkout	2025-09-24T21:39:28.5337228Z remote: Counting objects:  61% (171/279)        
+build	Checkout	2025-09-24T21:39:28.5338280Z remote: Counting objects:  62% (173/279)        
+build	Checkout	2025-09-24T21:39:28.5339301Z remote: Counting objects:  63% (176/279)        
+build	Checkout	2025-09-24T21:39:28.5340366Z remote: Counting objects:  64% (179/279)        
+build	Checkout	2025-09-24T21:39:28.5341396Z remote: Counting objects:  65% (182/279)        
+build	Checkout	2025-09-24T21:39:28.5342578Z remote: Counting objects:  66% (185/279)        
+build	Checkout	2025-09-24T21:39:28.5343622Z remote: Counting objects:  67% (187/279)        
+build	Checkout	2025-09-24T21:39:28.5344640Z remote: Counting objects:  68% (190/279)        
+build	Checkout	2025-09-24T21:39:28.5345681Z remote: Counting objects:  69% (193/279)        
+build	Checkout	2025-09-24T21:39:28.5346705Z remote: Counting objects:  70% (196/279)        
+build	Checkout	2025-09-24T21:39:28.5347728Z remote: Counting objects:  71% (199/279)        
+build	Checkout	2025-09-24T21:39:28.5348741Z remote: Counting objects:  72% (201/279)        
+build	Checkout	2025-09-24T21:39:28.5349756Z remote: Counting objects:  73% (204/279)        
+build	Checkout	2025-09-24T21:39:28.5350782Z remote: Counting objects:  74% (207/279)        
+build	Checkout	2025-09-24T21:39:28.5352122Z remote: Counting objects:  75% (210/279)        
+build	Checkout	2025-09-24T21:39:28.5353157Z remote: Counting objects:  76% (213/279)        
+build	Checkout	2025-09-24T21:39:28.5354181Z remote: Counting objects:  77% (215/279)        
+build	Checkout	2025-09-24T21:39:28.5355213Z remote: Counting objects:  78% (218/279)        
+build	Checkout	2025-09-24T21:39:28.5356226Z remote: Counting objects:  79% (221/279)        
+build	Checkout	2025-09-24T21:39:28.5357252Z remote: Counting objects:  80% (224/279)        
+build	Checkout	2025-09-24T21:39:28.5358270Z remote: Counting objects:  81% (226/279)        
+build	Checkout	2025-09-24T21:39:28.5359294Z remote: Counting objects:  82% (229/279)        
+build	Checkout	2025-09-24T21:39:28.5360329Z remote: Counting objects:  83% (232/279)        
+build	Checkout	2025-09-24T21:39:28.5361361Z remote: Counting objects:  84% (235/279)        
+build	Checkout	2025-09-24T21:39:28.5362762Z remote: Counting objects:  85% (238/279)        
+build	Checkout	2025-09-24T21:39:28.5364025Z remote: Counting objects:  86% (240/279)        
+build	Checkout	2025-09-24T21:39:28.5365553Z remote: Counting objects:  87% (243/279)        
+build	Checkout	2025-09-24T21:39:28.5366617Z remote: Counting objects:  88% (246/279)        
+build	Checkout	2025-09-24T21:39:28.5367657Z remote: Counting objects:  89% (249/279)        
+build	Checkout	2025-09-24T21:39:28.5368705Z remote: Counting objects:  90% (252/279)        
+build	Checkout	2025-09-24T21:39:28.5369727Z remote: Counting objects:  91% (254/279)        
+build	Checkout	2025-09-24T21:39:28.5370760Z remote: Counting objects:  92% (257/279)        
+build	Checkout	2025-09-24T21:39:28.5371790Z remote: Counting objects:  93% (260/279)        
+build	Checkout	2025-09-24T21:39:28.5372959Z remote: Counting objects:  94% (263/279)        
+build	Checkout	2025-09-24T21:39:28.5373999Z remote: Counting objects:  95% (266/279)        
+build	Checkout	2025-09-24T21:39:28.5375046Z remote: Counting objects:  96% (268/279)        
+build	Checkout	2025-09-24T21:39:28.5376079Z remote: Counting objects:  97% (271/279)        
+build	Checkout	2025-09-24T21:39:28.5377135Z remote: Counting objects:  98% (274/279)        
+build	Checkout	2025-09-24T21:39:28.5378201Z remote: Counting objects:  99% (277/279)        
+build	Checkout	2025-09-24T21:39:28.5379233Z remote: Counting objects: 100% (279/279)        
+build	Checkout	2025-09-24T21:39:28.5380519Z remote: Counting objects: 100% (279/279), done.        
+build	Checkout	2025-09-24T21:39:28.5381631Z remote: Compressing objects:   0% (1/223)        
+build	Checkout	2025-09-24T21:39:28.5383048Z remote: Compressing objects:   1% (3/223)        
+build	Checkout	2025-09-24T21:39:28.5384119Z remote: Compressing objects:   2% (5/223)        
+build	Checkout	2025-09-24T21:39:28.5385167Z remote: Compressing objects:   3% (7/223)        
+build	Checkout	2025-09-24T21:39:28.5386249Z remote: Compressing objects:   4% (9/223)        
+build	Checkout	2025-09-24T21:39:28.5387302Z remote: Compressing objects:   5% (12/223)        
+build	Checkout	2025-09-24T21:39:28.5388379Z remote: Compressing objects:   6% (14/223)        
+build	Checkout	2025-09-24T21:39:28.5389443Z remote: Compressing objects:   7% (16/223)        
+build	Checkout	2025-09-24T21:39:28.5390513Z remote: Compressing objects:   8% (18/223)        
+build	Checkout	2025-09-24T21:39:28.5391576Z remote: Compressing objects:   9% (21/223)        
+build	Checkout	2025-09-24T21:39:28.5392738Z remote: Compressing objects:  10% (23/223)        
+build	Checkout	2025-09-24T21:39:28.5393797Z remote: Compressing objects:  11% (25/223)        
+build	Checkout	2025-09-24T21:39:28.5394869Z remote: Compressing objects:  12% (27/223)        
+build	Checkout	2025-09-24T21:39:28.5395921Z remote: Compressing objects:  13% (29/223)        
+build	Checkout	2025-09-24T21:39:28.5396966Z remote: Compressing objects:  14% (32/223)        
+build	Checkout	2025-09-24T21:39:28.5398020Z remote: Compressing objects:  15% (34/223)        
+build	Checkout	2025-09-24T21:39:28.5399053Z remote: Compressing objects:  16% (36/223)        
+build	Checkout	2025-09-24T21:39:28.5400120Z remote: Compressing objects:  17% (38/223)        
+build	Checkout	2025-09-24T21:39:28.5401179Z remote: Compressing objects:  18% (41/223)        
+build	Checkout	2025-09-24T21:39:28.5402408Z remote: Compressing objects:  19% (43/223)        
+build	Checkout	2025-09-24T21:39:28.5403456Z remote: Compressing objects:  20% (45/223)        
+build	Checkout	2025-09-24T21:39:28.5404480Z remote: Compressing objects:  21% (47/223)        
+build	Checkout	2025-09-24T21:39:28.5405525Z remote: Compressing objects:  22% (50/223)        
+build	Checkout	2025-09-24T21:39:28.5406558Z remote: Compressing objects:  23% (52/223)        
+build	Checkout	2025-09-24T21:39:28.5407606Z remote: Compressing objects:  24% (54/223)        
+build	Checkout	2025-09-24T21:39:28.5408815Z remote: Compressing objects:  25% (56/223)        
+build	Checkout	2025-09-24T21:39:28.5409865Z remote: Compressing objects:  26% (58/223)        
+build	Checkout	2025-09-24T21:39:28.5410919Z remote: Compressing objects:  27% (61/223)        
+build	Checkout	2025-09-24T21:39:28.5412173Z remote: Compressing objects:  28% (63/223)        
+build	Checkout	2025-09-24T21:39:28.5413258Z remote: Compressing objects:  29% (65/223)        
+build	Checkout	2025-09-24T21:39:28.5414300Z remote: Compressing objects:  30% (67/223)        
+build	Checkout	2025-09-24T21:39:28.5415355Z remote: Compressing objects:  31% (70/223)        
+build	Checkout	2025-09-24T21:39:28.5416394Z remote: Compressing objects:  32% (72/223)        
+build	Checkout	2025-09-24T21:39:28.5417441Z remote: Compressing objects:  33% (74/223)        
+build	Checkout	2025-09-24T21:39:28.5418498Z remote: Compressing objects:  34% (76/223)        
+build	Checkout	2025-09-24T21:39:28.5419555Z remote: Compressing objects:  35% (79/223)        
+build	Checkout	2025-09-24T21:39:28.5420615Z remote: Compressing objects:  36% (81/223)        
+build	Checkout	2025-09-24T21:39:28.5421661Z remote: Compressing objects:  37% (83/223)        
+build	Checkout	2025-09-24T21:39:28.5422923Z remote: Compressing objects:  38% (85/223)        
+build	Checkout	2025-09-24T21:39:28.5423959Z remote: Compressing objects:  39% (87/223)        
+build	Checkout	2025-09-24T21:39:28.5425011Z remote: Compressing objects:  40% (90/223)        
+build	Checkout	2025-09-24T21:39:28.5426056Z remote: Compressing objects:  41% (92/223)        
+build	Checkout	2025-09-24T21:39:28.5427092Z remote: Compressing objects:  42% (94/223)        
+build	Checkout	2025-09-24T21:39:28.5428145Z remote: Compressing objects:  43% (96/223)        
+build	Checkout	2025-09-24T21:39:28.5429182Z remote: Compressing objects:  44% (99/223)        
+build	Checkout	2025-09-24T21:39:28.5430225Z remote: Compressing objects:  45% (101/223)        
+build	Checkout	2025-09-24T21:39:28.5431262Z remote: Compressing objects:  46% (103/223)        
+build	Checkout	2025-09-24T21:39:28.5432371Z remote: Compressing objects:  47% (105/223)        
+build	Checkout	2025-09-24T21:39:28.5814783Z remote: Compressing objects:  48% (108/223)        
+build	Checkout	2025-09-24T21:39:28.5816361Z remote: Compressing objects:  49% (110/223)        
+build	Checkout	2025-09-24T21:39:28.5818199Z remote: Compressing objects:  50% (112/223)        
+build	Checkout	2025-09-24T21:39:28.5819531Z remote: Compressing objects:  51% (114/223)        
+build	Checkout	2025-09-24T21:39:28.5820807Z remote: Compressing objects:  52% (116/223)        
+build	Checkout	2025-09-24T21:39:28.5822322Z remote: Compressing objects:  53% (119/223)        
+build	Checkout	2025-09-24T21:39:28.5824202Z remote: Compressing objects:  54% (121/223)        
+build	Checkout	2025-09-24T21:39:28.5826219Z remote: Compressing objects:  55% (123/223)        
+build	Checkout	2025-09-24T21:39:28.5827410Z remote: Compressing objects:  56% (125/223)        
+build	Checkout	2025-09-24T21:39:28.5828458Z remote: Compressing objects:  57% (128/223)        
+build	Checkout	2025-09-24T21:39:28.5829500Z remote: Compressing objects:  58% (130/223)        
+build	Checkout	2025-09-24T21:39:28.5830540Z remote: Compressing objects:  59% (132/223)        
+build	Checkout	2025-09-24T21:39:28.5831571Z remote: Compressing objects:  60% (134/223)        
+build	Checkout	2025-09-24T21:39:28.5832898Z remote: Compressing objects:  61% (137/223)        
+build	Checkout	2025-09-24T21:39:28.5833954Z remote: Compressing objects:  62% (139/223)        
+build	Checkout	2025-09-24T21:39:28.5835048Z remote: Compressing objects:  63% (141/223)        
+build	Checkout	2025-09-24T21:39:28.5836106Z remote: Compressing objects:  64% (143/223)        
+build	Checkout	2025-09-24T21:39:28.5837137Z remote: Compressing objects:  65% (145/223)        
+build	Checkout	2025-09-24T21:39:28.5838195Z remote: Compressing objects:  66% (148/223)        
+build	Checkout	2025-09-24T21:39:28.5839227Z remote: Compressing objects:  67% (150/223)        
+build	Checkout	2025-09-24T21:39:28.5840250Z remote: Compressing objects:  68% (152/223)        
+build	Checkout	2025-09-24T21:39:28.5841271Z remote: Compressing objects:  69% (154/223)        
+build	Checkout	2025-09-24T21:39:28.5842396Z remote: Compressing objects:  70% (157/223)        
+build	Checkout	2025-09-24T21:39:28.5843440Z remote: Compressing objects:  71% (159/223)        
+build	Checkout	2025-09-24T21:39:28.5844471Z remote: Compressing objects:  72% (161/223)        
+build	Checkout	2025-09-24T21:39:28.5845510Z remote: Compressing objects:  73% (163/223)        
+build	Checkout	2025-09-24T21:39:28.5846821Z remote: Compressing objects:  74% (166/223)        
+build	Checkout	2025-09-24T21:39:28.5847967Z remote: Compressing objects:  75% (168/223)        
+build	Checkout	2025-09-24T21:39:28.5849286Z remote: Compressing objects:  76% (170/223)        
+build	Checkout	2025-09-24T21:39:28.5850402Z remote: Compressing objects:  77% (172/223)        
+build	Checkout	2025-09-24T21:39:28.5851417Z remote: Compressing objects:  78% (174/223)        
+build	Checkout	2025-09-24T21:39:28.5852623Z remote: Compressing objects:  79% (177/223)        
+build	Checkout	2025-09-24T21:39:28.5853655Z remote: Compressing objects:  80% (179/223)        
+build	Checkout	2025-09-24T21:39:28.5854773Z remote: Compressing objects:  81% (181/223)        
+build	Checkout	2025-09-24T21:39:28.5855815Z remote: Compressing objects:  82% (183/223)        
+build	Checkout	2025-09-24T21:39:28.5856827Z remote: Compressing objects:  83% (186/223)        
+build	Checkout	2025-09-24T21:39:28.5857991Z remote: Compressing objects:  84% (188/223)        
+build	Checkout	2025-09-24T21:39:28.5859542Z remote: Compressing objects:  85% (190/223)        
+build	Checkout	2025-09-24T21:39:28.5861225Z remote: Compressing objects:  86% (192/223)        
+build	Checkout	2025-09-24T21:39:28.5862640Z remote: Compressing objects:  87% (195/223)        
+build	Checkout	2025-09-24T21:39:28.5863772Z remote: Compressing objects:  88% (197/223)        
+build	Checkout	2025-09-24T21:39:28.5864806Z remote: Compressing objects:  89% (199/223)        
+build	Checkout	2025-09-24T21:39:28.5865863Z remote: Compressing objects:  90% (201/223)        
+build	Checkout	2025-09-24T21:39:28.5866871Z remote: Compressing objects:  91% (203/223)        
+build	Checkout	2025-09-24T21:39:28.5867888Z remote: Compressing objects:  92% (206/223)        
+build	Checkout	2025-09-24T21:39:28.5868922Z remote: Compressing objects:  93% (208/223)        
+build	Checkout	2025-09-24T21:39:28.5869959Z remote: Compressing objects:  94% (210/223)        
+build	Checkout	2025-09-24T21:39:28.5870974Z remote: Compressing objects:  95% (212/223)        
+build	Checkout	2025-09-24T21:39:28.5872136Z remote: Compressing objects:  96% (215/223)        
+build	Checkout	2025-09-24T21:39:28.5873175Z remote: Compressing objects:  97% (217/223)        
+build	Checkout	2025-09-24T21:39:28.5874197Z remote: Compressing objects:  98% (219/223)        
+build	Checkout	2025-09-24T21:39:28.5875250Z remote: Compressing objects:  99% (221/223)        
+build	Checkout	2025-09-24T21:39:28.5876270Z remote: Compressing objects: 100% (223/223)        
+build	Checkout	2025-09-24T21:39:28.5877592Z remote: Compressing objects: 100% (223/223), done.        
+build	Checkout	2025-09-24T21:39:28.5878683Z Receiving objects:   0% (1/279)
+build	Checkout	2025-09-24T21:39:28.5879499Z Receiving objects:   1% (3/279)
+build	Checkout	2025-09-24T21:39:28.5880312Z Receiving objects:   2% (6/279)
+build	Checkout	2025-09-24T21:39:28.5881120Z Receiving objects:   3% (9/279)
+build	Checkout	2025-09-24T21:39:28.5882015Z Receiving objects:   4% (12/279)
+build	Checkout	2025-09-24T21:39:28.6068004Z Receiving objects:   5% (14/279)
+build	Checkout	2025-09-24T21:39:28.6069240Z Receiving objects:   6% (17/279)
+build	Checkout	2025-09-24T21:39:28.6070263Z Receiving objects:   7% (20/279)
+build	Checkout	2025-09-24T21:39:28.6078505Z Receiving objects:   8% (23/279)
+build	Checkout	2025-09-24T21:39:28.6079909Z Receiving objects:   9% (26/279)
+build	Checkout	2025-09-24T21:39:28.6081270Z Receiving objects:  10% (28/279)
+build	Checkout	2025-09-24T21:39:28.6082859Z Receiving objects:  11% (31/279)
+build	Checkout	2025-09-24T21:39:28.6084270Z Receiving objects:  12% (34/279)
+build	Checkout	2025-09-24T21:39:28.6085699Z Receiving objects:  13% (37/279)
+build	Checkout	2025-09-24T21:39:28.6087098Z Receiving objects:  14% (40/279)
+build	Checkout	2025-09-24T21:39:28.6088621Z Receiving objects:  15% (42/279)
+build	Checkout	2025-09-24T21:39:28.6090025Z Receiving objects:  16% (45/279)
+build	Checkout	2025-09-24T21:39:28.6091379Z Receiving objects:  17% (48/279)
+build	Checkout	2025-09-24T21:39:28.6092366Z Receiving objects:  18% (51/279)
+build	Checkout	2025-09-24T21:39:28.6093199Z Receiving objects:  19% (54/279)
+build	Checkout	2025-09-24T21:39:28.6094041Z Receiving objects:  20% (56/279)
+build	Checkout	2025-09-24T21:39:28.6094861Z Receiving objects:  21% (59/279)
+build	Checkout	2025-09-24T21:39:28.6095691Z Receiving objects:  22% (62/279)
+build	Checkout	2025-09-24T21:39:28.6096795Z Receiving objects:  23% (65/279)
+build	Checkout	2025-09-24T21:39:28.6097785Z Receiving objects:  24% (67/279)
+build	Checkout	2025-09-24T21:39:28.6098668Z Receiving objects:  25% (70/279)
+build	Checkout	2025-09-24T21:39:28.6099502Z Receiving objects:  26% (73/279)
+build	Checkout	2025-09-24T21:39:28.6100331Z Receiving objects:  27% (76/279)
+build	Checkout	2025-09-24T21:39:28.6336850Z Receiving objects:  28% (79/279)
+build	Checkout	2025-09-24T21:39:28.6338445Z Receiving objects:  29% (81/279)
+build	Checkout	2025-09-24T21:39:28.7205634Z Receiving objects:  30% (84/279)
+build	Checkout	2025-09-24T21:39:28.7230539Z Receiving objects:  31% (87/279)
+build	Checkout	2025-09-24T21:39:28.7477802Z Receiving objects:  32% (90/279)
+build	Checkout	2025-09-24T21:39:28.7481372Z Receiving objects:  33% (93/279)
+build	Checkout	2025-09-24T21:39:28.7483069Z Receiving objects:  34% (95/279)
+build	Checkout	2025-09-24T21:39:28.7484519Z Receiving objects:  35% (98/279)
+build	Checkout	2025-09-24T21:39:28.7485927Z Receiving objects:  36% (101/279)
+build	Checkout	2025-09-24T21:39:28.7487366Z Receiving objects:  37% (104/279)
+build	Checkout	2025-09-24T21:39:28.7488860Z Receiving objects:  38% (107/279)
+build	Checkout	2025-09-24T21:39:28.7490371Z Receiving objects:  39% (109/279)
+build	Checkout	2025-09-24T21:39:28.7491801Z Receiving objects:  40% (112/279)
+build	Checkout	2025-09-24T21:39:28.7493556Z Receiving objects:  41% (115/279)
+build	Checkout	2025-09-24T21:39:28.7549524Z Receiving objects:  42% (118/279)
+build	Checkout	2025-09-24T21:39:28.7552316Z Receiving objects:  43% (120/279)
+build	Checkout	2025-09-24T21:39:28.7553781Z Receiving objects:  44% (123/279)
+build	Checkout	2025-09-24T21:39:29.4016935Z Receiving objects:  45% (126/279)
+build	Checkout	2025-09-24T21:39:29.4018899Z Receiving objects:  46% (129/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4020705Z Receiving objects:  47% (132/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4022211Z Receiving objects:  48% (134/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4023665Z Receiving objects:  49% (137/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4025626Z Receiving objects:  50% (140/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4027673Z Receiving objects:  51% (143/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4029337Z Receiving objects:  52% (146/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4031051Z Receiving objects:  53% (148/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4032861Z Receiving objects:  54% (151/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4034851Z Receiving objects:  55% (154/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4036929Z Receiving objects:  56% (157/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4038926Z Receiving objects:  57% (160/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4040960Z Receiving objects:  58% (162/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4043493Z Receiving objects:  59% (165/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4044820Z Receiving objects:  60% (168/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4046532Z Receiving objects:  61% (171/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4048225Z Receiving objects:  62% (173/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4049874Z Receiving objects:  63% (176/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4051597Z Receiving objects:  64% (179/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4053550Z Receiving objects:  65% (182/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4055354Z Receiving objects:  66% (185/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4057301Z Receiving objects:  67% (187/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4059140Z Receiving objects:  68% (190/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4077489Z Receiving objects:  69% (193/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4092981Z Receiving objects:  70% (196/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4096312Z Receiving objects:  71% (199/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4100189Z Receiving objects:  72% (201/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4163333Z Receiving objects:  73% (204/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4174595Z Receiving objects:  74% (207/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4179926Z Receiving objects:  75% (210/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4402273Z Receiving objects:  76% (213/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4405099Z remote: Total 279 (delta 41), reused 208 (delta 30), pack-reused 0 (from 0)        
+build	Checkout	2025-09-24T21:39:29.4407832Z Receiving objects:  77% (215/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4412849Z Receiving objects:  78% (218/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4416155Z Receiving objects:  79% (221/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4418188Z Receiving objects:  80% (224/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4420846Z Receiving objects:  81% (226/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4423275Z Receiving objects:  82% (229/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4425394Z Receiving objects:  83% (232/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4427576Z Receiving objects:  84% (235/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4429655Z Receiving objects:  85% (238/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4431758Z Receiving objects:  86% (240/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4434284Z Receiving objects:  87% (243/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4436403Z Receiving objects:  88% (246/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4438513Z Receiving objects:  89% (249/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4440563Z Receiving objects:  90% (252/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4442749Z Receiving objects:  91% (254/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4444787Z Receiving objects:  92% (257/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4447153Z Receiving objects:  93% (260/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4449238Z Receiving objects:  94% (263/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4451306Z Receiving objects:  95% (266/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4453537Z Receiving objects:  96% (268/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4455642Z Receiving objects:  97% (271/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4457690Z Receiving objects:  98% (274/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4459804Z Receiving objects:  99% (277/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4461698Z Receiving objects: 100% (279/279), 10.14 MiB | 20.28 MiB/s
+build	Checkout	2025-09-24T21:39:29.4464072Z Receiving objects: 100% (279/279), 27.39 MiB | 31.95 MiB/s, done.
+build	Checkout	2025-09-24T21:39:29.4503166Z Resolving deltas:   0% (0/41)
+build	Checkout	2025-09-24T21:39:29.4504706Z Resolving deltas:   2% (1/41)
+build	Checkout	2025-09-24T21:39:29.4508205Z Resolving deltas:   4% (2/41)
+build	Checkout	2025-09-24T21:39:29.4510136Z Resolving deltas:   7% (3/41)
+build	Checkout	2025-09-24T21:39:29.4511590Z Resolving deltas:   9% (4/41)
+build	Checkout	2025-09-24T21:39:29.4513203Z Resolving deltas:  12% (5/41)
+build	Checkout	2025-09-24T21:39:29.4514666Z Resolving deltas:  14% (6/41)
+build	Checkout	2025-09-24T21:39:29.4516205Z Resolving deltas:  17% (7/41)
+build	Checkout	2025-09-24T21:39:29.4517747Z Resolving deltas:  19% (8/41)
+build	Checkout	2025-09-24T21:39:29.4519223Z Resolving deltas:  21% (9/41)
+build	Checkout	2025-09-24T21:39:29.4520668Z Resolving deltas:  24% (10/41)
+build	Checkout	2025-09-24T21:39:29.4522215Z Resolving deltas:  26% (11/41)
+build	Checkout	2025-09-24T21:39:29.4523607Z Resolving deltas:  29% (12/41)
+build	Checkout	2025-09-24T21:39:29.4536979Z Resolving deltas:  31% (13/41)
+build	Checkout	2025-09-24T21:39:29.4616820Z Resolving deltas:  34% (14/41)
+build	Checkout	2025-09-24T21:39:29.4849607Z Resolving deltas:  36% (15/41)
+build	Checkout	2025-09-24T21:39:29.4899898Z Resolving deltas:  39% (16/41)
+build	Checkout	2025-09-24T21:39:29.4943849Z Resolving deltas:  41% (17/41)
+build	Checkout	2025-09-24T21:39:29.4946345Z Resolving deltas:  43% (18/41)
+build	Checkout	2025-09-24T21:39:29.4963680Z Resolving deltas:  46% (19/41)
+build	Checkout	2025-09-24T21:39:29.4993048Z Resolving deltas:  48% (20/41)
+build	Checkout	2025-09-24T21:39:29.4995470Z Resolving deltas:  51% (21/41)
+build	Checkout	2025-09-24T21:39:29.4998991Z Resolving deltas:  53% (22/41)
+build	Checkout	2025-09-24T21:39:29.5002204Z Resolving deltas:  56% (23/41)
+build	Checkout	2025-09-24T21:39:29.5004726Z Resolving deltas:  58% (24/41)
+build	Checkout	2025-09-24T21:39:29.5007298Z Resolving deltas:  60% (25/41)
+build	Checkout	2025-09-24T21:39:29.5021990Z Resolving deltas:  63% (26/41)
+build	Checkout	2025-09-24T21:39:29.5023351Z Resolving deltas:  65% (27/41)
+build	Checkout	2025-09-24T21:39:29.5024644Z Resolving deltas:  68% (28/41)
+build	Checkout	2025-09-24T21:39:29.5025947Z Resolving deltas:  70% (29/41)
+build	Checkout	2025-09-24T21:39:29.5027311Z Resolving deltas:  73% (30/41)
+build	Checkout	2025-09-24T21:39:29.5028590Z Resolving deltas:  75% (31/41)
+build	Checkout	2025-09-24T21:39:29.5029901Z Resolving deltas:  78% (32/41)
+build	Checkout	2025-09-24T21:39:29.5031278Z Resolving deltas:  80% (33/41)
+build	Checkout	2025-09-24T21:39:29.5032808Z Resolving deltas:  82% (34/41)
+build	Checkout	2025-09-24T21:39:29.5034339Z Resolving deltas:  85% (35/41)
+build	Checkout	2025-09-24T21:39:29.5154125Z Resolving deltas:  87% (36/41)
+build	Checkout	2025-09-24T21:39:29.5322307Z Resolving deltas:  90% (37/41)
+build	Checkout	2025-09-24T21:39:29.5420409Z Resolving deltas:  92% (38/41)
+build	Checkout	2025-09-24T21:39:29.5444436Z Resolving deltas:  95% (39/41)
+build	Checkout	2025-09-24T21:39:29.5467761Z Resolving deltas:  97% (40/41)
+build	Checkout	2025-09-24T21:39:29.5469574Z Resolving deltas: 100% (41/41)
+build	Checkout	2025-09-24T21:39:29.5470923Z Resolving deltas: 100% (41/41), done.
+build	Checkout	2025-09-24T21:39:29.5656090Z From https://github.com/luccidnz/hold_that_thought
+build	Checkout	2025-09-24T21:39:29.5659133Z  * [new ref]         1b1a2767665a50a1cc0a1e0213850c4e09a32922 -> pull/3/merge
+build	Checkout	2025-09-24T21:39:29.5693381Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:29.5695301Z ##[group]Determining the checkout info
+build	Checkout	2025-09-24T21:39:29.5697388Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:29.5699078Z ##[group]Checking out the ref
+build	Checkout	2025-09-24T21:39:29.5701004Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/3/merge
+build	Checkout	2025-09-24T21:39:29.8957527Z Note: switching to 'refs/remotes/pull/3/merge'.
+build	Checkout	2025-09-24T21:39:29.8960530Z 
+build	Checkout	2025-09-24T21:39:29.8961052Z You are in 'detached HEAD' state. You can look around, make experimental
+build	Checkout	2025-09-24T21:39:29.8962320Z changes and commit them, and you can discard any commits you make in this
+build	Checkout	2025-09-24T21:39:29.8963225Z state without impacting any branches by switching back to a branch.
+build	Checkout	2025-09-24T21:39:29.8963737Z 
+build	Checkout	2025-09-24T21:39:29.8964127Z If you want to create a new branch to retain commits you create, you may
+build	Checkout	2025-09-24T21:39:29.8964864Z do so (now or later) by using -c with the switch command. Example:
+build	Checkout	2025-09-24T21:39:29.8965270Z 
+build	Checkout	2025-09-24T21:39:29.8965558Z   git switch -c <new-branch-name>
+build	Checkout	2025-09-24T21:39:29.8965881Z 
+build	Checkout	2025-09-24T21:39:29.8966089Z Or undo this operation with:
+build	Checkout	2025-09-24T21:39:29.8966331Z 
+build	Checkout	2025-09-24T21:39:29.8966467Z   git switch -
+build	Checkout	2025-09-24T21:39:29.8966665Z 
+build	Checkout	2025-09-24T21:39:29.8967021Z Turn off this advice by setting config variable advice.detachedHead to false
+build	Checkout	2025-09-24T21:39:29.8967497Z 
+build	Checkout	2025-09-24T21:39:29.8968098Z HEAD is now at 1b1a276 Merge c1e9f8de258b376ddb78d37c33c6ad0bcccf6570 into f3fe53808c906bfcbbd83ef1b4c29c7225f35450
+build	Checkout	2025-09-24T21:39:29.8978621Z ##[endgroup]
+build	Checkout	2025-09-24T21:39:29.9023724Z [command]/usr/bin/git log -1 --format='%H'
+build	Checkout	2025-09-24T21:39:29.9044985Z '1b1a2767665a50a1cc0a1e0213850c4e09a32922'
+build	Setup Flutter	∩╗┐2025-09-24T21:39:29.9353435Z ##[group]Run subosito/flutter-action@v2
+build	Setup Flutter	2025-09-24T21:39:29.9353775Z with:
+build	Setup Flutter	2025-09-24T21:39:29.9354016Z   channel: stable
+build	Setup Flutter	2025-09-24T21:39:29.9354253Z   architecture: X64
+build	Setup Flutter	2025-09-24T21:39:29.9354590Z   cache: false
+build	Setup Flutter	2025-09-24T21:39:29.9354821Z   pub-cache-path: default
+build	Setup Flutter	2025-09-24T21:39:29.9355074Z   dry-run: false
+build	Setup Flutter	2025-09-24T21:39:29.9355375Z   git-source: https://github.com/flutter/flutter.git
+build	Setup Flutter	2025-09-24T21:39:29.9355690Z ##[endgroup]
+build	Setup Flutter	2025-09-24T21:39:29.9465246Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+build	Setup Flutter	2025-09-24T21:39:29.9465786Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+build	Setup Flutter	2025-09-24T21:39:29.9510416Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Setup Flutter	2025-09-24T21:39:29.9510821Z ##[endgroup]
+build	Setup Flutter	2025-09-24T21:39:29.9641370Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+build	Setup Flutter	2025-09-24T21:39:29.9641799Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9642393Z [36;1m  -n '' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9642626Z [36;1m  -f '' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9642876Z [36;1m  -a 'X64' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9643164Z [36;1m  -k '' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9643392Z [36;1m  -c '' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9643593Z [36;1m  -l '' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9643818Z [36;1m  -d 'default' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9644132Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+build	Setup Flutter	2025-09-24T21:39:29.9644457Z [36;1m  stable[0m
+build	Setup Flutter	2025-09-24T21:39:29.9663074Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Setup Flutter	2025-09-24T21:39:29.9663443Z ##[endgroup]
+build	Setup Flutter	2025-09-24T21:39:30.2239811Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+build	Setup Flutter	2025-09-24T21:39:30.2240377Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+build	Setup Flutter	2025-09-24T21:39:30.2240780Z [36;1m  -n '3.35.4' \[0m
+build	Setup Flutter	2025-09-24T21:39:30.2241082Z [36;1m  -a 'x64' \[0m
+build	Setup Flutter	2025-09-24T21:39:30.2241499Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.35.4-x64' \[0m
+build	Setup Flutter	2025-09-24T21:39:30.2242282Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+build	Setup Flutter	2025-09-24T21:39:30.2242636Z [36;1m  stable[0m
+build	Setup Flutter	2025-09-24T21:39:30.2264765Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Setup Flutter	2025-09-24T21:39:30.2265197Z ##[endgroup]
+build	Setup Flutter	2025-09-24T21:39:30.4054256Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+build	Setup Flutter	2025-09-24T21:39:30.4054930Z                                  Dload  Upload   Total   Spent    Left  Speed
+build	Setup Flutter	2025-09-24T21:39:30.4055293Z 
+build	Setup Flutter	2025-09-24T21:39:30.6833560Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build	Setup Flutter	2025-09-24T21:39:31.6841128Z   1 1372M    1 20.8M    0     0  75.1M      0  0:00:18 --:--:--  0:00:18 75.0M
+build	Setup Flutter	2025-09-24T21:39:32.6833304Z  14 1372M   14  205M    0     0   160M      0  0:00:08  0:00:01  0:00:07  160M
+build	Setup Flutter	2025-09-24T21:39:33.6833279Z  27 1372M   27  375M    0     0   164M      0  0:00:08  0:00:02  0:00:06  164M
+build	Setup Flutter	2025-09-24T21:39:34.6833373Z  40 1372M   40  554M    0     0   169M      0  0:00:08  0:00:03  0:00:05  169M
+build	Setup Flutter	2025-09-24T21:39:35.6833787Z  53 1372M   53  739M    0     0   172M      0  0:00:07  0:00:04  0:00:03  172M
+build	Setup Flutter	2025-09-24T21:39:36.6834136Z  66 1372M   66  919M    0     0   174M      0  0:00:07  0:00:05  0:00:02  179M
+build	Setup Flutter	2025-09-24T21:39:37.6845202Z  78 1372M   78 1073M    0     0   170M      0  0:00:08  0:00:06  0:00:02  173M
+build	Setup Flutter	2025-09-24T21:39:38.3154219Z  91 1372M   91 1257M    0     0   172M      0  0:00:07  0:00:07 --:--:--  176M
+build	Setup Flutter	2025-09-24T21:39:38.3154918Z 100 1372M  100 1372M    0     0   173M      0  0:00:07  0:00:07 --:--:--  176M
+build	Install dependencies	∩╗┐2025-09-24T21:40:29.1812934Z ##[group]Run flutter pub get
+build	Install dependencies	2025-09-24T21:40:29.1813385Z [36;1mflutter pub get[0m
+build	Install dependencies	2025-09-24T21:40:29.1836997Z shell: /usr/bin/bash -e {0}
+build	Install dependencies	2025-09-24T21:40:29.1837432Z env:
+build	Install dependencies	2025-09-24T21:40:29.1837782Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+build	Install dependencies	2025-09-24T21:40:29.1838234Z   PUB_CACHE: /home/runner/.pub-cache
+build	Install dependencies	2025-09-24T21:40:29.1838565Z ##[endgroup]
+build	Install dependencies	2025-09-24T21:40:34.4541547Z Resolving dependencies...
+build	Install dependencies	2025-09-24T21:40:35.9879817Z Downloading packages...
+build	Install dependencies	2025-09-24T21:40:40.6991272Z + _fe_analyzer_shared 89.0.0
+build	Install dependencies	2025-09-24T21:40:40.6992089Z + analyzer 8.2.0
+build	Install dependencies	2025-09-24T21:40:40.6992604Z + app_links 6.4.1
+build	Install dependencies	2025-09-24T21:40:40.6993316Z + app_links_linux 1.0.3
+build	Install dependencies	2025-09-24T21:40:40.6993708Z + app_links_platform_interface 2.0.2
+build	Install dependencies	2025-09-24T21:40:40.6994111Z + app_links_web 1.0.4
+build	Install dependencies	2025-09-24T21:40:40.6994484Z + archive 4.0.7
+build	Install dependencies	2025-09-24T21:40:40.6994779Z + argon2 1.0.1
+build	Install dependencies	2025-09-24T21:40:40.6995108Z + args 2.7.0
+build	Install dependencies	2025-09-24T21:40:40.6995446Z + async 2.13.0
+build	Install dependencies	2025-09-24T21:40:40.6995803Z + boolean_selector 2.1.2
+build	Install dependencies	2025-09-24T21:40:40.7131411Z + build 4.0.0
+build	Install dependencies	2025-09-24T21:40:40.7131835Z + build_config 1.2.0
+build	Install dependencies	2025-09-24T21:40:40.7132274Z + build_daemon 4.0.4
+build	Install dependencies	2025-09-24T21:40:40.7132556Z + build_runner 2.8.0
+build	Install dependencies	2025-09-24T21:40:40.7132824Z + built_collection 5.1.1
+build	Install dependencies	2025-09-24T21:40:40.7133182Z + built_value 8.12.0
+build	Install dependencies	2025-09-24T21:40:40.7133568Z + characters 1.4.0 (1.4.1 available)
+build	Install dependencies	2025-09-24T21:40:40.7134009Z + checked_yaml 2.0.4
+build	Install dependencies	2025-09-24T21:40:40.7134352Z + clock 1.1.2
+build	Install dependencies	2025-09-24T21:40:40.7134706Z + code_builder 4.11.0
+build	Install dependencies	2025-09-24T21:40:40.7135019Z + collection 1.19.1
+build	Install dependencies	2025-09-24T21:40:40.7135363Z + connectivity_plus 6.1.5 (7.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7136370Z + connectivity_plus_platform_interface 2.0.1
+build	Install dependencies	2025-09-24T21:40:40.7136820Z + convert 3.1.2
+build	Install dependencies	2025-09-24T21:40:40.7137113Z + cross_file 0.3.4+2
+build	Install dependencies	2025-09-24T21:40:40.7137411Z + crypto 3.0.6
+build	Install dependencies	2025-09-24T21:40:40.7137728Z + cryptography 2.7.0
+build	Install dependencies	2025-09-24T21:40:40.7137980Z + dart_style 3.1.2
+build	Install dependencies	2025-09-24T21:40:40.7138264Z + dbus 0.7.11
+build	Install dependencies	2025-09-24T21:40:40.7138533Z + fake_async 1.3.3
+build	Install dependencies	2025-09-24T21:40:40.7138825Z + ffi 2.1.4
+build	Install dependencies	2025-09-24T21:40:40.7139083Z + file 7.0.1
+build	Install dependencies	2025-09-24T21:40:40.7139374Z + file_saver 0.2.9 (0.3.1 available)
+build	Install dependencies	2025-09-24T21:40:40.7139750Z + file_selector 1.0.4
+build	Install dependencies	2025-09-24T21:40:40.7140071Z + file_selector_android 0.5.1+16
+build	Install dependencies	2025-09-24T21:40:40.7140457Z + file_selector_ios 0.5.3+2
+build	Install dependencies	2025-09-24T21:40:40.7140785Z + file_selector_linux 0.9.3+2
+build	Install dependencies	2025-09-24T21:40:40.7141603Z + file_selector_macos 0.9.4+4
+build	Install dependencies	2025-09-24T21:40:40.7142129Z + file_selector_platform_interface 2.6.2
+build	Install dependencies	2025-09-24T21:40:40.7142577Z + file_selector_web 0.9.4+2
+build	Install dependencies	2025-09-24T21:40:40.7142916Z + file_selector_windows 0.9.3+4
+build	Install dependencies	2025-09-24T21:40:40.7143264Z + fixnum 1.1.1
+build	Install dependencies	2025-09-24T21:40:40.7143564Z + flutter 0.0.0 from sdk flutter
+build	Install dependencies	2025-09-24T21:40:40.7143958Z + flutter_background_service 5.1.0
+build	Install dependencies	2025-09-24T21:40:40.7144382Z + flutter_background_service_android 6.3.1
+build	Install dependencies	2025-09-24T21:40:40.7144837Z + flutter_background_service_ios 5.0.3
+build	Install dependencies	2025-09-24T21:40:40.7145325Z + flutter_background_service_platform_interface 5.1.2
+build	Install dependencies	2025-09-24T21:40:40.7145818Z + flutter_dotenv 6.0.0
+build	Install dependencies	2025-09-24T21:40:40.7146170Z + flutter_lints 4.0.0 (6.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7146593Z + flutter_riverpod 2.6.1 (3.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7147038Z + flutter_secure_storage 9.2.4
+build	Install dependencies	2025-09-24T21:40:40.7147467Z + flutter_secure_storage_linux 1.2.3 (2.0.1 available)
+build	Install dependencies	2025-09-24T21:40:40.7148018Z + flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7148636Z + flutter_secure_storage_platform_interface 1.1.2 (2.0.1 available)
+build	Install dependencies	2025-09-24T21:40:40.7149252Z + flutter_secure_storage_web 1.2.1 (2.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7149801Z + flutter_secure_storage_windows 3.1.2 (4.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7150298Z + flutter_test 0.0.0 from sdk flutter
+build	Install dependencies	2025-09-24T21:40:40.7150802Z + flutter_web_plugins 0.0.0 from sdk flutter
+build	Install dependencies	2025-09-24T21:40:40.7151281Z + frontend_server_client 4.0.0
+build	Install dependencies	2025-09-24T21:40:40.7151708Z + functions_client 2.4.4
+build	Install dependencies	2025-09-24T21:40:40.7152159Z + glob 2.1.3
+build	Install dependencies	2025-09-24T21:40:40.7152481Z + go_router 15.1.2 (16.2.4 available)
+build	Install dependencies	2025-09-24T21:40:40.7153163Z + gotrue 2.15.0
+build	Install dependencies	2025-09-24T21:40:40.7153469Z + graphs 2.3.2
+build	Install dependencies	2025-09-24T21:40:40.7153767Z + gtk 2.1.0
+build	Install dependencies	2025-09-24T21:40:40.7154016Z + hex 0.2.0
+build	Install dependencies	2025-09-24T21:40:40.7154269Z + hive 2.2.3
+build	Install dependencies	2025-09-24T21:40:40.7154514Z + hive_flutter 1.1.0
+build	Install dependencies	2025-09-24T21:40:40.7154818Z + http 1.5.0
+build	Install dependencies	2025-09-24T21:40:40.7155073Z + http_multi_server 3.2.2
+build	Install dependencies	2025-09-24T21:40:40.7155461Z + http_parser 4.1.2
+build	Install dependencies	2025-09-24T21:40:40.7155736Z + intl 0.20.2
+build	Install dependencies	2025-09-24T21:40:40.7156003Z + io 1.0.5
+build	Install dependencies	2025-09-24T21:40:40.7156256Z + js 0.6.7 (0.7.2 available)
+build	Install dependencies	2025-09-24T21:40:40.7156608Z + json_annotation 4.9.0
+build	Install dependencies	2025-09-24T21:40:40.7156911Z + jwt_decode 0.3.1
+build	Install dependencies	2025-09-24T21:40:40.7157210Z + leak_tracker 11.0.2
+build	Install dependencies	2025-09-24T21:40:40.7157539Z + leak_tracker_flutter_testing 3.0.10
+build	Install dependencies	2025-09-24T21:40:40.7157943Z + leak_tracker_testing 3.0.2
+build	Install dependencies	2025-09-24T21:40:40.7158324Z + lints 4.0.0 (6.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7158690Z + logging 1.3.0
+build	Install dependencies	2025-09-24T21:40:40.7158995Z + matcher 0.12.17
+build	Install dependencies	2025-09-24T21:40:40.7159352Z + material_color_utilities 0.11.1 (0.13.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7159828Z + meta 1.16.0 (1.17.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7160110Z + mime 2.0.0
+build	Install dependencies	2025-09-24T21:40:40.7160356Z + nm 0.5.0
+build	Install dependencies	2025-09-24T21:40:40.7160615Z + open_filex 4.7.0
+build	Install dependencies	2025-09-24T21:40:40.7160925Z + package_config 2.2.0
+build	Install dependencies	2025-09-24T21:40:40.7161221Z + package_info_plus 9.0.0
+build	Install dependencies	2025-09-24T21:40:40.7161615Z + package_info_plus_platform_interface 3.2.1
+build	Install dependencies	2025-09-24T21:40:40.7162169Z + path 1.9.1
+build	Install dependencies	2025-09-24T21:40:40.7162467Z + path_provider 2.1.5
+build	Install dependencies	2025-09-24T21:40:40.7162800Z + path_provider_android 2.2.18
+build	Install dependencies	2025-09-24T21:40:40.7163177Z + path_provider_foundation 2.4.2
+build	Install dependencies	2025-09-24T21:40:40.7163546Z + path_provider_linux 2.2.1
+build	Install dependencies	2025-09-24T21:40:40.7163912Z + path_provider_platform_interface 2.1.2
+build	Install dependencies	2025-09-24T21:40:40.7164363Z + path_provider_windows 2.3.0
+build	Install dependencies	2025-09-24T21:40:40.7164779Z + permission_handler 11.4.0 (12.0.1 available)
+build	Install dependencies	2025-09-24T21:40:40.7165313Z + permission_handler_android 12.1.0 (13.0.1 available)
+build	Install dependencies	2025-09-24T21:40:40.7165794Z + permission_handler_apple 9.4.7
+build	Install dependencies	2025-09-24T21:40:40.7166222Z + permission_handler_html 0.1.3+5
+build	Install dependencies	2025-09-24T21:40:40.7166688Z + permission_handler_platform_interface 4.3.0
+build	Install dependencies	2025-09-24T21:40:40.7167206Z + permission_handler_windows 0.2.1
+build	Install dependencies	2025-09-24T21:40:40.7167657Z + petitparser 7.0.1
+build	Install dependencies	2025-09-24T21:40:40.7167985Z + platform 3.1.6
+build	Install dependencies	2025-09-24T21:40:40.7168357Z + plugin_platform_interface 2.1.8
+build	Install dependencies	2025-09-24T21:40:40.7168965Z + pointycastle 3.9.1 (4.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7169315Z + pool 1.5.2
+build	Install dependencies	2025-09-24T21:40:40.7169551Z + posix 6.0.3
+build	Install dependencies	2025-09-24T21:40:40.7169815Z + postgrest 2.4.2
+build	Install dependencies	2025-09-24T21:40:40.7170102Z + pub_semver 2.2.0
+build	Install dependencies	2025-09-24T21:40:40.7170388Z + pubspec_parse 1.5.0
+build	Install dependencies	2025-09-24T21:40:40.7170688Z + realtime_client 2.5.2
+build	Install dependencies	2025-09-24T21:40:40.7170997Z + record 6.1.1
+build	Install dependencies	2025-09-24T21:40:40.7171272Z + record_android 1.4.2
+build	Install dependencies	2025-09-24T21:40:40.7171564Z + record_ios 1.1.2
+build	Install dependencies	2025-09-24T21:40:40.7172015Z + record_linux 1.2.1
+build	Install dependencies	2025-09-24T21:40:40.7172319Z + record_macos 1.1.1
+build	Install dependencies	2025-09-24T21:40:40.7172676Z + record_platform_interface 1.4.0
+build	Install dependencies	2025-09-24T21:40:40.7173030Z + record_web 1.2.0
+build	Install dependencies	2025-09-24T21:40:40.7173334Z + record_windows 1.0.7
+build	Install dependencies	2025-09-24T21:40:40.7173639Z + retry 3.1.2
+build	Install dependencies	2025-09-24T21:40:40.7173967Z + riverpod 2.6.1 (3.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7174468Z + rxdart 0.28.0
+build	Install dependencies	2025-09-24T21:40:40.7174768Z + sentry 8.14.2 (9.6.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7175144Z + sentry_flutter 8.14.2 (9.6.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7175563Z + share_plus 11.1.0 (12.0.0 available)
+build	Install dependencies	2025-09-24T21:40:40.7175969Z + share_plus_platform_interface 6.1.0
+build	Install dependencies	2025-09-24T21:40:40.7176387Z + shared_preferences 2.5.3
+build	Install dependencies	2025-09-24T21:40:40.7176783Z + shared_preferences_android 2.4.13
+build	Install dependencies	2025-09-24T21:40:40.7177270Z + shared_preferences_foundation 2.5.4
+build	Install dependencies	2025-09-24T21:40:40.7177717Z + shared_preferences_linux 2.4.1
+build	Install dependencies	2025-09-24T21:40:40.7178145Z + shared_preferences_platform_interface 2.4.1
+build	Install dependencies	2025-09-24T21:40:40.7178558Z + shared_preferences_web 2.4.3
+build	Install dependencies	2025-09-24T21:40:40.7178937Z + shared_preferences_windows 2.4.1
+build	Install dependencies	2025-09-24T21:40:40.7179512Z + shelf 1.4.2
+build	Install dependencies	2025-09-24T21:40:40.7179835Z + shelf_web_socket 3.0.0
+build	Install dependencies	2025-09-24T21:40:40.7180219Z + sky_engine 0.0.0 from sdk flutter
+build	Install dependencies	2025-09-24T21:40:40.7180644Z + source_span 1.10.1
+build	Install dependencies	2025-09-24T21:40:40.7180908Z + sprintf 7.0.0
+build	Install dependencies	2025-09-24T21:40:40.7181165Z + stack_trace 1.12.1
+build	Install dependencies	2025-09-24T21:40:40.7181406Z + state_notifier 1.0.0
+build	Install dependencies	2025-09-24T21:40:40.7181683Z + storage_client 2.4.1
+build	Install dependencies	2025-09-24T21:40:40.7182112Z + stream_channel 2.1.4
+build	Install dependencies	2025-09-24T21:40:40.7182440Z + stream_transform 2.1.1
+build	Install dependencies	2025-09-24T21:40:40.7182733Z + string_scanner 1.4.1
+build	Install dependencies	2025-09-24T21:40:40.7183025Z + supabase 2.9.1
+build	Install dependencies	2025-09-24T21:40:40.7183318Z + supabase_flutter 2.10.1
+build	Install dependencies	2025-09-24T21:40:40.7183643Z + term_glyph 1.2.2
+build	Install dependencies	2025-09-24T21:40:40.7183948Z + test_api 0.7.6 (0.7.7 available)
+build	Install dependencies	2025-09-24T21:40:40.7184340Z + typed_data 1.4.0
+build	Install dependencies	2025-09-24T21:40:40.7184639Z + url_launcher 6.3.2
+build	Install dependencies	2025-09-24T21:40:40.7185000Z + url_launcher_android 6.3.22
+build	Install dependencies	2025-09-24T21:40:40.7185386Z + url_launcher_ios 6.3.4
+build	Install dependencies	2025-09-24T21:40:40.7185660Z + url_launcher_linux 3.2.1
+build	Install dependencies	2025-09-24T21:40:40.7185982Z + url_launcher_macos 3.2.3
+build	Install dependencies	2025-09-24T21:40:40.7186318Z + url_launcher_platform_interface 2.3.2
+build	Install dependencies	2025-09-24T21:40:40.7186745Z + url_launcher_web 2.4.1
+build	Install dependencies	2025-09-24T21:40:40.7187090Z + url_launcher_windows 3.1.4
+build	Install dependencies	2025-09-24T21:40:40.7187467Z + uuid 4.5.1
+build	Install dependencies	2025-09-24T21:40:40.7187766Z + vector_math 2.2.0
+build	Install dependencies	2025-09-24T21:40:40.7188069Z + vm_service 15.0.2
+build	Install dependencies	2025-09-24T21:40:40.7188386Z + watcher 1.1.3
+build	Install dependencies	2025-09-24T21:40:40.7188690Z + web 1.1.1
+build	Install dependencies	2025-09-24T21:40:40.7188977Z + web_socket 1.0.1
+build	Install dependencies	2025-09-24T21:40:40.7189288Z + web_socket_channel 3.0.3
+build	Install dependencies	2025-09-24T21:40:40.7189646Z + win32 5.14.0
+build	Install dependencies	2025-09-24T21:40:40.7189943Z + xdg_directories 1.1.0
+build	Install dependencies	2025-09-24T21:40:40.7190265Z + xml 6.6.1
+build	Install dependencies	2025-09-24T21:40:40.7190523Z + yaml 3.1.3
+build	Install dependencies	2025-09-24T21:40:40.7190836Z + yet_another_json_isolate 2.1.0
+build	Install dependencies	2025-09-24T21:40:40.7191269Z Changed 172 dependencies!
+build	Install dependencies	2025-09-24T21:40:40.7191817Z 23 packages have newer versions incompatible with dependency constraints.
+build	Install dependencies	2025-09-24T21:40:40.7192672Z Try `flutter pub outdated` for more information.
+build	Run unit tests	∩╗┐2025-09-24T21:40:41.2744625Z ##[group]Run flutter test
+build	Run unit tests	2025-09-24T21:40:41.2744928Z [36;1mflutter test[0m
+build	Run unit tests	2025-09-24T21:40:41.2766632Z shell: /usr/bin/bash -e {0}
+build	Run unit tests	2025-09-24T21:40:41.2766909Z env:
+build	Run unit tests	2025-09-24T21:40:41.2767169Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+build	Run unit tests	2025-09-24T21:40:41.2767501Z   PUB_CACHE: /home/runner/.pub-cache
+build	Run unit tests	2025-09-24T21:40:41.2767735Z ##[endgroup]
+build	Run unit tests	2025-09-24T21:40:42.5244653Z 
+build	Run unit tests	2025-09-24T21:40:51.8345438Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/log_redactor_test.dart: LogRedactor redacts email addresses
+build	Run unit tests	2025-09-24T21:40:51.8398587Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/log_redactor_test.dart: LogRedactor redacts audio file paths
+build	Run unit tests	2025-09-24T21:40:51.8439703Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/log_redactor_test.dart: LogRedactor redacts passphrases
+build	Run unit tests	2025-09-24T21:40:51.8477989Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/log_redactor_test.dart: LogRedactor redacts transcripts
+build	Run unit tests	2025-09-24T21:40:51.8496969Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/log_redactor_test.dart: LogRedactor redactPath handles audio files
+build	Run unit tests	2025-09-24T21:40:51.8514711Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/log_redactor_test.dart: LogRedactor redactTranscript handles various transcript lengths
+build	Run unit tests	2025-09-24T21:40:51.8776399Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/temp_file_manager_test.dart: TempFileManager cleanupTempFiles deletes all temporary files
+build	Run unit tests	2025-09-24T21:40:51.8817725Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/temp_file_manager_test.dart: TempFileManager createTempFile creates a file with correct extension
+build	Run unit tests	2025-09-24T21:40:51.8852857Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/temp_file_manager_test.dart: TempFileManager deleteTempFile removes the specified file
+build	Run unit tests	2025-09-24T21:40:51.8922340Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/temp_file_manager_test.dart: TempFileManager getTempFileCount returns correct count
+build	Run unit tests	2025-09-24T21:40:53.2912897Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/widget_test.dart: App builds
+build	Run unit tests	2025-09-24T21:40:53.4823596Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/crypto_service_test.dart: CryptoService Basics isEncryptionSetUp returns false when not set up
+build	Run unit tests	2025-09-24T21:40:53.4863642Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/crypto_service_test.dart: CryptoService Basics isE2eeEnabled returns feature flag value
+build	Run unit tests	2025-09-24T21:40:54.6129250Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/crypto_service_test.dart: CryptoService Basics setupE2ee sets up encryption
+build	Run unit tests	2025-09-24T21:40:54.8517864Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/fake_sync_provider_test.dart: FakeSyncProvider uploads with progress and upserts metadata
+build	Run unit tests	2025-09-24T21:40:54.8594174Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/fake_sync_provider_test.dart: FakeSyncProvider can simulate failures
+build	Run unit tests	2025-09-24T21:40:55.4532354Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/thought_repository_test.dart: ThoughtRepository ensureSha256() computes and persists digest
+build	Run unit tests	2025-09-24T21:40:55.4569351Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/thought_repository_test.dart: ThoughtRepository updateAfterSync() sets remoteId & uploadedAt and persists
+build	Run unit tests	2025-09-24T21:40:55.5708330Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/crypto_service_test.dart: CryptoService Basics isEncryptionSetUp returns true after setup
+build	Run unit tests	2025-09-24T21:40:57.3734296Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/crypto_service_test.dart: CryptoService Basics unlock works with correct passphrase
+build	Run unit tests	2025-09-24T21:40:58.7238909Z Γ£à /home/runner/work/hold_that_thought/hold_that_thought/test/crypto_service_test.dart: CryptoService Basics unlock fails with incorrect passphrase
+build	Run unit tests	2025-09-24T21:40:58.7388668Z 
+build	Run unit tests	2025-09-24T21:40:58.7395264Z ≡ƒÄë 21 tests passed.
+build	Build Web	∩╗┐2025-09-24T21:40:58.7994455Z ##[group]Run flutter build web --release
+build	Build Web	2025-09-24T21:40:58.7994826Z [36;1mflutter build web --release[0m
+build	Build Web	2025-09-24T21:40:58.8016735Z shell: /usr/bin/bash -e {0}
+build	Build Web	2025-09-24T21:40:58.8017007Z env:
+build	Build Web	2025-09-24T21:40:58.8017271Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+build	Build Web	2025-09-24T21:40:58.8017610Z   PUB_CACHE: /home/runner/.pub-cache
+build	Build Web	2025-09-24T21:40:58.8017836Z ##[endgroup]
+build	Build Web	2025-09-24T21:41:11.5111186Z Compiling lib/main.dart for the Web...                          
+build	Build Web	2025-09-24T21:41:11.5127546Z Wasm dry run findings:
+build	Build Web	2025-09-24T21:41:11.5129601Z Found incompatibilities with WebAssembly.
+build	Build Web	2025-09-24T21:41:11.5130242Z 
+build	Build Web	2025-09-24T21:41:11.5130718Z package:file_saver/file_saver_web.dart 7:1 - dart:html unsupported (0)
+build	Build Web	2025-09-24T21:41:11.5133528Z package:flutter_secure_storage_web/flutter_secure_storage_web.dart 5:1 - dart:html unsupported (0)
+build	Build Web	2025-09-24T21:41:11.5136843Z package:flutter_secure_storage_web/src/subtle.dart 21:1 - dart:html unsupported (0)
+build	Build Web	2025-09-24T21:41:11.5138812Z package:js/js.dart 10:1 - dart:js unsupported (1)
+build	Build Web	2025-09-24T21:41:11.5139862Z package:flutter_secure_storage_web/flutter_secure_storage_web.dart 6:1 - JS interop library 'dart:js_util' can't be imported when compiling to Wasm. (2)
+build	Build Web	2025-09-24T21:41:11.5141191Z package:flutter_secure_storage_web/src/subtle.dart 22:1 - JS interop library 'dart:js_util' can't be imported when compiling to Wasm. (2)
+build	Build Web	2025-09-24T21:41:11.5142624Z package:flutter_secure_storage_web/src/subtle.dart 26:1 - JS interop library 'package:js/js.dart' can't be imported when compiling to Wasm. (2)
+build	Build Web	2025-09-24T21:41:11.5143374Z 
+build	Build Web	2025-09-24T21:41:11.5143989Z Consider addressing these issues to enable wasm builds. See docs for more info: https://docs.flutter.dev/platform-integration/web/wasm
+build	Build Web	2025-09-24T21:41:11.5144722Z 
+build	Build Web	2025-09-24T21:41:11.5164114Z Use --no-wasm-dry-run to disable these warnings.
+build	Build Web	2025-09-24T21:41:39.7435538Z Expected to find fonts for (MaterialIcons, packages/cupertino_icons/CupertinoIcons), but found (MaterialIcons). This usually means you are referring to font families in an IconData class but not including them in the assets section of your pubspec.yaml, are missing the package that would include them, or are missing "uses-material-design: true".
+build	Build Web	2025-09-24T21:41:39.7539103Z Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 9196 bytes (99.4% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+build	Build Web	2025-09-24T21:41:40.3703557Z Compiling lib/main.dart for the Web...                             40.9s
+build	Build Web	2025-09-24T21:41:40.3711293Z Γ£ô Built build/web
+build	Build Android APK (NDK-free)	∩╗┐2025-09-24T21:41:40.3879066Z ##[group]Run flutter build apk --release
+build	Build Android APK (NDK-free)	2025-09-24T21:41:40.3879448Z [36;1mflutter build apk --release[0m
+build	Build Android APK (NDK-free)	2025-09-24T21:41:40.3902249Z shell: /usr/bin/bash -e {0}
+build	Build Android APK (NDK-free)	2025-09-24T21:41:40.3902527Z env:
+build	Build Android APK (NDK-free)	2025-09-24T21:41:40.3902792Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+build	Build Android APK (NDK-free)	2025-09-24T21:41:40.3903131Z   PUB_CACHE: /home/runner/.pub-cache
+build	Build Android APK (NDK-free)	2025-09-24T21:41:40.3903381Z ##[endgroup]
+build	Build Android APK (NDK-free)	2025-09-24T21:44:30.9099349Z Running Gradle task 'assembleRelease'...                        
+build	Build Android APK (NDK-free)	2025-09-24T21:44:30.9100353Z Checking the license for package NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/licenses
+build	Build Android APK (NDK-free)	2025-09-24T21:44:30.9868491Z License for package NDK (Side by side) 27.0.12077973 accepted.
+build	Build Android APK (NDK-free)	2025-09-24T21:44:30.9872299Z Preparing "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973".
+build	Build Android APK (NDK-free)	2025-09-24T21:44:44.4858917Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" ready.
+build	Build Android APK (NDK-free)	2025-09-24T21:44:44.4861030Z Installing NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/ndk/27.0.12077973
+build	Build Android APK (NDK-free)	2025-09-24T21:44:44.4862586Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" complete.
+build	Build Android APK (NDK-free)	2025-09-24T21:44:45.4923173Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" finished.
+build	Build Android APK (NDK-free)	2025-09-24T21:48:34.8869335Z Expected to find fonts for (packages/cupertino_icons/CupertinoIcons, MaterialIcons), but found (MaterialIcons). This usually means you are referring to font families in an IconData class but not including them in the assets section of your pubspec.yaml, are missing the package that would include them, or are missing "uses-material-design: true".
+build	Build Android APK (NDK-free)	2025-09-24T21:48:34.9932249Z Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 3188 bytes (99.8% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2881268Z 
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2883144Z FAILURE: Build failed with an exception.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2884419Z 
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2884549Z * What went wrong:
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2885024Z Execution failed for task ':app:processReleaseResources'.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2886070Z > A failure occurred while executing com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask$TaskAction
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2887001Z    > Android resource linking failed
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2888546Z      ERROR: /home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/res/drawable/ic_stop.xml:6: AAPT: error: resource attr/colorOnPrimary (aka com.holdthatthought:attr/colorOnPrimary) not found.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2889725Z 
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2889737Z 
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2889865Z * Try:
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2890265Z > Run with --stacktrace option to get the stack trace.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2890792Z > Run with --info or --debug option to get more log output.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2891338Z > Run with --scan to get full insights.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2891804Z > Get more help at https://help.gradle.org.
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2892233Z 
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.2892370Z BUILD FAILED in 8m 19s
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.7902445Z Running Gradle task 'assembleRelease'...                          500.7s
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.7999262Z Gradle task assembleRelease failed with exit code 1
+build	Build Android APK (NDK-free)	2025-09-24T21:50:01.8068919Z ##[error]Process completed with exit code 1.
+build	Post Setup Flutter	∩╗┐2025-09-24T21:50:01.8186974Z Post job cleanup.
+build	Post Checkout	∩╗┐2025-09-24T21:50:01.8234091Z Post job cleanup.
+build	Post Checkout	2025-09-24T21:50:01.8983776Z [command]/usr/bin/git version
+build	Post Checkout	2025-09-24T21:50:01.9017729Z git version 2.51.0
+build	Post Checkout	2025-09-24T21:50:01.9056303Z Temporarily overriding HOME='/home/runner/work/_temp/c884b8fd-dda0-4d10-bea6-993b24acad65' before making global git config changes
+build	Post Checkout	2025-09-24T21:50:01.9057093Z Adding repository directory to the temporary git global config as a safe directory
+build	Post Checkout	2025-09-24T21:50:01.9060179Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hold_that_thought/hold_that_thought
+build	Post Checkout	2025-09-24T21:50:01.9087055Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Post Checkout	2025-09-24T21:50:01.9112017Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Post Checkout	2025-09-24T21:50:01.9320785Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Post Checkout	2025-09-24T21:50:01.9338589Z http.https://github.com/.extraheader
+build	Post Checkout	2025-09-24T21:50:01.9348799Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+build	Post Checkout	2025-09-24T21:50:01.9376680Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Complete job	∩╗┐2025-09-24T21:50:01.9680326Z Cleaning up orphan processes
+build	Complete job	2025-09-24T21:50:01.9974476Z Terminate orphan process: pid (2757) (java)
+build	Complete job	2025-09-24T21:50:02.0039620Z Terminate orphan process: pid (2901) (java)
