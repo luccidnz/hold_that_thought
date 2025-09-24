@@ -34,6 +34,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Explicitly enable desugaring for debug builds
+            isMinifyEnabled = false
+        }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
@@ -59,7 +63,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
     
     // Testing dependencies
     testImplementation("junit:junit:4.13.2")
