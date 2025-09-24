@@ -1,0 +1,488 @@
+﻿build_windows	Set up job	∩╗┐2025-09-24T07:56:33.4429690Z Current runner version: '2.328.0'
+build_windows	Set up job	2025-09-24T07:56:33.4472786Z ##[group]Runner Image Provisioner
+build_windows	Set up job	2025-09-24T07:56:33.4473958Z Hosted Compute Agent
+build_windows	Set up job	2025-09-24T07:56:33.4474810Z Version: 20250829.383
+build_windows	Set up job	2025-09-24T07:56:33.4475711Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+build_windows	Set up job	2025-09-24T07:56:33.4476801Z Build Date: 2025-08-29T13:48:48Z
+build_windows	Set up job	2025-09-24T07:56:33.4477750Z ##[endgroup]
+build_windows	Set up job	2025-09-24T07:56:33.4478672Z ##[group]Operating System
+build_windows	Set up job	2025-09-24T07:56:33.4479629Z Microsoft Windows Server 2022
+build_windows	Set up job	2025-09-24T07:56:33.4480801Z 10.0.20348
+build_windows	Set up job	2025-09-24T07:56:33.4481510Z Datacenter
+build_windows	Set up job	2025-09-24T07:56:33.4482247Z ##[endgroup]
+build_windows	Set up job	2025-09-24T07:56:33.4482980Z ##[group]Runner Image
+build_windows	Set up job	2025-09-24T07:56:33.4483768Z Image: windows-2022
+build_windows	Set up job	2025-09-24T07:56:33.4484508Z Version: 20250907.29.1
+build_windows	Set up job	2025-09-24T07:56:33.4486078Z Included Software: https://github.com/actions/runner-images/blob/win22/20250907.29/images/windows/Windows2022-Readme.md
+build_windows	Set up job	2025-09-24T07:56:33.4488324Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20250907.29
+build_windows	Set up job	2025-09-24T07:56:33.4490707Z ##[endgroup]
+build_windows	Set up job	2025-09-24T07:56:33.4492315Z ##[group]GITHUB_TOKEN Permissions
+build_windows	Set up job	2025-09-24T07:56:33.4494547Z Contents: read
+build_windows	Set up job	2025-09-24T07:56:33.4495283Z Metadata: read
+build_windows	Set up job	2025-09-24T07:56:33.4496001Z PullRequests: write
+build_windows	Set up job	2025-09-24T07:56:33.4496663Z ##[endgroup]
+build_windows	Set up job	2025-09-24T07:56:33.4499290Z Secret source: Actions
+build_windows	Set up job	2025-09-24T07:56:33.4500000Z Prepare workflow directory
+build_windows	Set up job	2025-09-24T07:56:33.4849174Z Prepare all required actions
+build_windows	Set up job	2025-09-24T07:56:33.4900784Z Getting action download info
+build_windows	Set up job	2025-09-24T07:56:33.7623758Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+build_windows	Set up job	2025-09-24T07:56:33.8824825Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build_windows	Set up job	2025-09-24T07:56:34.1268729Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build_windows	Set up job	2025-09-24T07:56:34.4235431Z Getting action download info
+build_windows	Set up job	2025-09-24T07:56:34.5260993Z Download action repository 'actions/cache@v4' (SHA:0400d5f644dc74513175e3cd8d07132dd4860809)
+build_windows	Set up job	2025-09-24T07:56:34.7032826Z Complete job name: build_windows
+build_windows	Enable long paths	∩╗┐2025-09-24T07:56:34.8711816Z ##[group]Run git config --system core.longpaths true
+build_windows	Enable long paths	2025-09-24T07:56:34.8712923Z [36;1mgit config --system core.longpaths true[0m
+build_windows	Enable long paths	2025-09-24T07:56:34.9157373Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build_windows	Enable long paths	2025-09-24T07:56:34.9158664Z ##[endgroup]
+build_windows	Run actions/checkout@v4	∩╗┐2025-09-24T07:56:40.7785533Z ##[group]Run actions/checkout@v4
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7785949Z with:
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7786146Z   lfs: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7786360Z   repository: luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7786854Z   token: ***
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7787074Z   ssh-strict: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7787294Z   ssh-user: git
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7787519Z   persist-credentials: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7787755Z   clean: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7787973Z   sparse-checkout-cone-mode: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7788240Z   fetch-depth: 1
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7788472Z   fetch-tags: false
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7788685Z   show-progress: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7788900Z   submodules: false
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7789106Z   set-safe-directory: true
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.7789342Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.9423918Z Syncing repository: luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.9425642Z ##[group]Getting Git version info
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:40.9426162Z Working directory is 'D:\a\hold_that_thought\hold_that_thought'
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:41.0214323Z [command]"C:\Program Files\Git\bin\git.exe" version
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:41.0424747Z git version 2.51.0.windows.1
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:41.1272084Z [command]"C:\Program Files\Git\bin\git.exe" lfs version
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2157265Z git-lfs/3.7.0 (GitHub; windows amd64; go 1.24.4; git 92dddf56)
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2199564Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2221838Z Temporarily overriding HOME='D:\a\_temp\db7ed5aa-d66a-4cfe-8da5-eddc6d1b9a3f' before making global git config changes
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2224335Z Adding repository directory to the temporary git global config as a safe directory
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2233384Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\hold_that_thought\hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2448119Z Deleting the contents of 'D:\a\hold_that_thought\hold_that_thought'
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2453690Z ##[group]Initializing the repository
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2462957Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\hold_that_thought\hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.2996213Z Initialized empty Git repository in D:/a/hold_that_thought/hold_that_thought/.git/
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3026558Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3411953Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3483782Z ##[group]Disabling automatic garbage collection
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3484584Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3637482Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3637861Z ##[group]Setting up auth
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3649667Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:42.3862799Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:43.3308455Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:43.3532925Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:43.7760622Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:43.7982524Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:43.7992387Z [command]"C:\Program Files\Git\bin\git.exe" lfs install --local
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:44.1662770Z Updated Git hooks.
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:44.1663337Z Git LFS initialized.
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:44.1838849Z ##[group]Fetching the repository
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:44.1855648Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0d5ff34676a3e1991955ce2c1fd78e8fbf16d9c9:refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4713129Z From https://github.com/luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4714100Z  * [new ref]         0d5ff34676a3e1991955ce2c1fd78e8fbf16d9c9 -> pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4897736Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4898313Z ##[group]Determining the checkout info
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4901292Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4901998Z ##[group]Fetching LFS objects
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.4911069Z [command]"C:\Program Files\Git\bin\git.exe" lfs fetch origin refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.6804689Z Fetching reference refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.8049671Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.8059410Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.8395696Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.8604609Z ##[group]Checking out the ref
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:45.8613441Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/3/merge
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2555113Z Note: switching to 'refs/remotes/pull/3/merge'.
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2555546Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2555807Z You are in 'detached HEAD' state. You can look around, make experimental
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2556949Z changes and commit them, and you can discard any commits you make in this
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2557699Z state without impacting any branches by switching back to a branch.
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2558089Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2559392Z If you want to create a new branch to retain commits you create, you may
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2560090Z do so (now or later) by using -c with the switch command. Example:
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2560480Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2560673Z   git switch -c <new-branch-name>
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2560940Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2561075Z Or undo this operation with:
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2561338Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2561432Z   git switch -
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2561589Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2561941Z Turn off this advice by setting config variable advice.detachedHead to false
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2562406Z 
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.2562950Z HEAD is now at 0d5ff34 Merge 28ce8f3d36f6c0ce0eb2dfa401e584cc9d1ba8d9 into f3fe53808c906bfcbbd83ef1b4c29c7225f35450
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.4740915Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.5028960Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+build_windows	Run actions/checkout@v4	2025-09-24T07:56:46.5223235Z 0d5ff34676a3e1991955ce2c1fd78e8fbf16d9c9
+build_windows	Git LFS	∩╗┐2025-09-24T07:56:46.5485782Z ##[group]Run git lfs install
+build_windows	Git LFS	2025-09-24T07:56:46.5486131Z [36;1mgit lfs install[0m
+build_windows	Git LFS	2025-09-24T07:56:46.5486346Z [36;1mgit lfs fetch --all || true[0m
+build_windows	Git LFS	2025-09-24T07:56:46.5486566Z [36;1mgit lfs checkout[0m
+build_windows	Git LFS	2025-09-24T07:56:46.5501696Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Git LFS	2025-09-24T07:56:46.5502056Z ##[endgroup]
+build_windows	Git LFS	2025-09-24T07:56:46.9604613Z Updated Git hooks.
+build_windows	Git LFS	2025-09-24T07:56:46.9605123Z Git LFS initialized.
+build_windows	Git LFS	2025-09-24T07:56:47.1680923Z Fetching all references...
+build_windows	Git LFS	2025-09-24T07:56:47.1681341Z 1 object found, done.
+build_windows	Run subosito/flutter-action@v2	∩╗┐2025-09-24T07:56:47.4248485Z ##[group]Run subosito/flutter-action@v2
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4248808Z with:
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4248978Z   channel: stable
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4249142Z   cache: true
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4249289Z   architecture: X64
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4249462Z   pub-cache-path: default
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4249640Z   dry-run: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4249860Z   git-source: https://github.com/flutter/flutter.git
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4250116Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4412358Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4412666Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4423040Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.4423396Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5066538Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5066863Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5067094Z [36;1m  -n '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5067259Z [36;1m  -f '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5067445Z [36;1m  -a 'X64' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5067601Z [36;1m  -k '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5067743Z [36;1m  -c '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5067886Z [36;1m  -l '' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5068030Z [36;1m  -d 'default' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5068279Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5068530Z [36;1m  stable[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5078844Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:47.5079203Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9225856Z ##[group]Run actions/cache@v4
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9226077Z with:
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9226288Z   path: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9226705Z   key: flutter-windows-stable-3.35.4-x64-d693b4b9dbac2acd4477aea4555ca6dcbea44ba2
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9227067Z   enableCrossOsArchive: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9227268Z   fail-on-cache-miss: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9227442Z   lookup-only: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9227615Z   save-always: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:49.9227762Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.3272014Z Cache not found for input keys: flutter-windows-stable-3.35.4-x64-d693b4b9dbac2acd4477aea4555ca6dcbea44ba2
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4885368Z ##[group]Run actions/cache@v4
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4885597Z with:
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4885790Z   path: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4886217Z   key: flutter-pub-windows-stable-3.35.4-x64-d693b4b9dbac2acd4477aea4555ca6dcbea44ba2-
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4886771Z   enableCrossOsArchive: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4886976Z   fail-on-cache-miss: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4887161Z   lookup-only: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4887318Z   save-always: false
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.4887485Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8330166Z Cache not found for input keys: flutter-pub-windows-stable-3.35.4-x64-d693b4b9dbac2acd4477aea4555ca6dcbea44ba2-
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8520944Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8521248Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8521472Z [36;1m  -n '3.35.4' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8521663Z [36;1m  -a 'x64' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8521920Z [36;1m  -c 'C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8522279Z [36;1m  -d 'C:\Users\runneradmin\AppData\Local\Pub\Cache' \[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8522532Z [36;1m  stable[0m
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8532537Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:50.8532918Z ##[endgroup]
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:52.6834033Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:52.6835014Z                                  Dload  Upload   Total   Spent    Left  Speed
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:52.6835255Z 
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:52.8424616Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:53.8424950Z   0 1678M    0 14.9M    0     0  93.1M      0  0:00:18 --:--:--  0:00:18 93.1M
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:54.8424960Z  19 1678M   19  320M    0     0   276M      0  0:00:06  0:00:01  0:00:05  276M
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:55.8426619Z  37 1678M   37  636M    0     0   294M      0  0:00:05  0:00:02  0:00:03  294M
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:56.8425768Z  54 1678M   54  912M    0     0   288M      0  0:00:05  0:00:03  0:00:02  288M
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:57.8428271Z  72 1678M   72 1208M    0     0   290M      0  0:00:05  0:00:04  0:00:01  290M
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:58.4047760Z  89 1678M   89 1500M    0     0   290M      0  0:00:05  0:00:05 --:--:--  297M
+build_windows	Run subosito/flutter-action@v2	2025-09-24T07:56:58.4055418Z 100 1678M  100 1678M    0     0   293M      0  0:00:05  0:00:05 --:--:--  297M
+build_windows	Enable Windows desktop	∩╗┐2025-09-24T07:58:38.6980138Z ##[group]Run flutter config --enable-windows-desktop
+build_windows	Enable Windows desktop	2025-09-24T07:58:38.6980716Z [36;1mflutter config --enable-windows-desktop[0m
+build_windows	Enable Windows desktop	2025-09-24T07:58:38.6996026Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Enable Windows desktop	2025-09-24T07:58:38.6996443Z env:
+build_windows	Enable Windows desktop	2025-09-24T07:58:38.6996725Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Enable Windows desktop	2025-09-24T07:58:38.6997147Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Enable Windows desktop	2025-09-24T07:58:38.6997463Z ##[endgroup]
+build_windows	Enable Windows desktop	2025-09-24T07:58:40.7926187Z Building flutter tool... 
+build_windows	Enable Windows desktop	2025-09-24T07:58:40.7958528Z Running pub upgrade... 
+build_windows	Enable Windows desktop	2025-09-24T07:58:40.9356697Z Resolving dependencies...
+build_windows	Enable Windows desktop	2025-09-24T07:58:42.1366252Z Downloading packages...
+build_windows	Enable Windows desktop	2025-09-24T07:58:54.5489123Z Got dependencies.
+build_windows	Enable Windows desktop	2025-09-24T07:59:10.3265258Z Setting "enable-windows-desktop" value to "true".
+build_windows	Enable Windows desktop	2025-09-24T07:59:10.3266936Z 
+build_windows	Enable Windows desktop	2025-09-24T07:59:10.3267315Z You may need to restart any open editors for them to read new settings.
+build_windows	Flutter pub get (retry)	∩╗┐2025-09-24T07:59:10.3591506Z ##[group]Run for i in {1..4}; do flutter pub get && break || sleep 10; done
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:10.3592041Z [36;1mfor i in {1..4}; do flutter pub get && break || sleep 10; done[0m
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:10.3604036Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:10.3604502Z env:
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:10.3604792Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:10.3605217Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:10.3605513Z ##[endgroup]
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:11.3352789Z Resolving dependencies...
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:13.1874090Z Downloading packages...
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8217132Z + _fe_analyzer_shared 89.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8218391Z + analyzer 8.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8219112Z + app_links 6.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8219540Z + app_links_linux 1.0.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8219940Z + app_links_platform_interface 2.0.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8220442Z + app_links_web 1.0.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8220798Z + archive 4.0.7
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8221301Z + argon2 1.0.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8221670Z + args 2.7.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8221973Z + async 2.13.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8222339Z + boolean_selector 2.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8222703Z + build 4.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8223074Z + build_config 1.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8223636Z + build_daemon 4.0.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8224041Z + build_runner 2.8.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8224589Z + built_collection 5.1.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8225738Z + built_value 8.12.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8226171Z + characters 1.4.0 (1.4.1 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8226599Z + checked_yaml 2.0.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8226979Z + clock 1.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8227291Z + code_builder 4.11.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8227786Z + collection 1.19.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8228212Z + connectivity_plus 6.1.5 (7.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8228712Z + connectivity_plus_platform_interface 2.0.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8229205Z + convert 3.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8229527Z + cross_file 0.3.4+2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8229914Z + crypto 3.0.6
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8230230Z + cryptography 2.7.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8230670Z + dart_style 3.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8230990Z + dbus 0.7.11
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8231334Z + fake_async 1.3.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8231694Z + ffi 2.1.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8232031Z + file 7.0.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8232476Z + file_saver 0.2.9 (0.3.1 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8232981Z + file_selector 1.0.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8233390Z + file_selector_android 0.5.1+16
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8233805Z + file_selector_ios 0.5.3+2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8234233Z + file_selector_linux 0.9.3+2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8234631Z + file_selector_macos 0.9.4+4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8235094Z + file_selector_platform_interface 2.6.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8235588Z + file_selector_web 0.9.4+2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8236005Z + file_selector_windows 0.9.3+4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8236442Z + fixnum 1.1.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8236782Z + flutter 0.0.0 from sdk flutter
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8237249Z + flutter_background_service 5.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8237719Z + flutter_background_service_android 6.3.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8238229Z + flutter_background_service_ios 5.0.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8238741Z + flutter_background_service_platform_interface 5.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8239317Z + flutter_dotenv 6.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8239683Z + flutter_lints 4.0.0 (6.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8240176Z + flutter_local_notifications 19.4.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8240679Z + flutter_local_notifications_linux 6.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8241227Z + flutter_local_notifications_platform_interface 9.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8241819Z + flutter_local_notifications_windows 1.0.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8242349Z + flutter_riverpod 2.6.1 (3.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8242898Z + flutter_secure_storage 9.2.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8243378Z + flutter_secure_storage_linux 1.2.3 (2.0.1 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8243975Z + flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8244640Z + flutter_secure_storage_platform_interface 1.1.2 (2.0.1 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8247688Z + flutter_secure_storage_web 1.2.1 (2.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8248360Z + flutter_secure_storage_windows 3.1.2 (4.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8248899Z + flutter_test 0.0.0 from sdk flutter
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8249409Z + flutter_web_plugins 0.0.0 from sdk flutter
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8249910Z + frontend_server_client 4.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8250331Z + functions_client 2.4.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8250674Z + glob 2.1.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8251019Z + go_router 15.1.2 (16.2.4 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8251437Z + gotrue 2.15.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8251784Z + graphs 2.3.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8252102Z + gtk 2.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8252438Z + hex 0.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8252760Z + hive 2.2.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8254130Z + hive_flutter 1.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8254528Z + http 1.5.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8254853Z + http_multi_server 3.2.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8255284Z + http_parser 4.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8255634Z + intl 0.20.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8255959Z + io 1.0.5
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8256247Z + js 0.6.7 (0.7.2 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8256682Z + json_annotation 4.9.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8257055Z + jwt_decode 0.3.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8257452Z + leak_tracker 11.0.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8257842Z + leak_tracker_flutter_testing 3.0.10
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8258329Z + leak_tracker_testing 3.0.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8258751Z + lints 4.0.0 (6.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8259141Z + logging 1.3.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8259497Z + matcher 0.12.17
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8259898Z + material_color_utilities 0.11.1 (0.13.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8260440Z + meta 1.16.0 (1.17.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8260821Z + mime 2.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8261129Z + nm 0.5.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8261431Z + open_filex 4.7.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8261790Z + package_config 2.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8262136Z + package_info_plus 9.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8262627Z + package_info_plus_platform_interface 3.2.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8263128Z + path 1.9.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8263441Z + path_provider 2.1.5
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8263858Z + path_provider_android 2.2.18
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8264300Z + path_provider_foundation 2.4.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8264711Z + path_provider_linux 2.2.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8265145Z + path_provider_platform_interface 2.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8265582Z + path_provider_windows 2.3.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8266036Z + permission_handler 11.4.0 (12.0.1 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8266554Z + permission_handler_android 12.1.0 (13.0.1 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8267103Z + permission_handler_apple 9.4.7
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8267550Z + permission_handler_html 0.1.3+5
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8267988Z + permission_handler_platform_interface 4.3.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8268507Z + permission_handler_windows 0.2.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8268940Z + petitparser 7.0.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8269335Z + platform 3.1.6
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8269754Z + plugin_platform_interface 2.1.8
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8270261Z + pointycastle 3.9.1 (4.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8270716Z + pool 1.5.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8271074Z + posix 6.0.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8271398Z + postgrest 2.4.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8271766Z + pub_semver 2.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8272110Z + pubspec_parse 1.5.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8272525Z + realtime_client 2.5.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8272890Z + record 6.1.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8273255Z + record_android 1.4.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8273592Z + record_ios 1.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8273900Z + record_linux 1.2.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8274233Z + record_macos 1.1.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8274552Z + record_platform_interface 1.4.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8274932Z + record_web 1.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8275217Z + record_windows 1.0.7
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8275525Z + retry 3.1.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8275805Z + riverpod 2.6.1 (3.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8276174Z + rxdart 0.28.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8276455Z + sentry 8.14.2 (9.6.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8276841Z + sentry_flutter 8.14.2 (9.6.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8278078Z + share_plus 11.1.0 (12.0.0 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8278532Z + share_plus_platform_interface 6.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8278956Z + shared_preferences 2.5.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8279307Z + shared_preferences_android 2.4.13
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8279791Z + shared_preferences_foundation 2.5.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8280264Z + shared_preferences_linux 2.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8280786Z + shared_preferences_platform_interface 2.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8281283Z + shared_preferences_web 2.4.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8281760Z + shared_preferences_windows 2.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8282135Z + shelf 1.4.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8282476Z + shelf_web_socket 3.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8282851Z + sky_engine 0.0.0 from sdk flutter
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8283590Z + source_span 1.10.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8283969Z + sprintf 7.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8284295Z + stack_trace 1.12.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8284680Z + state_notifier 1.0.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8285035Z + storage_client 2.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8285433Z + stream_channel 2.1.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8285796Z + stream_transform 2.1.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8286215Z + string_scanner 1.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8286565Z + supabase 2.9.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8286940Z + supabase_flutter 2.10.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8287314Z + term_glyph 1.2.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8287708Z + test_api 0.7.6 (0.7.7 available)
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8288124Z + timezone 0.10.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8288479Z + typed_data 1.4.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8288841Z + url_launcher 6.3.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8289205Z + url_launcher_android 6.3.22
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8289645Z + url_launcher_ios 6.3.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8290047Z + url_launcher_linux 3.2.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8290470Z + url_launcher_macos 3.2.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8290886Z + url_launcher_platform_interface 2.3.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8291383Z + url_launcher_web 2.4.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8291745Z + url_launcher_windows 3.1.4
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8292139Z + uuid 4.5.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8292443Z + vector_math 2.2.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8293226Z + vm_service 15.0.2
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8293567Z + watcher 1.1.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8293900Z + web 1.1.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8294211Z + web_socket 1.0.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8294535Z + web_socket_channel 3.0.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8294938Z + win32 5.14.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8295259Z + xdg_directories 1.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8295661Z + xml 6.6.1
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8295965Z + yaml 3.1.3
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8296334Z + yet_another_json_isolate 2.1.0
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8296884Z Changed 177 dependencies!
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8297505Z 23 packages have newer versions incompatible with dependency constraints.
+build_windows	Flutter pub get (retry)	2025-09-24T07:59:34.8298249Z Try `flutter pub outdated` for more information.
+build_windows	Doctor	∩╗┐2025-09-24T07:59:35.5549299Z ##[group]Run flutter doctor -v
+build_windows	Doctor	2025-09-24T07:59:35.5549688Z [36;1mflutter doctor -v[0m
+build_windows	Doctor	2025-09-24T07:59:35.5561486Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Doctor	2025-09-24T07:59:35.5561888Z env:
+build_windows	Doctor	2025-09-24T07:59:35.5562164Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Doctor	2025-09-24T07:59:35.5562573Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Doctor	2025-09-24T07:59:35.5562887Z ##[endgroup]
+build_windows	Doctor	2025-09-24T07:59:37.3030062Z [ΓêÜ] Flutter (Channel stable, 3.35.4, on Microsoft Windows [Version 10.0.20348.4052], locale en-US) [873ms]
+build_windows	Doctor	2025-09-24T07:59:37.3034174Z     ΓÇó Flutter version 3.35.4 on channel stable at C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Doctor	2025-09-24T07:59:37.3035795Z     ΓÇó Upstream repository https://github.com/flutter/flutter.git
+build_windows	Doctor	2025-09-24T07:59:37.3037355Z     ΓÇó Framework revision d693b4b9db (8 days ago), 2025-09-16 14:27:41 +0000
+build_windows	Doctor	2025-09-24T07:59:37.3038392Z     ΓÇó Engine revision c298091351
+build_windows	Doctor	2025-09-24T07:59:37.3039688Z     ΓÇó Dart version 3.9.2
+build_windows	Doctor	2025-09-24T07:59:37.3040768Z     ΓÇó DevTools version 2.48.0
+build_windows	Doctor	2025-09-24T07:59:37.3042949Z     ΓÇó Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-lldb-debugging
+build_windows	Doctor	2025-09-24T07:59:37.3043753Z 
+build_windows	Doctor	2025-09-24T07:59:38.6238531Z [ΓêÜ] Windows Version (Server 2022 Datacenter 64-bit, 21H2, 2009) [1,973ms]
+build_windows	Doctor	2025-09-24T07:59:38.6239643Z 
+build_windows	Doctor	2025-09-24T07:59:52.6451424Z [!] Android toolchain - develop for Android devices (Android SDK version 36.0.0) [16.0s]
+build_windows	Doctor	2025-09-24T07:59:52.6452676Z     ΓÇó Android SDK at C:\Android\android-sdk
+build_windows	Doctor	2025-09-24T07:59:52.6453907Z     ΓÇó Emulator version 36.1.9.0 (build_id 13823996) (CL:N/A)
+build_windows	Doctor	2025-09-24T07:59:52.6455459Z     ΓÇó Platform android-36-ext19, build-tools 36.0.0
+build_windows	Doctor	2025-09-24T07:59:52.6456520Z     ΓÇó ANDROID_HOME = C:\Android\android-sdk
+build_windows	Doctor	2025-09-24T07:59:52.6458056Z     ΓÇó ANDROID_SDK_ROOT = C:\Android\android-sdk
+build_windows	Doctor	2025-09-24T07:59:52.6460790Z     ΓÇó Java binary at: C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\8.0.462-8\x64\bin\java
+build_windows	Doctor	2025-09-24T07:59:52.6462014Z       This JDK is specified by the JAVA_HOME environment variable.
+build_windows	Doctor	2025-09-24T07:59:52.6463199Z       To manually set the JDK path, use: `flutter config --jdk-dir="path/to/jdk"`.
+build_windows	Doctor	2025-09-24T07:59:52.6464668Z     X Could not determine java version
+build_windows	Doctor	2025-09-24T07:59:52.6466905Z     ! Some Android licenses not accepted. To resolve this, run: flutter doctor --android-licenses
+build_windows	Doctor	2025-09-24T07:59:52.6467586Z 
+build_windows	Doctor	2025-09-24T07:59:52.6470944Z [ΓêÜ] Chrome - develop for the web [487ms]
+build_windows	Doctor	2025-09-24T07:59:52.6472571Z     ΓÇó Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+build_windows	Doctor	2025-09-24T07:59:52.6473238Z 
+build_windows	Doctor	2025-09-24T07:59:52.6475688Z [ΓêÜ] Visual Studio - develop Windows apps (Visual Studio Enterprise 2022 17.14.13 (August 2025)) [485ms]
+build_windows	Doctor	2025-09-24T07:59:52.6476650Z     ΓÇó Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Enterprise
+build_windows	Doctor	2025-09-24T07:59:52.6477877Z     ΓÇó Visual Studio Enterprise 2022 version 17.14.36414.22
+build_windows	Doctor	2025-09-24T07:59:52.6547272Z     ΓÇó Windows 10 SDK version 10.0.26100.0
+build_windows	Doctor	2025-09-24T07:59:52.6547809Z 
+build_windows	Doctor	2025-09-24T07:59:52.6547993Z [!] Android Studio (not installed) [16ms]
+build_windows	Doctor	2025-09-24T07:59:52.6548849Z     ΓÇó Android Studio not found; download from https://developer.android.com/studio/index.html
+build_windows	Doctor	2025-09-24T07:59:52.6549779Z       (or visit https://flutter.dev/to/windows-android-setup for detailed instructions).
+build_windows	Doctor	2025-09-24T07:59:52.6550297Z 
+build_windows	Doctor	2025-09-24T07:59:52.6550564Z [ΓêÜ] Connected device (2 available) [4.5s]
+build_windows	Doctor	2025-09-24T07:59:52.6551342Z     ΓÇó Windows (desktop) ΓÇó windows ΓÇó windows-x64    ΓÇó Microsoft Windows [Version 10.0.20348.4052]
+build_windows	Doctor	2025-09-24T07:59:52.6551887Z     ΓÇó Chrome (web)      ΓÇó chrome  ΓÇó web-javascript ΓÇó unknown
+build_windows	Doctor	2025-09-24T07:59:52.6552107Z 
+build_windows	Doctor	2025-09-24T07:59:52.6552240Z [ΓêÜ] Network resources [456ms]
+build_windows	Doctor	2025-09-24T07:59:52.6552577Z     ΓÇó All expected network resources are available.
+build_windows	Doctor	2025-09-24T07:59:52.6552784Z 
+build_windows	Doctor	2025-09-24T07:59:52.6552879Z ! Doctor found issues in 2 categories.
+build_windows	Build Windows Release	∩╗┐2025-09-24T07:59:52.6868335Z ##[group]Run flutter build windows --release
+build_windows	Build Windows Release	2025-09-24T07:59:52.6868901Z [36;1mflutter build windows --release[0m
+build_windows	Build Windows Release	2025-09-24T07:59:52.6885236Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows	Build Windows Release	2025-09-24T07:59:52.6885643Z env:
+build_windows	Build Windows Release	2025-09-24T07:59:52.6885886Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Build Windows Release	2025-09-24T07:59:52.6886270Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Build Windows Release	2025-09-24T07:59:52.6886565Z ##[endgroup]
+build_windows	Build Windows Release	2025-09-24T08:02:33.9999281Z Building Windows application...                                   159.8s
+build_windows	Build Windows Release	2025-09-24T08:02:34.0030059Z ΓêÜ Built build\windows\x64\runner\Release\hold_that_thought.exe
+build_windows	Upload Windows Release	∩╗┐2025-09-24T08:02:34.0369655Z ##[group]Run actions/upload-artifact@v4
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0370039Z with:
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0370202Z   name: Windows Release
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0370416Z   path: build/windows/runner/Release/**
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0370646Z   if-no-files-found: error
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0370846Z   compression-level: 6
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0371043Z   overwrite: false
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0371228Z   include-hidden-files: false
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0371426Z env:
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0371652Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0372026Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows	Upload Windows Release	2025-09-24T08:02:34.0372278Z ##[endgroup]
+build_windows	Upload Windows Release	2025-09-24T08:02:34.3110885Z ##[error]No files were found with the provided path: build/windows/runner/Release/**. No artifacts will be uploaded.
+build_windows	Post Run subosito/flutter-action@v2	∩╗┐2025-09-24T08:02:34.3361279Z Post job cleanup.
+build_windows	Post Run actions/checkout@v4	∩╗┐2025-09-24T08:02:34.3487621Z Post job cleanup.
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.5622748Z [command]"C:\Program Files\Git\bin\git.exe" version
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.5830971Z git version 2.51.0.windows.1
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.5886788Z Copying 'C:\Users\runneradmin\.gitconfig' to 'D:\a\_temp\9382508a-0d3c-4484-996b-a936138049df\.gitconfig'
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.5905891Z Temporarily overriding HOME='D:\a\_temp\9382508a-0d3c-4484-996b-a936138049df' before making global git config changes
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.5906798Z Adding repository directory to the temporary git global config as a safe directory
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.5916421Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\hold_that_thought\hold_that_thought
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.6143253Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:34.6361770Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:35.0737118Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:35.0930093Z http.https://github.com/.extraheader
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:35.0964304Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+build_windows	Post Run actions/checkout@v4	2025-09-24T08:02:35.1184547Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build_windows	Complete job	∩╗┐2025-09-24T08:02:35.5864236Z Cleaning up orphan processes
+build_windows	Complete job	2025-09-24T08:02:35.6018064Z Terminate orphan process: pid (5820) (adb)
+build_windows	Complete job	2025-09-24T08:02:35.6161452Z Terminate orphan process: pid (4688) (vctip)

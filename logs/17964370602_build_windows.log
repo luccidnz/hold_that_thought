@@ -1,0 +1,14 @@
+build_windows   Build Windows Release   2025-09-24T02:23:46.8483402Z ##[group]Run flutter build windows --release
+build_windows   Build Windows Release   2025-09-24T02:23:46.8483798Z flutter build windows --release
+build_windows   Build Windows Release   2025-09-24T02:23:46.8495203Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+build_windows   Build Windows Release   2025-09-24T02:23:46.8495591Z env:
+build_windows   Build Windows Release   2025-09-24T02:23:46.8495880Z   FLUTTER_ROOT: C:\hostedtoolcache\windows\flutter\stable-3.35.4-x64
+build_windows   Build Windows Release   2025-09-24T02:23:46.8496274Z   PUB_CACHE: C:\Users\runneradmin\AppData\Local\Pub\Cache
+build_windows   Build Windows Release   2025-09-24T02:23:46.8496581Z ##[endgroup]
+build_windows   Build Windows Release   2025-09-24T02:24:57.4769841Z Building Windows application...
+build_windows   Build Windows Release   2025-09-24T02:24:57.4786597Z   Error detected in pubspec.yaml:
+build_windows   Build Windows Release   2025-09-24T02:24:57.4787377Z   No file or variants found for asset: .env.
+build_windows   Build Windows Release   2025-09-24T02:24:57.5648466Z C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): error MSB8066: Custom build for 'D:\a\hold_that_thought\hold_that_thought\build\windows\x64\CMakeFiles\8bd835bdd85c0f753ff47dd2d554b95f\flutter_windows.dll.rule;D:\a\hold_that_thought\hold_that_thought\build\windows\x64\CMakeFiles\52a9bba352d6e2aea0f3048d8244b5a8\flutter_assemble.rule;D:\a\hold_that_thought\hold_that_thought\windows\flutter\CMakeLists.txt' exited with code 1. [D:\a\hold_that_thought\hold_that_thought\build\windows\x64\flutter\flutter_assemble.vcxproj]
+build_windows   Build Windows Release   2025-09-24T02:25:10.2298478Z Building Windows application...                                    81.9s
+build_windows   Build Windows Release   2025-09-24T02:25:10.2385870Z Build process failed.
+build_windows   Build Windows Release   2025-09-24T02:25:10.2541995Z ##[error]Process completed with exit code 1.

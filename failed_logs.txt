@@ -1,0 +1,170 @@
+### Android Build Failure (`build_android.log`)
+
+```log
+build_android	Set up job	┐2025-09-24T00:14:20.0404925Z Current runner version: '2.328.0'
+build_android	Set up job	2025-09-24T00:14:20.0435397Z ##[group]Runner Image Provisioner
+build_android	Set up job	2025-09-24T00:14:20.0436603Z Hosted Compute Agent
+build_android	Set up job	2025-09-24T00:14:20.0437402Z Version: 20250829.383
+build_android	Set up job	2025-09-24T00:14:20.0438421Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+build_android	Set up job	2025-09-24T00:14:20.0439580Z Build Date: 2025-08-29T13:48:48Z
+build_android	Set up job	2025-09-24T00:14:20.0440857Z ##[endgroup]
+build_android	Set up job	2025-09-24T00:14:20.0441608Z ##[group]Operating System
+build_android	Set up job	2025-09-24T00:14:20.0442633Z Ubuntu
+build_android	Set up job	2025-09-24T00:14:20.0443355Z 24.04.3
+build_android	Set up job	2025-09-24T00:14:20.0444047Z LTS
+build_android	Set up job	2025-09-24T00:14:20.0444905Z ##[endgroup]
+build_android	Set up job	2025-09-24T00:14:20.0445675Z ##[group]Runner Image
+build_android	Set up job	2025-09-24T00:14:20.0446620Z Image: ubuntu-24.04
+build_android	Set up job	2025-09-24T00:14:20.0447389Z Version: 20250907.24.1
+build_android	Set up job	2025-09-24T00:14:20.0449055Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250907.24/images/ubuntu/Ubuntu2404-Readme.md
+build_android	Set up job	2025-09-24T00:14:20.0451587Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250907.24
+build_android	Set up job	2025-09-24T00:14:20.0453592Z ##[endgroup]
+build_android	Set up job	2025-09-24T00:14:20.0455337Z ##[group]GITHUB_TOKEN Permissions
+build_android	Set up job	2025-09-24T00:14:20.0457699Z Contents: read
+build_android	Set up job	2025-09-24T00:14:20.0458667Z Metadata: read
+build_android	Set up job	2025-09-24T00:14:20.0459504Z PullRequests: write
+build_android	Set up job	2025-09-24T00:14:20.0460288Z ##[endgroup]
+build_android	Set up job	2025-09-24T00:14:20.0463379Z Secret source: Actions
+build_android	Set up job	2025-09-24T00:14:20.0464378Z Prepare workflow directory
+build_android	Set up job	2025-09-24T00:14:20.0916060Z Prepare all required actions
+build_android	Set up job	2025-09-24T00:14:20.0970875Z Getting action download info
+build_android	Set up job	2025-09-24T00:14:20.4225197Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+build_android	Set up job	2025-09-24T00:14:20.4902311Z Download action repository 'actions/setup-java@v4' (SHA:c5195efecf7bdfc987ee8bae7a71cb8b11521c00)
+build_android	Set up job	2025-09-24T00:14:20.8511273Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build_android	Set up job	2025-09-24T00:14:21.1107777Z Download action repository 'android-actions/setup-android@v3' (SHA:9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407)
+build_android	Set up job	2025-09-24T00:14:21.3157213Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build_android	Set up job	2025-09-24T00:14:21.5232915Z Getting action download info
+build_android	Set up job	2025-09-24T00:14:21.6401129Z Download action repository 'actions/cache@v4' (SHA:0400d5f644dc74513175e3cd8d07132dd4860809)
+build_android	Set up job	2025-09-24T00:14:21.7919597Z Complete job name: build_android
+build_android	Run actions/checkout@v4	┐2025-09-24T00:14:21.8761785Z ##[group]Run actions/checkout@v4
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8763183Z with:
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8764084Z   lfs: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8764902Z   repository: luccidnz/hold_that_thought
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8766199Z   token: ***
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8767128Z   ssh-strict: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8767939Z   ssh-user: git
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8768781Z   persist-credentials: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8769758Z   clean: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8770776Z   sparse-checkout-cone-mode: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8771762Z   fetch-depth: 1
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8772655Z   fetch-tags: false
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8773500Z   show-progress: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8774399Z   submodules: false
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8775317Z   set-safe-directory: true
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.8776498Z ##[endgroup]
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.9934578Z Syncing repository: luccidnz/hold_that_thought
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.9937884Z ##[group]Getting Git version info
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.9939757Z Working directory is '/home/runner/work/hold_that_thought/hold_that_thought'
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.9942230Z [command]/usr/bin/git version
+build_android	Run actions/checkout@v4	2025-09-24T00:14:21.9960050Z git version 2.51.0
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0001407Z [command]/usr/bin/git lfs version
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0299765Z git-lfs/3.7.0 (GitHub; linux amd64; go 1.24.4)
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0318948Z ##[endgroup]
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0339342Z Temporarily overriding HOME='/home/runner/work/_temp/60efea43-86b2-431b-bcab-807148431f45' before making global git config changes
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0342203Z Adding repository directory to the temporary git global config as a safe directory
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0346927Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hold_that_thought/hold_that_thought
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0384139Z Deleting the contents of '/home/runner/work/hold_that_thought/hold_that_thought'
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0388102Z ##[group]Initializing the repository
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0391820Z [command]/usr/bin/git init /home/runner/work/hold_that_thought/hold_that_thought
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0456559Z hint: Using 'master' as the name for the initial branch. This default branch name
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0459715Z hint: is subject to change. To configure the initial branch name to use in all
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0462950Z hint: of your new repositories, which will suppress this warning, call:
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0465321Z hint: 
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0466913Z hint: 	git config --global init.defaultBranch <name>
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0468865Z hint: 
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0470802Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0473886Z hint: 'development'. The just-created branch can be renamed via this command:
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0476314Z hint: 
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0477504Z hint: 	git branch -m <name>
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0478853Z hint: 
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0480219Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0482711Z Initialized empty Git repository in /home/runner/work/hold_that_thought/hold_that_thought/.git/
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0485951Z [command]/usr/bin/git remote add origin https://github.com/luccidnz/hold_that_thought
+build_android	Run actions/checkout@v4	2025-09-24T00:14:22.0518570Z ##[endgroup]
+```
+
+### Windows Build Failure (`build_windows.log`)
+
+```log
+build_windows	Set up job	┐2025-09-24T00:14:22.2245598Z Current runner version: '2.328.0'
+build_windows	Set up job	2025-09-24T00:14:22.3009192Z ##[group]Runner Image Provisioner
+build_windows	Set up job	2025-09-24T00:14:22.3009900Z Hosted Compute Agent
+build_windows	Set up job	2025-09-24T00:14:22.3010406Z Version: 20250829.383
+build_windows	Set up job	2025-09-24T00:14:22.3010938Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+build_windows	Set up job	2025-09-24T00:14:22.3011541Z Build Date: 2025-08-29T13:48:48Z
+build_windows	Set up job	2025-09-24T00:14:22.3012079Z ##[endgroup]
+build_windows	Set up job	2025-09-24T00:14:22.3012513Z ##[group]Operating System
+build_windows	Set up job	2025-09-24T00:14:22.3013025Z Microsoft Windows Server 2022
+build_windows	Set up job	2025-09-24T00:14:22.3013502Z 10.0.20348
+build_windows	Set up job	2025-09-24T00:14:22.3013916Z Datacenter
+build_windows	Set up job	2025-09-24T00:14:22.3014284Z ##[endgroup]
+build_windows	Set up job	2025-09-24T00:14:22.3014695Z ##[group]Runner Image
+build_windows	Set up job	2025-09-24T00:14:22.3015229Z Image: windows-2022
+build_windows	Set up job	2025-09-24T00:14:22.3015631Z Version: 20250907.29.1
+build_windows	Set up job	2025-09-24T00:14:22.3016578Z Included Software: https://github.com/actions/runner-images/blob/win22/20250907.29/images/windows/Windows2022-Readme.md
+build_windows	Set up job	2025-09-24T00:14:22.3017847Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20250907.29
+build_windows	Set up job	2025-09-24T00:14:22.3019332Z ##[endgroup]
+build_windows	Set up job	2025-09-24T00:14:22.3020391Z ##[group]GITHUB_TOKEN Permissions
+build_windows	Set up job	2025-09-24T00:14:22.3022014Z Contents: read
+build_windows	Set up job	2025-09-24T00:14:22.3022536Z Metadata: read
+build_windows	Set up job	2025-09-24T00:14:22.3022942Z PullRequests: write
+build_windows	Set up job	2025-09-24T00:14:22.3023367Z ##[endgroup]
+build_windows	Set up job	2025-09-24T00:14:22.3025249Z Secret source: Actions
+build_windows	Set up job	2025-09-24T00:14:22.3025854Z Prepare workflow directory
+build_windows	Set up job	2025-09-24T00:14:22.3336105Z Prepare all required actions
+build_windows	Set up job	2025-09-24T00:14:22.3372052Z Getting action download info
+build_windows	Set up job	2025-09-24T00:14:22.8402263Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+build_windows	Set up job	2025-09-24T00:14:22.9612298Z Download action repository 'microsoft/setup-msbuild@v1.3' (SHA:ede762b26a2de8d110bb5a3db4d7e0e080c0e917)
+build_windows	Set up job	2025-09-24T00:14:23.5541331Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build_windows	Set up job	2025-09-24T00:14:24.0687683Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build_windows	Set up job	2025-09-24T00:14:24.4164318Z Getting action download info
+build_windows	Set up job	2025-09-24T00:14:24.5898252Z Download action repository 'actions/cache@v4' (SHA:0400d5f644dc74513175e3cd8d07132dd4860809)
+build_w
+indows	Set up job	2025-09-24T00:14:24.7676861Z Complete job name: build_windows
+build_windows	Run actions/checkout@v4	┐2025-09-24T00:14:24.9578143Z ##[group]Run actions/checkout@v4
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9579569Z with:
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9580317Z   lfs: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9581080Z   repository: luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9582166Z   token: ***
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9582925Z   ssh-strict: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9583669Z   ssh-user: git
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9584425Z   persist-credentials: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9585232Z   clean: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9586004Z   sparse-checkout-cone-mode: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9586786Z   fetch-depth: 1
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9587395Z   fetch-tags: false
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9587985Z   show-progress: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9588590Z   submodules: false
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9589229Z   set-safe-directory: true
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:24.9590055Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:25.1336450Z Syncing repository: luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:25.1338600Z ##[group]Getting Git version info
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:25.1339472Z Working directory is 'D:\a\hold_that_thought\hold_that_thought'
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:25.2737771Z [command]"C:\Program Files\Git\bin\git.exe" version
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:25.7723150Z git version 2.51.0.windows.1
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:25.8728320Z [command]"C:\Program Files\Git\bin\git.exe" lfs version
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0093810Z git-lfs/3.7.0 (GitHub; windows amd64; go 1.24.4; git 92dddf56)
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0143889Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0166203Z Temporarily overriding HOME='D:\a\_temp\586db165-3459-4fd5-a090-9334ae581e3f' before making global git config changes
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0166980Z Adding repository directory to the temporary git global config as a safe directory
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0177450Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\hold_that_thought\hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0768940Z Deleting the contents of 'D:\a\hold_that_thought\hold_that_thought'
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0774891Z ##[group]Initializing the repository
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.0785260Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\hold_that_thought\hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.1962729Z Initialized empty Git repository in D:/a/hold_that_thought/hold_that_thought/.git/
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2004518Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/luccidnz/hold_that_thought
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2528152Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2528899Z ##[group]Disabling automatic garbage collection
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2538999Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2771905Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2772309Z ##[group]Setting up auth
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.2784956Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:28.3017911Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:29.7972596Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:29.8205949Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:30.2474912Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:30.2702008Z ##[endgroup]
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:30.2712836Z [command]"C:\Program Files\Git\bin\git.exe" lfs install --local
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:30.7186255Z Updated Git hooks.
+build_windows	Run actions/checkout@v4	2025-09-24T00:14:30.7186731Z Git LFS initialized.
+```
