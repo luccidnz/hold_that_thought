@@ -1,20 +1,28 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hold_that_thought/services/crypto_service.dart';
 import 'package:hold_that_thought/services/feature_flags.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // Fake secure storage implementation for testing
-class FakeSecureStorage {
+class FakeSecureStorage extends FlutterSecureStorage {
   final Map<String, String> _storage = {};
   
-  Future<String?> read({required String key}) async {
+  FakeSecureStorage() : super(aOptions: AndroidOptions(), iOptions: IOSOptions());
+  
+  @override
+  Future<String?> read({required String key, IOSOptions? iOptions, AndroidOptions? aOptions, LinuxOptions? lOptions, WindowsOptions? wOptions, WebOptions? webOptions, MacOsOptions? mOptions}) async {
     return _storage[key];
   }
   
-  Future<void> write({required String key, required String value}) async {
-    _storage[key] = value;
+  @override
+  Future<void> write({required String key, required String? value, IOSOptions? iOptions, AndroidOptions? aOptions, LinuxOptions? lOptions, WindowsOptions? wOptions, WebOptions? webOptions, MacOsOptions? mOptions}) async {
+    if (value != null) {
+      _storage[key] = value;
+    }
   }
   
-  Future<void> delete({required String key}) async {
+  @override
+  Future<void> delete({required String key, IOSOptions? iOptions, AndroidOptions? aOptions, LinuxOptions? lOptions, WindowsOptions? wOptions, WebOptions? webOptions, MacOsOptions? mOptions}) async {
     _storage.remove(key);
   }
 }
@@ -76,7 +84,7 @@ void main() {
   setUp(() {
     secureStorage = FakeSecureStorage();
     featureFlags = FakeFeatureFlags();
-    cryptoService = CryptoService(secureStorage as dynamic, featureFlags);
+    cryptoService = CryptoService(secureStorage, featureFlags);
   });
 
   group('CryptoService Basics', () {
