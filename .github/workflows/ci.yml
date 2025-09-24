@@ -77,6 +77,12 @@ jobs:
           ./gradlew clean || true
           cd ..
           flutter clean
+      - name: Android diag (versions)
+        run: |
+          flutter --version
+          dart --version
+          cd android && ./gradlew -v
+
       - name: Build Android Debug
         run: flutter build apk --debug --no-shrink --verbose
       - name: List build outputs
@@ -227,4 +233,5 @@ jobs:
               issue_number: context.issue.number,
               body: message
             });
+
 
