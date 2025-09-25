@@ -189,8 +189,8 @@ jobs:
         with:
           name: Android Debug APK
 
-      # Run as a single Bash session to keep functions in scope
-      - name: Run smoke test via adb (single bash session)
+      # Run smoke test with inline retry function
+      - name: Run smoke test via adb (inline functions)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
@@ -201,27 +201,23 @@ jobs:
           emulator-boot-timeout: 900
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
           script: |
-            /usr/bin/env bash <<'BASH'
-            set -eu
-
-            retry() {
-              n=0
-              until "$@"; do
-                n=$((n+1))
-                if [ $n -ge 12 ]; then
-                  echo "retry: giving up ($*)"
-                  exit 1
-                fi
-                echo "retry $n: $*"
-                sleep 10
-              done
-            }
-
+            set -euo pipefail
             echo "::group::ADB prep"
             adb kill-server || true
             adb start-server || true
             adb version || true
-            retry adb wait-for-device
+            
+            # Retry adb wait-for-device with inline logic
+            n=0
+            until adb wait-for-device; do
+              n=$((n+1))
+              if [ $n -ge 12 ]; then
+                echo "retry: giving up (adb wait-for-device)"
+                exit 1
+              fi
+              echo "retry $n: adb wait-for-device"
+              sleep 10
+            done
             echo "::endgroup::"
 
             echo "::group::Deep boot verification (up to ~8 min)"
@@ -246,12 +242,21 @@ jobs:
             echo "::endgroup::"
 
             echo "::group::Install + ping"
-            retry sh -c 'adb install -r -d -t app-debug.apk'
+            # Retry APK install with inline logic
+            n=0
+            until adb install -r -d -t app-debug.apk; do
+              n=$((n+1))
+              if [ $n -ge 12 ]; then
+                echo "retry: giving up (adb install)"
+                exit 1
+              fi
+              echo "retry $n: adb install"
+              sleep 10
+            done
             adb shell input keyevent 82 || true
             echo "::endgroup::"
 
             echo "SMOKE_OK"
-            BASH
 
       - name: Collect logcat on failure (capped 15s)
         if: failure()
