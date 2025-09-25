@@ -189,22 +189,33 @@ jobs:
         with:
           name: Android Debug APK
 
-      # NOTE: disable-animations=false to avoid flaky internal hook in the runner
-      - name: Run smoke test via adb (ultra-resilient)
+      # Run as a single Bash session to keep functions in scope
+      - name: Run smoke test via adb (single bash session)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           arch: x86_64
           target: google_apis
-          disable-animations: false
+          disable-animations: false     # avoid flaky runner hook
           force-avd-creation: true
           emulator-boot-timeout: 900
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
           script: |
+            /usr/bin/env bash <<'BASH'
             set -eu
 
-            # Generic retry with total attempts + sleep
-            retry() { n=0; until "$@"; do n=$((n+1)); [ $n -ge 12 ] && { echo "retry: giving up ($*)"; exit 1; }; echo "retry $n: $*"; sleep 10; done; }
+            retry() {
+              n=0
+              until "$@"; do
+                n=$((n+1))
+                if [ $n -ge 12 ]; then
+                  echo "retry: giving up ($*)"
+                  exit 1
+                fi
+                echo "retry $n: $*"
+                sleep 10
+              done
+            }
 
             echo "::group::ADB prep"
             adb kill-server || true
@@ -213,8 +224,7 @@ jobs:
             retry adb wait-for-device
             echo "::endgroup::"
 
-            echo "::group::Deep boot verification (up to 8 min)"
-            # We loop up to ~8 minutes waiting for multiple readiness signals
+            echo "::group::Deep boot verification (up to ~8 min)"
             BOOT_OK=0
             for i in $(seq 1 48); do
               A=$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
@@ -225,24 +235,23 @@ jobs:
                 echo "Boot signals: sys.boot_completed=$A dev.bootcomplete=$B user0=$C provisioned=$D"
                 BOOT_OK=1; break
               fi
-              # heal ADB transport intermittently
               adb kill-server || true
               adb start-server || true
               sleep 10
             done
             if [ "$BOOT_OK" != "1" ]; then
-              echo "Boot did not complete in time"; exit 1
+              echo "Boot did not complete in time"
+              exit 1
             fi
             echo "::endgroup::"
 
-            echo "::group::Install + ping device"
+            echo "::group::Install + ping"
             retry sh -c 'adb install -r -d -t app-debug.apk'
-            # wake device, should succeed even if no launcher
             adb shell input keyevent 82 || true
             echo "::endgroup::"
 
             echo "SMOKE_OK"
-            exit 0
+            BASH
 
       - name: Collect logcat on failure (capped 15s)
         if: failure()
