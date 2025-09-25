@@ -13,6 +13,29 @@ retry() {
   done
 }
 
+wait_for_pm() {
+  log "waiting for Package Manager service…"
+  # up to ~5 min: 60 * 5s
+  for i in $(seq 1 60); do
+    # both commands must succeed: 'cmd package list' and 'pm path android' returns a package: line
+    if adb shell 'cmd package list packages >/dev/null 2>&1'; then
+      if adb shell pm path android 2>/dev/null | grep -q '^package:'; then
+        log "Package Manager is ready"
+        return 0
+      fi
+    fi
+    # heal adb transport every ~30s
+    if [ $((i % 6)) -eq 0 ]; then
+      adb kill-server || true
+      adb start-server || true
+      adb wait-for-device || true
+    fi
+    sleep 5
+  done
+  log "Package Manager was not ready in time"
+  return 1
+}
+
 log "adb prep"
 adb kill-server || true
 adb start-server || true
@@ -35,6 +58,9 @@ for _ in $(seq 1 48); do  # ~8 min
   sleep 10
 done
 [ "$BOOT_OK" = "1" ] || { log "boot did not complete"; exit 1; }
+
+# NEW: wait for Package Manager *after* boot flags flip
+wait_for_pm
 
 log "install APK"
 retry "adb install -r -d -t app-debug.apk"
