@@ -14,25 +14,44 @@ retry() {
 }
 
 wait_for_pm() {
-  log "waiting for Package Manager service…"
-  # up to ~5 min: 60 * 5s
-  for i in $(seq 1 60); do
-    # both commands must succeed: 'cmd package list' and 'pm path android' returns a package: line
-    if adb shell 'cmd package list packages >/dev/null 2>&1'; then
-      if adb shell pm path android 2>/dev/null | grep -q '^package:'; then
-        log "Package Manager is ready"
-        return 0
-      fi
+  log "waiting for Package Manager + dependent services…"
+  # up to ~8 min: 96 * 5s
+  for i in $(seq 1 96); do
+    # Check multiple readiness criteria
+    PM_READY=0
+    STORAGE_READY=0
+    SETTINGS_READY=0
+    
+    # Package Manager basic availability
+    if adb shell 'cmd package list packages >/dev/null 2>&1' && adb shell pm path android 2>/dev/null | grep -q '^package:'; then
+      PM_READY=1
     fi
-    # heal adb transport every ~30s
-    if [ $((i % 6)) -eq 0 ]; then
+    
+    # Storage Manager readiness (avoid NullPointerException on getVolumes)
+    if adb shell 'vdc volume list' >/dev/null 2>&1; then
+      STORAGE_READY=1
+    fi
+    
+    # Settings provider readiness (avoid IllegalStateException on system providers)
+    if adb shell 'settings get global device_provisioned' >/dev/null 2>&1; then
+      SETTINGS_READY=1
+    fi
+    
+    if [ "$PM_READY" = "1" ] && [ "$STORAGE_READY" = "1" ] && [ "$SETTINGS_READY" = "1" ]; then
+      log "All installation services ready (PM=$PM_READY storage=$STORAGE_READY settings=$SETTINGS_READY)"
+      return 0
+    fi
+    
+    # heal adb transport every ~60s  
+    if [ $((i % 12)) -eq 0 ]; then
+      log "Service check $i/96: PM=$PM_READY storage=$STORAGE_READY settings=$SETTINGS_READY (healing adb)"
       adb kill-server || true
       adb start-server || true
       adb wait-for-device || true
     fi
     sleep 5
   done
-  log "Package Manager was not ready in time"
+  log "Installation services were not ready in time (PM=$PM_READY storage=$STORAGE_READY settings=$SETTINGS_READY)"
   return 1
 }
 
