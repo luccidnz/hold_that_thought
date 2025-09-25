@@ -1,0 +1,138 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ['**']
+  push:
+    branches: ['**']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+      - name: Git LFS
+        run: |
+          git lfs install
+          git lfs fetch --all || true
+          git lfs checkout
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Install Android SDK (cmdline-tools)
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 10406996
+          accept-android-sdk-licenses: true
+          packages: |
+            platform-tools
+            platforms;android-34
+            build-tools;34.0.0
+      - name: Flutter pub get (retry)
+        run: |
+          for i in {1..4}; do flutter pub get && break || sleep 10; done
+      # Fix gradlew permission issue
+      - name: Make gradlew executable
+        run: chmod +x ./android/gradlew
+      - name: Build Android Debug
+        run: flutter build apk --debug --no-shrink
+      - name: Upload Android Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Android Debug APK
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+      - name: Git LFS
+        shell: bash
+        run: |
+          git lfs install
+          git lfs fetch --all || true
+          git lfs checkout
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Enable Windows desktop
+        shell: bash
+        run: flutter config --enable-windows-desktop
+      - name: Check Windows dependencies
+        shell: bash
+        run: |
+          echo "Checking Visual Studio installation..."
+          vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath || true
+          echo "Checking for Windows 10 SDK..."
+          reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0" /v InstallationFolder || true
+      - name: Flutter pub get (retry)
+        shell: bash
+        run: |
+          for i in {1..4}; do flutter pub get && break || sleep 10; done
+      - name: Doctor
+        shell: bash
+        run: flutter doctor -v
+      - name: Build Windows Release
+        shell: bash
+        run: flutter build windows --release
+      - name: Upload Windows Release
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Release
+          path: build/windows/runner/Release/**
+          if-no-files-found: error
+
+  # Optional: keep the emulator smoke test; depends only on Android build.
+  android_qa_smoke:
+    needs: build_android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      # Fix gradlew permission issue
+      - name: Make gradlew executable
+        run: chmod +x ./android/gradlew
+      - name: Run smoke test on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          arch: x86_64
+          target: default
+          script: ./android/gradlew connectedAndroidTest
+
+  notify:
+    needs: [build_android, build_windows]
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Comment on PR when artifacts are ready
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          pr-number: ${{ github.event.pull_request.number }}
+          comment-tag: artifacts-ready
+          message: |
+            ✅ Artifacts are ready:
+            - Windows Release (zip)
+            - Android Debug APK
+            Please complete Artifacts-only QA and, if it matches the checklist, comment `QA: PASS`

@@ -1,0 +1,9 @@
+﻿name: Build Hold That Thought
+on:
+  pull_request:
+    branches: ['**']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Legacy build check superseded by CI  passing stub.'

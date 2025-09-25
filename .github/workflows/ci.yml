@@ -1,0 +1,239 @@
+﻿name: CI
+
+on:
+  pull_request:
+    branches: ['**']
+  push:
+    branches: ['**']
+
+concurrency:
+  # Make each push (commit SHA) its own group so later pushes don't cancel this run
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.sha }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+      - name: Git LFS
+        run: |
+          git lfs install
+          git lfs fetch --all || true
+          git lfs checkout
+
+      # NEW: make gradlew runnable & normalize line endings
+      - name: Fix gradlew permissions (Linux-safe)
+        run: |
+          if [ -f android/gradlew ]; then
+            # strip CRLF if present (avoids '#!/bin/sh^M' issues)
+            sed -i 's/\r$//' android/gradlew || true
+            chmod +x android/gradlew || true
+            echo "gradlew perms/lf fixed:"
+            ls -l android/gradlew
+            git ls-files --stage android/gradlew || true
+          else
+            echo "android/gradlew not found" && exit 1
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.35.4'
+          cache: true
+      - name: Show Flutter/Dart versions
+        run: |
+          flutter --version
+          dart --version
+      - name: Create CI .env file
+        run: |
+          cat > .env << EOF
+          ENV=ci
+          API_BASE_URL=https://example.invalid
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          SENTRY_DSN=
+          EOF
+      - name: Install Android SDK (cmdline-tools)
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: latest
+          packages: >
+            platform-tools
+            platforms;android-34
+            build-tools;34.0.0
+          accept-android-sdk-licenses: true
+      - name: Debug environment
+        run: |
+          echo "ANDROID_HOME: $ANDROID_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          ls -la android/ || true
+      - name: Flutter pub get (retry)
+        run: |
+          for i in {1..4}; do flutter pub get && break || sleep 10; done
+      - name: Flutter doctor
+        run: flutter doctor -v
+      - name: Verify Flutter/Dart versions
+        run: |
+          flutter --version
+          dart --version
+      - name: Clean Gradle cache
+        run: |
+          cd android
+          ./gradlew clean || true
+          cd ..
+          flutter clean
+      - name: Android diag (versions)
+        run: |
+          flutter --version
+          dart --version
+          cd android && ./gradlew -v
+
+      - name: Build Android Debug
+        run: flutter build apk --debug --no-shrink --verbose
+      - name: List build outputs
+        run: |
+          find build -name "*.apk" || true
+      - name: Upload Android Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Android Debug APK
+          path: |
+            build/app/outputs/flutter-apk/app-debug.apk
+            build/app/outputs/apk/debug/app-debug.apk
+          if-no-files-found: warn
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Enable long paths
+        run: git config --system core.longpaths true
+
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+
+      - name: Git LFS
+        shell: bash
+        run: |
+          git lfs install
+          git lfs fetch --all || true
+          git lfs checkout
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.35.4'
+          cache: true
+
+      - name: Show Flutter/Dart versions
+        shell: bash
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Create CI .env file
+        shell: bash
+        run: |
+          cat > .env << EOF
+          ENV=ci
+          API_BASE_URL=https://example.invalid
+          SUPABASE_URL=
+          SUPABASE_ANON_KEY=
+          SENTRY_DSN=
+          EOF
+
+      - name: Enable Windows desktop
+        shell: bash
+        run: flutter config --enable-windows-desktop
+
+      - name: Flutter pub get (retry)
+        shell: bash
+        run: |
+          for i in {1..4}; do flutter pub get && break || sleep 10; done
+
+      - name: Doctor
+        shell: bash
+        run: flutter doctor -v
+
+      - name: Build Windows Release
+        shell: bash
+        run: flutter build windows --release
+
+      - name: Upload Windows Release
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Release
+          path: build/windows/x64/runner/Release/**
+          if-no-files-found: error
+  android_qa_smoke:
+    needs: build_android
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/download-artifact@v4
+        with:
+          name: Android Debug APK
+
+      # Locate and prepare the APK file
+      - name: Prepare APK for smoke test
+        run: |
+          find . -name "*.apk" -type f
+          if [ -f "flutter-apk/app-debug.apk" ]; then
+            cp "flutter-apk/app-debug.apk" "./app-debug.apk"
+          elif [ -f "apk/debug/app-debug.apk" ]; then
+            cp "apk/debug/app-debug.apk" "./app-debug.apk"
+          elif [ -f "build/app/outputs/flutter-apk/app-debug.apk" ]; then
+            cp "build/app/outputs/flutter-apk/app-debug.apk" "./app-debug.apk"
+          elif [ -f "build/app/outputs/apk/debug/app-debug.apk" ]; then
+            cp "build/app/outputs/apk/debug/app-debug.apk" "./app-debug.apk"
+          elif [ -f "app-debug.apk" ]; then
+            echo "APK already in root directory"
+          else
+            echo "ERROR: Could not find app-debug.apk"
+            exit 1
+          fi
+          ls -la app-debug.apk
+
+      # execute ONE command so all functions/vars stay in the same shell
+      - name: Run smoke test via adb (repo script)
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          arch: x86_64
+          target: google_apis
+          disable-animations: false      # avoid flaky runner hook
+          force-avd-creation: true
+          emulator-boot-timeout: 900
+          emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
+          script: bash ci/android_smoke.sh
+
+      - name: Collect logcat on failure (capped 15s)
+        if: failure()
+        run: |
+          mkdir -p smoke-logs
+          timeout 15s adb logcat -d > smoke-logs/logcat.txt || echo "logcat timeout or adb down"
+
+      - name: Upload smoke logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-smoke-logs
+          path: smoke-logs/**
+
+
+

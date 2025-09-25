@@ -1,0 +1,476 @@
+﻿emulator	Set up job	∩╗┐2025-09-24T21:29:16.3299002Z Current runner version: '2.328.0'
+emulator	Set up job	2025-09-24T21:29:16.3333141Z ##[group]Runner Image Provisioner
+emulator	Set up job	2025-09-24T21:29:16.3334669Z Hosted Compute Agent
+emulator	Set up job	2025-09-24T21:29:16.3335619Z Version: 20250829.383
+emulator	Set up job	2025-09-24T21:29:16.3336551Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+emulator	Set up job	2025-09-24T21:29:16.3337866Z Build Date: 2025-08-29T13:48:48Z
+emulator	Set up job	2025-09-24T21:29:16.3338880Z ##[endgroup]
+emulator	Set up job	2025-09-24T21:29:16.3339792Z ##[group]Operating System
+emulator	Set up job	2025-09-24T21:29:16.3340844Z Ubuntu
+emulator	Set up job	2025-09-24T21:29:16.3341610Z 24.04.3
+emulator	Set up job	2025-09-24T21:29:16.3342377Z LTS
+emulator	Set up job	2025-09-24T21:29:16.3343296Z ##[endgroup]
+emulator	Set up job	2025-09-24T21:29:16.3344465Z ##[group]Runner Image
+emulator	Set up job	2025-09-24T21:29:16.3345340Z Image: ubuntu-24.04
+emulator	Set up job	2025-09-24T21:29:16.3346377Z Version: 20250907.24.1
+emulator	Set up job	2025-09-24T21:29:16.3348216Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250907.24/images/ubuntu/Ubuntu2404-Readme.md
+emulator	Set up job	2025-09-24T21:29:16.3350714Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250907.24
+emulator	Set up job	2025-09-24T21:29:16.3352847Z ##[endgroup]
+emulator	Set up job	2025-09-24T21:29:16.3355059Z ##[group]GITHUB_TOKEN Permissions
+emulator	Set up job	2025-09-24T21:29:16.3358142Z Contents: read
+emulator	Set up job	2025-09-24T21:29:16.3359148Z Metadata: read
+emulator	Set up job	2025-09-24T21:29:16.3359918Z Packages: read
+emulator	Set up job	2025-09-24T21:29:16.3360684Z ##[endgroup]
+emulator	Set up job	2025-09-24T21:29:16.3363953Z Secret source: Actions
+emulator	Set up job	2025-09-24T21:29:16.3365144Z Prepare workflow directory
+emulator	Set up job	2025-09-24T21:29:16.3835478Z Prepare all required actions
+emulator	Set up job	2025-09-24T21:29:16.3892363Z Getting action download info
+emulator	Set up job	2025-09-24T21:29:16.6765551Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+emulator	Set up job	2025-09-24T21:29:16.8530639Z Download action repository 'actions/setup-java@v4' (SHA:c5195efecf7bdfc987ee8bae7a71cb8b11521c00)
+emulator	Set up job	2025-09-24T21:29:17.2689129Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+emulator	Set up job	2025-09-24T21:29:17.3978785Z Download action repository 'reactivecircus/android-emulator-runner@v2' (SHA:1dcd0090116d15e7c562f8db72807de5e036a4ed)
+emulator	Set up job	2025-09-24T21:29:17.6884784Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+emulator	Set up job	2025-09-24T21:29:17.8984942Z Getting action download info
+emulator	Set up job	2025-09-24T21:29:18.0436076Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+emulator	Set up job	2025-09-24T21:29:18.3878460Z Complete job name: emulator
+emulator	Run actions/checkout@v4	∩╗┐2025-09-24T21:29:18.4745173Z ##[group]Run actions/checkout@v4
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4746488Z with:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4747265Z   repository: luccidnz/hold_that_thought
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4748490Z   token: ***
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4749194Z   ssh-strict: true
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4749933Z   ssh-user: git
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4750687Z   persist-credentials: true
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4751533Z   clean: true
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4752291Z   sparse-checkout-cone-mode: true
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4753204Z   fetch-depth: 1
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4754151Z   fetch-tags: false
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4754908Z   show-progress: true
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4755680Z   lfs: false
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4756396Z   submodules: false
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4757181Z   set-safe-directory: true
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.4758286Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5837951Z Syncing repository: luccidnz/hold_that_thought
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5840842Z ##[group]Getting Git version info
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5842265Z Working directory is '/home/runner/work/hold_that_thought/hold_that_thought'
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5844560Z [command]/usr/bin/git version
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5931266Z git version 2.51.0
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5958157Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5974530Z Temporarily overriding HOME='/home/runner/work/_temp/0b6e66ca-b2bc-4161-88df-c2cdd0e518f7' before making global git config changes
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5979123Z Adding repository directory to the temporary git global config as a safe directory
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.5983167Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hold_that_thought/hold_that_thought
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6019264Z Deleting the contents of '/home/runner/work/hold_that_thought/hold_that_thought'
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6023188Z ##[group]Initializing the repository
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6027956Z [command]/usr/bin/git init /home/runner/work/hold_that_thought/hold_that_thought
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6158991Z hint: Using 'master' as the name for the initial branch. This default branch name
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6161397Z hint: is subject to change. To configure the initial branch name to use in all
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6163957Z hint: of your new repositories, which will suppress this warning, call:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6166200Z hint:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6167720Z hint: 	git config --global init.defaultBranch <name>
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6169656Z hint:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6171379Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6174516Z hint: 'development'. The just-created branch can be renamed via this command:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6176900Z hint:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6178097Z hint: 	git branch -m <name>
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6179453Z hint:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6181294Z hint: Disable this message with "git config set advice.defaultBranchName false"
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6183743Z Initialized empty Git repository in /home/runner/work/hold_that_thought/hold_that_thought/.git/
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6187365Z [command]/usr/bin/git remote add origin https://github.com/luccidnz/hold_that_thought
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6216128Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6218430Z ##[group]Disabling automatic garbage collection
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6220509Z [command]/usr/bin/git config --local gc.auto 0
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6249461Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6251598Z ##[group]Setting up auth
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6256907Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6288844Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6634598Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6665952Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6881140Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6923497Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6925946Z ##[group]Fetching the repository
+emulator	Run actions/checkout@v4	2025-09-24T21:29:18.6934772Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2820294c20f5d711946c36f3d42b7205ee08fa20:refs/remotes/pull/3/merge
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8208326Z From https://github.com/luccidnz/hold_that_thought
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8209298Z  * [new ref]         2820294c20f5d711946c36f3d42b7205ee08fa20 -> pull/3/merge
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8247875Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8248671Z ##[group]Determining the checkout info
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8249775Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8255487Z [command]/usr/bin/git sparse-checkout disable
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8298362Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8327533Z ##[group]Checking out the ref
+emulator	Run actions/checkout@v4	2025-09-24T21:29:19.8330784Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/3/merge
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1338394Z Note: switching to 'refs/remotes/pull/3/merge'.
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1341121Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1341627Z You are in 'detached HEAD' state. You can look around, make experimental
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1342788Z changes and commit them, and you can discard any commits you make in this
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1344012Z state without impacting any branches by switching back to a branch.
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1344580Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1344959Z If you want to create a new branch to retain commits you create, you may
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1345856Z do so (now or later) by using -c with the switch command. Example:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1346871Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1347128Z   git switch -c <new-branch-name>
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1347511Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1347770Z Or undo this operation with:
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1348146Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1348335Z   git switch -
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1348519Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1348781Z Turn off this advice by setting config variable advice.detachedHead to false
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1349113Z 
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1349463Z HEAD is now at 2820294 Merge 688d5118a1cbab3429d9dd1b93f769fcbf45f7af into f3fe53808c906bfcbbd83ef1b4c29c7225f35450
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1364251Z ##[endgroup]
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1403464Z [command]/usr/bin/git log -1 --format=%H
+emulator	Run actions/checkout@v4	2025-09-24T21:29:20.1426442Z 2820294c20f5d711946c36f3d42b7205ee08fa20
+emulator	Set up JDK 17	∩╗┐2025-09-24T21:29:20.1688491Z ##[group]Run actions/setup-java@v4
+emulator	Set up JDK 17	2025-09-24T21:29:20.1688825Z with:
+emulator	Set up JDK 17	2025-09-24T21:29:20.1689036Z   distribution: temurin
+emulator	Set up JDK 17	2025-09-24T21:29:20.1689278Z   java-version: 17
+emulator	Set up JDK 17	2025-09-24T21:29:20.1689506Z   java-package: jdk
+emulator	Set up JDK 17	2025-09-24T21:29:20.1689760Z   check-latest: false
+emulator	Set up JDK 17	2025-09-24T21:29:20.1689983Z   server-id: github
+emulator	Set up JDK 17	2025-09-24T21:29:20.1690214Z   server-username: GITHUB_ACTOR
+emulator	Set up JDK 17	2025-09-24T21:29:20.1690502Z   server-password: GITHUB_TOKEN
+emulator	Set up JDK 17	2025-09-24T21:29:20.1690773Z   overwrite-settings: true
+emulator	Set up JDK 17	2025-09-24T21:29:20.1691021Z   job-status: success
+emulator	Set up JDK 17	2025-09-24T21:29:20.1691376Z   token: ***
+emulator	Set up JDK 17	2025-09-24T21:29:20.1691593Z ##[endgroup]
+emulator	Set up JDK 17	2025-09-24T21:29:20.3679689Z ##[group]Installed distributions
+emulator	Set up JDK 17	2025-09-24T21:29:20.3744913Z Resolved Java 17.0.16+8 from tool-cache
+emulator	Set up JDK 17	2025-09-24T21:29:20.3745679Z Setting Java 17.0.16+8 as the default
+emulator	Set up JDK 17	2025-09-24T21:29:20.3760594Z Creating toolchains.xml for JDK version 17 from temurin
+emulator	Set up JDK 17	2025-09-24T21:29:20.3838111Z Writing to /home/runner/.m2/toolchains.xml
+emulator	Set up JDK 17	2025-09-24T21:29:20.3838938Z 
+emulator	Set up JDK 17	2025-09-24T21:29:20.3839227Z Java configuration:
+emulator	Set up JDK 17	2025-09-24T21:29:20.3839604Z   Distribution: temurin
+emulator	Set up JDK 17	2025-09-24T21:29:20.3840289Z   Version: 17.0.16+8
+emulator	Set up JDK 17	2025-09-24T21:29:20.3840823Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up JDK 17	2025-09-24T21:29:20.3841386Z 
+emulator	Set up JDK 17	2025-09-24T21:29:20.3842511Z ##[endgroup]
+emulator	Set up JDK 17	2025-09-24T21:29:20.3859596Z Creating settings.xml with server-id: github
+emulator	Set up JDK 17	2025-09-24T21:29:20.3866863Z Writing to /home/runner/.m2/settings.xml
+emulator	Set up Flutter	∩╗┐2025-09-24T21:29:20.4082880Z ##[group]Run subosito/flutter-action@v2
+emulator	Set up Flutter	2025-09-24T21:29:20.4083183Z with:
+emulator	Set up Flutter	2025-09-24T21:29:20.4083361Z   flutter-version: 3.x
+emulator	Set up Flutter	2025-09-24T21:29:20.4083711Z   channel: stable
+emulator	Set up Flutter	2025-09-24T21:29:20.4083898Z   architecture: X64
+emulator	Set up Flutter	2025-09-24T21:29:20.4084076Z   cache: false
+emulator	Set up Flutter	2025-09-24T21:29:20.4084264Z   pub-cache-path: default
+emulator	Set up Flutter	2025-09-24T21:29:20.4084465Z   dry-run: false
+emulator	Set up Flutter	2025-09-24T21:29:20.4084710Z   git-source: https://github.com/flutter/flutter.git
+emulator	Set up Flutter	2025-09-24T21:29:20.4085002Z env:
+emulator	Set up Flutter	2025-09-24T21:29:20.4085274Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.4085716Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.4086050Z ##[endgroup]
+emulator	Set up Flutter	2025-09-24T21:29:20.4179122Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+emulator	Set up Flutter	2025-09-24T21:29:20.4179532Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4235794Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+emulator	Set up Flutter	2025-09-24T21:29:20.4236122Z env:
+emulator	Set up Flutter	2025-09-24T21:29:20.4236450Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.4236903Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.4237235Z ##[endgroup]
+emulator	Set up Flutter	2025-09-24T21:29:20.4371633Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+emulator	Set up Flutter	2025-09-24T21:29:20.4372001Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4372259Z [36;1m  -n '3.x' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4372457Z [36;1m  -f '' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4372634Z [36;1m  -a 'X64' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4372819Z [36;1m  -k '' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4372986Z [36;1m  -c '' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4373163Z [36;1m  -l '' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4373341Z [36;1m  -d 'default' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4374096Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4374392Z [36;1m  stable[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.4401790Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+emulator	Set up Flutter	2025-09-24T21:29:20.4402110Z env:
+emulator	Set up Flutter	2025-09-24T21:29:20.4402407Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.4402855Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.4403196Z ##[endgroup]
+emulator	Set up Flutter	2025-09-24T21:29:20.6344095Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+emulator	Set up Flutter	2025-09-24T21:29:20.6344430Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.6344696Z [36;1m  -n '3.35.4' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.6344901Z [36;1m  -a 'x64' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.6345184Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.35.4-x64' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.6345510Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.6345754Z [36;1m  stable[0m
+emulator	Set up Flutter	2025-09-24T21:29:20.6375000Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+emulator	Set up Flutter	2025-09-24T21:29:20.6375343Z env:
+emulator	Set up Flutter	2025-09-24T21:29:20.6375620Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.6376065Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Set up Flutter	2025-09-24T21:29:20.6376419Z ##[endgroup]
+emulator	Set up Flutter	2025-09-24T21:29:20.7891093Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+emulator	Set up Flutter	2025-09-24T21:29:20.7893178Z                                  Dload  Upload   Total   Spent    Left  Speed
+emulator	Set up Flutter	2025-09-24T21:29:20.7893898Z 
+emulator	Set up Flutter	2025-09-24T21:29:21.3483392Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+emulator	Set up Flutter	2025-09-24T21:29:22.3486539Z   7 1372M    7  106M    0     0   189M      0  0:00:07 --:--:--  0:00:07  189M
+emulator	Set up Flutter	2025-09-24T21:29:23.3485680Z  25 1372M   25  345M    0     0   221M      0  0:00:06  0:00:01  0:00:05  221M
+emulator	Set up Flutter	2025-09-24T21:29:24.3497175Z  49 1372M   49  679M    0     0   265M      0  0:00:05  0:00:02  0:00:03  265M
+emulator	Set up Flutter	2025-09-24T21:29:25.3485440Z  75 1372M   75 1032M    0     0   289M      0  0:00:04  0:00:03  0:00:01  289M
+emulator	Set up Flutter	2025-09-24T21:29:25.4431886Z  97 1372M   97 1340M    0     0   293M      0  0:00:04  0:00:04 --:--:--  293M
+emulator	Set up Flutter	2025-09-24T21:29:25.4432433Z 100 1372M  100 1372M    0     0   294M      0  0:00:04  0:00:04 --:--:--  309M
+emulator	Flutter pub get	∩╗┐2025-09-24T21:30:14.4791449Z ##[group]Run flutter pub get
+emulator	Flutter pub get	2025-09-24T21:30:14.4791736Z [36;1mflutter pub get[0m
+emulator	Flutter pub get	2025-09-24T21:30:14.4822569Z shell: /usr/bin/bash -e {0}
+emulator	Flutter pub get	2025-09-24T21:30:14.4822800Z env:
+emulator	Flutter pub get	2025-09-24T21:30:14.4823081Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Flutter pub get	2025-09-24T21:30:14.4823766Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Flutter pub get	2025-09-24T21:30:14.4824236Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+emulator	Flutter pub get	2025-09-24T21:30:14.4824561Z   PUB_CACHE: /home/runner/.pub-cache
+emulator	Flutter pub get	2025-09-24T21:30:14.4824791Z ##[endgroup]
+emulator	Flutter pub get	2025-09-24T21:30:19.2801969Z Resolving dependencies...
+emulator	Flutter pub get	2025-09-24T21:30:20.8134917Z Downloading packages...
+emulator	Flutter pub get	2025-09-24T21:30:25.8061799Z + _fe_analyzer_shared 89.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8062362Z + analyzer 8.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8062757Z + app_links 6.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8063154Z + app_links_linux 1.0.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8063948Z + app_links_platform_interface 2.0.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8064462Z + app_links_web 1.0.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8064963Z + archive 4.0.7
+emulator	Flutter pub get	2025-09-24T21:30:25.8065309Z + argon2 1.0.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8065661Z + args 2.7.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8065983Z + async 2.13.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8066361Z + boolean_selector 2.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8066789Z + build 4.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8067171Z + build_config 1.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8067579Z + build_daemon 4.0.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8067995Z + build_runner 2.8.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8068408Z + built_collection 5.1.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8068849Z + built_value 8.12.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8069339Z + characters 1.4.0 (1.4.1 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8069835Z + checked_yaml 2.0.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8070221Z + clock 1.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8071021Z + code_builder 4.11.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8071409Z + collection 1.19.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8071801Z + connectivity_plus 6.1.5 (7.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8072315Z + connectivity_plus_platform_interface 2.0.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8072794Z + convert 3.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8073105Z + cross_file 0.3.4+2
+emulator	Flutter pub get	2025-09-24T21:30:25.8073429Z + crypto 3.0.6
+emulator	Flutter pub get	2025-09-24T21:30:25.8073992Z + cryptography 2.7.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8074366Z + dart_style 3.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8074662Z + dbus 0.7.11
+emulator	Flutter pub get	2025-09-24T21:30:25.8074940Z + fake_async 1.3.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8075221Z + ffi 2.1.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8075485Z + file 7.0.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8075827Z + file_saver 0.2.9 (0.3.1 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8076289Z + file_selector 1.0.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8076708Z + file_selector_android 0.5.1+16
+emulator	Flutter pub get	2025-09-24T21:30:25.8077160Z + file_selector_ios 0.5.3+2
+emulator	Flutter pub get	2025-09-24T21:30:25.8077584Z + file_selector_linux 0.9.3+2
+emulator	Flutter pub get	2025-09-24T21:30:25.8078019Z + file_selector_macos 0.9.4+4
+emulator	Flutter pub get	2025-09-24T21:30:25.8078494Z + file_selector_platform_interface 2.6.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8079011Z + file_selector_web 0.9.4+2
+emulator	Flutter pub get	2025-09-24T21:30:25.8079410Z + file_selector_windows 0.9.3+4
+emulator	Flutter pub get	2025-09-24T21:30:25.8079786Z + fixnum 1.1.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8080127Z + flutter 0.0.0 from sdk flutter
+emulator	Flutter pub get	2025-09-24T21:30:25.8080575Z + flutter_background_service 5.1.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8081084Z + flutter_background_service_android 6.3.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8081648Z + flutter_background_service_ios 5.0.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8082238Z + flutter_background_service_platform_interface 5.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8082749Z + flutter_dotenv 6.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8083123Z + flutter_lints 4.0.0 (6.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8083776Z + flutter_riverpod 2.6.1 (3.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8084241Z + flutter_secure_storage 9.2.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8084701Z + flutter_secure_storage_linux 1.2.3 (2.0.1 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8085263Z + flutter_secure_storage_macos 3.1.3 (4.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8085909Z + flutter_secure_storage_platform_interface 1.1.2 (2.0.1 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8086576Z + flutter_secure_storage_web 1.2.1 (2.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8087151Z + flutter_secure_storage_windows 3.1.2 (4.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8087672Z + flutter_test 0.0.0 from sdk flutter
+emulator	Flutter pub get	2025-09-24T21:30:25.8088127Z + flutter_web_plugins 0.0.0 from sdk flutter
+emulator	Flutter pub get	2025-09-24T21:30:25.8088988Z + frontend_server_client 4.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8089384Z + functions_client 2.4.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8089728Z + glob 2.1.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8090047Z + go_router 15.1.2 (16.2.4 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8090448Z + gotrue 2.15.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8090777Z + graphs 2.3.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8091165Z + gtk 2.1.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8091504Z + hex 0.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8091794Z + hive 2.2.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8092107Z + hive_flutter 1.1.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8092434Z + http 1.5.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8092747Z + http_multi_server 3.2.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8093078Z + http_parser 4.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8093485Z + intl 0.20.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8093965Z + io 1.0.5
+emulator	Flutter pub get	2025-09-24T21:30:25.8094257Z + js 0.6.7 (0.7.2 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8094578Z + json_annotation 4.9.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8094922Z + jwt_decode 0.3.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8095219Z + leak_tracker 11.0.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8095594Z + leak_tracker_flutter_testing 3.0.10
+emulator	Flutter pub get	2025-09-24T21:30:25.8096048Z + leak_tracker_testing 3.0.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8096460Z + lints 4.0.0 (6.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8096846Z + logging 1.3.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8097146Z + matcher 0.12.17
+emulator	Flutter pub get	2025-09-24T21:30:25.8097544Z + material_color_utilities 0.11.1 (0.13.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8098028Z + meta 1.16.0 (1.17.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8098407Z + mime 2.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8098702Z + nm 0.5.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8099006Z + open_filex 4.7.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8099348Z + package_config 2.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8099731Z + package_info_plus 9.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8100166Z + package_info_plus_platform_interface 3.2.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8100932Z + path 1.9.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8101271Z + path_provider 2.1.5
+emulator	Flutter pub get	2025-09-24T21:30:25.8101661Z + path_provider_android 2.2.18
+emulator	Flutter pub get	2025-09-24T21:30:25.8102107Z + path_provider_foundation 2.4.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8102537Z + path_provider_linux 2.2.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8103017Z + path_provider_platform_interface 2.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8103732Z + path_provider_windows 2.3.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8104199Z + permission_handler 11.4.0 (12.0.1 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8104750Z + permission_handler_android 12.1.0 (13.0.1 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8105283Z + permission_handler_apple 9.4.7
+emulator	Flutter pub get	2025-09-24T21:30:25.8105718Z + permission_handler_html 0.1.3+5
+emulator	Flutter pub get	2025-09-24T21:30:25.8106170Z + permission_handler_platform_interface 4.3.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8106651Z + permission_handler_windows 0.2.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8107050Z + petitparser 7.0.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8107365Z + platform 3.1.6
+emulator	Flutter pub get	2025-09-24T21:30:25.8107692Z + plugin_platform_interface 2.1.8
+emulator	Flutter pub get	2025-09-24T21:30:25.8108122Z + pointycastle 3.9.1 (4.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8108539Z + pool 1.5.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8108827Z + posix 6.0.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8109129Z + postgrest 2.4.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8109439Z + pub_semver 2.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8109756Z + pubspec_parse 1.5.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8110083Z + realtime_client 2.5.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8110406Z + record 6.1.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8110712Z + record_android 1.4.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8111038Z + record_ios 1.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8111338Z + record_linux 1.2.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8111666Z + record_macos 1.1.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8112011Z + record_platform_interface 1.4.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8112400Z + record_web 1.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8112742Z + record_windows 1.0.7
+emulator	Flutter pub get	2025-09-24T21:30:25.8113065Z + retry 3.1.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8113386Z + riverpod 2.6.1 (3.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8113988Z + rxdart 0.28.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8114319Z + sentry 8.14.2 (9.6.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8114725Z + sentry_flutter 8.14.2 (9.6.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8115153Z + share_plus 11.1.0 (12.0.0 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8115577Z + share_plus_platform_interface 6.1.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8116003Z + shared_preferences 2.5.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8116391Z + shared_preferences_android 2.4.13
+emulator	Flutter pub get	2025-09-24T21:30:25.8116829Z + shared_preferences_foundation 2.5.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8117261Z + shared_preferences_linux 2.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8117965Z + shared_preferences_platform_interface 2.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8118427Z + shared_preferences_web 2.4.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8118820Z + shared_preferences_windows 2.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8119209Z + shelf 1.4.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8119509Z + shelf_web_socket 3.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8119882Z + sky_engine 0.0.0 from sdk flutter
+emulator	Flutter pub get	2025-09-24T21:30:25.8120270Z + source_span 1.10.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8120581Z + sprintf 7.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8120884Z + stack_trace 1.12.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8121209Z + state_notifier 1.0.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8121545Z + storage_client 2.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8121878Z + stream_channel 2.1.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8122230Z + stream_transform 2.1.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8122569Z + string_scanner 1.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8122894Z + supabase 2.9.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8123231Z + supabase_flutter 2.10.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8123817Z + term_glyph 1.2.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8124147Z + test_api 0.7.6 (0.7.7 available)
+emulator	Flutter pub get	2025-09-24T21:30:25.8124529Z + typed_data 1.4.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8124848Z + url_launcher 6.3.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8125176Z + url_launcher_android 6.3.22
+emulator	Flutter pub get	2025-09-24T21:30:25.8125558Z + url_launcher_ios 6.3.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8125913Z + url_launcher_linux 3.2.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8126281Z + url_launcher_macos 3.2.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8126668Z + url_launcher_platform_interface 2.3.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8127110Z + url_launcher_web 2.4.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8127473Z + url_launcher_windows 3.1.4
+emulator	Flutter pub get	2025-09-24T21:30:25.8127826Z + uuid 4.5.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8128109Z + vector_math 2.2.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8128417Z + vm_service 15.0.2
+emulator	Flutter pub get	2025-09-24T21:30:25.8128757Z + watcher 1.1.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8129105Z + web 1.1.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8129666Z + web_socket 1.0.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8129995Z + web_socket_channel 3.0.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8130345Z + win32 5.14.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8130659Z + xdg_directories 1.1.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8130989Z + xml 6.6.1
+emulator	Flutter pub get	2025-09-24T21:30:25.8131345Z + yaml 3.1.3
+emulator	Flutter pub get	2025-09-24T21:30:25.8131669Z + yet_another_json_isolate 2.1.0
+emulator	Flutter pub get	2025-09-24T21:30:25.8132103Z Changed 172 dependencies!
+emulator	Flutter pub get	2025-09-24T21:30:25.8132686Z 23 packages have newer versions incompatible with dependency constraints.
+emulator	Flutter pub get	2025-09-24T21:30:25.8133375Z Try `flutter pub outdated` for more information.
+emulator	Build app and tests	∩╗┐2025-09-24T21:30:26.4058427Z ##[group]Run flutter build apk --debug
+emulator	Build app and tests	2025-09-24T21:30:26.4058799Z [36;1mflutter build apk --debug[0m
+emulator	Build app and tests	2025-09-24T21:30:26.4059036Z [36;1mcd android[0m
+emulator	Build app and tests	2025-09-24T21:30:26.4059280Z [36;1m./gradlew assembleAndroidTest assembleDebug[0m
+emulator	Build app and tests	2025-09-24T21:30:26.4090124Z shell: /usr/bin/bash -e {0}
+emulator	Build app and tests	2025-09-24T21:30:26.4090356Z env:
+emulator	Build app and tests	2025-09-24T21:30:26.4090638Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Build app and tests	2025-09-24T21:30:26.4091093Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Build app and tests	2025-09-24T21:30:26.4091499Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+emulator	Build app and tests	2025-09-24T21:30:26.4091834Z   PUB_CACHE: /home/runner/.pub-cache
+emulator	Build app and tests	2025-09-24T21:30:26.4092070Z ##[endgroup]
+emulator	Build app and tests	2025-09-24T21:32:06.4132320Z Running Gradle task 'assembleDebug'...                          
+emulator	Build app and tests	2025-09-24T21:32:06.4138655Z Checking the license for package NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/licenses
+emulator	Build app and tests	2025-09-24T21:32:06.4139540Z License for package NDK (Side by side) 27.0.12077973 accepted.
+emulator	Build app and tests	2025-09-24T21:32:06.4140286Z Preparing "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973".
+emulator	Build app and tests	2025-09-24T21:32:18.8991800Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" ready.
+emulator	Build app and tests	2025-09-24T21:32:18.8995109Z Installing NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/ndk/27.0.12077973
+emulator	Build app and tests	2025-09-24T21:32:18.8997818Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" complete.
+emulator	Build app and tests	2025-09-24T21:32:19.4059474Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" finished.
+emulator	Build app and tests	2025-09-24T21:34:30.1050236Z Note: Some input files use or override a deprecated API.
+emulator	Build app and tests	2025-09-24T21:34:30.1050994Z Note: Recompile with -Xlint:deprecation for details.
+emulator	Build app and tests	2025-09-24T21:35:23.4997123Z /home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/java/com/example/hold_that_thought/RecordingService.java:128: error: package R does not exist
+emulator	Build app and tests	2025-09-24T21:35:23.5004606Z                 .addAction(R.drawable.ic_stop, "Stop", stopPendingIntent)
+emulator	Build app and tests	2025-09-24T21:35:23.5017852Z                             ^
+emulator	Build app and tests	2025-09-24T21:35:23.5024548Z /home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/java/com/example/hold_that_thought/RecordingService.java:126: error: package R does not exist
+emulator	Build app and tests	2025-09-24T21:35:23.5026389Z                 .setSmallIcon(R.drawable.ic_recording)
+emulator	Build app and tests	2025-09-24T21:35:23.5027059Z                                ^
+emulator	Build app and tests	2025-09-24T21:35:23.5028311Z Note: /home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/java/com/example/hold_that_thought/RecordingService.java uses or overrides a deprecated API.
+emulator	Build app and tests	2025-09-24T21:35:23.5029586Z Note: Recompile with -Xlint:deprecation for details.
+emulator	Build app and tests	2025-09-24T21:35:23.5030045Z 2 errors
+emulator	Build app and tests	2025-09-24T21:35:26.3989156Z 
+emulator	Build app and tests	2025-09-24T21:35:26.4006104Z FAILURE: Build failed with an exception.
+emulator	Build app and tests	2025-09-24T21:35:26.4006839Z 
+emulator	Build app and tests	2025-09-24T21:35:26.4007069Z * What went wrong:
+emulator	Build app and tests	2025-09-24T21:35:26.4013063Z Execution failed for task ':app:compileDebugJavaWithJavac'.
+emulator	Build app and tests	2025-09-24T21:35:26.4013907Z > Compilation failed; see the compiler output below.
+emulator	Build app and tests	2025-09-24T21:35:26.4015617Z   Note: Recompile with -Xlint:deprecation for details./home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/java/com/example/hold_that_thought/RecordingService.java:128: error: package R does not exist
+emulator	Build app and tests	2025-09-24T21:35:26.4017415Z                   .addAction(R.drawable.ic_stop, "Stop", stopPendingIntent)
+emulator	Build app and tests	2025-09-24T21:35:26.4018425Z                               ^
+emulator	Build app and tests	2025-09-24T21:35:26.4019718Z   /home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/java/com/example/hold_that_thought/RecordingService.java:126: error: package R does not exist
+emulator	Build app and tests	2025-09-24T21:35:26.4020972Z                   .setSmallIcon(R.drawable.ic_recording)
+emulator	Build app and tests	2025-09-24T21:35:26.4022271Z                                  ^Note: /home/runner/work/hold_that_thought/hold_that_thought/android/app/src/main/java/com/example/hold_that_thought/RecordingService.java uses or overrides a deprecated API.
+emulator	Build app and tests	2025-09-24T21:35:26.4023684Z   2 errors
+emulator	Build app and tests	2025-09-24T21:35:26.4024160Z 
+emulator	Build app and tests	2025-09-24T21:35:26.4024270Z * Try:
+emulator	Build app and tests	2025-09-24T21:35:26.4024683Z > Check your code and dependencies to fix the compilation error(s)
+emulator	Build app and tests	2025-09-24T21:35:26.4025251Z > Run with --scan to get full insights.
+emulator	Build app and tests	2025-09-24T21:35:26.4025540Z 
+emulator	Build app and tests	2025-09-24T21:35:26.4025662Z BUILD FAILED in 4m 58s
+emulator	Build app and tests	2025-09-24T21:35:26.8632996Z Running Gradle task 'assembleDebug'...                            299.7s
+emulator	Build app and tests	2025-09-24T21:35:26.8749450Z Gradle task assembleDebug failed with exit code 1
+emulator	Build app and tests	2025-09-24T21:35:26.8817569Z ##[error]Process completed with exit code 1.
+emulator	Upload test reports	∩╗┐2025-09-24T21:35:26.8908011Z ##[group]Run actions/upload-artifact@v4
+emulator	Upload test reports	2025-09-24T21:35:26.8908447Z with:
+emulator	Upload test reports	2025-09-24T21:35:26.8908752Z   name: android-instrumentation-reports
+emulator	Upload test reports	2025-09-24T21:35:26.8909212Z   path: android/**/connected/**/index.html
+emulator	Upload test reports	2025-09-24T21:35:26.8909630Z   if-no-files-found: warn
+emulator	Upload test reports	2025-09-24T21:35:26.8909975Z   compression-level: 6
+emulator	Upload test reports	2025-09-24T21:35:26.8910293Z   overwrite: false
+emulator	Upload test reports	2025-09-24T21:35:26.8910610Z   include-hidden-files: false
+emulator	Upload test reports	2025-09-24T21:35:26.8910958Z env:
+emulator	Upload test reports	2025-09-24T21:35:26.8911396Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Upload test reports	2025-09-24T21:35:26.8912157Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+emulator	Upload test reports	2025-09-24T21:35:26.8912933Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.4-x64
+emulator	Upload test reports	2025-09-24T21:35:26.8913488Z   PUB_CACHE: /home/runner/.pub-cache
+emulator	Upload test reports	2025-09-24T21:35:26.8914087Z ##[endgroup]
+emulator	Upload test reports	2025-09-24T21:35:27.3516884Z ##[warning]No files were found with the provided path: android/**/connected/**/index.html. No artifacts will be uploaded.
+emulator	Post Set up Flutter	∩╗┐2025-09-24T21:35:27.3777151Z Post job cleanup.
+emulator	Post Set up JDK 17	∩╗┐2025-09-24T21:35:27.3827486Z Post job cleanup.
+emulator	Post Run actions/checkout@v4	∩╗┐2025-09-24T21:35:27.5714051Z Post job cleanup.
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7313894Z [command]/usr/bin/git version
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7388529Z git version 2.51.0
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7489253Z Temporarily overriding HOME='/home/runner/work/_temp/b6d7d0b2-fe86-4a37-b9fd-20be0256715b' before making global git config changes
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7491045Z Adding repository directory to the temporary git global config as a safe directory
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7496956Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hold_that_thought/hold_that_thought
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7549257Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7595924Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.7985868Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.8026717Z http.https://github.com/.extraheader
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.8028037Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+emulator	Post Run actions/checkout@v4	2025-09-24T21:35:27.8066325Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+emulator	Complete job	∩╗┐2025-09-24T21:35:27.8513394Z Cleaning up orphan processes
+emulator	Complete job	2025-09-24T21:35:27.9010610Z Terminate orphan process: pid (2533) (java)
+emulator	Complete job	2025-09-24T21:35:27.9033931Z Terminate orphan process: pid (2658) (java)
+emulator	Complete job	2025-09-24T21:35:27.9061392Z Terminate orphan process: pid (2995) (java)

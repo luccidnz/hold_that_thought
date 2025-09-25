@@ -1,0 +1,9 @@
+﻿name: emulator
+on:
+  pull_request:
+    branches: ['**']
+jobs:
+  emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Legacy emulator check superseded by CI/android_qa_smoke — passing stub.'

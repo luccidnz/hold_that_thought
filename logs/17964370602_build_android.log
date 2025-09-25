@@ -1,0 +1,13 @@
+build_android   Make gradlew executable 2025-09-24T02:22:13.4490213Z ##[group]Run chmod +x ./gradlew
+build_android   Make gradlew executable 2025-09-24T02:22:13.4490497Z chmod +x ./gradlew
+build_android   Make gradlew executable 2025-09-24T02:22:13.4520071Z shell: /usr/bin/bash -e {0}
+build_android   Make gradlew executable 2025-09-24T02:22:13.4520276Z env:
+build_android   Make gradlew executable 2025-09-24T02:22:13.4520538Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build_android   Make gradlew executable 2025-09-24T02:22:13.4520965Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build_android   Make gradlew executable 2025-09-24T02:22:13.4521363Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/beta-3.24.0-0.1.pre-x64
+build_android   Make gradlew executable 2025-09-24T02:22:13.4521666Z   PUB_CACHE: /home/runner/.pub-cache
+build_android   Make gradlew executable 2025-09-24T02:22:13.4522099Z   ANDROID_HOME: /usr/local/lib/android/sdk
+build_android   Make gradlew executable 2025-09-24T02:22:13.4522394Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+build_android   Make gradlew executable 2025-09-24T02:22:13.4522613Z ##[endgroup]
+build_android   Make gradlew executable 2025-09-24T02:22:13.4582253Z chmod: cannot access './gradlew': No such file or directory
+build_android   Make gradlew executable 2025-09-24T02:22:13.4593620Z ##[error]Process completed with exit code 1.
