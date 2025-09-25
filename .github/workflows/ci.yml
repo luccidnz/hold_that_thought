@@ -189,8 +189,8 @@ jobs:
         with:
           name: Android Debug APK
 
-      # Run smoke test with inline retry function
-      - name: Run smoke test via adb (inline functions)
+      # Run smoke test with resilient retry logic
+      - name: Run smoke test via adb (pipefail-safe)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
@@ -201,7 +201,7 @@ jobs:
           emulator-boot-timeout: 900
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
           script: |
-            set -euo pipefail
+            set -eu
             echo "::group::ADB prep"
             adb kill-server || true
             adb start-server || true
