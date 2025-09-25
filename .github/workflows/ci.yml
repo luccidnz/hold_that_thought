@@ -7,7 +7,8 @@ on:
     branches: ['**']
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # Make each push (commit SHA) its own group so later pushes don't cancel this run
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.sha }}
   cancel-in-progress: true
 
 permissions:
