@@ -179,7 +179,7 @@ jobs:
   android_qa_smoke:
     needs: build_android
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -190,7 +190,7 @@ jobs:
         with:
           name: Android Debug APK
 
-      - name: Run smoke test via adb (resilient)
+      - name: Run smoke test via adb (deterministic)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
@@ -198,12 +198,12 @@ jobs:
           target: google_apis
           disable-animations: true
           force-avd-creation: true
-          emulator-boot-timeout: 900
+          emulator-boot-timeout: 600
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
           script: |
             set -euo pipefail
 
-            retry() { n=0; until "$@"; do n=$((n+1)); [ $n -ge 8 ] && { echo "retry: giving up"; exit 1; }; echo "retry $n for: $*"; sleep 8; done; }
+            retry() { n=0; until "$@"; do n=$((n+1)); [ $n -ge 6 ] && { echo "retry: giving up"; exit 1; }; echo "retry $n for: $*"; sleep 8; done; }
 
             echo "::group::ADB prep"
             adb kill-server || true
@@ -215,55 +215,44 @@ jobs:
             adb shell svc power stayon true || true
             echo "::endgroup::"
 
-            echo "::group::Install APK (with retries)"
+            echo "::group::Install APK"
             retry sh -c 'adb install -r -d -t app-debug.apk'
             echo "::endgroup::"
 
-            echo "::group::Resolve package/activity from APK"
-            # Prefer aapt (build-tools) to read the package from the APK.
-            PKG="$(aapt dump badging app-debug.apk | sed -n "s/.*package: name='\([^']*\)'.*/\1/p" | head -n1 || true)"
-            if [ -z "$PKG" ]; then
-              # Fallback: pick last installed package (best-effort)
-              PKG="$(adb shell pm list packages | sed -n 's/package://p' | tail -n1)"
-            fi
+            echo "::group::Resolve package from AndroidManifest.xml (no aapt needed)"
+            PKG=$(grep -oP 'package="[^"]+\"' android/app/src/main/AndroidManifest.xml | head -n1 | cut -d '"' -f2 || true)
+            if [ -z "$PKG" ]; then PKG=com.holdthatthought; fi
             echo "PACKAGE=$PKG"
-            if [ -z "$PKG" ]; then echo "Could not determine package name"; exit 1; fi
-
-            # Try to resolve default launchable activity
-            ACT="$(adb shell cmd package resolve-activity --brief "$PKG" | tail -n1 | sed 's#^'"$PKG"'/##' || true)"
-            echo "ACTIVITY=${ACT:-<monkey>}"
             echo "::endgroup::"
 
-            echo "::group::Launch app (with retries + fallback)"
-            # First try explicit start if we resolved an activity
+            echo "::group::Launch app (resolve-activity -> fallback monkey)"
+            ACT=$(adb shell cmd package resolve-activity --brief "$PKG" 2>/dev/null | tail -n1 | sed "s#^$PKG/##" || true)
             if [ -n "$ACT" ] && [ "$ACT" != "$PKG" ]; then
               retry sh -c "adb shell am start -W -n $PKG/$ACT"
             else
-              # Fallback to monkey MAIN/LAUNCHER
               retry sh -c "adb shell monkey -p $PKG -c android.intent.category.LAUNCHER 1"
             fi
             echo "::endgroup::"
 
-            echo "::group::Verify process (with reconnect if needed)"
-            for i in 1 2 3 4 5 6 7 8; do
+            echo "::group::Verify process (with quick reconnects)"
+            for i in 1 2 3 4 5 6; do
               if adb shell pidof "$PKG" >/dev/null 2>&1; then
-                echo "App is running"
+                echo "App is running ✅"
                 exit 0
               fi
-              # Handle intermittent 'Broken pipe' / transport issues
               adb kill-server || true
               adb start-server || true
               adb wait-for-device || true
-              sleep 6
+              sleep 5
             done
             echo "App did not stay running"; exit 1
             echo "::endgroup::"
 
-      - name: Collect logcat on failure
+      - name: Collect logcat on failure (capped 20s)
         if: failure()
         run: |
           mkdir -p smoke-logs
-          adb logcat -d > smoke-logs/logcat.txt || echo "no logcat"
+          timeout 20s adb logcat -d > smoke-logs/logcat.txt || echo "logcat timeout or adb down"
 
       - name: Upload smoke logs
         if: failure()
