@@ -189,74 +189,18 @@ jobs:
         with:
           name: Android Debug APK
 
-      # Run smoke test with resilient retry logic
-      - name: Run smoke test via adb (pipefail-safe)
+      # execute ONE command so all functions/vars stay in the same shell
+      - name: Run smoke test via adb (repo script)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           arch: x86_64
           target: google_apis
-          disable-animations: false     # avoid flaky runner hook
+          disable-animations: false      # avoid flaky runner hook
           force-avd-creation: true
           emulator-boot-timeout: 900
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
-          script: |
-            set -eu
-            echo "::group::ADB prep"
-            adb kill-server || true
-            adb start-server || true
-            adb version || true
-            
-            # Retry adb wait-for-device with inline logic
-            n=0
-            until adb wait-for-device; do
-              n=$((n+1))
-              if [ $n -ge 12 ]; then
-                echo "retry: giving up (adb wait-for-device)"
-                exit 1
-              fi
-              echo "retry $n: adb wait-for-device"
-              sleep 10
-            done
-            echo "::endgroup::"
-
-            echo "::group::Deep boot verification (up to ~8 min)"
-            BOOT_OK=0
-            for i in $(seq 1 48); do
-              A=$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
-              B=$(adb shell getprop dev.bootcomplete 2>/dev/null | tr -d '\r')
-              C=$(adb shell getprop sys.user.0.running 2>/dev/null | tr -d '\r')
-              D=$(adb shell settings get global device_provisioned 2>/dev/null | tr -d '\r')
-              if [ "$A" = "1" ] || [ "$B" = "1" ] || { [ "$C" = "1" ] && [ "$D" = "1" ]; }; then
-                echo "Boot signals: sys.boot_completed=$A dev.bootcomplete=$B user0=$C provisioned=$D"
-                BOOT_OK=1; break
-              fi
-              adb kill-server || true
-              adb start-server || true
-              sleep 10
-            done
-            if [ "$BOOT_OK" != "1" ]; then
-              echo "Boot did not complete in time"
-              exit 1
-            fi
-            echo "::endgroup::"
-
-            echo "::group::Install + ping"
-            # Retry APK install with inline logic
-            n=0
-            until adb install -r -d -t app-debug.apk; do
-              n=$((n+1))
-              if [ $n -ge 12 ]; then
-                echo "retry: giving up (adb install)"
-                exit 1
-              fi
-              echo "retry $n: adb install"
-              sleep 10
-            done
-            adb shell input keyevent 82 || true
-            echo "::endgroup::"
-
-            echo "SMOKE_OK"
+          script: bash ci/android_smoke.sh
 
       - name: Collect logcat on failure (capped 15s)
         if: failure()
