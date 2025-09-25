@@ -201,7 +201,7 @@ jobs:
           emulator-boot-timeout: 900
           emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
           script: |
-            set -euo pipefail
+            set -eu
 
             # Generic retry with total attempts + sleep
             retry() { n=0; until "$@"; do n=$((n+1)); [ $n -ge 12 ] && { echo "retry: giving up ($*)"; exit 1; }; echo "retry $n: $*"; sleep 10; done; }
@@ -256,4 +256,5 @@ jobs:
         with:
           name: android-smoke-logs
           path: smoke-logs/**
+
 
