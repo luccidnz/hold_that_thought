@@ -189,6 +189,22 @@ jobs:
         with:
           name: Android Debug APK
 
+      # Locate and prepare the APK file
+      - name: Prepare APK for smoke test
+        run: |
+          find . -name "*.apk" -type f
+          if [ -f "build/app/outputs/flutter-apk/app-debug.apk" ]; then
+            cp "build/app/outputs/flutter-apk/app-debug.apk" "./app-debug.apk"
+          elif [ -f "build/app/outputs/apk/debug/app-debug.apk" ]; then
+            cp "build/app/outputs/apk/debug/app-debug.apk" "./app-debug.apk"
+          elif [ -f "app-debug.apk" ]; then
+            echo "APK already in root directory"
+          else
+            echo "ERROR: Could not find app-debug.apk"
+            exit 1
+          fi
+          ls -la app-debug.apk
+
       # execute ONE command so all functions/vars stay in the same shell
       - name: Run smoke test via adb (repo script)
         uses: reactivecircus/android-emulator-runner@v2
