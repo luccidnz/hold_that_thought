@@ -13,7 +13,6 @@ on:
 env:
   VERSION_NAME_FROM_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc') && format('{0}', replace(github.ref_name, 'v', '')) || '' }}
   VERSION_CODE_FROM_RUN: ${{ github.run_number }}
-      - 'v[0-9]*'
 
 concurrency:
   # Make each push (commit SHA) its own group so later pushes don't cancel this run
