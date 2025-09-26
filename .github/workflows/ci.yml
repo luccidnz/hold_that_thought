@@ -35,8 +35,8 @@ jobs:
         run: echo "ref=$GITHUB_REF, ref_name=${{ github.ref_name }}"
 
   build_android:
-  env:
-    GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g
+    env:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g
     runs-on: ubuntu-latest
     steps:
       - uses: actions/cache@v4
@@ -151,9 +151,9 @@ jobs:
           if-no-files-found: warn
 
   build_windows:
-  env:
-    GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g
-    FLUTTER_WINDOWS: 'true'
+    env:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g
+      FLUTTER_WINDOWS: 'true'
     runs-on: windows-latest
     steps:
       - uses: actions/cache@v4
