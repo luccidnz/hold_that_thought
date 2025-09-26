@@ -1,10 +1,14 @@
 ﻿name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: ['**']
   push:
     branches: ['**']
+    tags:
+      - 'v*'
+      - 'v[0-9]*'
 
 concurrency:
   # Make each push (commit SHA) its own group so later pushes don't cancel this run
@@ -258,11 +262,25 @@ jobs:
         run: |
           apk="$(ls dist/android/*.apk | head -n 1)"
           cp "$apk" "dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk"
+      - name: Generate SHA256 checksums
+        run: |
+          cd dist
+          for f in *.apk *.zip; do
+            [ -f "$f" ] || continue
+            if command -v sha256sum >/dev/null 2>&1; then
+              sha256sum "$f" > "$f.sha256"
+            else
+              shasum -a 256 "$f" > "$f.sha256"
+            fi
+          done
       - name: Attach to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk
-            dist/HoldThatThought-${GITHUB_REF_NAME}-windows.zip
+            dist/HoldThatThought-${{ github.ref_name }}-debug.apk
+            dist/HoldThatThought-${{ github.ref_name }}-debug.apk.sha256
+            dist/HoldThatThought-${{ github.ref_name }}-windows.zip
+            dist/HoldThatThought-${{ github.ref_name }}-windows.zip.sha256
+          prerelease: ${{ contains(github.ref_name, '-rc') }}
 
 
