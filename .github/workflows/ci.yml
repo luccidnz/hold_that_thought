@@ -260,7 +260,13 @@ jobs:
           zip -qr ../HoldThatThought-${GITHUB_REF_NAME}-windows.zip .
       - name: Move APK to dist root
         run: |
-          apk="$(ls dist/android/*.apk | head -n 1)"
+          # Find the APK file in the downloaded artifact
+          apk="$(find dist/android -name "*.apk" -type f | head -n 1)"
+          if [ -z "$apk" ]; then
+            echo "Error: No APK file found in dist/android"
+            find dist/android -type f
+            exit 1
+          fi
           cp "$apk" "dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk"
       - name: Generate SHA256 checksums
         run: |
