@@ -1,6 +1,11 @@
 ï»¿name: CI
 
 on:
+
+env:
+  VERSION_NAME_FROM_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc') && format('{0}', replace(github.ref_name, 'v', '')) || '' }}
+  VERSION_CODE_FROM_RUN: ${{ github.run_number }}
+
   workflow_dispatch:
   pull_request:
     branches: ['**']
@@ -117,6 +122,8 @@ jobs:
 
       - name: Build Android Debug
         run: flutter build apk --debug --no-shrink --verbose
+      - name: Build Android Debug (with version)
+        run: flutter build apk --debug --build-name \"${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}\" --build-number \"${{ env.VERSION_CODE_FROM_RUN }}\"
       - name: List build outputs
         run: |
           find build -name "*.apk" || true
@@ -370,14 +377,40 @@ jobs:
           storeFile=release.keystore
           EOF
 
+      # Generate What's New for Play Store
+      - name: Generate What's New (<=500 chars)
+        run: |
+          mkdir -p dist/whatsnew
+          tag="${GITHUB_REF_NAME}"
+          file="dist/CHANGELOG-${GITHUB_REF_NAME}.md"
+          # Generate changelog if not exists (fallback for manual testing)
+          if [ ! -f "$file" ]; then
+            git fetch --tags --force
+            curr="${GITHUB_REF_NAME}"
+            prev="$(git tag --sort=-creatordate | grep -v "^$curr$" | head -n1 || true)"
+            if [ -n "$prev" ]; then range="$prev..$curr"; else range=""; fi
+            mkdir -p dist
+            echo "## Changelog for $curr" > "$file"
+            if [ -n "$range" ]; then
+              echo "" >> "$file"
+              git log --pretty=format:'- %s (%h) — %an' $range >> "$file"
+            else
+              echo "- Initial tagged release notes" >> "$file"
+            fi
+          fi
+          # Extract first 500 chars for What's New
+          short=$(head -c 500 "$file" | tr -d '\r')
+          printf "%s\n" "$short" > dist/whatsnew/en-US.txt
+
       # Build signed AAB (Flutter delegates to Gradle + key.properties)
       - name: Build AAB (release)
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
 
       # Upload to Google Play (internal track)
       - name: Upload to Google Play (internal)
         uses: r0adkll/upload-google-play@v1
         with:
+          whatsNewDirectory: dist/whatsnew
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: ${{ secrets.PLAY_PACKAGE_NAME }}
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
