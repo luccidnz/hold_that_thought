@@ -1,11 +1,6 @@
 ï»¿name: CI
 
 on:
-
-env:
-  VERSION_NAME_FROM_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc') && format('{0}', replace(github.ref_name, 'v', '')) || '' }}
-  VERSION_CODE_FROM_RUN: ${{ github.run_number }}
-
   workflow_dispatch:
   pull_request:
     branches: ['**']
@@ -13,6 +8,11 @@ env:
     branches: ['**']
     tags:
       - 'v*'
+      - 'v[0-9]*'
+
+env:
+  VERSION_NAME_FROM_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc') && format('{0}', replace(github.ref_name, 'v', '')) || '' }}
+  VERSION_CODE_FROM_RUN: ${{ github.run_number }}
       - 'v[0-9]*'
 
 concurrency:
@@ -393,7 +393,7 @@ jobs:
             echo "## Changelog for $curr" > "$file"
             if [ -n "$range" ]; then
               echo "" >> "$file"
-              git log --pretty=format:'- %s (%h) — %an' $range >> "$file"
+              git log --pretty=format:'- %s (%h) ï¿½ %an' $range >> "$file"
             else
               echo "- Initial tagged release notes" >> "$file"
             fi
