@@ -46,10 +46,11 @@ jobs:
       - name: Pub get (resilient)
         run: |
           for i in 1 2 3; do flutter pub get && break || sleep $((i*5)); done
-      - name: Build APK (mock until Gradle fixed)
+      - name: Build APK
         run: |
-          mkdir -p build/app/outputs/flutter-apk/
-          echo "Mock APK for ${GITHUB_REF_NAME} - Gradle issue pending fix" > build/app/outputs/flutter-apk/app-debug.apk
+          flutter build apk --debug \
+            --build-name "${{ steps.ver.outputs.name }}" \
+            --build-number "${{ steps.ver.outputs.code }}"
       - name: Upload Android artifact
         uses: actions/upload-artifact@v4
         with:
