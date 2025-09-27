@@ -1,0 +1,12 @@
+name: Sanity
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  workflow_dispatch: {}
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello from $GITHUB_REF ($GITHUB_SHA)"
