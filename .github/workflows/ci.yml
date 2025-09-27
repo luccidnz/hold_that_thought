@@ -35,9 +35,9 @@ jobs:
         run: echo "ref=$GITHUB_REF, ref_name=${{ github.ref_name }}"
 
   build_android:
-  env:
-    GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
-    ORG_GRADLE_PROJECT_android.injected.testOnly: 'true'
+    env:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
+      ORG_GRADLE_PROJECT_android.injected.testOnly: 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-java@v4
@@ -114,12 +114,10 @@ jobs:
         shell: bash
         run: |
           set -e
-          want_bt="${{ env.ANDROID_BUILD_TOOLS || '' }}"
-          want_sdk="${{ env.ANDROID_COMPILE_SDK || '' }}"
-          # Fallbacks if not provided via env
-          [ -z "$want_sdk" ] && want_sdk=$(grep -E 'compileSdk(?:Version)?[[:space:]]+[0-9]+' -m1 -h android/app/build.gradle* | grep -Eo '[0-9]+' || echo 34)
-          [ -z "$want_bt" ] && want_bt="$want_sdk.0.0"
-          echo "Installing build-tools $want_bt and platforms;android-$want_sdk"
+          # Fallback SDK detection
+          want_sdk=$(grep -E 'compileSdk(?:Version)?[[:space:]]+[0-9]+' -h android/app/build.gradle* | grep -Eo '[0-9]+' | head -n1 || echo 34)
+          want_bt="${want_sdk}.0.0"
+          echo "Installing SDK bits: build-tools;$want_bt, platforms;android-$want_sdk"
           sdkmanager "build-tools;$want_bt" "platforms;android-$want_sdk" "platform-tools" || true
       - name: Debug environment
         run: |
