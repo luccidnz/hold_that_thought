@@ -57,6 +57,41 @@ jobs:
           name: Android Debug APK
           path: build/app/outputs/flutter-apk/*.apk
           retention-days: 30
+
+      - name: Compute version outputs (AAB)
+        if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
+        id: ver_aab
+        run: |
+          ref="${GITHUB_REF_NAME}"
+          name="${ref#v}"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "code=${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+      - name: Restore signing key for AAB (guarded)
+        if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
+        env:
+          ANDROID_SIGNING_KEY_B64: ${{ secrets.ANDROID_SIGNING_KEY_B64 }}
+        run: |
+          mkdir -p android/app
+          echo "$ANDROID_SIGNING_KEY_B64" | base64 -d > android/app/release.keystore
+          cat > android/key.properties <<'EOF'
+          storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
+          keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          storeFile=release.keystore
+          EOF
+      - name: Build AAB (release, guarded)
+        if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
+        run: |
+          flutter build appbundle --release \
+            --build-name "${{ steps.ver_aab.outputs.name }}" \
+            --build-number "${{ steps.ver_aab.outputs.code }}"
+      - name: Upload Android AAB artifact
+        if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
+        uses: actions/upload-artifact@v4
+        with:
+          name: Android AAB
+          path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 30
       
   build_windows:
     name: Windows ZIP
@@ -113,11 +148,16 @@ jobs:
         with:
           name: Windows Release
           path: dist/windows
+      - uses: actions/download-artifact@v4
+        with:
+          name: Android AAB
+          path: dist/aab
       - name: Prepare files
         run: |
           mkdir -p dist
           cp dist/android/*.apk "dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk"
           cp dist/windows/*.zip "dist/HoldThatThought-${GITHUB_REF_NAME}-windows.zip"
+          if [ -d dist/aab ]; then cp dist/aab/*.aab "dist/HoldThatThought-${GITHUB_REF_NAME}.aab"; fi
       - name: Generate SHA256
         run: |
           cd dist
@@ -125,6 +165,7 @@ jobs:
             [ -f "$f" ] || continue
             (sha256sum "$f" || shasum -a 256 "$f") > "$f.sha256"
           done
+          [ -f "HoldThatThought-${GITHUB_REF_NAME}.aab" ] && (sha256sum "HoldThatThought-${GITHUB_REF_NAME}.aab" || shasum -a 256 "HoldThatThought-${GITHUB_REF_NAME}.aab") > "HoldThatThought-${GITHUB_REF_NAME}.aab.sha256"
       - uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -132,5 +173,34 @@ jobs:
             dist/HoldThatThought-${{ github.ref_name }}-debug.apk.sha256
             dist/HoldThatThought-${{ github.ref_name }}-windows.zip
             dist/HoldThatThought-${{ github.ref_name }}-windows.zip.sha256
+            dist/HoldThatThought-${{ github.ref_name }}.aab
+            dist/HoldThatThought-${{ github.ref_name }}.aab.sha256
           append_body: true
           body: "Automated release for ${{ github.ref_name }}"
+
+  release_android_play:
+    name: Play Upload (stable tags only)
+    if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
+    needs: [build_android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: Android AAB
+          path: dist/aab
+      - name: Generate What's New (<=500 chars)
+        run: |
+          mkdir -p dist/whatsnew
+          file="dist/CHANGELOG-${GITHUB_REF_NAME}.md"
+          [ -f "$file" ] || echo "No changelog found" > "$file"
+          head -c 500 "$file" | tr -d '\r' > dist/whatsnew/en-US.txt
+      - name: Upload to Google Play (internal) 
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: ${{ secrets.PLAY_PACKAGE_NAME }}
+          releaseFiles: dist/aab/app-release.aab
+          track: internal
+          status: completed
+          whatsNewDirectory: dist/whatsnew
