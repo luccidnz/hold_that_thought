@@ -35,10 +35,22 @@ jobs:
         run: echo "ref=$GITHUB_REF, ref_name=${{ github.ref_name }}"
 
   build_android:
-    env:
-      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g
+  env:
+    GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
+    ORG_GRADLE_PROJECT_android.injected.testOnly: 'true'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - name: Android Doctor (preflight)
+        run: bash tools/ci/doctor_android.sh
       - uses: actions/cache@v4
         with:
           path: ~/.pub-cache
@@ -140,6 +152,17 @@ jobs:
       - name: List build outputs
         run: |
           find build -name "*.apk" || true
+      - name: Upload doctor logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-doctor-logs
+          path: |
+            build-dryrun.log
+            build-deps.log
+            **/reports/**
+          retention-days: 14
+
       - name: Upload Android Debug APK
         uses: actions/upload-artifact@v4
         with:
@@ -152,7 +175,8 @@ jobs:
 
   build_windows:
     env:
-      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
+      ORG_GRADLE_PROJECT_android.injected.testOnly: 'true'
       FLUTTER_WINDOWS: 'true'
     runs-on: windows-latest
     steps:
