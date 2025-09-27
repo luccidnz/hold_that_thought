@@ -46,10 +46,11 @@ jobs:
       - name: Pub get (resilient)
         run: |
           for i in 1 2 3; do flutter pub get && break || sleep $((i*5)); done
-      - name: Build APK (mock for now)
+      - name: Build APK
         run: |
-          mkdir -p build/app/outputs/flutter-apk/
-          echo "Mock APK for ${GITHUB_REF_NAME}" > build/app/outputs/flutter-apk/app-debug.apk
+          flutter build apk --debug \
+            --build-name "${{ steps.ver.outputs.name }}" \
+            --build-number "${{ steps.ver.outputs.code }}"
       - name: Upload Android artifact
         uses: actions/upload-artifact@v4
         with:
@@ -57,9 +58,49 @@ jobs:
           path: build/app/outputs/flutter-apk/*.apk
           retention-days: 30
       
+  build_windows:
+    name: Windows ZIP
+    runs-on: windows-latest
+    env:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - name: Enable Windows desktop
+        run: flutter config --enable-windows-desktop
+      - name: Pub get
+        run: flutter pub get
+      - name: Compute version outputs
+        id: ver
+        shell: bash
+        run: |
+          ref="${GITHUB_REF_NAME}"
+          if [[ "$ref" =~ ^v[0-9] ]]; then name="${ref#v}"; else name="0.0.0"; fi
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "code=${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+      - name: Build Windows (release)
+        run: |
+          flutter build windows --release \
+            --build-name "${{ steps.ver.outputs.name }}" \
+            --build-number "${{ steps.ver.outputs.code }}"
+      - name: Zip Windows build
+        shell: bash
+        run: |
+          mkdir -p dist
+          7z a -tzip "dist/HoldThatThought-${GITHUB_REF_NAME}-windows.zip" build/windows/x64/runner/Release/* >/dev/null
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Release
+          path: dist/HoldThatThought-${{ github.ref_name }}-windows.zip
+          retention-days: 30
+      
   release:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [test, build_android]
+    needs: [test, build_android, build_windows]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -71,18 +112,28 @@ jobs:
         with:
           name: Android Debug APK
           path: dist/android
+      - uses: actions/download-artifact@v4
+        with:
+          name: Windows Release
+          path: dist/windows
       - name: Prepare files
         run: |
           mkdir -p dist
           cp dist/android/*.apk "dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk"
+          cp dist/windows/*.zip "dist/HoldThatThought-${GITHUB_REF_NAME}-windows.zip"
       - name: Generate SHA256
         run: |
           cd dist
-          (sha256sum HoldThatThought-${GITHUB_REF_NAME}-debug.apk || shasum -a 256 HoldThatThought-${GITHUB_REF_NAME}-debug.apk) > HoldThatThought-${GITHUB_REF_NAME}-debug.apk.sha256
+          for f in *.apk *.zip; do
+            [ -f "$f" ] || continue
+            (sha256sum "$f" || shasum -a 256 "$f") > "$f.sha256"
+          done
       - uses: softprops/action-gh-release@v2
         with:
           files: |
             dist/HoldThatThought-${{ github.ref_name }}-debug.apk
             dist/HoldThatThought-${{ github.ref_name }}-debug.apk.sha256
+            dist/HoldThatThought-${{ github.ref_name }}-windows.zip
+            dist/HoldThatThought-${{ github.ref_name }}-windows.zip.sha256
           append_body: true
           body: "Automated release for ${{ github.ref_name }}"
