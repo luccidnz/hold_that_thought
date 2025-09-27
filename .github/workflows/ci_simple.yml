@@ -1,0 +1,41 @@
+name: CI
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  workflow_dispatch: {}
+
+jobs:
+  windows_signing_test:
+    name: Windows Signing Test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      - name: Enable Windows desktop
+        run: flutter config --enable-windows-desktop
+      - name: Flutter pub get
+        run: flutter pub get
+      - name: Build Windows (release)
+        run: flutter build windows --release
+      - name: Sign EXE files (if secrets exist)
+        if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
+        shell: pwsh
+        run: |
+          $runnerDir = "build/windows/x64/runner/Release"
+          $exes = Get-ChildItem $runnerDir -Filter *.exe -Recurse
+          if ($exes.Count -eq 0) { 
+            Write-Host "❌ No EXEs found to sign"
+            exit 1
+          }
+          Write-Host "✅ Found $($exes.Count) EXE files ready for signing"
+          Write-Host "ℹ️ Note: Code signing would run here if WIN_CERT_PFX_B64 secret exists"
+      - name: Create ZIP
+        shell: bash
+        run: |
+          mkdir -p dist
+          7z a -tzip "dist/HoldThatThought-${GITHUB_REF_NAME}-windows.zip" build/windows/x64/runner/Release/* >/dev/null
+          echo "✅ Created Windows ZIP"
