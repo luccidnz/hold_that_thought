@@ -40,3 +40,10 @@ Untagging is not required; you can pause at Closed/0.1 until fixed.
 - **Protected tags**: `v*` tags are protected from accidental deletion/creation by non-admins.
 - **Provenance**: CI now attaches SLSA provenance attestations to release files (GitHub Artifact Attestations).
 - **Duplicate-run guard**: CI uses concurrency per ref so repeated pushes won't double-run.
+
+## Verification & promotion safety
+- **Release verification**: CI downloads the assets and validates SHA256; APK version **must** match the tag.
+- **Play environments**:
+  - Internal uploads require **play-internal** approval (already configured).
+  - Promotions (Closed/Production) require **play-production** approval (set reviewers in *Settings → Environments*).
+- **Tag protection**: we protect `v*` tags from deletes/force-updates via Rulesets (if available on plan).
