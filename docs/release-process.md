@@ -34,3 +34,9 @@ Untagging is not required; you can pause at Closed/0.1 until fixed.
 - .sha256 alongside each asset
 - Changelog appended to release body
 - "What's New" derived from tag changelog (first 500 chars)
+
+## Security & controls
+- **Environment-gated Play upload**: workflow uses the `play-internal` environment. Add required reviewers in Settings → Environments → play-internal to enforce 4-eyes before any Play upload.
+- **Protected tags**: `v*` tags are protected from accidental deletion/creation by non-admins.
+- **Provenance**: CI now attaches SLSA provenance attestations to release files (GitHub Artifact Attestations).
+- **Duplicate-run guard**: CI uses concurrency per ref so repeated pushes won't double-run.
