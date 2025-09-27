@@ -25,6 +25,7 @@ permissions:
   contents: read
 jobs:
   promote:
+    environment: play-production
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
