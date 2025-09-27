@@ -82,10 +82,7 @@ jobs:
           echo "name=$name" >> "$GITHUB_OUTPUT"
           echo "code=${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
       - name: Build Windows (release)
-        run: |
-          flutter build windows --release \
-            --build-name "${{ steps.ver.outputs.name }}" \
-            --build-number "${{ steps.ver.outputs.code }}"
+        run: flutter build windows --release --build-name "${{ steps.ver.outputs.name }}" --build-number "${{ steps.ver.outputs.code }}"
       - name: Zip Windows build
         shell: bash
         run: |
