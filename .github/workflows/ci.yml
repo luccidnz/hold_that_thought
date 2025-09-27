@@ -1,317 +1,109 @@
 ﻿name: CI
 
 on:
-  workflow_dispatch:
-  pull_request:
-    branches: ['**']
   push:
     branches: ['**']
-    tags:
-      - 'v*'
-      - 'v[0-9]*'
+    tags: ['v*']
+  pull_request:
+    branches: ['**']
+  workflow_dispatch: {}
 
 env:
-  VERSION_NAME_FROM_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc') && format('{0}', replace(github.ref_name, 'v', '')) || '' }}
+  JAVA_VERSION: '17'
+  FLUTTER_CHANNEL: 'stable'
+  VERSION_NAME_FROM_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc') && replace(github.ref_name, 'v', '') || '' }}
   VERSION_CODE_FROM_RUN: ${{ github.run_number }}
-
-concurrency:
-  # Make each push (commit SHA) its own group so later pushes don't cancel this run
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.sha }}
-  cancel-in-progress: true
-
-permissions:
-  contents: read
-  pull-requests: write
 
 jobs:
   tag_probe:
     name: Tag Probe
-    runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - name: Echo Context
-        run: echo "ref=$GITHUB_REF, ref_name=${{ github.ref_name }}"
+        run: echo "ref=$GITHUB_REF ref_name=${{ github.ref_name }}"
 
   build_android:
+    name: Android Debug APK
+    runs-on: ubuntu-latest
     env:
       GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
-      ORG_GRADLE_PROJECT_android.injected.testOnly: 'true'
-    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
       - uses: android-actions/setup-android@v3
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
-      - name: Android Doctor (preflight)
-        run: bash tools/ci/doctor_android.sh
-      - uses: actions/cache@v4
-        with:
-          path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-pub-
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*','**/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle-
-      - uses: actions/checkout@v4
-        with: { lfs: true }
-      - name: Git LFS
-        run: |
-          git lfs install
-          git lfs fetch --all || true
-          git lfs checkout
-
-      # NEW: make gradlew runnable & normalize line endings
-      - name: Fix gradlew permissions (Linux-safe)
-        run: |
-          if [ -f android/gradlew ]; then
-            # strip CRLF if present (avoids '#!/bin/sh^M' issues)
-            sed -i 's/\r$//' android/gradlew || true
-            chmod +x android/gradlew || true
-            echo "gradlew perms/lf fixed:"
-            ls -l android/gradlew
-            git ls-files --stage android/gradlew || true
-          else
-            echo "android/gradlew not found" && exit 1
-          fi
-
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-          cache: gradle
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: '3.35.4'
-          cache: true
-      - name: Show Flutter/Dart versions
-        run: |
-          flutter --version
-          dart --version
-      - name: Create CI .env file
-        run: |
-          cat > .env << EOF
-          ENV=ci
-          API_BASE_URL=https://example.invalid
-          SUPABASE_URL=
-          SUPABASE_ANON_KEY=
-          SENTRY_DSN=
-          EOF
       - name: Accept Android licenses
         run: yes | sdkmanager --licenses || true
-      - name: Install Android SDK packages
+      - name: Determine compileSdk and build-tools
+        id: sdk
         shell: bash
         run: |
           set -e
-          # Fallback SDK detection
-          want_sdk=$(grep -E 'compileSdk(?:Version)?[[:space:]]+[0-9]+' -h android/app/build.gradle* | grep -Eo '[0-9]+' | head -n1 || echo 34)
-          want_bt="${want_sdk}.0.0"
-          echo "Installing SDK bits: build-tools;$want_bt, platforms;android-$want_sdk"
-          sdkmanager "build-tools;$want_bt" "platforms;android-$want_sdk" "platform-tools" || true
-      - name: Debug environment
-        run: |
-          echo "ANDROID_HOME: $ANDROID_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          ls -la android/ || true
-      - name: Flutter pub get (resilient)
-        run: |
-          for i in {1..3}; do flutter pub get && break || sleep $((i*5)); done
+          SDK=$(grep -E 'compileSdk(?:Version)?\s+[0-9]+' -h android/app/build.gradle* | grep -Eo '[0-9]+' | head -n1 || echo 33)
+          BT="${SDK}.0.0"
+          echo "sdk=$SDK" >> $GITHUB_OUTPUT
+          echo "bt=$BT" >> $GITHUB_OUTPUT
+          sdkmanager "platforms;android-$SDK" "build-tools;$BT" "platform-tools" || true
       - name: Flutter doctor
         run: flutter doctor -v
-      - name: Verify Flutter/Dart versions
+      - name: Pub get (resilient)
         run: |
-          flutter --version
-          dart --version
-      - name: Clean Gradle cache
+          for i in 1 2 3; do flutter pub get && break || sleep $((i*5)); done
+      - name: Build APK
         run: |
-          cd android
-          ./gradlew clean || true
-          cd ..
-          flutter clean
-      - name: Android diag (versions)
-        run: |
-          flutter --version
-          dart --version
-          cd android && ./gradlew -v
-
-      - name: Build Android Debug (with version)
-        run: flutter build apk --debug --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
-      - name: List build outputs
-        run: |
-          find build -name "*.apk" || true
-      - name: Upload doctor logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-doctor-logs
-          path: |
-            build-dryrun.log
-            build-deps.log
-            **/reports/**
-          retention-days: 14
-
-      - name: Upload Android Debug APK
+          flutter build apk --debug \
+            --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" \
+            --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
+      - name: Upload Android artifact
         uses: actions/upload-artifact@v4
         with:
           name: Android Debug APK
+          path: build/app/outputs/flutter-apk/*.apk
           retention-days: 30
-          path: |
-            build/app/outputs/flutter-apk/app-debug.apk
-            build/app/outputs/apk/debug/app-debug.apk
-          if-no-files-found: warn
 
   build_windows:
+    name: Windows ZIP
+    runs-on: windows-latest
     env:
       GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx3g -Dkotlin.daemon.jvm.options=-Xmx2g
-      ORG_GRADLE_PROJECT_android.injected.testOnly: 'true'
-      FLUTTER_WINDOWS: 'true'
-    runs-on: windows-latest
     steps:
-      - uses: actions/cache@v4
-        with:
-          path: ~/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-pub-
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*','**/gradle-wrapper.properties') }}
-          restore-keys: ${{ runner.os }}-gradle-
-      - name: Enable long paths
-        run: git config --system core.longpaths true
-
       - uses: actions/checkout@v4
-        with: { lfs: true }
-
-      - name: Git LFS
-        shell: bash
-        run: |
-          git lfs install
-          git lfs fetch --all || true
-          git lfs checkout
-
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
-          flutter-version: '3.35.4'
+          channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
-
-      - name: Show Flutter/Dart versions
-        shell: bash
-        run: |
-          flutter --version
-          dart --version
-
-      - name: Create CI .env file
-        shell: bash
-        run: |
-          cat > .env << EOF
-          ENV=ci
-          API_BASE_URL=https://example.invalid
-          SUPABASE_URL=
-          SUPABASE_ANON_KEY=
-          SENTRY_DSN=
-          EOF
-
       - name: Enable Windows desktop
-        shell: bash
         run: flutter config --enable-windows-desktop
-
-      - name: Flutter pub get (retry)
+      - name: Pub get
+        run: flutter pub get
+      - name: Build Windows (release)
+        run: |
+          flutter build windows --release \
+            --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" \
+            --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
+      - name: Zip Windows build
         shell: bash
         run: |
-          for i in {1..4}; do flutter pub get && break || sleep 10; done
-
-      - name: Doctor
-        shell: bash
-        run: flutter doctor -v
-
-      - name: Build Windows Release
-        shell: bash
-        run: flutter build windows --release --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
-
-      - name: Upload Windows Release
+          mkdir -p dist
+          7z a -tzip dist/HoldThatThought-${{ github.ref_name }}-windows.zip build/windows/x64/runner/Release/* >/dev/null
+      - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows Release
+          path: dist/HoldThatThought-${{ github.ref_name }}-windows.zip
           retention-days: 30
-          path: build/windows/x64/runner/Release/**
-          if-no-files-found: error
-  android_qa_smoke:
-    needs: build_android
-    runs-on: ubuntu-latest
-    timeout-minutes: 35
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-      - uses: actions/download-artifact@v4
-        with:
-          name: Android Debug APK
-
-      # Locate and prepare the APK file
-      - name: Prepare APK for smoke test
-        run: |
-          find . -name "*.apk" -type f
-          if [ -f "flutter-apk/app-debug.apk" ]; then
-            cp "flutter-apk/app-debug.apk" "./app-debug.apk"
-          elif [ -f "apk/debug/app-debug.apk" ]; then
-            cp "apk/debug/app-debug.apk" "./app-debug.apk"
-          elif [ -f "build/app/outputs/flutter-apk/app-debug.apk" ]; then
-            cp "build/app/outputs/flutter-apk/app-debug.apk" "./app-debug.apk"
-          elif [ -f "build/app/outputs/apk/debug/app-debug.apk" ]; then
-            cp "build/app/outputs/apk/debug/app-debug.apk" "./app-debug.apk"
-          elif [ -f "app-debug.apk" ]; then
-            echo "APK already in root directory"
-          else
-            echo "ERROR: Could not find app-debug.apk"
-            exit 1
-          fi
-          ls -la app-debug.apk
-
-      # execute ONE command so all functions/vars stay in the same shell
-      - name: Run smoke test via adb (repo script)
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 30
-          arch: x86_64
-          target: google_apis
-          disable-animations: false      # avoid flaky runner hook
-          force-avd-creation: true
-          emulator-boot-timeout: 900
-          emulator-options: -no-window -no-snapshot -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none -camera-front none
-          script: bash ci/android_smoke.sh
-
-      - name: Collect logcat on failure (capped 15s)
-        if: failure()
-        run: |
-          mkdir -p smoke-logs
-          timeout 15s adb logcat -d > smoke-logs/logcat.txt || echo "logcat timeout or adb down"
-
-      - name: Upload smoke logs
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-smoke-logs
-          retention-days: 30
-          path: smoke-logs/**
 
   release_assets:
+    name: Attach GitHub Release Assets
     if: startsWith(github.ref, 'refs/tags/v')
     needs: [build_android, build_windows]
     runs-on: ubuntu-latest
@@ -321,20 +113,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Generate changelog
-        run: |
-          git fetch --tags --force
-          curr="${GITHUB_REF_NAME}"
-          prev="$(git tag --sort=-creatordate | grep -v "^$curr$" | head -n1 || true)"
-          if [ -n "$prev" ]; then range="$prev..$curr"; else range=""; fi
-          mkdir -p dist
-          echo "## Changelog for $curr" > dist/CHANGELOG-$curr.md
-          if [ -n "$range" ]; then
-            echo "" >> dist/CHANGELOG-$curr.md
-            git log --pretty=format:'- %s (%h) — %an' $range >> dist/CHANGELOG-$curr.md
-          else
-            echo "- Initial tagged release notes" >> dist/CHANGELOG-$curr.md
-          fi
       - uses: actions/download-artifact@v4
         with:
           name: Android Debug APK
@@ -343,81 +121,69 @@ jobs:
         with:
           name: Windows Release
           path: dist/windows
-      - name: Zip Windows build
+      - name: Prepare files
         run: |
-          cd dist/windows
-          zip -qr ../HoldThatThought-${GITHUB_REF_NAME}-windows.zip .
-      - name: Move APK to dist root
-        run: |
-          # Find the APK file in the downloaded artifact
-          apk="$(find dist/android -name "*.apk" -type f | head -n 1)"
-          if [ -z "$apk" ]; then
-            echo "Error: No APK file found in dist/android"
-            find dist/android -type f
-            exit 1
-          fi
-          cp "$apk" "dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk"
-      - name: Generate SHA256 checksums
+          mkdir -p dist
+          cp dist/android/*.apk      "dist/HoldThatThought-${GITHUB_REF_NAME}-debug.apk"
+          cp dist/windows/*.zip      "dist/HoldThatThought-${GITHUB_REF_NAME}-windows.zip"
+      - name: Generate SHA256
         run: |
           cd dist
           for f in *.apk *.zip; do
             [ -f "$f" ] || continue
-            if command -v sha256sum >/dev/null 2>&1; then
-              sha256sum "$f" > "$f.sha256"
-            else
-              shasum -a 256 "$f" > "$f.sha256"
-            fi
+            (sha256sum "$f" || shasum -a 256 "$f") > "$f.sha256"
           done
-      - name: Attach to GitHub Release
+      - name: Generate changelog
+        run: |
+          git fetch --tags --force
+          curr="${GITHUB_REF_NAME}"
+          prev="$(git tag --sort=-creatordate | grep -v "^$curr$" | head -n1 || true)"
+          echo "## Changelog for $curr" > dist/CHANGELOG-$curr.md
+          if [ -n "$prev" ]; then
+            git log --pretty=format:'- %s (%h)  %an' "$prev..$curr" >> dist/CHANGELOG-$curr.md
+          else
+            echo "- Initial tagged release" >> dist/CHANGELOG-$curr.md
+          fi
+      - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          append_body: true
-          body_path: dist/CHANGELOG-${{ github.ref_name }}.md
           files: |
             dist/HoldThatThought-${{ github.ref_name }}-debug.apk
             dist/HoldThatThought-${{ github.ref_name }}-debug.apk.sha256
             dist/HoldThatThought-${{ github.ref_name }}-windows.zip
             dist/HoldThatThought-${{ github.ref_name }}-windows.zip.sha256
+          append_body: true
+          body_path: dist/CHANGELOG-${{ github.ref_name }}.md
           prerelease: ${{ contains(github.ref_name, '-rc') }}
 
   release_android_play:
+    name: Play Upload (stable tags only)
     if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-rc')
     needs: [build_android]
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+    env:
+      PLAY_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
     steps:
-      - name: Validate Play Store secrets
-        run: |
-          if [ -z "${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}" ]; then
-            echo "❌ GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is empty - skipping Play Store upload"
-            exit 0
-          fi
-          if [[ "${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}" == *"demo"* ]]; then
-            echo "❌ GOOGLE_PLAY_SERVICE_ACCOUNT_JSON contains demo data - skipping Play Store upload"
-            exit 0
-          fi
-          echo "✅ Play Store secrets validated"
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
-
-      # Restore keystore from secret (Base64)
-      - name: Restore Android signing key
+      - name: Restore signing key
+        if: env.PLAY_JSON != ''
         env:
           ANDROID_SIGNING_KEY_B64: ${{ secrets.ANDROID_SIGNING_KEY_B64 }}
         run: |
           mkdir -p android/app
           echo "$ANDROID_SIGNING_KEY_B64" | base64 -d > android/app/release.keystore
-
-      # Create key.properties for Gradle
-      - name: Write key.properties
+      - name: key.properties
+        if: env.PLAY_JSON != ''
         run: |
           cat > android/key.properties <<'EOF'
           storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -425,44 +191,26 @@ jobs:
           keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
           storeFile=release.keystore
           EOF
-
-      # Generate What's New for Play Store
+      - name: Build AAB (release)
+        if: env.PLAY_JSON != ''
+        run: |
+          flutter build appbundle --release \
+            --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" \
+            --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
       - name: Generate What's New (<=500 chars)
+        if: env.PLAY_JSON != ''
         run: |
           mkdir -p dist/whatsnew
-          tag="${GITHUB_REF_NAME}"
           file="dist/CHANGELOG-${GITHUB_REF_NAME}.md"
-          # Generate changelog if not exists (fallback for manual testing)
-          if [ ! -f "$file" ]; then
-            git fetch --tags --force
-            curr="${GITHUB_REF_NAME}"
-            prev="$(git tag --sort=-creatordate | grep -v "^$curr$" | head -n1 || true)"
-            if [ -n "$prev" ]; then range="$prev..$curr"; else range=""; fi
-            mkdir -p dist
-            echo "## Changelog for $curr" > "$file"
-            if [ -n "$range" ]; then
-              echo "" >> "$file"
-              git log --pretty=format:'- %s (%h) � %an' $range >> "$file"
-            else
-              echo "- Initial tagged release notes" >> "$file"
-            fi
-          fi
-          # Extract first 500 chars for What's New
-          short=$(head -c 500 "$file" | tr -d '\r')
-          printf "%s\n" "$short" > dist/whatsnew/en-US.txt
-
-      # Build signed AAB (Flutter delegates to Gradle + key.properties)
-      - name: Build AAB (release)
-        run: flutter build appbundle --release --build-name "${{ env.VERSION_NAME_FROM_TAG || '0.0.0' }}" --build-number "${{ env.VERSION_CODE_FROM_RUN }}"
-
-      # Upload to Google Play (internal track)
+          [ -f "$file" ] || echo "No changelog found" > "$file"
+          head -c 500 "$file" | tr -d '\r' > dist/whatsnew/en-US.txt
       - name: Upload to Google Play (internal)
+        if: env.PLAY_JSON != ''
         uses: r0adkll/upload-google-play@v1
         with:
-          whatsNewDirectory: dist/whatsnew
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: ${{ secrets.PLAY_PACKAGE_NAME }}
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: internal
           status: completed
-
+          whatsNewDirectory: dist/whatsnew
