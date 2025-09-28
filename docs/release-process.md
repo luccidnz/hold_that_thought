@@ -40,6 +40,7 @@ Untagging is not required; you can pause at Closed/0.1 until fixed.
 - **Protected tags**: `v*` tags are protected from accidental deletion/creation by non-admins.
 - **Provenance**: CI now attaches SLSA provenance attestations to release files (GitHub Artifact Attestations).
 - **Duplicate-run guard**: CI uses concurrency per ref so repeated pushes won't double-run.
+- **Windows signing**: on stable tags, EXEs are signed (if WIN_CERT_PFX_B64/WIN_CERT_PASSWORD exist) and verified post-release.
 
 ## Verification & promotion safety
 - **Release verification**: CI downloads the assets and validates SHA256; APK version **must** match the tag.
