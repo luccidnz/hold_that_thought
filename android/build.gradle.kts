@@ -12,6 +12,37 @@ allprojects {
     }
 }
 
+// Configure all subprojects to use JDK 17
+subprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
+    
+    // Force Java 17 toolchain and compile options for all Android subprojects
+    afterEvaluate {
+        val hasAndroid = plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")
+        if (hasAndroid) {
+            configure<com.android.build.gradle.BaseExtension> {
+                compileOptions {
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
+                }
+            }
+        }
+        
+        // Ensure Java toolchain for plain Java plugins (used by some dependencies)
+        plugins.withId("java") {
+            configure<JavaPluginExtension> {
+                toolchain {
+                    languageVersion.set(JavaLanguageVersion.of(17))
+                }
+            }
+        }
+    }
+}
+
 // Expose kotlin_version for Groovy module build.gradle
 
 
