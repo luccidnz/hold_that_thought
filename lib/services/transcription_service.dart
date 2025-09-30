@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:hold_that_thought/utils/keys.dart';
 
 class TranscriptionService {
   final String _url = 'https://api.openai.com/v1/audio/transcriptions';
@@ -9,13 +10,17 @@ class TranscriptionService {
   final String? overrideKey;
   TranscriptionService({this.overrideKey});
 
-  String _key() {
-    final raw = (overrideKey ?? Platform.environment['OPENAI_API_KEY'] ?? '');
-    return raw.replaceAll('\r','').replaceAll('\n','').trim();
+  Future<String> _key() async {
+    if (overrideKey != null && overrideKey!.isNotEmpty) {
+      return overrideKey!.trim();
+    }
+    
+    final key = await Keys.openaiApiKey;
+    return key ?? '';
   }
 
   Future<String> transcribeFile(String path) async {
-    final key = _key();
+    final key = await _key();
     if (key.isEmpty) throw 'Missing OPENAI_API_KEY';
     final file = File(path);
     if (!await file.exists()) throw 'Audio file not found: $path';
@@ -41,7 +46,7 @@ class TranscriptionService {
   }
 
   Future<String?> ping() async {
-    final key = _key();
+    final key = await _key();
     if (key.isEmpty) return Future.error('OPENAI_API_KEY not set');
     final uri = Uri.parse('https://api.openai.com/v1/models/$_model');
     try {
